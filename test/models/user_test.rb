@@ -6,7 +6,9 @@ class UserTest < ActiveSupport::TestCase
   # end
   def setup
     @user = User.new(name: "Example User", email: "user@example.com",
-            password: "foobar", password_confirmation: "foobar")
+            password: "foobar", password_confirmation: "foobar", location: "London, Ont",
+            experience: "Was really good at everything. This is incredible. I'm incredible",
+            accomplishment: "Won the olympics. Walked around the world. Jumped in the moon")
   end
 
   test "should be valid" do
@@ -53,4 +55,10 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
+
+  test "location should not be too long" do
+    @user.location = "a" * 21
+    assert_not @user.valid?
+  end
+
 end

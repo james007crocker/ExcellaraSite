@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h1>Sign up</h1>
-    <%= form_for(@user) do |f| %>
-        <%= render 'shared/error_messages' %>
+    <%= form_for(@company) do |f| %>
+        <%= render 'shared/error_messages_companies' %>
 
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
@@ -14,11 +14,11 @@
         <%= f.label :location %>
         <%= f.text_field :location, class: 'form-control' %>
 
-        <%= f.label :experience %>
-        <%= f.text_area :experience, class: 'form-control', :rows => "10" %>
+        <%= f.label :size, "Number of Employees" %>
+        <%= f.text_field :size, class: 'form-control'%>
 
-        <%= f.label :accomplishment, "Accomplishments" %>
-        <%= f.text_area :accomplishment, class: 'form-control', :rows => "10" %>
+        <%= f.label :description, "Company Description"  %>
+        <%= f.text_area :description, class: 'form-control', :rows => "10" %>
 
         <%= f.label :password %>
         <%= f.password_field :password, class: 'form-control' %>

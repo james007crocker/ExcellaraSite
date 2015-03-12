@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311000150) do
+ActiveRecord::Schema.define(version: 20150312025418) do
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "location"
+    t.integer  "size"
+    t.text     "description"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
+  end
+
+  add_index "companies", ["email"], name: "index_companies_on_email", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

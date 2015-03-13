@@ -1,1 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+GeneralTire:
+  name: GeneralTire
+  email: general@example.com
+  location: London
+  size: 10
+  description: none
+  password_digest: <%= User.digest('password') %>

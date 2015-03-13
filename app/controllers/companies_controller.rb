@@ -10,6 +10,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(user_params)
     if @company.save
+      company_log_in @company
       flash[:success] = "Welcome to Excellara!"
       redirect_to @company
     else

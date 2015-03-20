@@ -1,0 +1,21 @@
+<h1>Edit Profile</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@company) do |f| %>
+        <%= render 'shared/error_messages_companies' %>
+
+        <%= f.label :location %>
+        <%= f.text_field :location, class: 'form-control' %>
+
+        <%= f.label :size, "Number of Employees" %>
+        <%= f.text_field :size, class: 'form-control' %>
+
+        <%= f.label :description %>
+        <%= f.text_area :description, class: 'form-control', :rows => "10" %>
+
+        <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

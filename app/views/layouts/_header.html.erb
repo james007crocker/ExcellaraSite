@@ -13,19 +13,20 @@
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", current_user %></li>
-                <li><%= link_to "Job Postings", '#' %></li>
+                <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
                 <li class="divider"></li>
                 <li><%= link_to "Logout", logout_path, method: "delete" %></li>
               </ul>
             </li>
         <% elsif company_logged_in? %>
+            <li><%= link_to "Professionals",   users_path %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
             <li><%= link_to "Profile", current_company %></li>
-            <li><%= link_to "Professionals", '#' %></li>
+            <li><%= link_to "Edit Profile", edit_company_path(current_company) %></li>
             <li class="divider"></li>
             <li><%= link_to "Logout", logout_path, method: "delete" %></li>
               </ul>

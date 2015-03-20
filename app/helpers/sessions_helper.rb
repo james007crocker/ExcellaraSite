@@ -14,7 +14,10 @@ module SessionsHelper
         @current_user = user
       end
     end
+  end
 
+  def current_user?(user)
+      user == current_user
   end
 
   def user_logged_in?
@@ -56,6 +59,10 @@ module SessionsHelper
     end
   end
 
+  def current_company?(company)
+    company == current_company
+  end
+
   def company_logged_in?
     !current_company.nil?
   end
@@ -76,5 +83,15 @@ module SessionsHelper
     company.forget
     cookies.delete(:company_id)
     cookies.delete(:remember_token)
+  end
+
+  #Misc
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+  def store_location
+    session[:forwarding_url] = request.url if request.get?
   end
 end

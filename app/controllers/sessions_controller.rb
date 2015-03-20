@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       #Log user in
       user_log_in user
       params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
-      redirect_to user
+      redirect_back_or user
     else
       company = Company.find_by(email: params[:session][:email].downcase)
       if company && company.authenticate(params[:session][:password])

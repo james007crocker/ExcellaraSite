@@ -11,11 +11,11 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @company = Company.new(user_params)
+    @company = Company.new(company_params)
     if @company.save
-      company_log_in @company
-      flash[:success] = "Welcome to Excellara!"
-      redirect_back_or @company
+      @company.send_activation_email
+      flash[:info] = "An account activation email has been sent to you."
+      redirect_to root_url
     else
       render 'new'
     end
@@ -39,7 +39,7 @@ class CompaniesController < ApplicationController
 
   private
 
-  def user_params
+  def company_params
     params.require(:company).permit(:name, :email, :location, :description, :size, :password, :password_confirmation)
   end
 

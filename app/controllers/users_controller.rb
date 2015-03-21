@@ -29,9 +29,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      user_log_in @user
-      flash[:success] = "Welcome to Excellara!"
-      redirect_to @user
+      @user.send_activation_email
+      flash[:info] = "An account activation email has been sent to you."
+      redirect_to root_url
     else
       render 'new'
     end
@@ -53,6 +53,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
   private
 
     def user_params
@@ -70,7 +76,7 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       unless current_user?(@user)
-        flash[:danger] = "You do not have permission to view this profile."
+        flash[:danger] = "You do not have permission to view this page."
         redirect_to(root_url)
       end
     end
@@ -79,7 +85,7 @@ class UsersController < ApplicationController
       if current_company.nil?
         @user = User.find_by_id(params[:id])
         if (@user.nil? || (!current_user?(@user) && !@user.nil?))
-          flash[:danger] = "You do not have permission to view this profile."
+          flash[:danger] = "You do not have permission to view this page."
           redirect_to(root_url)
         end
       end

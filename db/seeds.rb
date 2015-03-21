@@ -12,7 +12,9 @@ User.create!(name: "Excellara_User_Admin",
             location: "Palo Alto",
             accomplishment: "Taking the world by storm",
             experience: "Working on it.",
-            admin: true)
+            admin: true,
+            activated: true,
+            activated_at: Time.zone.now )
 
 Company.create!(name: "Excellara_Company_Admin",
              email: "admin2@excellara.com",
@@ -21,4 +23,6 @@ Company.create!(name: "Excellara_Company_Admin",
              location: "Palo Alto",
              description: "Taking the world by storm",
              size: 3,
-             admin: true)
+             admin: true,
+            activated: true,
+            activated_at: Time.zone.now)

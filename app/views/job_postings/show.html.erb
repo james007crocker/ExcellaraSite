@@ -1,0 +1,13 @@
+
+<% if !@jobposting.nil? %>
+    <h3>Company <%= @jobposting.company.name %> </h3>
+    <div style="border: 2px solid">
+      <p> Title: <%= @jobposting.title %></p>
+      <p> Location: <%= @jobposting.location %></p>
+      <p> Description: <br> <%= @jobposting.description %></p>
+      <p> Posted <%= time_ago_in_words(@jobposting.created_at) %> ago.</p>
+      <%= link_to "Remove", jobposting, method: :delete %>
+    </div>
+<% else %>
+    <p>No job to show. </p>
+<% end %>

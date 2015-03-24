@@ -1,0 +1,14 @@
+<% if @company.job_postings.any? %>
+
+    <% @jobpostings.each do |jobposting| %>
+        <div style="border: 2px solid">
+        <p> Title: <%= jobposting.title %></p>
+        <p> Location: <%= jobposting.location %></p>
+        <p> Description: <br> <%= jobposting.description %></p>
+        <p> Posted <%= time_ago_in_words(jobposting.created_at) %> ago.</p>
+          <%= link_to "Remove", jobposting, method: :delete %>
+        </div>
+        <br>
+    <% end %>
+
+<% end %>

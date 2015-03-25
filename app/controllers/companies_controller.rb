@@ -8,6 +8,9 @@ class CompaniesController < ApplicationController
 
   def show
     @company = Company.find(params[:id])
+    if current_company?(@company)
+      @apps = Applicant.where("company_id = ?", @company.id)
+    end
   end
 
   def create

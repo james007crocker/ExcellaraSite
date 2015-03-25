@@ -1,16 +1,36 @@
 <div class="row">
-    <section class="user_info">
       <h1>
         <%= @user.name %>
       </h1>
+    <div style="display: inline-block" class="col-md-6">
       <br>
       <%= @user.email %>
       <br>
       <%= @user.location %>
       <br><br>
-      <%= @user.experience %>
+      <div style="word-break: break-all; white-space: normal">
+        <%=simple_format(word_wrap(@user.experience, line_width: 50)) %>
+      </div>
       <br><br>
-      <%= @user.accomplishment %>
-    </section>
+      <div style="word-break: break-all; white-space: normal">
+        <%=simple_format(word_wrap(@user.accomplishment, line_width: 50)) %>
+      </div>
+      </div>
+      <div style="display: inline-block" align="right" class="col-md-6">
+        <% unless @apps.nil? %>
+            <% @apps.each do |app| %>
+                <%=link_to app.job_posting.title, app.job_posting %>
+                <%= app.job_posting.location %>
+                <%= app.job_posting.company.name %>
+
+                <% if app.userAccept == false %>
+                    <%= link_to "Accept?", '#', class: "btn btn-primary" %>
+                <% elsif app.compAccept == false %>
+                    <%= link_to "Pending", '#', class: "btn btn-warning" %>
+                <% end %>
+                <br>
+            <% end %>
+        <% end %>
+      </div>
 </div>
 

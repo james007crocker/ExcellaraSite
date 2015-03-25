@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get   'user_signup' =>    'users#new'
   get   'company_signup' => 'companies#new'
   get   'login'       =>    'sessions#new'
+  get   'joblist'     =>    'job_postings#joblist'
   post  'login'       =>    'sessions#create'
   delete 'logout'      =>   'sessions#destroy'
   resources :users
@@ -18,5 +19,6 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :job_postings
+  resources :applicants, only: [:create, :destroy]
 
 end

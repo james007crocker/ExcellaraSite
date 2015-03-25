@@ -1,0 +1,18 @@
+<h1>Jobs</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <% @job_postings.each do |job| %>
+      <li>
+      <p>Title:
+      <%= link_to job.title, job %>
+      </p>
+      <%= job.company.name %>
+      <p>Location: <%= job.location %></p>
+      <p>Posted <%= time_ago_in_words(job.created_at) %> ago.</p>
+      </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

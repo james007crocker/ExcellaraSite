@@ -29,9 +29,16 @@ class JobPostingsController < ApplicationController
     @jobpostings = @company.job_postings.paginate(page: params[:page])
   end
 
+  def joblist
+    @job_postings = JobPosting.paginate(page: params[:page])
+  end
+
   def show
-    @company = Company.find(params[:id]) || current_company
-    @jobposting = @company.job_postings.find_by(id: params[:id])
+    if !current_company.nil?
+      @jobposting = current_company.job_postings.find_by(id: params[:id])
+    else
+      @jobposting = JobPosting.find_by(id: params[:id])
+    end
   end
 
   private
@@ -39,4 +46,5 @@ class JobPostingsController < ApplicationController
     def job_posting_params
       params.require(:job_posting).permit(:title, :location, :description)
     end
+
 end

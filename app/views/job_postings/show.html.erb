@@ -4,9 +4,21 @@
     <div style="border: 2px solid">
       <p> Title: <%= @jobposting.title %></p>
       <p> Location: <%= @jobposting.location %></p>
-      <p> Description: <br> <%= @jobposting.description %></p>
+      <div style="word-break: break-all; white-space: normal">
+        <%=simple_format(word_wrap(@jobposting.description, line_width: 50)) %>
+      </div>
       <p> Posted <%= time_ago_in_words(@jobposting.created_at) %> ago.</p>
-      <%= link_to "Remove", jobposting, method: :delete %>
+
+      <% unless current_company.nil? %>
+      <%= link_to "Remove", @jobposting, method: :delete %>
+      <% end %>
+
+      <% unless current_user.nil? || @jobposting.applicants.find_by(user_id: current_user.id)%>
+        <%= form_for(@jobposting.applicants.build) do |f| %>
+              <%= hidden_field_tag :job_id, @jobposting.id %>
+            <%= f.submit "Apply", class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
     </div>
 <% else %>
     <p>No job to show. </p>

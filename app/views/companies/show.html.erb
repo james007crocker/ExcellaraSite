@@ -1,8 +1,9 @@
 <div class="row">
-    <section class="user_info">
       <h1>
         <%= @company.name %>
       </h1>
+  <div style="display: inline-block" class="col-md-6">
+
       <br>
       <%= @company.email %>
       <br>
@@ -10,7 +11,27 @@
       <br><br>
       <%= @company.size %>
       <br><br>
-      <%= @company.description %>
-    </section>
+      <div style="word-break: break-all; white-space: normal">
+        <%=simple_format(word_wrap(@company.description, line_width: 50)) %>
+      </div>
+  </div>
+
+
+  <div style="display: inline-block" align="right" class="col-md-6">
+    <% unless @apps.nil? %>
+        <% @apps.each do |app| %>
+            <%= app.job_posting.title %>
+            <%= app.job_posting.location %>
+            <%= link_to User.find_by(id: app.user_id).name, User.find_by(id: app.user_id) %>
+            <% if app.userAccept == false %>
+                <%= link_to "Pending", '#', class: "btn btn-warning" %>
+            <% elsif app.compAccept == false %>
+                <%= link_to "Accept?", '#', class: "btn btn-primary" %>
+            <% end %>
+            <br>
+        <% end %>
+    <% end %>
+  </div>
+
 </div>
 

@@ -23,6 +23,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    if current_user?(@user)
+      @apps = Applicant.where("user_id = ?", @user.id)
+    end
   end
 
   def create

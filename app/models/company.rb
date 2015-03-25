@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
-  has_many :job_postings
+  has_many :job_postings, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
   before_create :create_activation_digest
   before_save { self.email = email.downcase }

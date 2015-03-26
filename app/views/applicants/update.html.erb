@@ -1,0 +1,6 @@
+<%= form_tag url_for(:controller => 'applicants', :action => 'send_match_email'), :method => 'get' do  %>
+    <%= hidden_field_tag :receiver, @receiver.id %>
+    <%= hidden_field_tag :job, @job.id %>
+    <%= text_area_tag 'text', class: 'form-control', :rows => "10" %>
+    <%= submit_tag "Send Email", class: "btn btn-primary" %>
+<% end %>

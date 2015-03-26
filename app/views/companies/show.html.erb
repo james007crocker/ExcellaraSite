@@ -20,7 +20,7 @@
   <div style="display: inline-block" align="right" class="col-md-6">
     <% unless @apps.nil? %>
         <% @apps.each do |app| %>
-            <%= app.job_posting.title %>
+            <%= link_to app.job_posting.title, app.job_posting %>
             <%= app.job_posting.location %>
             <%= link_to User.find_by(id: app.user_id).name, User.find_by(id: app.user_id) %>
             <% if app.userAccept == false %>

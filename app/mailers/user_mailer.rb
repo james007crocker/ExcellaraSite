@@ -21,4 +21,18 @@ class UserMailer < ApplicationMailer
 
     mail to: receiver.email, subject: "Excellara Password Reset"
   end
+
+  def match_email(sender, receiver, job, text)
+    @receiver = receiver
+    @sender = sender
+    @job = job
+    @text = text
+    if @receiver.kind_of? User
+      subject_string = "Excellara Match: " + @job.title + " at " + @sender.name
+    else
+      subject_string = "Excellara Match: " + @reciever.name + " for " + @job.title
+    end
+
+    mail to: receiver.email, subject: subject_string
+  end
 end

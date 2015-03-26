@@ -25,7 +25,23 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if current_user?(@user)
       @apps = Applicant.where("user_id = ?", @user.id)
+    elsif current_company
+      @job_array = []
+      comp_jobs = current_company.job_postings
+      comp_jobs.each do |comp_job|
+          add = 1
+          job_apps = comp_job.applicants
+          job_apps.each do |job_app|
+            if job_app.user_id == @user.id
+              add = 0
+            end
+          end
+          if add == 1
+            @job_array << comp_job
+          end
+      end
     end
+
   end
 
   def create

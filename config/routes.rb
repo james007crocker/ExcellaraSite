@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :job_postings
-  resources :applicants, only: [:create, :destroy]
-
+  resources :applicants, only: [:create, :destroy, :update]
+  resources :applicants do
+    member do
+      get :send_match_email
+    end
+  end
 end

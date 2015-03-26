@@ -17,6 +17,14 @@
       </div>
       </div>
       <div style="display: inline-block" align="right" class="col-md-6">
+        <% unless current_company.nil? || @job_array.nil? %>
+            <%= form_tag url_for(:controller => 'applicants', :action => 'create'), :method => 'post' do  %>
+                <%= hidden_field_tag :user_id, @user.id %>
+                <%= select_tag "job_id", options_from_collection_for_select(@job_array, "id", "title") %>
+                <%= submit_tag "Recruit?", class: "btn btn-primary" %>
+            <% end %>
+        <% end %>
+
         <% unless @apps.nil? %>
             <% @apps.each do |app| %>
                 <%=link_to app.job_posting.title, app.job_posting %>
@@ -24,9 +32,13 @@
                 <%= app.job_posting.company.name %>
 
                 <% if app.userAccept == false %>
-                    <%= link_to "Accept?", '#', class: "btn btn-primary" %>
+                    <%= form_tag url_for(:controller => 'applicants', :action => 'update'), :method => 'patch' do  %>
+                        <%= submit_tag "Accept?", class: "btn btn-primary" %>
+                    <% end %>
                 <% elsif app.compAccept == false %>
-                    <%= link_to "Pending", '#', class: "btn btn-warning" %>
+                    <p style="color: grey; background-color: yellow; width: 50px">Pending</p>
+                <% else %>
+                    <p style="color: white; background-color: darkgreen; width: 50px">Match</p>
                 <% end %>
                 <br>
             <% end %>

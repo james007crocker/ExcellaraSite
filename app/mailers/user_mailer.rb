@@ -30,9 +30,8 @@ class UserMailer < ApplicationMailer
     if @receiver.kind_of? User
       subject_string = "Excellara Match: " + @job.title + " at " + @sender.name
     else
-      subject_string = "Excellara Match: " + @reciever.name + " for " + @job.title
+      subject_string = "Excellara Match: " + @receiver.name + " for " + @job.title
     end
-
     mail to: receiver.email, subject: subject_string
   end
 end

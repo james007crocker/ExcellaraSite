@@ -9,7 +9,7 @@ class ApplicantsController < ApplicationController
       applicant.user_id = user.id
       applicant.company_id = current_company.id
       if applicant.save
-        flash[:success] = "A message has been sent to" + user.name
+        flash[:success] = "A message has been sent to " + user.name
         redirect_to users_path
       else
         flash[:danger] = "Error recruiting professional"
@@ -34,30 +34,37 @@ class ApplicantsController < ApplicationController
 
   def update
     if current_user
-      @applicant = Applicant.find_by(id: params[:id])
+      @applicant = Applicant.find_by(id: params[:app_id])
       @job = @applicant.job_posting
-      @applicant.update_attribute(:userAccept, true)
       @receiver = Company.find_by(id: @applicant.company_id)
     elsif current_company
-      @applicant = Applicant.find_by(id: params[:id])
+      @applicant = Applicant.find_by(id: params[:app_id])
       @job = @applicant.job_posting
-      @applicant.update_attribute(:compAccept, true)
       @receiver = User.find_by(id: @applicant.user_id)
     end
   end
 
 
   def send_match_email
+    @applicant = Applicant.find_by(id: params[:app_id])
     if current_user
+      @applicant.update_attribute(:userAccept, true)
       @sender = current_user
       @receiver = Company.find_by(id: params[:receiver])
     else
+      @applicant.update_attribute(:compAccept, true)
       @sender = current_company
       @receiver = User.find_by(id: params[:receiver])
     end
     @text = params[:text]
     @job = JobPosting.find_by(id: params[:job])
-    ####################################################-------------------------Add action mailer thing here!!!
+    UserMailer.match_email(@sender, @receiver, @job, @text).deliver_now
+    flash[:success] = "Contacted " + @receiver.name + " about " + @job.title + " match"
+    if current_user
+      redirect_to current_user
+    else
+      redirect_to current_company
+    end
   end
 
   def destroy

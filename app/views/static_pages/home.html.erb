@@ -1,4 +1,147 @@
-<p>Home page</p>
-<p> Most of the landing page stuff will be copied here</p>
+<div class="intro-header">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="intro-message">
+          <h1 style="text-shadow: 0px 0px 30px #000, -1px -1px #000, 1px 1px #000">Excellara</h1>
+          <h3 style="text-shadow: 0px 0px 30px #000, -1px -1px #000, 1px 1px #000">Connecting Businesses with Experienced Help</h3>
+          <hr class="intro-divider">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.intro-header -->
 
-<%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
+<!-- Page Content -->
+<a  name="services"></a>
+<div class="content-section-b">
+  <div align="center">
+    <div class="container">
+      <div class="row">
+
+        <hr align="center" class="section-heading-spacer2">
+        <div class="clearfix"></div>
+        <h3 class="section-heading">&nbsp Excellara is an online platform that matches semi-retired professionals with businesses
+          looking to hire experienced help on a part-time or contract basis.  Qualified professionals may come from a variety
+          of industries including accounting, law, manufacturing, healthcare, and academia. <br></h3>
+      </div>
+      <div>
+        <h2>Select Sign Up Type:</h2>
+        <%= link_to "Retired Professional", user_signup_path, class: "btn btn-lg btn-primary" , style: :"width: 200px" %>
+        <%= link_to "Company", company_signup_path, class: "btn btn-lg btn-success" , style: :"width: 200px" %>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="content-section-a">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-sm-6">
+        <hr class="section-heading-spacer">
+        <div class="clearfix"></div>
+        <h2 class="section-heading">Benefits for Small Businesses:<br></h2>
+        <ul class="lead">
+          <li>Save time by selecting from an exclusive pool of candidates</li> </br>
+          <li>Lower hiring costs by minimizing training</li></br>
+          <li>High quality work for a reasonable price</li>
+        </ul>
+      </div>
+      <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+        <%= image_tag "innovation.jpg", :class => "img-responsive" %>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+</div>
+<!-- /.content-section-a -->
+
+<div class="content-section-b">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+        <hr class="section-heading-spacer">
+        <div class="clearfix"></div>
+        <h2 class="section-heading">Benefits for Retirees<br></h2>
+        <ul class="lead">
+          <li>Make money to put towards that vacation you deserve</li></br>
+          <li>Keep your skills sharp while working for a company who appreciates you</li></br>
+          <li>Flexible work hours so you have time off to enjoy retired life</li>
+        </ul>
+      </div>
+      <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+        <%= image_tag "computer.jpg", :class => "img-responsive" %>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+</div>
+<!-- /.content-section-b -->
+<a  name="team"></a>
+<div class="content-section-a">
+
+  <div  class="container">
+
+    <div align="center">
+      <hr align="center" class="section-heading-spacer2">
+      <div class="clearfix"></div>
+      <h2 class="section-heading">Our Team</h2>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4" align="center">
+        <%= image_tag "lauren.jpg", :class => "img-circle", :width => "150", :align => "middle" %>
+        <br><br><p>Lauren Watkins <br>Co-founder <br> Business Lead</p>
+      </div>
+      <div class="col-md-4" align="center">
+        <%= image_tag "james.jpg", :class => "img-circle", :width => "150", :align => "middle" %>
+        <br><br><p>James Crocker <br>Co-founder <br> Technical Lead</p>
+      </div>
+      <div class="col-md-4" align="center">
+        <%= image_tag "nikita.jpg", :class => "img-circle", :width => "150", :align => "middle" %>
+        <br><br><p>Nikita Zhitkevich <br>Co-founder <br> Product Lead</p>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div align="center">
+        <div align="center">
+          <%= image_tag "bryan.jpg", :class => "img-circle", :width => "150", :align => "middle" %>
+          <br><br><p>Bryan Kerdman <br> Advisor</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- /.content-section-a -->
+
+<a  name="contact"></a>
+<div class="banner">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-6">
+
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+</div>

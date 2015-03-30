@@ -27,6 +27,7 @@ class UsersController < ApplicationController
       @apps = Applicant.where("user_id = ?", @user.id)
     elsif current_company
       @job_array = []
+      @app_array = []
       comp_jobs = current_company.job_postings
       comp_jobs.each do |comp_job|
           add = 1
@@ -38,10 +39,11 @@ class UsersController < ApplicationController
           end
           if add == 1
             @job_array << comp_job
+          else
+            @app_array << comp_job.applicants.find_by(user_id: @user.id)
           end
       end
     end
-
   end
 
   def create

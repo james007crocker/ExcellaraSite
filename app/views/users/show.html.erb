@@ -1,48 +1,151 @@
-<div class="row">
-      <h1>
-        <%= @user.name %>
-      </h1>
-    <div style="display: inline-block" class="col-md-6">
-      <br>
-      <%= @user.email %>
-      <br>
-      <%= @user.location %>
-      <br><br>
-      <div style="word-break: break-all; white-space: normal">
-        <%=simple_format(word_wrap(@user.experience, line_width: 50)) %>
-      </div>
-      <br><br>
-      <div style="word-break: break-all; white-space: normal">
-        <%=simple_format(word_wrap(@user.accomplishment, line_width: 50)) %>
-      </div>
-      </div>
-      <div style="display: inline-block" align="right" class="col-md-6">
-        <% unless current_company.nil? || @job_array.nil? %>
-            <%= form_tag url_for(:controller => 'applicants', :action => 'create'), :method => 'post' do  %>
-                <%= hidden_field_tag :user_id, @user.id %>
-                <%= select_tag "job_id", options_from_collection_for_select(@job_array, "id", "title") %>
-                <%= submit_tag "Recruit?", class: "btn btn-primary" %>
+<% if current_company %>
+    <h1 class="profile_title">
+      <%= @user.name %>
+    </h1>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="listing">
+          <p style="margin-left: 10%"><strong>Location: </strong><%= @user.location %></p>
+          <p style="margin-left: 10%"><strong>Experience:</strong></p>
+          <div style="word-break: break-all; white-space: normal; margin-left: 5%">
+            <%=simple_format(word_wrap(@user.experience, line_width: 75)) %>
+          </div>
+          <p style="margin-left: 10%"><strong>Accomplishments: </strong></p>
+          <div style="word-break: break-all; white-space: normal; margin-left: 5%">
+            <%=simple_format(word_wrap(@user.accomplishment, line_width: 75)) %>
+          </div>
+
+          <div align="center">
+            <div class="listing" style="width: 60%">
+            <p><strong>Jobs You Have Suggested:</strong></p>
+            <% if !current_company.nil? %>
+
+                  <% @app_array.each do |app| %>
+                      <% if !app.userAccept %>
+                          <div style="display: inline-block;">
+                            <p><%= app.job_posting.title %> Status: </p>
+                          </div>
+                          <div style="display: inline-block">
+                            <button class="btn btn-warning btn-sm disabled">Pending</button>
+                          </div>
+                          <br>
+                      <% else %>
+                          <div style="display: inline-block;">
+                            <p><%= app.job_posting.title %> Status: </p>
+                          </div>
+                          <div style="display: inline-block">
+                            <button class="btn btn-success btn-sm disabled">Pending</button>
+                          </div>
+                          <br>
+                      <% end %>
+                  <% end %>
+
             <% end %>
-        <% end %>
+            </div>
+          </div>
+          <p></p>
+          <div align="center">
+            <div align="center" style="width: 60%" class="listing">
+              <div class="row">
+                <p><strong>Suggest a job for this professional:</strong></p>
 
-        <% unless @apps.nil? %>
-            <% @apps.each do |app| %>
-                <%=link_to app.job_posting.title, app.job_posting %>
-                <%= app.job_posting.location %>
-                <%= app.job_posting.company.name %>
+                  <% if !current_company.nil? && @job_array.size > 0 %>
+                      <%= form_tag url_for(:controller => 'applicants', :action => 'create'), :method => 'post' do  %>
+                          <%= hidden_field_tag :user_id, @user.id %>
+                        <div style="width: 50%;">
+                          <%= select_tag "job_id", options_from_collection_for_select(@job_array, "id", "title") %>
+                        </div>
+                        <div style="width: 30%;">
+                          <%= submit_tag "Recruit?", class: "btn btn-primary" %>
+                        </div>
+                      <% end %>
+                  <% end %>
+                  <p></p>
 
-                <% if app.userAccept == false %>
-                    <%= form_tag url_for(:controller => 'applicants', :action => 'update'), :method => 'patch' do  %>
-                        <%= submit_tag "Accept?", class: "btn btn-primary" %>
-                    <% end %>
-                <% elsif app.compAccept == false %>
-                    <p style="color: grey; background-color: yellow; width: 50px">Pending</p>
-                <% else %>
-                    <p style="color: white; background-color: darkgreen; width: 50px">Match</p>
-                <% end %>
-                <br>
-            <% end %>
-        <% end %>
+              </div>
+            </div>
+          </div>
+          <p></p>
+        </div>
       </div>
-</div>
+    </div>
+<% elsif current_user %>
+    <h1 class="profile_title">
+      <%= @user.name %>
+    </h1>
+    <table class="profile">
+      <tr>
+        <td>
+          <div class="profile_mar">
+            <p>
+              <strong>Contact: </strong><%= @user.email %>
+            </p>
 
+            <p>
+              <strong>Location: </strong><%= @user.location %>
+            </p>
+          </div>
+
+          <br><br>
+          <div class="blurb">
+            <p><strong>Experience:</strong></p>
+            <%=simple_format(word_wrap(@user.experience, line_width: 70)) %>
+          </div>
+          <div class="blurb">
+            <p><strong>Accomplishments:</strong></p>
+            <%=simple_format(word_wrap(@user.accomplishment, line_width: 70)) %>
+          </div>
+        </td>
+        <td class="col-md-6">
+          <br>
+          <% unless @apps.nil? %>
+              <% @apps.each do |app| %>
+                  <table class="border">
+                    <tr>
+                      <td width="30%">
+                        <p style="margin-left: 4%"><strong>Title: </strong><%= link_to app.job_posting.title, app.job_posting %></p>
+                      </td>
+                      <td width="30%">
+                        <p><strong>Location: </strong><%= app.job_posting.location %></p>
+                      </td>
+                      <td width="30%">
+                        <p><strong>Company: </strong><%= app.job_posting.company.name %></p>
+                      </td>
+                    </tr>
+                    <tr align="center">
+                      <td colspan="2">
+                        <div style="display: inline-block">
+                          <p><strong>Status: </strong></p>
+                        </div>
+                        <div style="display: inline-block" align="left">
+                          <% if app.userAccept == false %>
+                              <%= form_tag url_for(:controller => 'applicants', :action => 'update'), :method => 'patch' do  %>
+                                  <%= hidden_field_tag :app_id, app.id %>
+                                  <%= submit_tag "Accept?", class: "btn btn-primary btn-sm" %>
+                              <% end %>
+                          <% elsif app.compAccept == false %>
+                              <button class="btn btn-warning btn-sm disabled">Pending</button>
+                          <% else %>
+                              <button class="btn btn-success btn-sm disabled">Matched</button>
+                          <% end %>
+                        </div>
+                      </td>
+                      <td  valign="bottom">
+                        <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Sent <%= time_ago_in_words(app.created_at) %> ago.</p>
+                      </td>
+                    </tr>
+                  </table>
+                  <br>
+              <% end %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+
+
+
+
+
+<% else %>
+
+<% end %>

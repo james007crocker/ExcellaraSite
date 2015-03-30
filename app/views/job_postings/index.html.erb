@@ -1,0 +1,39 @@
+<div class="row" style="padding-top: 100px">
+  <div class="col-md-6 col-md-offset-3">
+      <% if @company.job_postings.any? %>
+          <% @jobpostings.each do |jobposting| %>
+              <div class="listing">
+                <table class="profile_mar" width = 80%>
+                  <tr>
+                    <td colspan="3">
+                      <p style="display: inline; margin-right: 20%"><strong>Title: </strong><%= jobposting.title %></p>
+                      <p style="display: inline" align="right"><strong>Location: </strong><%= jobposting.location %></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p><strong>Description: </strong></p>
+                      <div class="blurb">
+                        <%= simple_format(word_wrap(jobposting.description, line_width: 100)) %>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <div style="display: inline">
+                  <div style="width: 70%; display: inline" >
+                    <p align="center"><%= link_to "Remove", jobposting, method: :delete %></p>
+                  </div>
+                  <div style="width: 30%; display: inline">
+                    <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Posted <%= time_ago_in_words(jobposting.created_at) %> ago.</p>
+                  </div>
+                </div>
+              </div>
+              <br>
+          <% end %>
+
+      <% else %>
+          <p> No job postings made yet.</p>
+      <% end %>
+
+  </div>
+</div>

@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323011040) do
+ActiveRecord::Schema.define(version: 20150325043101) do
+
+  create_table "applicants", force: :cascade do |t|
+    t.boolean  "compAccept"
+    t.boolean  "userAccept"
+    t.integer  "job_posting_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "company_id"
+  end
+
+  add_index "applicants", ["job_posting_id", "created_at"], name: "index_applicants_on_job_posting_id_and_created_at"
+  add_index "applicants", ["job_posting_id"], name: "index_applicants_on_job_posting_id"
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"

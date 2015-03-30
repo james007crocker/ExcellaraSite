@@ -1,12 +1,12 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to "Excellara", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   root_path %></li>
-        <li><%= link_to "Help",   help_path %></li>
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation" xmlns="http://www.w3.org/1999/html" style="padding-bottom:0px ! important;">
+  <div class="container topnav">
+    <div class="navbar-header">
+      <%= link_to "Excellara", root_path, class: "navbar-brand topnav"%>
+    </div>
 
+      <ul class="nav navbar-nav navbar-right">
         <% if user_logged_in? %>
+            <li><%= link_to "Browse Jobs",   joblist_path %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>
@@ -19,6 +19,8 @@
               </ul>
             </li>
         <% elsif company_logged_in? %>
+            <li><%= link_to "Post Job",   new_job_posting_path %></li>
+            <li><%= link_to "My Jobs",   job_postings_path %></li>
             <li><%= link_to "Professionals",   users_path %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -32,9 +34,10 @@
               </ul>
             </li>
         <% else %>
+            <li><%= link_to "Home",   root_path %></li>
+            <li><%= link_to "Contact",   help_path %></li>
             <li><%= link_to "Log in", login_path %></li>
         <% end %>
       </ul>
-    </nav>
-  </div>
-</header>
+    </div>
+</nav>

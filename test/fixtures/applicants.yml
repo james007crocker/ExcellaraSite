@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  compAccept: false
+  userAccept: false
+  job_posting_id: 
+  user_id: 1
+
+two:
+  compAccept: false
+  userAccept: false
+  job_posting_id: 
+  user_id: 1

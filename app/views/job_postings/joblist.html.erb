@@ -1,0 +1,38 @@
+<h1 class="profile_title">Jobs</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="listing">
+
+      <%= will_paginate %>
+
+      <ul class="users">
+        <% @job_postings.each do |job| %>
+            <li>
+              <div class="listing" style="margin-right: 10%">
+                <div style="margin-left: 10%">
+                  <p><strong>Title: </strong>
+                    <%= job.title%>
+                  </p>
+                  <p><strong>Company: </strong><%= job.company.name %></p>
+                  <p><strong>Location: </strong><%= job.location %></p>
+                  <p>Posted <%= time_ago_in_words(job.created_at) %> ago.</p>
+                </div>
+                <div align="center">
+                  <div clas="row">
+                    <div style="width: 30%;">
+                      <br>
+                      <%= button_to "View Job", job, class: "btn btn-primary", method: "get"%>
+                      <p></p>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </li>
+        <% end %>
+      </ul>
+
+      <%= will_paginate %>
+
+    </div>
+  </div>
+</div>

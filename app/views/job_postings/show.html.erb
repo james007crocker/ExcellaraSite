@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% if !@jobposting.nil? %>
+        <h3 class="profile_title">Company <%= @jobposting.company.name %> </h3>
+        <div class="listing">
+            <table class="profile_mar" width = 80%>
+              <tr>
+                <td colspan="3">
+                  <p style="display: inline; margin-right: 20%"><strong>Title: </strong><%= @jobposting.title %></p>
+                  <p style="display: inline" align="right"><strong>Location: </strong><%= @jobposting.location %></p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p><strong>Description: </strong></p>
+                  <div class="blurb">
+                    <%= simple_format(word_wrap(@jobposting.description, line_width: 100)) %>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          <div align="center">
+            <div class="row">
+                <% unless current_company.nil? %>
+                    <%= link_to "Remove", @jobposting, method: :delete %>
+                <% end %>
+
+                <div style="width: 30%;">
+
+                  <% unless current_user.nil? || @jobposting.applicants.find_by(user_id: current_user.id)%>
+                      <%= form_for(@jobposting.applicants.build) do |f| %>
+                          <%= hidden_field_tag :job_id, @jobposting.id %>
+                          <%= f.submit "Apply", class: "btn btn-primary" %>
+                      <% end %>
+                  <% end %>
+
+                  <% if !current_user.nil? && state(@jobposting) == "Match" %>
+                      <button class="btn btn-success btn-sm disabled">Matched</button>
+                  <% elsif !current_user.nil? && state(@jobposting) == "Pending" %>
+                      <button class="btn btn-warning btn-sm disabled">Pending</button>
+                  <% end %>
+
+                </div>
+            </div>
+          </div>
+
+              <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Posted <%= time_ago_in_words(@jobposting.created_at) %> ago.</p>
+        </div>
+    <% else %>
+        <p>No job to show. </p>
+    <% end %>
+  </div>
+</div>

@@ -1,21 +1,45 @@
-<h1>Professionals</h1>
-
+<h1 class="profile_title">
+  Professionals
+</h1>
 <%= will_paginate %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <ul class="users">
+      <% @users.each do |user| %>
 
-<ul class="users">
-  <% @users.each do |user| %>
-      <% if user.admin == false && user.activated == true %>
-      <li>
-        <%= link_to user.name, user %>
-        <%=  user.location %>
-        <% end %>
-        <% if current_company.nil? %>
-            <%if current_user.admin? && !current_user?(user) %>
-                <%= link_to "Delete", user, method: :delete, data: { confirm: "Are you sure?" } %>
-            <% end%>
-      </li>
+          <% if user.admin == false && user.activated == true %>
+          <li>
+            <div class="border">
+              <table width="100%">
+                <tr>
+                  <td>
+                    <p style="margin-left: 10px"><strong>Name: </strong><%= user.name %></p>
+                  </td>
+                  <td>
+                    <p><strong>Location: </strong><%=  user.location %></p>
+                  </td>
+                </tr>
+              </table>
+              <div align="center">
+                <div clas="row">
+                  <div style="width: 30%;">
+                    <br>
+                    <%= button_to "View Profile", user, class: "btn btn-primary", method: "get"%>
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+            <% if current_company.nil? %>
+                <%if current_user.admin? && !current_user?(user) %>
+                    <%= link_to "Delete", user, method: :delete, data: { confirm: "Are you sure?" } %>
+                <% end%>
+          </li>
+          <% end %>
       <% end %>
-  <% end %>
-</ul>
+    </ul>
 
-<%= will_paginate %>
+    <%= will_paginate %>
+  </div>
+</div>

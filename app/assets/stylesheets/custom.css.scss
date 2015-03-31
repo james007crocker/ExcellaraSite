@@ -1,6 +1,22 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.intro-header {
+  padding-top: 0px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+  padding-bottom: 50px;
+  text-align: center;
+  color: #f8f8f8;
+  background: url(image-path("intro-bg3.jpg")) no-repeat center center;
+  background-size: cover;
+}
+
+.banner {
+  padding: 100px 0;
+  color: #f8f8f8;
+  background: url(asset-path("banner-bg3.jpg")) no-repeat center center;
+  background-size: cover;
+}
+
 body {
   padding-top: 40px;
 }

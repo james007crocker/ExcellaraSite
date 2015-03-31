@@ -9,7 +9,7 @@
 
           <% if user.admin == false && user.activated == true %>
           <li>
-            <div class="border">
+            <div class="div-back-border">
               <table width="100%">
                 <tr>
                   <td>
@@ -30,11 +30,11 @@
                 </div>
               </div>
             </div>
-            <% end %>
-            <% if current_company.nil? %>
-                <%if current_user.admin? && !current_user?(user) %>
-                    <%= link_to "Delete", user, method: :delete, data: { confirm: "Are you sure?" } %>
-                <% end%>
+          <% end %>
+          <% if current_company.nil? %>
+            <%if current_user.admin? && !current_user?(user) %>
+                 <%= link_to "Delete", user, method: :delete, data: { confirm: "Are you sure?" } %>
+            <% end%>
           </li>
           <% end %>
       <% end %>

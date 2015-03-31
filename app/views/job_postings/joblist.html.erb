@@ -1,21 +1,22 @@
 <h1 class="profile_title">Jobs</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <div class="listing">
 
       <%= will_paginate %>
 
-      <ul class="users">
+
         <% @job_postings.each do |job| %>
-            <li>
-              <div class="listing" style="margin-right: 10%">
+
+              <div class="div-back-border">
                 <div style="margin-left: 10%">
+                  <div>
+                    <br>
+                  </div>
                   <p><strong>Title: </strong>
                     <%= job.title%>
                   </p>
                   <p><strong>Company: </strong><%= job.company.name %></p>
                   <p><strong>Location: </strong><%= job.location %></p>
-                  <p>Posted <%= time_ago_in_words(job.created_at) %> ago.</p>
                 </div>
                 <div align="center">
                   <div clas="row">
@@ -26,13 +27,16 @@
                     </div>
                   </div>
               </div>
+                <p class="copyright text-muted small" align="right" style="margin-right: 10%">Posted <%= time_ago_in_words(job.created_at) %> ago.</p>
               </div>
-            </li>
+        <div>
+          <br>
+        </div>
+
         <% end %>
-      </ul>
+
 
       <%= will_paginate %>
 
-    </div>
   </div>
 </div>

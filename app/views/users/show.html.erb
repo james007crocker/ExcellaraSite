@@ -34,10 +34,13 @@
                             <p><%= app.job_posting.title %> Status: </p>
                           </div>
                           <div style="display: inline-block">
-                            <button class="btn btn-success btn-sm disabled">Pending</button>
+                            <button class="btn btn-success btn-sm disabled">Matched</button>
                           </div>
                           <br>
                       <% end %>
+                  <% end %>
+                  <% if @app_array.size == 0 %>
+                    <p align="center">No jobs yet.</p>
                   <% end %>
 
             <% end %>
@@ -59,6 +62,13 @@
                           <%= submit_tag "Recruit?", class: "btn btn-primary" %>
                         </div>
                       <% end %>
+                   <% elsif !current_company.nil? && @job_array.size == 0 %>
+                    <p align="center">No jobs posted yet.</p>
+                    <div align="center">
+                      <div style="width: 30%;">
+                        <%= button_to "Post Job?", new_job_posting_path, class: "btn btn-primary", method: :get%>
+                      </div>
+                    </div>
                   <% end %>
                   <p></p>
 
@@ -73,78 +83,101 @@
     <h1 class="profile_title">
       <%= @user.name %>
     </h1>
-    <table class="profile">
-      <tr>
-        <td>
-          <div class="profile_mar">
-            <p>
-              <strong>Contact: </strong><%= @user.email %>
-            </p>
+    <div align="center">
+      <div class="row">
+        <div style="width: 80%" class="div-back-profile">
 
-            <p>
-              <strong>Location: </strong><%= @user.location %>
-            </p>
-          </div>
-
-          <br><br>
-          <div class="blurb">
-            <p><strong>Experience:</strong></p>
-            <%=simple_format(word_wrap(@user.experience, line_width: 70)) %>
-          </div>
-          <div class="blurb">
-            <p><strong>Accomplishments:</strong></p>
-            <%=simple_format(word_wrap(@user.accomplishment, line_width: 70)) %>
-          </div>
-        </td>
-        <td class="col-md-6">
-          <br>
-          <% unless @apps.nil? %>
-              <% @apps.each do |app| %>
-                  <table class="border">
-                    <tr>
-                      <td width="30%">
-                        <p style="margin-left: 4%"><strong>Title: </strong><%= link_to app.job_posting.title, app.job_posting %></p>
-                      </td>
-                      <td width="30%">
-                        <p><strong>Location: </strong><%= app.job_posting.location %></p>
-                      </td>
-                      <td width="30%">
-                        <p><strong>Company: </strong><%= app.job_posting.company.name %></p>
-                      </td>
-                    </tr>
-                    <tr align="center">
-                      <td colspan="2">
-                        <div style="display: inline-block">
-                          <p><strong>Status: </strong></p>
-                        </div>
-                        <div style="display: inline-block" align="left">
-                          <% if app.userAccept == false %>
-                              <%= form_tag url_for(:controller => 'applicants', :action => 'update'), :method => 'patch' do  %>
-                                  <%= hidden_field_tag :app_id, app.id %>
-                                  <%= submit_tag "Accept?", class: "btn btn-primary btn-sm" %>
-                              <% end %>
-                          <% elsif app.compAccept == false %>
-                              <button class="btn btn-warning btn-sm disabled">Pending</button>
-                          <% else %>
-                              <button class="btn btn-success btn-sm disabled">Matched</button>
-                          <% end %>
-                        </div>
-                      </td>
-                      <td  valign="bottom">
-                        <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Sent <%= time_ago_in_words(app.created_at) %> ago.</p>
-                      </td>
-                    </tr>
-                  </table>
+          <table>
+            <tr>
+              <td>
+                <div>
                   <br>
-              <% end %>
-          <% end %>
-        </td>
-      </tr>
-    </table>
+                </div>
+                <div class="profile_mar">
+                  <p>
+                    <strong>Contact: </strong><%= @user.email %>
+                  </p>
+
+                  <p>
+                    <strong>Location: </strong><%= @user.location %>
+                  </p>
+                </div>
+
+                <br><br>
+                <div class="blurb" style="margin-left: 50px">
+                  <p><strong>Experience:</strong></p>
+                  <%=simple_format(word_wrap(@user.experience, line_width: 70)) %>
+                </div>
+                <div class="blurb" style="margin-left: 50px">
+                  <p><strong>Accomplishments:</strong></p>
+                  <%=simple_format(word_wrap(@user.accomplishment, line_width: 70)) %>
+                </div>
+                <div>
+                  <br>
+                </div>
+              </td>
+              <td class="col-md-6">
+                <br>
+                <% unless @apps.nil? %>
+                    <% if @apps.size == 0 %>
+                        <p align="center"> You have no activity to display. Start by browsing jobs.</p>
+                        <div align="center">
+                          <div style="width: 30%;">
+                            <%= button_to "Browse Jobs", joblist_path , class: "btn btn-primary", method: :get%>
+                          </div>
+                        </div>
+                    <% else %>
+
+                        <% @apps.each do |app| %>
+                            <table class="div-back-border">
+                              <tr>
+                                <td width="30%">
+                                  <p style="margin-left: 4%"><strong>Title: </strong><%= link_to app.job_posting.title, app.job_posting %></p>
+                                </td>
+                                <td width="30%">
+                                  <p><strong>Location: </strong><%= app.job_posting.location %></p>
+                                </td>
+                                <td width="30%">
+                                  <p><strong>Company: </strong><%= app.job_posting.company.name %></p>
+                                </td>
+                              </tr>
+                              <tr align="center">
+                                <td colspan="2">
+                                  <div style="display: inline-block">
+                                    <p><strong>Status: </strong></p>
+                                  </div>
+                                  <div style="display: inline-block" align="left">
+                                    <% if app.userAccept == false %>
+                                        <%= form_tag url_for(:controller => 'applicants', :action => 'update'), :method => 'patch' do  %>
+                                            <%= hidden_field_tag :app_id, app.id %>
+                                            <%= submit_tag "Accept?", class: "btn btn-primary btn-sm" %>
+                                        <% end %>
+                                    <% elsif app.compAccept == false %>
+                                        <button class="btn btn-warning btn-sm disabled">Pending</button>
+                                    <% else %>
+                                        <button class="btn btn-success btn-sm disabled">Matched</button>
+                                    <% end %>
+                                  </div>
+                                </td>
+                                <td  valign="bottom">
+                                  <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Sent <%= time_ago_in_words(app.created_at) %> ago.</p>
+                                </td>
+                              </tr>
+                            </table>
+                            <br>
+                        <% end %>
+
+                    <% end %>
 
 
+                <% end %>
+              </td>
+            </tr>
+          </table>
 
-
+        </div>
+      </div>
+    </div>
 
 <% else %>
 

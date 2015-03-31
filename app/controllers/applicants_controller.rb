@@ -29,6 +29,9 @@ class ApplicantsController < ApplicationController
         flash[:danger] = "Error applying for job"
         redirect_to current_user
       end
+    else
+      flash[:danger] = "You do not have permission to view this page"
+      redirect_to root_path
     end
   end
 
@@ -41,6 +44,9 @@ class ApplicantsController < ApplicationController
       @applicant = Applicant.find_by(id: params[:app_id])
       @job = @applicant.job_posting
       @receiver = User.find_by(id: @applicant.user_id)
+    else
+      flash[:danger] = "You do not have permission to view this page"
+      redirect_to root_path
     end
   end
 
@@ -51,10 +57,13 @@ class ApplicantsController < ApplicationController
       @applicant.update_attribute(:userAccept, true)
       @sender = current_user
       @receiver = Company.find_by(id: params[:receiver])
-    else
+    elsif current_company
       @applicant.update_attribute(:compAccept, true)
       @sender = current_company
       @receiver = User.find_by(id: params[:receiver])
+    else
+      flash[:danger] = "You do not have permission to view this page"
+      redirect_to root_path
     end
     @text = params[:text]
     @job = JobPosting.find_by(id: params[:job])

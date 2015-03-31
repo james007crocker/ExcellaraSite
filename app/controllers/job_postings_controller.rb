@@ -26,11 +26,11 @@ class JobPostingsController < ApplicationController
 
   def index
     @company = current_company
-    @jobpostings = @company.job_postings.paginate(page: params[:page])
+    @jobpostings = @company.job_postings.paginate(page: params[:page], per_page: 3)
   end
 
   def joblist
-    @job_postings = JobPosting.paginate(page: params[:page])
+    @job_postings = JobPosting.paginate(page: params[:page], per_page: 10)
   end
 
   def show

@@ -199,7 +199,6 @@ html, body {
 .blurb {
   word-break: break-all;
   white-space: normal;
-  margin-left: 10%;
 }
 
 .profile_title {
@@ -222,4 +221,35 @@ html, body {
 /*Home Page Buttons*/
 .home-page-buttons {
   width: 200px;
+}
+
+/* Backgorund colors */
+.div-back-profile {
+  width: 100%;
+  border-collapse: separate !important;
+  border-style: solid;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-color: #c0c0c0;
+  tr  {
+    width: 50%;
+  }
+  h1 {
+    text-align: center;
+  }
+  div:not(.blurb, .profile_mar) {
+    border-style: ridge;
+  }
+  background-color: #ffffff;
+}
+
+.div-back-border {
+  background-color: #ffffff;
+  width: 100%;
+  border-collapse: separate !important;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #c0c0c0;
 }

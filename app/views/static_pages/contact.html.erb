@@ -1,1 +1,17 @@
-<p> Contact page - currently unused </p>
+<h1 class="profile_title">
+  Contact
+</h1>
+<h4 align="center">Leave your name, email and message and we will get back to you soon!</h4>
+<div align="center">
+  <div class="row">
+    <div style="width: 500px;">
+      <%= form_tag url_for(:controller => 'static_pages', :action => 'send_message'), :method => 'get' do%>
+          <%= text_field_tag :name, nil, class: 'form-control', placeholder: "Name", :style => "color: black" %>
+          <%= text_field_tag :email, nil, class: 'form-control', placeholder: "example@email.com", :style => "color: black" %>
+          <%= text_area_tag :message, nil, class: 'form-control', rows: 10, placeholder: "Enter message here"  %>
+          <%= submit_tag "Send", class: "btn btn-primary"%>
+      <% end %>
+    </div>
+  </div>
+</div>
+

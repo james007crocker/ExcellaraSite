@@ -1,20 +1,27 @@
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
+<div align="center">
+  <div class="row">
+    <div style="width: 80%; padding-top: 100px" >
     <% if !@jobposting.nil? %>
         <h3 class="profile_title">Company <%= @jobposting.company.name %> </h3>
-        <div class="listing">
-            <table class="profile_mar" width = 80%>
+        <div class="div-back-border">
+            <table width = 80%>
               <tr>
                 <td colspan="3">
+                  <div>
+                    <br>
+                  </div>
                   <p style="display: inline; margin-right: 20%"><strong>Title: </strong><%= @jobposting.title %></p>
                   <p style="display: inline" align="right"><strong>Location: </strong><%= @jobposting.location %></p>
+                  <div>
+                    <br>
+                  </div>
                 </td>
               </tr>
               <tr>
                 <td>
                   <p><strong>Description: </strong></p>
                   <div class="blurb">
-                    <%= simple_format(word_wrap(@jobposting.description, line_width: 100)) %>
+                    <%= simple_format(word_wrap(@jobposting.description, line_width: 200)) %>
                   </div>
                 </td>
               </tr>
@@ -49,5 +56,6 @@
     <% else %>
         <p>No job to show. </p>
     <% end %>
+    </div>
   </div>
 </div>

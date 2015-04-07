@@ -1,4 +1,10 @@
-<p>Select sign up type:</p>
+<h2 class="profile_title">Select sign up type:</h2>
 
-<%= link_to "Retired Professional", user_signup_path, class: "btn btn-lg btn-primary"  %>
-<%= link_to "Company", company_signup_path, class: "btn btn-lg btn-success" %>
+<div align="center">
+  <div class="container">
+    <div class="row">
+      <%= link_to "Retired Professional", user_signup_path, class: "btn btn-lg btn-primary" , style: :"width: 200px" %>
+      <%= link_to "Company", company_signup_path, class: "btn btn-lg btn-success" , style: :"width: 200px" %>
+    </div>
+  </div>
+</div>

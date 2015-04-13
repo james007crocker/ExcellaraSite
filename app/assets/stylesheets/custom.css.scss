@@ -17,10 +17,6 @@
   background-size: cover;
 }
 
-body {
-  padding-top: 40px;
-}
-
 section {
   overflow: auto;
 }
@@ -154,6 +150,10 @@ html, body {
   height: 100%;
 }
 
+body {
+  padding-top: 40px;
+}
+
 .wrapper {
   min-height: 100%;
   height: auto !important;
@@ -161,6 +161,7 @@ html, body {
 }
 
 .footer, .push {
+  bottom: 0px;
   height: 4em; /* .push must be the same height as .footer */
   margin-right: 10px;
 }

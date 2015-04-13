@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "An account activation email has been sent to you."
+      flash[:success] = "An account activation email has been sent to you."
       redirect_to root_url
     else
       render 'new'

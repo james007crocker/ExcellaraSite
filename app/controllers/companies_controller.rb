@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
-  before_action :logged_in_company, only: [:edit, :update]
+  before_action :logged_in_company, only: [:edit, :update, :destroy]
   before_action :correct_company, only: [:edit, :update]
+  before_action :can_view_profile, only: [:show]
 
   def new
     @company = Company.new
@@ -59,6 +60,16 @@ class CompaniesController < ApplicationController
     unless current_company?(@company)
       flash[:danger] = "You do not have permission to view this profile."
       redirect_to(root_url)
+    end
+  end
+
+  def can_view_profile
+    if current_user.nil?
+      @company = Company.find_by_id(params[:id])
+      if (@company.nil? || (!current_company?(@company) && !@company.nil?))
+        flash[:danger] = "You do not have permission to view this page."
+        redirect_to(root_url)
+      end
     end
   end
 end

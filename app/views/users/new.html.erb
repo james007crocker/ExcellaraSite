@@ -1,3 +1,5 @@
+<div class="accommodate_alert"></div>
+
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h1 class="profile_title">Sign up</h1>
@@ -14,11 +16,13 @@
         <%= f.label :location %>
         <%= f.text_field :location, class: 'form-control' %>
 
-        <%= f.label :experience %>
+        <%= f.label :experience, "Experience Summary:" %>
         <%= f.text_area :experience, class: 'form-control', :rows => "10" %>
 
-        <%= f.label :accomplishment, "Accomplishments" %>
+        <!--
+        <% f.label :accomplishment, "Accomplishments" %>
         <%= f.text_area :accomplishment, class: 'form-control', :rows => "10" %>
+        -->
 
         <%= f.label :password %>
         <%= f.password_field :password, class: 'form-control' %>

@@ -9,11 +9,14 @@
 <body>
     <%= render 'layouts/header' %>
     <div style="height: 100%">
-      <div align="center" class="container" > <!--style="position: absolute; padding-top: 50px"-->
-        <% flash.each do |message_type, message| %>
-            <div class="alert alert-<%= message_type %>"><%= message %></div>
-        <% end %>
+      <div class="container" align="center">
+        <div  class="container" style="padding-top: 25px; position: absolute"> <!---->
+          <% flash.each do |message_type, message| %>
+              <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
+        </div>
       </div>
+
       <%= yield %>
     </div>
     <%= render 'layouts/footer' %>

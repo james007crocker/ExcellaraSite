@@ -1,4 +1,7 @@
 <p>Name: <%= @name %> </p>
+<br>
 <p>Email: <%= @email %> </p>
+<br>
 <p>Message:</p>
+<br>
 <p class="blurb"><%= simple_format(word_wrap(@message, line_width: 75)) %></p>

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   validates :experience, presence: true
 
-  validates :accomplishment, presence: true
+  #validates :accomplishment, length: { minimum: 5}
 
   has_secure_password
   validates :password, length: { minimum: 6 }

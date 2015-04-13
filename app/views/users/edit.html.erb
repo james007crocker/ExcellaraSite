@@ -1,3 +1,5 @@
+<div class="accommodate_alert"></div>
+
 <h1 class="profile_title">Edit Profile</h1>
 
 <div class="row">
@@ -11,8 +13,10 @@
         <%= f.label :experience %>
         <%= f.text_area :experience, class: 'form-control', :rows => "10" %>
 
+        <!--
         <%= f.label :accomplishment, "Accomplishments" %>
         <%= f.text_area :accomplishment, class: 'form-control', :rows => "10" %>
+        -->
 
         <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>

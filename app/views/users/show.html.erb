@@ -1,3 +1,5 @@
+<div class="accommodate_alert"></div>
+
 <% if current_company %>
     <h1 class="profile_title">
       <%= @user.name %>
@@ -6,14 +8,14 @@
       <div class="col-md-6 col-md-offset-3">
         <div class="div-back-border">
           <p style="margin-left: 10%"><strong>Location: </strong><%= @user.location %></p>
-          <p style="margin-left: 10%"><strong>Experience:</strong></p>
+          <p style="margin-left: 10%"><strong>Experience Summary:</strong></p>
           <div style="word-break: break-all; white-space: normal; margin-left: 5%">
             <%=simple_format(word_wrap(@user.experience, line_width: 75)) %>
           </div>
-          <p style="margin-left: 10%"><strong>Accomplishments: </strong></p>
+          <!--<p style="margin-left: 10%"><strong>Accomplishments: </strong></p>
           <div style="word-break: break-all; white-space: normal; margin-left: 5%">
-            <%=simple_format(word_wrap(@user.accomplishment, line_width: 75)) %>
-          </div>
+            <%-#simple_format(word_wrap(@user.accomplishment, line_width: 75))-%>
+          </div>-->
 
           <div align="center">
             <div class="div-back-border" style="width: 60%">
@@ -105,13 +107,13 @@
 
                 <br><br>
                 <div class="blurb" style="margin-left: 50px">
-                  <p><strong>Experience:</strong></p>
+                  <p><strong>Experience Summary:</strong></p>
                   <%=simple_format(word_wrap(@user.experience, line_width: 70)) %>
                 </div>
-                <div class="blurb" style="margin-left: 50px">
+                <!--<div class="blurb" style="margin-left: 50px">
                   <p><strong>Accomplishments:</strong></p>
-                  <%=simple_format(word_wrap(@user.accomplishment, line_width: 70)) %>
-                </div>
+                  <%-#simple_format(word_wrap(@user.accomplishment, line_width: 70)) -%>
+                </div>-->
                 <div>
                   <br>
                 </div>

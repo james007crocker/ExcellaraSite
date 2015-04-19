@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :activation_token, :reset_token, :picture
   before_create :create_activation_digest
   before_save { self.email = email.downcase }
 
@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   validates :experience, presence: true
 
   #validates :accomplishment, length: { minimum: 5}
+
+  mount_uploader :picture, PictureUploader
+  validate  :picture_size
 
   has_secure_password
   validates :password, length: { minimum: 6 }
@@ -71,5 +74,11 @@ class User < ActiveRecord::Base
     def create_activation_digest
       self.activation_token = User.new_token
       self.activation_digest = User.digest(activation_token)
+    end
+
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "should be less than 5MB")
+      end
     end
 end

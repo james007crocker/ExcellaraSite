@@ -66,6 +66,7 @@ class UsersController < ApplicationController
     if @user.update_attribute(:location, params[:user][:location])
       @user.update_attribute(:accomplishment, params[:user][:accomplishment])
       @user.update_attribute(:experience, params[:user][:experience])
+      @user.update_attribute(:picture, params[:user][:picture])
       flash.now[:success] = "Profile Updated"
       redirect_to @user
     else
@@ -82,7 +83,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :location, :experience, :accomplishment, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :location, :experience, :accomplishment, :password, :password_confirmation, :picture)
     end
 
     def logged_in_user

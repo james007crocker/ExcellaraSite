@@ -34,6 +34,7 @@ class CompaniesController < ApplicationController
     if @company.update_attribute(:location, params[:company][:location])
       @company.update_attribute(:size, params[:company][:size])
       @company.update_attribute(:description, params[:company][:description])
+      @company.update_attribute(:picture, params[:company][:picture])
       flash.now[:success] = "Profile Updated"
       redirect_to @company
     else

@@ -1,5 +1,9 @@
 <div class="accommodate_alert"></div>
-
+<div  class="profile_pic">
+  <div align="center">
+    <%= image_tag @company.picture.url, class: "vert_align" if @company.picture? %>
+  </div>
+</div>
 <h1 class="profile_title">
   <%= @company.name %>
 </h1>
@@ -9,7 +13,7 @@
       <table>
         <tr>
           <td>
-            <div class="profile_mar">
+            <div class="profile_mar" style="padding-top: 130px">
               <p>
                 <strong>Contact: </strong><%= @company.email %>
               </p>

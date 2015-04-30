@@ -1,14 +1,26 @@
 <div class="accommodate_alert"></div>
 
 <% if current_company %>
+
     <h1 class="profile_title">
       <%= @user.name %>
     </h1>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="div-back-border">
-          <p style="margin-left: 10%"><strong>Location: </strong><%= @user.location %></p>
-          <p style="margin-left: 10%"><strong>Experience Summary:</strong></p>
+          <table width="100%">
+            <tr>
+              <td width="50%">
+                <p style="margin-left: 10%"><strong>Location: </strong><%= @user.location %></p>
+                <p style="margin-left: 10%"><strong>Experience Summary:</strong></p>
+              </td>
+              <td width="50%">
+                <div class="profile_pic2" align="right">
+                    <%= image_tag @user.picture.url, class: "img-thumbnail", width: 150, height: 150 if @user.picture? %>
+                </div>
+              </td>
+            </tr>
+          </table>
           <div style="word-break: break-all; white-space: normal; margin-left: 5%">
             <%=simple_format(word_wrap(@user.experience, line_width: 75)) %>
           </div>
@@ -61,7 +73,7 @@
                           <%= select_tag "job_id", options_from_collection_for_select(@job_array, "id", "title") %>
                         </div>
                         <div style="width: 30%;">
-                          <%= submit_tag "Recruit?", class: "btn btn-primary" %>
+                          <%= submit_tag "Suggest Job", class: "btn btn-primary" %>
                         </div>
                       <% end %>
                    <% elsif !current_company.nil? && @job_array.size == 0 %>
@@ -82,10 +94,15 @@
       </div>
     </div>
 <% elsif current_user %>
+    <div  class="profile_pic">
+      <div align="center">
+        <%= image_tag @user.picture.url, class: "vert_align" if @user.picture? %>
+      </div>
+    </div>
     <h1 class="profile_title">
       <%= @user.name %>
     </h1>
-    <!-- image_tag @user.picture.url if @user.picture? -->
+
     <div align="center">
       <div class="row">
         <div style="width: 80%" class="div-back-profile">

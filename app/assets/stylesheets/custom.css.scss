@@ -206,8 +206,8 @@ body {
 }
 
 .profile_mar {
-  margin-left: 10%
-  
+  margin-left: 10%;
+  margin-top: 40px;
 }
 
 .border {
@@ -256,4 +256,49 @@ body {
 
 .accommodate_alert {
   padding-bottom: 75px;
+}
+
+.profile_pic {
+  margin-left: 20%;
+  padding-bottom: 50px;
+  background-color: #ffffff;
+  border-color: #c0c0c0;
+  border-style: solid;
+  width: 210px;
+  height: 210px;
+  line-height: 210px;
+  display: inline-block;
+  text-align: center;
+  position: absolute;
+}
+
+.profile_pic2 {
+  border-radius: 10px;
+  margin-left: 50%;
+  margin-right: 5px;
+  margin-top: 5px;
+  background-color: #ffffff;
+  border-color: #c0c0c0;
+  border-style: solid;
+  display: inline-block;
+  z-index: 1;
+}
+
+.profile_pic3 {
+  width: 150px;
+  max-height: 150px;
+  min-height: 125px;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: lightgrey;
+  border-color: #c0c0c0;
+  border-style: solid;
+  display: inline-block;
+  z-index: 1;
+}
+
+.vert_align {
+  vertical-align: middle;
 }

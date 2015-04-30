@@ -11,26 +11,47 @@
 
           <% if user.admin == false && user.activated == true %>
           <li>
-            <div class="div-back-border">
+            <div class="div-back-border" >
               <table width="100%">
                 <tr>
-                  <td>
-                    <p style="margin-left: 10px"><strong>Name: </strong><%= user.name %></p>
+                  <td width="200px">
+                    <div class="profile_pic3">
+                      <%= image_tag user.picture.url, class: "img-thumbnail", width: 150, height: 150 if user.picture? %>
+                    </div>
                   </td>
                   <td>
-                    <p><strong>Location: </strong><%=  user.location %></p>
+                    <table width="100%">
+                      <tr >
+                        <td width="50%" >
+                          <p style="margin-left: 10px"><strong>Name: </strong><%= user.name %></p>
+                        </td>
+                        <td width="50%">
+                          <p><strong>Location: </strong><%=  user.location %></p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="padding-left: 10px">
+                          <p><%=simple_format(word_wrap(user.experience[0..100]+"......", line_width: 50)) %></p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <div align="center">
+                            <div clas="row">
+                              <div style="width: 30%;">
+                                <br>
+                                <%= button_to "View Profile", user, class: "btn btn-primary", method: "get"%>
+                                <p></p>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
               </table>
-              <div align="center">
-                <div clas="row">
-                  <div style="width: 30%;">
-                    <br>
-                    <%= button_to "View Profile", user, class: "btn btn-primary", method: "get"%>
-                    <p></p>
-                  </div>
-                </div>
-              </div>
+
             </div>
           <% end %>
           <% if current_company.nil? %>

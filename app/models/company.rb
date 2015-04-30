@@ -18,6 +18,9 @@ class Company < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
 
+  mount_uploader :picture, PictureUploader
+  validate  :picture_size
+
   def Company.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
         BCrypt::Engine.cost
@@ -73,4 +76,9 @@ class Company < ActiveRecord::Base
       self.activation_digest = Company.digest(activation_token)
     end
 
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "should be less than 5MB")
+      end
+    end
 end

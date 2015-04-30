@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415004027) do
+ActiveRecord::Schema.define(version: 20150430205100) do
 
   create_table "applicants", force: :cascade do |t|
     t.boolean  "compAccept"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150415004027) do
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.string   "picture"
   end
 
   add_index "companies", ["email"], name: "index_companies_on_email", unique: true

@@ -17,10 +17,10 @@
         <%= f.label :accomplishment, "Accomplishments" %>
         <%= f.text_area :accomplishment, class: 'form-control', :rows => "10" %>
         -->
-        <!-- f.label :picture, "Picture Upload" %>
+        <%= f.label :picture, "Picture Upload" %>
         <span class="picture">
-         f.file_field :picture, class: 'form-control'%>
-        </span> -->
+         <%= f.file_field :picture, class: 'form-control', accept: 'image/jpeg,image/gif,image/png'%>
+        </span>
 
         <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>

@@ -4,25 +4,42 @@
   <div class="row">
     <div style="width: 80%; padding-top: 100px" >
     <% if !@jobposting.nil? %>
-        <h3 class="profile_title">Company <%= @jobposting.company.name %> </h3>
+        <h3 class="profile_title">Company <%= @jobposting.title %> </h3>
         <div class="div-back-border">
-            <table width = 80%>
+            <table width="100%">
               <tr>
-                <td colspan="3">
-                  <div>
-                    <br>
-                  </div>
-                  <p style="display: inline; margin-right: 20%"><strong>Title: </strong><%= @jobposting.title %></p>
-                  <p style="display: inline" align="right"><strong>Location: </strong><%= @jobposting.location %></p>
-                  <div>
-                    <br>
+                <td width="50%">
+                  <table width="100%">
+                    <tr>
+                      <td width="50%">
+                        <p style="margin-left: 10px"><strong>Company: </strong><%= @jobposting.company.name %></p>
+                      </td>
+                      <td width="50%">
+                        <p align="right"><strong>Location: </strong><%= @jobposting.location %></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p style="margin-left: 10px"><strong>Website: </strong><%= @jobposting.company.website %></p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+
+                <td width="50%">
+                  <div class="profile_pic2" align="right">
+                    <% if @jobposting.company.picture?%>
+                        <%= image_tag @jobposting.company.picture.url, class: "img-thumbnail", width: 150, height: 150%>
+                    <% else %>
+                        <%= image_tag "no_profile.png", class: "img-thumbnail", width: 150, height: 150  %>
+                    <% end %>
                   </div>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p><strong>Description: </strong></p>
-                  <div class="blurb">
+                  <p style="margin-left: 10px"><strong>Job Description: </strong></p>
+                  <div class="blurb" style="margin-left: 10px">
                     <%= simple_format(word_wrap(@jobposting.description, line_width: 200)) %>
                   </div>
                 </td>

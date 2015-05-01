@@ -1,7 +1,11 @@
 <div class="accommodate_alert"></div>
 <div  class="profile_pic">
   <div align="center">
-    <%= image_tag @company.picture.url, class: "vert_align" if @company.picture? %>
+    <% if @company.picture?%>
+        <%= image_tag @company.picture.url, class: "vert-align" %>
+    <% else %>
+        <%= image_tag "no_company_pic.png", class: "vert-align"  %>
+    <% end %>
   </div>
 </div>
 <h1 class="profile_title">
@@ -13,11 +17,13 @@
       <table>
         <tr>
           <td>
-            <div class="profile_mar" style="padding-top: 130px">
+            <div class="profile_mar">
               <p>
                 <strong>Contact: </strong><%= @company.email %>
               </p>
-
+              <p>
+                <strong>Website: </strong><%= @company.website %>
+              </p>
               <p>
                 <strong>Location: </strong><%= @company.location %>
               </p>
@@ -42,7 +48,7 @@
                     <p align="center"> You have no activity to display. Start by posting jobs then finding professionals.</p>
                     <div align="center">
                       <div style="width: 30%;">
-                        <%= button_to "Post Job?", new_job_posting_path, class: "btn btn-primary", method: :get%>
+                        <%= button_to "Post Job", new_job_posting_path, class: "btn btn-primary", method: :get%>
                       </div>
                     </div>
                 <% else %>

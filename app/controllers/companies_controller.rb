@@ -18,7 +18,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
     if @company.save
       @company.send_activation_email
-      flash[:info] = "An account activation email has been sent to you."
+      flash[:success] = "An account activation email has been sent to you. Please follow the link in this email to activate your account."
       redirect_to root_url
     else
       render 'new'
@@ -35,6 +35,7 @@ class CompaniesController < ApplicationController
       @company.update_attribute(:size, params[:company][:size])
       @company.update_attribute(:description, params[:company][:description])
       @company.update_attribute(:picture, params[:company][:picture])
+      @company.update_attribute(:website, params[:company][:website])
       flash.now[:success] = "Profile Updated"
       redirect_to @company
     else

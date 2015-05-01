@@ -16,7 +16,11 @@
                 <tr>
                   <td width="200px">
                     <div class="profile_pic3">
-                      <%= image_tag user.picture.url, class: "img-thumbnail", width: 150, height: 150 if user.picture? %>
+                      <% if user.picture?%>
+                          <%= image_tag user.picture.url, class: "img-thumbnail", width: 150, height: 150%>
+                      <% else %>
+                          <%= image_tag "no_profile.png", class: "img-thumbnail", width: 150, height: 150  %>
+                      <% end %>
                     </div>
                   </td>
                   <td>

@@ -16,7 +16,11 @@
               </td>
               <td width="50%">
                 <div class="profile_pic2" align="right">
-                    <%= image_tag @user.picture.url, class: "img-thumbnail", width: 150, height: 150 if @user.picture? %>
+                  <% if @user.picture?%>
+                      <%= image_tag @user.picture.url, class: "img-thumbnail", width: 150, height: 150 if @user.picture? %>
+                  <% else %>
+                      <%= image_tag "no_profile.png", class: "img-thumbnail", width: 150, height: 150  %>
+                  <% end %>
                 </div>
               </td>
             </tr>
@@ -80,7 +84,7 @@
                     <p align="center">No jobs posted yet.</p>
                     <div align="center">
                       <div style="width: 30%;">
-                        <%= button_to "Post Job?", new_job_posting_path, class: "btn btn-primary", method: :get%>
+                        <%= button_to "Post Job", new_job_posting_path, class: "btn btn-primary", method: :get%>
                       </div>
                     </div>
                   <% end %>
@@ -95,9 +99,11 @@
     </div>
 <% elsif current_user %>
     <div  class="profile_pic">
-      <div align="center">
-        <%= image_tag @user.picture.url, class: "vert_align" if @user.picture? %>
-      </div>
+        <% if @user.picture?%>
+            <%= image_tag @user.picture.url, class: "img-thumbnail" %>
+        <% else %>
+            <%= image_tag "no_profile.png", class: "img-thumbnail"%>
+        <% end %>
     </div>
     <h1 class="profile_title">
       <%= @user.name %>

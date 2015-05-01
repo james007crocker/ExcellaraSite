@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   validate  :picture_size
 
-  mount_uploader :resume, PictureUploader
+  mount_uploader :resume, ResumeUploader
   validate  :resume_size
 
   has_secure_password

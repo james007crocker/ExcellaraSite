@@ -46,6 +46,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def resume
+    @user = User.find(params[:id])
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -67,6 +71,7 @@ class UsersController < ApplicationController
       @user.update_attribute(:accomplishment, params[:user][:accomplishment])
       @user.update_attribute(:experience, params[:user][:experience])
       @user.update_attribute(:picture, params[:user][:picture])
+      @user.update_attribute(:resume, params[:user][:resume])
       flash.now[:success] = "Profile Updated"
       redirect_to @user
     else

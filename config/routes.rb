@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get   'joblist'     =>    'job_postings#joblist'
   post  'login'       =>    'sessions#create'
   delete 'logout'      =>   'sessions#destroy'
+  get   'resume'      =>    'users#resume'
   resources :users
   resources :companies
   resources :account_activations, only: [:edit]

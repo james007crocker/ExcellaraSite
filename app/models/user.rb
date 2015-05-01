@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   validate  :picture_size
 
+  mount_uploader :resume, PictureUploader
+  validate  :resume_size
+
   has_secure_password
   validates :password, length: { minimum: 6 }
 
@@ -81,4 +84,10 @@ class User < ActiveRecord::Base
         errors.add(:picture, "should be less than 5MB")
       end
     end
+
+  def resume_size
+    if resume.size > 5.megabytes
+      errors.add(:resume, "should be less than 5MB")
+    end
+  end
 end

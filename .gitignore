@@ -17,3 +17,4 @@
 /tmp
 #ignore all image and temp file uploads
 /uploads/*
+public/uploads/

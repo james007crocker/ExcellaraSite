@@ -52,11 +52,13 @@ class ApplicantsController < ApplicationController
 
 
   def send_match_email
+
     @applicant = Applicant.find_by(id: params[:app_id])
     if current_user
       @applicant.update_attribute(:userAccept, true)
       @sender = current_user
       @receiver = Company.find_by(id: params[:receiver])
+      @sendresume = params[:sendresume]
     elsif current_company
       @applicant.update_attribute(:compAccept, true)
       @sender = current_company
@@ -67,7 +69,7 @@ class ApplicantsController < ApplicationController
     end
     @text = params[:text]
     @job = JobPosting.find_by(id: params[:job])
-    UserMailer.match_email(@sender, @receiver, @job, @text).deliver_now
+    UserMailer.match_email(@sender, @receiver, @job, @text, @sendresume).deliver_now
     flash[:success] = "Contacted " + @receiver.name + " about " + @job.title + " match"
     if current_user
       redirect_to current_user

@@ -18,7 +18,11 @@
         <%= hidden_field_tag :job, @job.id %>
         <%= hidden_field_tag :app_id, @applicant.id %>
         <%= text_area_tag :text, nil, class: 'form-control', rows: 10, placeholder: "Enter message here"  %>
-
+        <% if current_user && current_user.resume? %>
+            <div class="checkbox">
+              <label class="checkbox_send_email"><%= check_box_tag 'sendresume' %> Attach resume to email?</label>
+            </div>
+        <% end %>
         <%= submit_tag "Send Email", class: "btn btn-primary"%>
     <% end %>
   </div>

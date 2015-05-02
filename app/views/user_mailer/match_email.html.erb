@@ -1,3 +1,6 @@
 <p><%= @text %></p>
 <br>
 <p><%= @sender.name %> can be reached at: <%= @sender.email %></p>
+<% if @sendresume == "1" %>
+        <p> Follow this link to view <%= @sender.name %>'s  </p> <a href="<%= @link %>">Resume</a>
+<% end %>

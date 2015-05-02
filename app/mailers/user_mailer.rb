@@ -22,11 +22,17 @@ class UserMailer < ApplicationMailer
     mail to: receiver.email, subject: "Excellara Password Reset"
   end
 
-  def match_email(sender, receiver, job, text)
+  def match_email(sender, receiver, job, text, sendresume)
     @receiver = receiver
     @sender = sender
     @job = job
     @text = text
+    @sendresume = sendresume
+    if Rails.env.production?
+      @link = "https://excellara-test.herokuapp.com/resume?id=" + @sender.id.to_s
+    else
+      @link = "http://localhost:3000/resume?id=" + @sender.id.to_s
+    end
     if @receiver.kind_of? User
       subject_string = "Excellara Match: " + @job.title + " at " + @sender.name
     else

@@ -5,6 +5,18 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+ <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+  <style>
+      .carousel-inner > .item > img,
+      .carousel-inner > .item > a > img {
+          width: 100%;
+          margin: auto;
+      }
+  </style>
+
 </head>
 <body>
     <%= render 'layouts/header' %>
@@ -12,7 +24,7 @@
       <div class="container" align="center">
         <div  class="container" style="padding-top: 25px; position: absolute"> <!---->
           <% flash.each do |message_type, message| %>
-              <div class="alert alert-<%= message_type %>"><%= message %></div>
+              <div class="alert alert-<%= message_type %>" style="z-index: 1"><%= message %></div>
           <% end %>
         </div>
       </div>

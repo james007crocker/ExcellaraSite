@@ -3,9 +3,10 @@
 <h1 class="profile_title">
   Professionals
 </h1>
-<%= will_paginate %>
+
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-6 col-centered">
+    <%= will_paginate %>
     <ul class="users">
       <% @users.each do |user| %>
 

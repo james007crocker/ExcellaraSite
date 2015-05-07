@@ -37,11 +37,12 @@ class CompaniesController < ApplicationController
 
   def update
     @company = Company.find(params[:id])
-    if @company.update_attribute(:location, params[:company][:location])
-      @company.update_attribute(:size, params[:company][:size])
-      @company.update_attribute(:description, params[:company][:description])
-      @company.update_attribute(:picture, params[:company][:picture])
-      @company.update_attribute(:website, params[:company][:website])
+    if @company.update(company_update_params)
+      #update_attribute(:location, params[:company][:location])
+      #@company.update_attribute(:size, params[:company][:size])
+      #@company.update_attribute(:description, params[:company][:description])
+      #@company.update_attribute(:picture, params[:company][:picture])
+      #@company.update_attribute(:website, params[:company][:website])
       flash.now[:success] = "Profile Updated"
       redirect_to @company
     else
@@ -61,6 +62,10 @@ class CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:name, :email, :location, :website, :description, :size, :password, :password_confirmation)
+  end
+
+  def company_update_params
+    params.require(:company).permit(:location, :website, :description, :size, :picture)
   end
 
   def logged_in_company
@@ -88,4 +93,5 @@ class CompaniesController < ApplicationController
       end
     end
   end
+
 end

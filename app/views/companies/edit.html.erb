@@ -1,8 +1,15 @@
 <div class="accommodate_alert"></div>
 
-<h1 class="profile_title">
-  Edit Profile
-</h1>
+<% if current_company.website.blank? || current_company.location.blank? || current_company.size.blank? || current_company.description.blank? %>
+    <h1 class="profile_title">
+      Complete Profile
+    </h1>
+<% else %>
+    <h1 class="profile_title">
+      Edit Profile
+    </h1>
+<% end %>
+
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">

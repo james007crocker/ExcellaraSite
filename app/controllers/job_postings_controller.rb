@@ -1,4 +1,6 @@
 class JobPostingsController < ApplicationController
+  before_action :checkAccountCompleteUser, only: [:joblist]
+  before_action :checkAccountCompleteCompany, only: [:new, :index]
 
   def create
     @jobpostings = current_company.job_postings.build(job_posting_params)
@@ -45,6 +47,20 @@ class JobPostingsController < ApplicationController
 
     def job_posting_params
       params.require(:job_posting).permit(:title, :location, :description)
+    end
+
+    def checkAccountCompleteUser
+      if current_user.location.blank? || current_user.experience.blank?
+        flash[:danger] = "Please complete your profile before proceeding"
+        redirect_to edit_user_path(current_user)
+      end
+    end
+
+    def checkAccountCompleteCompany
+      unless CompanyProfileIsComplete?
+        flash[:danger] = "Please complete your profile before proceeding"
+        redirect_to edit_company_path(current_company)
+      end
     end
 
 end

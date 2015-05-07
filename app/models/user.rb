@@ -9,10 +9,11 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
       format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false}
 
-  validates :location, presence: true, length:  { maximum: 20 }
+  validates :location,  length:  { maximum: 20 }#,presence: true
+  validate :userLocation?, :unless => Proc.new { |user| user.location.nil? }
 
-  validates :experience, presence: true
-
+  #validates :experience, presence: true
+  validate :userExperience?, :unless => Proc.new { |user| user.experience.nil? }
   #validates :accomplishment, length: { minimum: 5}
 
   mount_uploader :picture, PictureUploader
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
   validate  :resume_size
 
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, :unless => Proc.new { |company| company.password.nil? }
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -85,9 +86,21 @@ class User < ActiveRecord::Base
       end
     end
 
-  def resume_size
-    if resume.size > 5.megabytes
-      errors.add(:resume, "should be less than 5MB")
+    def resume_size
+      if resume.size > 5.megabytes
+        errors.add(:resume, "should be less than 5MB")
+      end
     end
-  end
+
+    def userLocation?
+      if self.activated && self.location.blank?
+        errors.add(:location, "should  be present")
+      end
+    end
+
+    def userExperience?
+      if self.activated && self.experience.blank?
+        errors.add(:experience, "should  be present")
+      end
+    end
 end

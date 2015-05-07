@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy, :matched_jobs]
   before_action :correct_user, only: [:edit, :update]
   before_action :can_view_profile, only: [:show, :index]
+  before_action :can_view_pages, only: [:index]
 
   def new
     @user = User.new
@@ -73,11 +74,12 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attribute(:location, params[:user][:location])
-      @user.update_attribute(:accomplishment, params[:user][:accomplishment])
-      @user.update_attribute(:experience, params[:user][:experience])
-      @user.update_attribute(:picture, params[:user][:picture])
-      @user.update_attribute(:resume, params[:user][:resume])
+    if @user.update_attributes(user_update_params)
+      #(:location, params[:user][:location])
+      #@user.update_attribute(:accomplishment, params[:user][:accomplishment])
+      #@user.update_attribute(:experience, params[:user][:experience])
+      #@user.update_attribute(:picture, params[:user][:picture])
+      #@user.update_attribute(:resume, params[:user][:resume])
       flash.now[:success] = "Profile Updated"
       redirect_to @user
     else
@@ -105,6 +107,10 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :location, :experience, :accomplishment, :password, :password_confirmation, :picture)
     end
 
+    def user_update_params
+      params.require(:user).permit(:location, :experience, :accomplishment, :picture, :resume)
+    end
+
     def logged_in_user
       unless user_logged_in?
         store_location
@@ -128,6 +134,13 @@ class UsersController < ApplicationController
           flash[:danger] = "You do not have permission to view this page."
           redirect_to(root_url)
         end
+      end
+    end
+
+    def can_view_pages
+      unless CompanyProfileIsComplete?
+        flash[:danger] = "Please complete your profile before proceeding"
+        redirect_to edit_company_path(current_company)
       end
     end
 end

@@ -369,3 +369,37 @@ body {
   margin-left: 50px;
   margin-bottom: 5px;
 }
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+.profile_text {
+  vertical-align: text-top;
+  text-align: center;
+}
+
+.credential_text {
+  margin-left: 30%;
+}
+
+.data_cell {
+  height: 100px;
+  display: table;
+}
+
+.paragraph_text {
+  text-align:center;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.barcode_rows {
+  tr:nth-child(even){
+    background-color: #EBF0FF;
+  }
+  tr:nth-child(odd){
+    background-color: #EBF0FF;
+  }
+}

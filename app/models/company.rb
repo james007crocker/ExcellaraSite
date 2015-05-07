@@ -9,14 +9,21 @@ class Company < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false}
 
-  validates :location, presence: true, length:  { maximum: 20 }
+  validates :location, length:  { maximum: 20 } #, presence: true
+  validate :CompLocation?, :unless => Proc.new { |company| company.location.nil? }
 
-  validates :size, presence: true, numericality: { only_integer: true }, inclusion: { in: 1..1000 }
+  validates :size, numericality: { only_integer: true }, inclusion: { in: 1..10000 }, on: :update #, presence: true
+  #validate :CompSize?
 
-  validates :description, presence: true
+  #validates :description, presence: true
+  validate :CompDescription?, :unless => Proc.new { |company| company.description.nil? }
+
+  validates :website, length: { maximum: 20 }
+  validate :CompWebsite? , :unless => Proc.new { |company| company.description.nil? }
 
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, :unless => Proc.new { |company| company.password.nil? }
+
 
   mount_uploader :picture, PictureUploader
   validate  :picture_size
@@ -79,6 +86,34 @@ class Company < ActiveRecord::Base
     def picture_size
       if picture.size > 5.megabytes
         errors.add(:picture, "should be less than 5MB")
+      end
+    end
+
+    def CompSize?
+      if self.size.blank?
+        errors.add(:size, "should be an number")
+      end
+    end
+
+    def is_number?(string)
+     true if Float(string) rescue false
+    end
+
+    def CompWebsite?
+      if self.activated && self.website.blank?
+        errors.add(:website, "should  be present")
+      end
+    end
+
+    def CompLocation?
+      if self.activated && self.location.blank?
+        errors.add(:location, "should  be present")
+      end
+    end
+
+    def CompDescription?
+      if self.activated && self.description.blank?
+        errors.add(:description, "should be present")
       end
     end
 end

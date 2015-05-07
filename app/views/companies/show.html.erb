@@ -1,50 +1,76 @@
 <div class="accommodate_alert"></div>
 <div  class="profile_pic">
   <div align="center">
-    <% if @company.picture?%>
-        <%= image_tag @company.picture.url, class: "vert-align" %>
-    <% else %>
-        <%= image_tag "no_company_pic.png", class: "vert-align"  %>
-    <% end %>
+
   </div>
 </div>
-<div align="center">
-  <h1 style="padding-left: 10%">
-    <%= @company.name %>
-  </h1>
-</div>
-<div align="center">
+<div class="container">
   <div class="row">
-    <div style="width: 80%" class="div-back-profile">
+    <div class="col-md-8 col-centered" style="background-color: #D1E0FF">
       <table>
         <tr>
           <td>
-            <div class="profile_mar">
-              <p>
-                <strong>Contact: </strong><%= @company.email %>
-              </p>
-              <p>
-                <strong>Website: </strong><%= @company.website %>
-              </p>
-              <p>
-                <strong>Location: </strong><%= @company.location %>
-              </p>
-              <p>
-                <strong>Employees: </strong><%= @company.size %>
-              </p>
-            </div>
-
-            <br><br>
-            <div class="blurb" style="margin-left: 50px">
-              <p><strong>About:</strong></p>
-              <%= simple_format(make_paragraph(@company.description, 55)) %>
-            </div>
+            <% if @company.picture?%>
+                <%= image_tag @company.picture.url, class: "vert-align" %>
+            <% else %>
+                <%= image_tag "no_company_pic.png", class: "vert-align"  %>
+            <% end %>
           </td>
-          <td class="col-md-6">
-            <div class="profile_title">
-              <h3>Recent Activity</h3>
-            </div>
-            <br>
+          <td width="100%">
+            <table width="100%">
+              <tr>
+                <td style="background-color: #EBF0FF">
+                  <h1 class="profile_text">
+                    <%= @company.name %>
+                  </h1>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #D1E0FF">
+                    <p class="credential_text">Location: <%= @company.location %></p>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #EBF0FF">
+                    <p class="credential_text">Contact: <%= @company.email %></p>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #D1E0FF">
+                  <p class="credential_text">Website: <%= @company.website %></p>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #EBF0FF">
+                  <p class="credential_text">Employees: <%= @company.size %></p>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-8 col-centered" style="background-color: #9DB5FF">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-1 data_cell" style="background-color: #B2CCFF">
+            <p class="paragraph_text"><%= pluralize(@company.job_postings.count, 'Job Posting') %></p>
+          </div>
+          <div class="col-xs-1 data_cell" style="background-color: #9DB5FF">
+            <p class="paragraph_text"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "f", "t").count, 'Job Applicant') %></p>
+          </div>
+          <div class="col-xs-1 data_cell" style="background-color: #B2CCFF">
+            <p class="paragraph_text"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "t", "t").count, 'Job Match') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 col-centered" style="background-color: #D1E0FF">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h3 align="center">Recent Activity</h3>
             <% unless @apps.nil? %>
                 <% if @apps.size == 0 %>
                     <p align="center"> You have no activity to display. Start by posting jobs then finding professionals.</p>
@@ -55,9 +81,8 @@
                     </div>
                 <% else %>
                     <% @apps.each do |app| %>
-                        <table class="div-back-border">
+                        <table class="barcode_rows" width="80%" align="center">
                           <tr>
-
                             <td width="30%">
                               <p style="margin-left: 5px"><strong></strong><%= link_to app.job_posting.title, app.job_posting %></p>
                             </td>
@@ -77,7 +102,7 @@
                                 <% if app.compAccept == false %>
                                     <%= form_tag url_for(:controller => 'applicants', :action => 'update'), :method => 'patch' do  %>
                                         <%= hidden_field_tag :app_id, app.id %>
-                                        <%= submit_tag "Accept?", class: "btn btn-primary btn-sm" %>
+                                        <%= submit_tag "Accept", class: "btn btn-primary btn-sm" %>
                                     <% end %>
                                 <% elsif app.userAccept == false %>
                                     <button class="btn btn-warning btn-sm disabled">Pending</button>
@@ -95,9 +120,10 @@
                     <% end %>
                 <% end %>
             <% end %>
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+

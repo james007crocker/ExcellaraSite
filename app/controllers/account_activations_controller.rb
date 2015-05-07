@@ -6,14 +6,14 @@ class AccountActivationsController < ApplicationController
       user.activate
       user_log_in user
       flash[:success] = "Account activated!"
-      redirect_to user
+      redirect_to edit_user_path(user)
     else
       company = Company.find_by(email: params[:email])
       if company && !company.activated? && company.authenticated?(:activation, params[:id])
         company.activate
         company_log_in company
         flash[:success] = "Account activated!"
-        redirect_to company
+        redirect_to edit_company_path(company)
       else
         flash[:danger] = "Invalid activation link"
         redirect_to root_url

@@ -104,4 +104,24 @@ module SessionsHelper
     session[:forwarding_url] = request.url if request.get?
   end
 
+
+  #Display text without letters wrecked --------------------------
+
+  def make_paragraph(text, number)
+    paragraph = ""
+    textA = text.gsub(/\s+/m, ' ').strip.split(" ")
+    i = 0
+    j = 0
+    while i < textA.size
+      j += textA[i].size
+      paragraph += " " + textA[i]
+      if i + 1  < textA.size && j + textA[i + 1].size > number
+        j = 0
+        paragraph += "\n"
+      end
+      i += 1
+    end
+    return paragraph
+  end
+
 end

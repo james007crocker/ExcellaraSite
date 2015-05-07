@@ -27,7 +27,7 @@
                     <td>
                       <p><strong>Description: </strong></p>
                       <div class="blurb">
-                        <%= simple_format(word_wrap(jobposting.description, line_width: 200)) %>
+                        <%= simple_format(make_paragraph(jobposting.description , 100)) %>
                       </div>
                     </td>
                   </tr>

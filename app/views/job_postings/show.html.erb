@@ -37,10 +37,10 @@
                 </td>
               </tr>
               <tr>
-                <td>
-                  <p style="margin-left: 10px"><strong>Job Description: </strong></p>
-                  <div class="blurb" style="margin-left: 10px">
-                    <%= simple_format(word_wrap(@jobposting.description, line_width: 200)) %>
+                <td width="75%">
+                  <p style="margin-left: 10%"><strong>Job Description: </strong></p>
+                  <div class="blurb" style="margin-left: 10%">
+                    <%= simple_format(make_paragraph(@jobposting.description, 80)) %>
                   </div>
                 </td>
               </tr>

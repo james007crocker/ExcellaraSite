@@ -1,0 +1,148 @@
+<div class="accommodate_alert"></div>
+
+<h1 class="profile_title">
+  History
+</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3 align="center" style="background-color: #ffff00">
+        Pending
+      </h3>
+      <% @pending.each do |app| %>
+          <table class="div-back-border" style="margin-bottom: 10px">
+            <tr>
+              <td width="100px">
+                <div class="profile_pic4">
+                  <% if User.find_by_id(app.user_id).picture? %>
+                      <%= image_tag User.find_by_id(app.user_id).picture.url, class: "img-thumbnail", width: 50, height: 50%>
+                  <% else %>
+                      <%= image_tag "no_profile.png", class: "img-thumbnail", width: 50, height: 50  %>
+                  <% end %>
+                </div>
+              </td>
+              <td>
+                <table width="100%">
+                  <tr>
+                    <td>
+                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id) %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <%= app.job_posting.title %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Applied <%= time_ago_in_words(app.created_at) %> ago.</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+      <% end %>
+      <% if @pending.size == 0 %>
+          <p align="center">No pending jobs yet.</p>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <h3 align="center" style="background-color: greenyellow">
+        Action Required
+      </h3>
+      <% @required.each do |app| %>
+          <table class="div-back-border" style="margin-bottom: 10px">
+            <tr>
+              <td width="100px">
+                <div class="profile_pic4">
+                  <% if User.find_by_id(app.user_id).picture? %>
+                      <%= image_tag User.find_by_id(app.user_id).picture.url, class: "img-thumbnail", width: 50, height: 50%>
+                  <% else %>
+                      <%= image_tag "no_profile.png", class: "img-thumbnail", width: 50, height: 50  %>
+                  <% end %>
+                </div>
+              </td>
+              <td>
+                <table width="100%">
+                  <tr>
+                    <td>
+                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id) %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <%=  app.job_posting.title %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Recieved <%= time_ago_in_words(app.created_at) %> ago.</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div style="margin-bottom: 5px; margin-right: 5px; margin-left: 5px">
+                  <%= form_tag url_for(:controller => 'applicants', :action => 'update', :id => app.id), :method => 'patch' do  %>
+                      <%= hidden_field_tag :app_id, app.id %>
+                      <%= submit_tag "Accept", class: "btn btn-primary"%>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+      <% end %>
+      <% if @required.size == 0 %>
+          <p align="center">No jobs require action.</p>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <h3 align="center" style="background-color: deepskyblue">
+        Matched
+      </h3>
+      <% @matched.each do |app| %>
+          <table class="div-back-border" style="margin-bottom: 10px">
+            <tr>
+              <td width="100px">
+                <div class="profile_pic4">
+                  <% if User.find_by_id(app.user_id).picture? %>
+                      <%= image_tag User.find_by_id(app.user_id).picture.url, class: "img-thumbnail", width: 50, height: 50%>
+                  <% else %>
+                      <%= image_tag "no_profile.png", class: "img-thumbnail", width: 50, height: 50  %>
+                  <% end %>
+                </div>
+              </td>
+              <td>
+                <table width="100%">
+                  <tr>
+                    <td>
+                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id) %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <%=  app.job_posting.title %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3 ">
+                      <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Matched <%= time_ago_in_words(app.updated_at) %> ago.</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+      <% end %>
+      <% if @matched.size == 0 %>
+          <p align="center">No jobs matches yet.</p>
+      <% end %>
+
+    </div>
+  </div>
+</div>

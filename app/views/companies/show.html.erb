@@ -8,9 +8,11 @@
     <% end %>
   </div>
 </div>
-<h1 class="profile_title">
-  <%= @company.name %>
-</h1>
+<div align="center">
+  <h1 style="padding-left: 10%">
+    <%= @company.name %>
+  </h1>
+</div>
 <div align="center">
   <div class="row">
     <div style="width: 80%" class="div-back-profile">
@@ -35,12 +37,12 @@
             <br><br>
             <div class="blurb" style="margin-left: 50px">
               <p><strong>About:</strong></p>
-              <%=simple_format(word_wrap(@company.description, line_width: 70)) %>
+              <%= simple_format(make_paragraph(@company.description, 55)) %>
             </div>
           </td>
           <td class="col-md-6">
             <div class="profile_title">
-              <h3>Activity</h3>
+              <h3>Recent Activity</h3>
             </div>
             <br>
             <% unless @apps.nil? %>
@@ -55,20 +57,21 @@
                     <% @apps.each do |app| %>
                         <table class="div-back-border">
                           <tr>
+
                             <td width="30%">
-                              <p style="margin-left: 4%"><strong>Title: </strong><%= link_to app.job_posting.title, app.job_posting %></p>
+                              <p style="margin-left: 5px"><strong></strong><%= link_to app.job_posting.title, app.job_posting %></p>
                             </td>
                             <td width="30%">
-                              <p><strong>Location: </strong><%= app.job_posting.location %></p>
+                              <p><strong></strong><%= app.job_posting.location %></p>
                             </td>
                             <td width="30%">
-                              <p><strong>Applicant: </strong><%= link_to User.find_by(id: app.user_id).name, User.find_by(id: app.user_id) %></p>
+                              <p><strong></strong><%= link_to User.find_by(id: app.user_id).name, User.find_by(id: app.user_id) %></p>
                             </td>
                           </tr>
-                          <tr align="center">
-                            <td colspan="2">
+                          <tr>
+                            <td>
                               <div style="display: inline-block">
-                                <p><strong>Status: </strong></p>
+                                <p style="margin-left: 5px"><strong>Status: </strong></p>
                               </div>
                               <div style="display: inline-block" align="left">
                                 <% if app.compAccept == false %>
@@ -83,8 +86,8 @@
                                 <% end %>
                               </div>
                             </td>
-                            <td  valign="bottom">
-                              <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Sent <%= time_ago_in_words(app.created_at) %> ago.</p>
+                            <td  colspan="2" valign="bottom">
+                              <p class="copyright text-muted small" align="left" style="margin-left: 30%"> Sent <%= time_ago_in_words(app.created_at) %> ago.</p>
                             </td>
                           </tr>
                         </table>

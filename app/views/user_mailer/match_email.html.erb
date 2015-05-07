@@ -2,5 +2,5 @@
 <br>
 <p><%= @sender.name %> can be reached at: <%= @sender.email %></p>
 <% if @sendresume == "1" %>
-        <p> Follow this link to view <%= @sender.name %>'s  <a href="<%= @link %>">Resume</a></p>
+        <p> Follow this link to view <%= @sender.name %>'s  <%= link_to "Resume", resume_users_url(id: @sender.id) %> </p>
 <% end %>

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'password_resets/new'
-
   get 'password_resets/edit'
 
   root                      'static_pages#home'
@@ -15,13 +14,23 @@ Rails.application.routes.draw do
   get   'joblist'     =>    'job_postings#joblist'
   post  'login'       =>    'sessions#create'
   delete 'logout'      =>   'sessions#destroy'
-  get   'resume'      =>    'users#resume'
-  resources :users
-  resources :companies
+
+  resources :users do
+    collection do
+      get 'matched_jobs'
+      get 'resume'
+    end
+  end
+
+  resources :companies do
+    collection do
+      get 'activity'
+    end
+  end
+
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :job_postings
-  resources :applicants, only: [:create, :destroy, :update]
   resources :applicants do
     member do
       get :send_match_email

@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :logged_in_company, only: [:edit, :update, :destroy]
+  before_action :logged_in_company, only: [:edit, :update, :destroy, :activity]
   before_action :correct_company, only: [:edit, :update]
   before_action :can_view_profile, only: [:show]
 
@@ -10,7 +10,13 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     if current_company?(@company)
-      @apps = Applicant.where("company_id = ?", @company.id)
+      @apps = []
+      appsMatchUser = Applicant.where("company_id = ?", @company.id)
+      appsMatchUser.each do |f|
+        if Time.now - f.updated_at < 7.days
+          @apps << f
+        end
+      end
     end
   end
 
@@ -43,10 +49,18 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def activity
+    @company = current_company
+    @apps = Applicant.where("company_id = ?", @company.id)
+    @pending = @apps.where("userAccept = ? and compAccept = ?", "f", "t")
+    @required  = @apps.where("userAccept = ? and compAccept = ?", "t", "f")
+    @matched = @apps.where("userAccept = ? and compAccept = ?", "t", "t")
+  end
+
   private
 
   def company_params
-    params.require(:company).permit(:name, :email, :location, :description, :size, :password, :password_confirmation)
+    params.require(:company).permit(:name, :email, :location, :website, :description, :size, :password, :password_confirmation)
   end
 
   def logged_in_company

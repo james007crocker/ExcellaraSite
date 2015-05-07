@@ -1,5 +1,5 @@
 <%= @text %>
 <%= @sender.name %> can be reached at: <%= @sender.email %>.
 <% if @sendresume == "1" %>
-    Follow this link to view <%= @sender.name %>'s <a href="<%= @link %>"%>Resume</a>
+    Follow this link to view <%= @sender.name %>'s <%= link_to "Resume", resume_users_url(id: @sender.id) %>.
 <% end %>

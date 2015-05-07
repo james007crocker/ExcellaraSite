@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :logged_in_user, only: [:edit, :update, :destroy, :matched_jobs]
   before_action :correct_user, only: [:edit, :update]
   before_action :can_view_profile, only: [:show, :index]
 
@@ -24,7 +24,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if current_user?(@user)
-      @apps = Applicant.where("user_id = ?", @user.id)
+      @apps = []
+      appsMatchUser = Applicant.where("user_id = ?", @user.id)
+      appsMatchUser.each do |f|
+        if Time.now - f.updated_at < 7.days
+          @apps << f
+        end
+      end
     elsif current_company
       @job_array = []
       @app_array = []
@@ -77,6 +83,14 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def matched_jobs
+    @user = current_user
+    @apps = Applicant.where("user_id = ?", @user.id)
+    @pending = @apps.where("userAccept = ? and compAccept = ?", "t", "f")
+    @required  = @apps.where("userAccept = ? and compAccept = ?", "f", "t")
+    @matched = @apps.where("userAccept = ? and compAccept = ?", "t", "t")
   end
 
   def authenticated?(attribute, token)

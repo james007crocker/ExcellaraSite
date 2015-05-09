@@ -246,12 +246,11 @@ body {
 }
 
 .div-back-border {
-  background-color: #ffffff;
   width: 100%;
   border-collapse: separate !important;
-  border-style: solid;
+  /*border-style: solid;
   border-radius: 10px;
-  border-color: #c0c0c0;
+  border-color: #c0c0c0;*/
 }
 
 .accommodate_alert {
@@ -262,7 +261,7 @@ body {
   margin-left: 20%;
   background-color: #ffffff;
   border-radius: 10px;
-  border-color: #c0c0c0;
+  border-color: #9DB5FF;
   border-style: solid;
   width: 210px;
   display: inline-block;
@@ -276,7 +275,7 @@ body {
   margin-right: 5px;
   margin-top: 5px;
   background-color: #ffffff;
-  border-color: #c0c0c0;
+  border-color: #9DB5FF;
   border-style: solid;
   z-index: 1;
 }
@@ -290,7 +289,7 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
   background-color: #ffffff;
-  border-color: #c0c0c0;
+  border-color: #9DB5FF;
   border-style: solid;
   display: inline-block;
   z-index: 1;
@@ -304,7 +303,7 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
   background-color: #ffffff;
-  border-color: #c0c0c0;
+  border-color: #9DB5FF;
   border-style: solid;
 }
 
@@ -317,8 +316,8 @@ body {
 }
 
 .shadow_img {
-  -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,2));
   filter: url(#drop-shadow);
+  -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,2));
   -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
 }
@@ -365,6 +364,12 @@ body {
   left: 10%;
 }
 
+.excellara_item3 {
+  position: absolute;
+  top: 200px;
+  left: 10%;
+}
+
 .suggestion_txt {
   margin-left: 50px;
   margin-bottom: 5px;
@@ -402,4 +407,24 @@ body {
   tr:nth-child(odd){
     background-color: #EBF0FF;
   }
+}
+
+.button_width {
+  width: 100px;
+}
+
+.color_1 {
+  background-color: #D1E0FF;
+}
+
+.color_2 {
+  background-color: #EBF0FF;
+}
+
+.color_3 {
+  background-color: #9DB5FF
+}
+
+.color_4 {
+  background-color: #B2CCFF
 }

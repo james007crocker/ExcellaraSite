@@ -40,6 +40,21 @@ class JobPostingsController < ApplicationController
       @jobposting = current_company.job_postings.find_by(id: params[:id])
     else
       @jobposting = JobPosting.find_by(id: params[:id])
+      @jobposting.update_attribute(:views, increment_view_count(@jobposting))
+    end
+  end
+
+  def edit
+    @job = JobPosting.find(params[:id])
+  end
+
+  def update
+    @job = JobPosting.find(params[:id])
+    if @job.update_attributes(job_posting_params)
+      flash.now[:success] = "Posting Updated"
+      redirect_to job_postings_path
+    else
+      render 'edit'
     end
   end
 

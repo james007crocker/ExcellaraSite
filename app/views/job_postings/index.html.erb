@@ -12,37 +12,62 @@
           <%= will_paginate @jobpostings %>
 
           <% @jobpostings.each do |jobposting| %>
-              <div class="div-back-border" >
-                <table width = 80%>
-                  <tr>
-                    <td colspan="3">
-                      <p style="display: inline; margin-right: 20%"><strong>Title: </strong><%= jobposting.title %></p>
-                      <p style="display: inline" align="right"><strong>Location: </strong><%= jobposting.location %></p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <br>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p><strong>Description: </strong></p>
-                      <div class="blurb">
-                        <%= simple_format(make_paragraph(jobposting.description , 100)) %>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-                <div style="display: inline">
-                  <div style="display: inline" align="center">
-                    <div style="width: 30%;">
-                      <%= button_to "Remove", jobposting, class: "btn btn-primary", method: :delete%>
+                  <div class="col-md-8 color_1" style="margin-bottom: 20px">
+                    <div>
+                      <table width = 100%>
+                        <tr>
+                          <td colspan="3" class="color_2">
+                            <p style="display: inline; margin-right: 20%"><strong>Title: </strong><%= jobposting.title %></p>
+                            <p style="display: inline" align="right"><strong>Location: </strong><%= jobposting.location %></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <br>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p><strong>Description: </strong></p>
+                            <div class="blurb">
+                              <%= simple_format(make_paragraph(jobposting.description , 80)) %>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                      <table>
+                        <tr>
+                          <td>
+                            <div style="padding: 5px">
+                              <%= button_to "Edit", edit_job_posting_path(jobposting), class: "btn btn-warning button_width", method: :get%>
+                            </div>
+                          </td>
+                          <td>
+                            <div style="padding: 5px">
+                              <%= button_to "Remove", jobposting, class: "btn btn-primary button_width", method: :delete%>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </div>
-                  <div style="width: 30%; display: inline">
-                    <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Posted <%= time_ago_in_words(jobposting.created_at) %> ago.</p>
+                  <div class="col-xs-2 color_3" style="min-height: 100%">
+                    <table>
+                      <tr>
+                        <td>
+                          <%= pluralize(jobposting.views, 'Job View') %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <%= pluralize(Applicant.where(" job_posting_id = ?", jobposting.id).count, 'Applicant') %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <%= pluralize(Applicant.where(" job_posting_id = ?", jobposting.id).where(" compAccept = ? and userAccept = ?", "t", "t").count, 'Match') %>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
-                </div>
-              </div>
               <br>
           <% end %>
 

@@ -12,7 +12,7 @@
 
           <% if user.admin == false && user.activated == true %>
           <li>
-            <div class="div-back-border" >
+            <div class="color_1">
               <table width="100%">
                 <tr>
                   <td width="200px">
@@ -25,13 +25,13 @@
                     </div>
                   </td>
                   <td>
-                    <table width="100%">
+                    <table width="100%" style="top: 0px">
                       <tr >
-                        <td width="50%" >
-                          <p style="margin-left: 10px"><strong>Name: </strong><%= user.name %></p>
+                        <td width="50%" class="color_2">
+                          <p style="margin-left: 10px">Name: <%= user.name %></p>
                         </td>
-                        <td width="50%">
-                          <p><strong>Location: </strong><%=  user.location %></p>
+                        <td width="50%" class="color_2">
+                          <p>Location: <%=  user.location %></p>
                         </td>
                       </tr>
                       <tr>

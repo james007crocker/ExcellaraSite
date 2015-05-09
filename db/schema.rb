@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501174720) do
+ActiveRecord::Schema.define(version: 20150509011040) do
 
   create_table "applicants", force: :cascade do |t|
     t.boolean  "compAccept"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150501174720) do
     t.integer  "company_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "views"
   end
 
   add_index "job_postings", ["company_id", "created_at"], name: "index_job_postings_on_company_id_and_created_at"

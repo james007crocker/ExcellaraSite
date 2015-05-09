@@ -7,7 +7,7 @@
     </h1>
     <div class="row">
       <div class="col-md-6" style="margin-left: 10%">
-        <div class="div-back-border">
+        <div class="div-back- color_1">
           <table width="100%">
             <tr>
               <td width="50%">
@@ -113,65 +113,69 @@
 
     </div>
 <% elsif current_user %>
-
-    <div  class="profile_pic">
-        <% if @user.picture?%>
-            <%= image_tag @user.picture.url, class: "img-thumbnail" %>
-        <% else %>
-            <%= image_tag "no_profile.png", class: "img-thumbnail"%>
-        <% end %>
-    </div>
-    <h1 class="profile_title" style="padding-left: 10%">
-      <%= @user.name %>
-    </h1>
-
-    <div align="center">
+    <div class="container">
       <div class="row">
-        <div style="width: 80%" class="div-back-profile">
-
+        <div class="col-md-8 col-centered color_1">
           <table>
             <tr>
               <td>
-                <div>
-                  <br>
-                </div>
-                <div class="profile_mar">
-                  <p>
-                    <strong>Contact: </strong><%= @user.email %>
-                  </p>
-
-                  <p>
-                    <strong>Location: </strong><%= @user.location %>
-                  </p>
-                  <p>
-                    <%= link_to "Your Resume", resume_users_path(id: @user.id) %>
-                  </p>
-                </div>
-
-                <br><br>
-                <div class="blurb">
-                  <p><strong>Experience Summary:</strong></p>
-                  <p><%= simple_format(make_paragraph(@user.experience, 53)) %></p>
-                </div>
-                <!--<div class="blurb" style="margin-left: 50px">
-                  <p><strong>Accomplishments:</strong></p>
-                  <%-#simple_format(word_wrap(@user.accomplishment, line_width: 70)) -%>
-                </div>-->
-                <div align="center" >
-                  <div style="width: 150px;">
-                    <%= button_to "Edit Profile", edit_user_path , class: "btn btn-primary", method: :get%>
-                  </div>
-                </div>
-                <div>
-                  <br>
-                </div>
+                <% if @user.picture?%>
+                    <%= image_tag @user.picture.url, class: "vert-align" %>
+                <% else %>
+                    <%= image_tag "no_profile.png", class: "vert-align"%>
+                <% end %>
               </td>
-              <td class="col-md-6" style="vertical-align: 100px">
-                <br>
+              <td width="100%">
+                <table width="100%">
+                  <tr>
+                    <td class="color_2">
+                      <h1 class="profile_text">
+                        <%= @user.name %>
+                      </h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="color_1" width="100%">
+                      <p class="credential_text">Location: <%= @user.location %></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="color_1">
+                      <p class="credential_text">Contact: <%= @user.email %></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="color_1">
+                      <p class="credential_text"><%= link_to "Your Resume", resume_users_path(id: @user.id) %></p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-8 col-centered color_3">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-1 data_cell color_4">
+                <p class="paragraph_text"><%= pluralize(Applicant.where(" user_id = ?", @user.id).count, 'Application') %></p>
+              </div>
+              <div class="col-xs-1 data_cell color_3">
+                <p class="paragraph_text"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where(" userAccept = ?", "f").count, 'Application') %> Require Attention</p>
+              </div>
+              <div class="col-xs-1 data_cell color_4">
+                <p class="paragraph_text"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where("compAccept = ? and userAccept = ?", "t", "t").count, 'Job Match') %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8 col-centered color_1">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8">
+                <h3 align="center">Recent Activity</h3>
                 <% unless @apps.nil? %>
-                    <h3 class="profile_title">
-                      Recent Activity
-                    </h3>
                     <% if @apps.size == 0 %>
                         <p align="center"> You have no activity to display. Start by browsing jobs.</p>
                         <div align="center">
@@ -181,7 +185,7 @@
                         </div>
                     <% else %>
                         <% @apps.each do |app| %>
-                            <table class="div-back-border" id="ChangeColor">
+                            <table class="barcode_rows" width="80%" align="center">
                               <tr>
                                 <td width="30%">
                                   <p style="margin-left: 4%"><strong></strong><%= link_to app.job_posting.title, app.job_posting %></p>
@@ -218,19 +222,14 @@
                             </table>
                             <br>
                         <% end %>
-
                     <% end %>
-
-
                 <% end %>
-              </td>
-            </tr>
-          </table>
-
-        </div>
+              </div>
+            </div>
+         </div>
+      </div>
       </div>
     </div>
-
 <% else %>
 
 <% end %>

@@ -11,7 +11,7 @@
         Pending
       </h3>
       <% @pending.each do |app| %>
-          <table class="div-back-border" style="margin-bottom: 10px">
+          <table class="div-back-border color_1" style="margin-bottom: 10px">
             <tr>
               <td width="100px">
                 <div class="profile_pic4">
@@ -53,7 +53,7 @@
         Offers
       </h3>
       <% @required.each do |app| %>
-          <table class="div-back-border" style="margin-bottom: 10px">
+          <table class="div-back-border color_1" style="margin-bottom: 10px">
             <tr>
               <td width="100px">
                 <div class="profile_pic4">
@@ -89,7 +89,9 @@
                 <div style="margin-bottom: 5px; margin-right: 5px; margin-left: 5px">
                   <%= form_tag url_for(:controller => 'applicants', :action => 'update', :id => app.id), :method => 'patch' do  %>
                       <%= hidden_field_tag :app_id, app.id %>
-                      <%= submit_tag "Accept", class: "btn btn-primary"%>
+                      <div style="text-align: center">
+                        <%= submit_tag "Accept", class: "btn btn-primary button_width"%>
+                      </div>
                   <% end %>
                 </div>
               </td>
@@ -106,7 +108,7 @@
         Matched
       </h3>
       <% @matched.each do |app| %>
-          <table class="div-back-border" style="margin-bottom: 10px">
+          <table class="div-back-border color_1" style="margin-bottom: 10px">
             <tr>
               <td width="100px">
                 <div class="profile_pic4">

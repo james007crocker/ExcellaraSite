@@ -6,7 +6,7 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-md-8 col-centered" style="background-color: #D1E0FF">
+    <div class="col-md-8 col-centered color_1">
       <table>
         <tr>
           <td>
@@ -19,29 +19,29 @@
           <td width="100%">
             <table width="100%">
               <tr>
-                <td style="background-color: #EBF0FF">
+                <td class="color_2">
                   <h1 class="profile_text">
                     <%= @company.name %>
                   </h1>
                 </td>
               </tr>
               <tr>
-                <td style="background-color: #D1E0FF">
+                <td class="color_1">
                     <p class="credential_text">Location: <%= @company.location %></p>
                 </td>
               </tr>
               <tr>
-                <td style="background-color: #EBF0FF">
+                <td class="color_1">
                     <p class="credential_text">Contact: <%= @company.email %></p>
                 </td>
               </tr>
               <tr>
-                <td style="background-color: #D1E0FF">
+                <td class="color_1">
                   <p class="credential_text">Website: <%= @company.website %></p>
                 </td>
               </tr>
               <tr>
-                <td style="background-color: #EBF0FF">
+                <td class="color_1">
                   <p class="credential_text">Employees: <%= @company.size %></p>
                 </td>
               </tr>
@@ -51,22 +51,22 @@
         </tr>
       </table>
     </div>
-    <div class="col-md-8 col-centered" style="background-color: #9DB5FF">
+    <div class="col-md-8 col-centered color_3">
       <div class="container">
         <div class="row">
-          <div class="col-xs-1 data_cell" style="background-color: #B2CCFF">
+          <div class="col-xs-1 data_cell color_4">
             <p class="paragraph_text"><%= pluralize(@company.job_postings.count, 'Job Posting') %></p>
           </div>
-          <div class="col-xs-1 data_cell" style="background-color: #9DB5FF">
+          <div class="col-xs-1 data_cell color_3">
             <p class="paragraph_text"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "f", "t").count, 'Job Applicant') %></p>
           </div>
-          <div class="col-xs-1 data_cell" style="background-color: #B2CCFF">
+          <div class="col-xs-1 data_cell color_4">
             <p class="paragraph_text"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "t", "t").count, 'Job Match') %></p>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-8 col-centered" style="background-color: #D1E0FF">
+    <div class="col-md-8 col-centered color_1">
       <div class="container">
         <div class="row">
           <div class="col-md-8">

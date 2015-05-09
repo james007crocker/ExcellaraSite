@@ -17,5 +17,13 @@ module JobPostingsHelper
       return "Pending"
     end
   end
+
+  def increment_view_count(job)
+    if job.views.nil?
+      return 1
+    else
+      return job.views + 1
+    end
+  end
 end
 

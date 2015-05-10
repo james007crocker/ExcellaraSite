@@ -20,13 +20,13 @@
                 </div>
               </td>
               <td width="50%">
-                <p style="margin-left: 10%"><strong>Location: </strong><%= @user.location %></p>
-                <p style="margin-left: 10%"><strong>Experience Summary:</strong></p>
+                <p class="paragraph_text2" style="margin-left: 10%"><strong>Location: </strong><%= @user.location %></p>
               </td>
             </tr>
           </table>
           <div style="word-break: break-all; white-space: normal; margin-left: 5%; margin-top: 10px">
-            <%= simple_format(make_paragraph(@user.experience, 65)) %>
+            <p class="paragraph_text2"><strong>Experience Summary:</strong></p>
+            <%= simple_format(make_paragraph(@user.experience, 65), class: 'paragraph_text') %>
           </div>
           <!--<p style="margin-left: 10%"><strong>Accomplishments: </strong></p>
           <div style="word-break: break-all; white-space: normal; margin-left: 5%">
@@ -37,15 +37,15 @@
 
       <div class="col-md-4">
         <div align="center">
-          <div class="div-back-border" style="width: 100%">
-            <p align="left" style="padding-left: 10px"><strong>Jobs You Have Suggested:</strong></p>
+          <div class="div-back-border color_2" style="width: 100%">
+            <p class="paragraph_text2" align="left" style="padding-left: 10px"><strong>Jobs You Have Suggested:</strong></p>
             <% if !current_company.nil? %>
-                <table width="100%">
+                <table width="100%" class="color_1" style="padding-top: 5px">
                   <% @app_array.each do |app| %>
                       <% if !app.userAccept %>
                           <tr>
                             <td>
-                              <p class="suggestion_txt"><%= app.job_posting.title %> Status: </p>
+                              <p class="suggestion_txt paragraph_text2"><%= app.job_posting.title %> Status: </p>
                             </td>
                             <td>
                               <button class="btn btn-warning btn-sm disabled">Pending</button>
@@ -54,7 +54,7 @@
                       <% else %>
                           <tr>
                             <td>
-                              <p class="suggestion_txt"><%= app.job_posting.title %> Status: </p>
+                              <p class="suggestion_txt paragraph_text2"><%= app.job_posting.title %> </p>
                             </td>
                             <td>
                               <button class="btn btn-success btn-sm disabled">Matched</button>
@@ -82,9 +82,9 @@
         </div>
 
         <div align="center" style="margin-top: 20px">
-          <div align="center" style="width: 100%" class="div-back-border">
-            <div class="row">
-              <p align="left" style="padding-left: 20px"><strong>Suggest a job for this professional:</strong></p>
+          <div align="center" style="width: 100%" class="div-back-border color_2">
+            <p class="paragraph_text2" align="left" style="padding-left: 20px"><strong>Suggest a Job:</strong></p>
+            <div class="color_1" style="padding-top: 5px; padding-bottom: 2px">
 
               <% if !current_company.nil? && @job_array.size > 0 %>
                   <%= form_tag url_for(:controller => 'applicants', :action => 'create'), :method => 'post' do  %>
@@ -97,10 +97,10 @@
                       </div>
                   <% end %>
               <% elsif !current_company.nil? && @job_array.size == 0 %>
-                  <p align="center">No jobs posted yet.</p>
+                  <p align="center">No jobs to suggest yet.</p>
                   <div align="center">
                     <div style="width: 30%;">
-                      <%= button_to "Post Job", new_job_posting_path, class: "btn btn-primary", method: :get%>
+                      <%= button_to "Post New Job", new_job_posting_path, class: "btn btn-primary", method: :get%>
                     </div>
                   </div>
               <% end %>
@@ -136,17 +136,17 @@
                   </tr>
                   <tr>
                     <td class="color_1" width="100%">
-                      <p class="credential_text">Location: <%= @user.location %></p>
+                      <p class="credential_text paragraph_text2"><strong>Location:</strong> <%= @user.location %></p>
                     </td>
                   </tr>
                   <tr>
                     <td class="color_1">
-                      <p class="credential_text">Contact: <%= @user.email %></p>
+                      <p class="credential_text paragraph_text2"><strong>Contact:</strong> <%= @user.email %></p>
                     </td>
                   </tr>
                   <tr>
                     <td class="color_1">
-                      <p class="credential_text"><%= link_to "Your Resume", resume_users_path(id: @user.id) %></p>
+                      <p class="credential_text paragraph_text2"><%= link_to "Your Resume", resume_users_path(id: @user.id) %></p>
                     </td>
                   </tr>
                 </table>
@@ -158,13 +158,13 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-1 data_cell color_4">
-                <p class="paragraph_text"><%= pluralize(Applicant.where(" user_id = ?", @user.id).count, 'Application') %></p>
+                <p class="stand_out"><%= pluralize(Applicant.where(" user_id = ?", @user.id).count, 'Application') %></p>
               </div>
               <div class="col-xs-1 data_cell color_3">
-                <p class="paragraph_text"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where(" userAccept = ?", "f").count, 'Application') %> Require Attention</p>
+                <p class="stand_out"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where(" userAccept = ?", "f").count, 'Action') %> Required</p>
               </div>
               <div class="col-xs-1 data_cell color_4">
-                <p class="paragraph_text"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where("compAccept = ? and userAccept = ?", "t", "t").count, 'Job Match') %></p>
+                <p class="stand_out"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where("compAccept = ? and userAccept = ?", "t", "t").count, 'Job Match') %></p>
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-8">
-                <h3 align="center">Recent Activity</h3>
+                <h3 class="heading_text" align="center">Recent Activity</h3>
                 <% unless @apps.nil? %>
                     <% if @apps.size == 0 %>
                         <p align="center"> You have no activity to display. Start by browsing jobs.</p>
@@ -188,19 +188,19 @@
                             <table class="barcode_rows" width="80%" align="center">
                               <tr>
                                 <td width="30%">
-                                  <p style="margin-left: 4%"><strong></strong><%= link_to app.job_posting.title, app.job_posting %></p>
+                                  <p class="paragraph_text2" style="margin-left: 4%"><strong></strong><%= link_to app.job_posting.title, app.job_posting %></p>
                                 </td>
                                 <td width="30%">
-                                  <p><strong></strong><%= app.job_posting.location %></p>
+                                  <p class="paragraph_text"><strong></strong><%= app.job_posting.location %></p>
                                 </td>
                                 <td width="30%">
-                                  <p><strong></strong><%= app.job_posting.company.name %></p>
+                                  <p class="paragraph_text"><strong></strong><%= app.job_posting.company.name %></p>
                                 </td>
                               </tr>
                               <tr align="center">
                                 <td colspan="1">
                                   <div style="display: inline-block">
-                                    <p><strong>Status: </strong></p>
+                                    <p class="paragraph_text2"><strong>Status: </strong></p>
                                   </div>
                                   <div style="display: inline-block" align="left">
                                     <% if app.userAccept == false %>

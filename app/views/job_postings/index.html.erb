@@ -12,22 +12,58 @@
           <%= will_paginate @jobpostings %>
 
           <% @jobpostings.each do |jobposting| %>
-                  <div class="col-md-8 color_1" style="margin-bottom: 20px">
+              <script>
+                $(document).ready(function(){
+                    $("#button<%= jobposting.id %>").click(function(){
+                        if ($(this).text() == "View Stats") {
+                            $(this).text("Hide Stats");
+                        } else {
+                            $(this).text("View Stats");
+                        }
+                        $("#stats<%= jobposting.id %>").toggle();
+                    });
+                });
+                //$(document).ready(ready);
+                //$(document).on('page:load', ready);
+                console.log("Enter");
+              </script>
+                  <div class="col-md-8 color_1 col-centered" style="margin-bottom: 20px">
+                    <div class="col-xs-2 color_3" style="height: 100px; display: none; position: absolute; padding-top: 20px" id="stats<%=jobposting.id %>">
+                      <table>
+                        <tr>
+                          <td>
+                            <p class="paragraph_text"><%= pluralize(jobposting.views, 'Job View') %></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p class="paragraph_text"><%= pluralize(Applicant.where(" job_posting_id = ?", jobposting.id).count, 'Applicant') %></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p class="paragraph_text"><%= pluralize(Applicant.where(" job_posting_id = ?", jobposting.id).where(" compAccept = ? and userAccept = ?", "t", "t").count, 'Match') %></p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
                     <div>
                       <table width = 100%>
                         <tr>
-                          <td colspan="3" class="color_2">
-                            <p style="display: inline; margin-right: 20%"><strong>Title: </strong><%= jobposting.title %></p>
-                            <p style="display: inline" align="right"><strong>Location: </strong><%= jobposting.location %></p>
+                          <td width="50%" class="color_2">
+                            <p class="paragraph_text"><strong>Title: </strong><%= jobposting.title %></p>
+                          </td>
+                          <td width="50%" class="color_2">
+                            <p class="paragraph_text"><strong>Location: </strong><%= jobposting.location %></p>
                           </td>
                         </tr>
                         <tr>
                           <br>
                         </tr>
                         <tr>
-                          <td>
-                            <p><strong>Description: </strong></p>
-                            <div class="blurb">
+                          <td align="center" colspan="3">
+                            <div class="paragraph_text">
+                              <p align="left"><strong>Description: </strong></p>
                               <%= simple_format(make_paragraph(jobposting.description , 80)) %>
                             </div>
                           </td>
@@ -35,6 +71,11 @@
                       </table>
                       <table>
                         <tr>
+                          <td>
+                            <div style="padding: 5px">
+                              <%= button_tag "View Stats", class: "btn btn-success button_width", id: "button#{jobposting.id}"%>
+                            </div>
+                          </td>
                           <td>
                             <div style="padding: 5px">
                               <%= button_to "Edit", edit_job_posting_path(jobposting), class: "btn btn-warning button_width", method: :get%>
@@ -48,25 +89,6 @@
                         </tr>
                       </table>
                     </div>
-                  </div>
-                  <div class="col-xs-2 color_3" style="min-height: 100%">
-                    <table>
-                      <tr>
-                        <td>
-                          <%= pluralize(jobposting.views, 'Job View') %>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <%= pluralize(Applicant.where(" job_posting_id = ?", jobposting.id).count, 'Applicant') %>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <%= pluralize(Applicant.where(" job_posting_id = ?", jobposting.id).where(" compAccept = ? and userAccept = ?", "t", "t").count, 'Match') %>
-                        </td>
-                      </tr>
-                    </table>
                   </div>
               <br>
           <% end %>

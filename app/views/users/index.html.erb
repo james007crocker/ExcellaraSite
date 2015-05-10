@@ -24,19 +24,19 @@
                       <% end %>
                     </div>
                   </td>
-                  <td>
-                    <table width="100%" style="top: 0px">
+                  <td style="padding-top: 10px">
+                    <table width="100%">
                       <tr >
                         <td width="50%" class="color_2">
-                          <p style="margin-left: 10px">Name: <%= user.name %></p>
+                          <p class="paragraph_text" style="margin-left: 10px"><strong>Name:</strong> <%= user.name %></p>
                         </td>
                         <td width="50%" class="color_2">
-                          <p>Location: <%=  user.location %></p>
+                          <p class="paragraph_text"><strong>Location:</strong> <%=  user.location %></p>
                         </td>
                       </tr>
                       <tr>
-                        <td colspan="2" style="padding-left: 10px">
-                          <p><%=simple_format(word_wrap(user.experience[0..100]+"......", line_width: 50)) %></p>
+                        <td class="color_4" colspan="2" style="padding-left: 10px" align="center">
+                          <p class="paragraph_text"><%=simple_format(word_wrap(user.experience[0..100]+"......", line_width: 55), class: 'paragraph_text') %></p>
                         </td>
                       </tr>
                       <tr>

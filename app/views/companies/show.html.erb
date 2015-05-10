@@ -1,9 +1,4 @@
 <div class="accommodate_alert"></div>
-<div  class="profile_pic">
-  <div align="center">
-
-  </div>
-</div>
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-centered color_1">
@@ -27,22 +22,22 @@
               </tr>
               <tr>
                 <td class="color_1">
-                    <p class="credential_text">Location: <%= @company.location %></p>
+                    <p class="credential_text paragraph_text2"><strong>Location:</strong> <%= @company.location %></p>
                 </td>
               </tr>
               <tr>
                 <td class="color_1">
-                    <p class="credential_text">Contact: <%= @company.email %></p>
+                    <p class="credential_text paragraph_text2"><strong>Contact:</strong> <%= @company.email %></p>
                 </td>
               </tr>
               <tr>
                 <td class="color_1">
-                  <p class="credential_text">Website: <%= @company.website %></p>
+                  <p class="credential_text paragraph_text2"><strong>Website:</strong> <%= @company.website %></p>
                 </td>
               </tr>
               <tr>
                 <td class="color_1">
-                  <p class="credential_text">Employees: <%= @company.size %></p>
+                  <p class="credential_text paragraph_text2"><strong>Employees:</strong> <%= @company.size %></p>
                 </td>
               </tr>
             </table>
@@ -55,13 +50,13 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-1 data_cell color_4">
-            <p class="paragraph_text"><%= pluralize(@company.job_postings.count, 'Job Posting') %></p>
+            <p class="stand_out"><%= pluralize(@company.job_postings.count, 'Job Posting') %></p>
           </div>
           <div class="col-xs-1 data_cell color_3">
-            <p class="paragraph_text"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "f", "t").count, 'Job Applicant') %></p>
+            <p class="stand_out"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "f", "t").count, 'Job Applicant') %></p>
           </div>
           <div class="col-xs-1 data_cell color_4">
-            <p class="paragraph_text"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "t", "t").count, 'Job Match') %></p>
+            <p class="stand_out"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "t", "t").count, 'Job Match') %></p>
           </div>
         </div>
       </div>
@@ -70,7 +65,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8">
-            <h3 align="center">Recent Activity</h3>
+            <h3 class="heading_text" align="center">Recent Activity</h3>
             <% unless @apps.nil? %>
                 <% if @apps.size == 0 %>
                     <p align="center"> You have no activity to display. Start by posting jobs then finding professionals.</p>
@@ -84,19 +79,19 @@
                         <table class="barcode_rows" width="80%" align="center">
                           <tr>
                             <td width="30%">
-                              <p style="margin-left: 5px"><strong></strong><%= link_to app.job_posting.title, app.job_posting %></p>
+                              <p class="paragraph_text2" style="margin-left: 5px"><strong></strong><%= link_to app.job_posting.title, app.job_posting %></p>
                             </td>
                             <td width="30%">
-                              <p><strong></strong><%= app.job_posting.location %></p>
+                              <p class="paragraph_text"><strong></strong><%= app.job_posting.location %></p>
                             </td>
                             <td width="30%">
-                              <p><strong></strong><%= link_to User.find_by(id: app.user_id).name, User.find_by(id: app.user_id) %></p>
+                              <p class="paragraph_text"><strong></strong><%= link_to User.find_by(id: app.user_id).name, User.find_by(id: app.user_id) %></p>
                             </td>
                           </tr>
                           <tr>
                             <td>
                               <div style="display: inline-block">
-                                <p style="margin-left: 5px"><strong>Status: </strong></p>
+                                <p class="paragraph_text2" style="margin-left: 5px"><strong>Status: </strong></p>
                               </div>
                               <div style="display: inline-block" align="left">
                                 <% if app.compAccept == false %>

@@ -2,31 +2,31 @@
 
 <div align="center">
   <div class="row">
-    <div style="width: 80%; padding-top: 100px" >
+    <div class="col-md-8 col-centered" >
     <% if !@jobposting.nil? %>
         <h3 class="profile_title">Company <%= @jobposting.title %> </h3>
         <div class="div-back-border color_1">
             <table width="100%">
               <tr>
                 <td width="50%">
-                  <table width="100%">
+                  <table width="100%" style="margin-left: 10%">
                     <tr>
-                      <td width="50%">
-                        <p style="margin-left: 10px"><strong>Company: </strong><%= @jobposting.company.name %></p>
+                      <td  colspan="1">
+                        <p class="paragraph_text2" style="margin-left: 10px"><strong>Company: </strong><%= @jobposting.company.name %></p>
                       </td>
-                      <td width="50%">
-                        <p align="right"><strong>Location: </strong><%= @jobposting.location %></p>
+                      <td colspan="1">
+                        <p class="paragraph_text2" align="right"><strong>Location: </strong><%= @jobposting.location %></p>
                       </td>
                     </tr>
                     <tr>
-                      <td>
-                        <p style="margin-left: 10px"><strong>Website: </strong><%= @jobposting.company.website %></p>
+                      <td colspan="2">
+                        <p  class="paragraph_text2" style="margin-left: 10px"><strong>Website: </strong><%= @jobposting.company.website %></p>
                       </td>
                     </tr>
                   </table>
                 </td>
 
-                <td width="50%">
+                <td colspan="1">
                   <div class="profile_pic2" align="right">
                     <% if @jobposting.company.picture?%>
                         <%= image_tag @jobposting.company.picture.url, class: "img-thumbnail", width: 150, height: 150%>
@@ -37,10 +37,10 @@
                 </td>
               </tr>
               <tr>
-                <td width="75%">
+                <td colspan="3">
                   <p style="margin-left: 10%"><strong>Job Description: </strong></p>
                   <div class="blurb" style="margin-left: 10%">
-                    <%= simple_format(make_paragraph(@jobposting.description, 80)) %>
+                    <%= simple_format(make_paragraph(@jobposting.description, 100), class: 'paragraph_text') %>
                   </div>
                 </td>
               </tr>

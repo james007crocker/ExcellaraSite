@@ -9,7 +9,7 @@
 
         <% @job_postings.each do |job| %>
 
-              <div class="div-back-border color_1">
+              <div class="div-back-border color_4">
                 <table width="100%">
                   <tr>
                     <td width="160px">
@@ -21,32 +21,32 @@
                         <% end %>
                       </div>
                     </td>
-                    <td>
-                      <table width="100%" style="margin-top: 10px">
+                    <td style="margin-left: 10px">
+                      <table  width="100%" style="margin-top: 10px">
                         <tr>
-                          <td width="50%">
-                            <p><strong>Title: </strong><%= job.title%></p>
+                          <td class="color_1" width="50%">
+                            <p class="paragraph_text"><strong>Title: </strong><%= job.title%></p>
                           </td>
-                          <td width="50%">
-                            <p><strong>Location: </strong><%= job.location %></p></p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">
-                            <p><strong>Company: </strong><%= job.company.name %></p>
+                          <td class="color_1" width="50%">
+                            <p class="paragraph_text"><strong>Location: </strong><%= job.location %></p>
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="2">
-                            <p><%=simple_format(word_wrap(job.description[0..100]+"......", line_width: 50)) %></p>
+                          <td class="color_1" colspan="2">
+                            <p class="paragraph_text"><strong>Company: </strong><%= job.company.name %></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="color_2" colspan="2" align="center">
+                            <p><%=simple_format(word_wrap(job.description[0..100]+"......", line_width: 50), class: 'paragraph_text') %></p>
                           </td>
                         </tr>
                         <tr>
                           <td colspan="2">
                             <div align="center">
                               <div clas="row">
-                                <div style="width: 30%;">
-                                  <%= button_to "View Job", job, class: "btn btn-primary", method: "get"%>
+                                <div style="margin: 5px">
+                                  <%= button_to "View Job", job, class: "btn btn-primary button_width", method: "get"%>
                                 </div>
                               </div>
                             </div>

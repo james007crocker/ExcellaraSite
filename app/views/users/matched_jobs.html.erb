@@ -7,7 +7,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <h3 align="center" style="background-color: #ffff00">
+      <h3 class="heading_text" align="center" style="background-color: #ffff00">
         Pending
       </h3>
       <% @pending.each do |app| %>
@@ -23,15 +23,15 @@
                 </div>
               </td>
               <td>
-                <table width="100%">
+                <table width="100%" style="margin-top: 5px">
                   <tr>
-                    <td>
-                      <%= app.job_posting.title %>
+                    <td class="color_2">
+                      <%= link_to app.job_posting.title, job_posting_path(app.job_posting.id), class: 'paragraph_text' %>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <%= app.job_posting.company.name %>
+                    <td class="color_2">
+                      <p class="paragraph_text"><%= app.job_posting.company.name %></p>
                     </td>
                   </tr>
                   <tr>
@@ -49,7 +49,7 @@
       <% end %>
     </div>
     <div class="col-sm-4">
-      <h3 align="center" style="background-color: greenyellow">
+      <h3 class="heading_text" align="center" style="background-color: greenyellow">
         Offers
       </h3>
       <% @required.each do |app| %>
@@ -67,20 +67,16 @@
               <td>
                 <table width="100%">
                   <tr>
-                    <td>
-                      <%= link_to app.job_posting.title, job_posting_path(app.job_posting.id) %>
+                    <td class="color_2">
+                      <%= link_to app.job_posting.title, job_posting_path(app.job_posting.id), class: 'paragraph_text' %>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <%= app.job_posting.company.name %>
+                    <td class="color_2">
+                      <p class="paragraph_text"><%= app.job_posting.company.name %></p>
                     </td>
                   </tr>
-                  <tr>
-                    <td colspan="3">
-                      <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Recieved <%= time_ago_in_words(app.created_at) %> ago.</p>
-                    </td>
-                  </tr>
+
                 </table>
               </td>
             </tr>
@@ -89,9 +85,16 @@
                 <div style="margin-bottom: 5px; margin-right: 5px; margin-left: 5px">
                   <%= form_tag url_for(:controller => 'applicants', :action => 'update', :id => app.id), :method => 'patch' do  %>
                       <%= hidden_field_tag :app_id, app.id %>
-                      <%= submit_tag "Accept", class: "btn btn-primary"%>
+                      <div style="text-align: center">
+                        <%= submit_tag "Accept", class: "btn btn-primary button_width"%>
+                      </div>
                   <% end %>
                 </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Recieved <%= time_ago_in_words(app.created_at) %> ago.</p>
               </td>
             </tr>
           </table>
@@ -102,7 +105,7 @@
       <% end %>
     </div>
     <div class="col-sm-4">
-      <h3 align="center" style="background-color: deepskyblue">
+      <h3 class="heading_text" align="center" style="background-color: deepskyblue">
         Matched
       </h3>
       <% @matched.each do |app| %>
@@ -118,15 +121,15 @@
                 </div>
               </td>
               <td>
-                <table width="100%">
+                <table width="100%" style="margin-top: 5px">
                   <tr>
-                    <td>
-                      <%= app.job_posting.title %>
+                    <td class="color_2">
+                      <%= link_to app.job_posting.title, job_posting_path(app.job_posting.id), class: 'paragraph_text' %>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <%= app.job_posting.company.name %>
+                    <td class="color_2">
+                      <p class="paragraph_text"><%= app.job_posting.company.name %></p>
                     </td>
                   </tr>
                   <tr>

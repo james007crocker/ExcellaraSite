@@ -7,7 +7,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <h3 align="center" style="background-color: #ffff00">
+      <h3 class="heading_text" align="center" style="background-color: #ffff00">
         Pending
       </h3>
       <% @pending.each do |app| %>
@@ -23,15 +23,15 @@
                 </div>
               </td>
               <td>
-                <table width="100%">
+                <table width="100%" style="margin-top: 5px">
                   <tr>
-                    <td>
-                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id) %>
+                    <td class="color_2">
+                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id), class: 'paragraph_text' %>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <%= app.job_posting.title %>
+                    <td class="color_2">
+                      <p class="paragraph_text"><%= app.job_posting.title %></p>
                     </td>
                   </tr>
                   <tr>
@@ -49,7 +49,7 @@
       <% end %>
     </div>
     <div class="col-sm-4">
-      <h3 align="center" style="background-color: greenyellow">
+      <h3 class="heading_text" align="center" style="background-color: greenyellow">
         Offers
       </h3>
       <% @required.each do |app| %>
@@ -65,22 +65,18 @@
                 </div>
               </td>
               <td>
-                <table width="100%">
+                <table width="100%" class="color_2">
                   <tr>
                     <td>
-                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id) %>
+                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id), class: 'paragraph_text' %>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <%=  app.job_posting.title %>
+                      <p class="paragraph_text"> <%=  app.job_posting.title %> </p>
                     </td>
                   </tr>
-                  <tr>
-                    <td colspan="3">
-                      <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Recieved <%= time_ago_in_words(app.created_at) %> ago.</p>
-                    </td>
-                  </tr>
+
                 </table>
               </td>
             </tr>
@@ -96,6 +92,11 @@
                 </div>
               </td>
             </tr>
+            <tr>
+              <td colspan="3">
+                <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Recieved <%= time_ago_in_words(app.created_at) %> ago.</p>
+              </td>
+            </tr>
           </table>
 
       <% end %>
@@ -104,7 +105,7 @@
       <% end %>
     </div>
     <div class="col-sm-4">
-      <h3 align="center" style="background-color: deepskyblue">
+      <h3 class="heading_text" align="center" style="background-color: deepskyblue">
         Matched
       </h3>
       <% @matched.each do |app| %>
@@ -120,15 +121,15 @@
                 </div>
               </td>
               <td>
-                <table width="100%">
+                <table width="100%" style="margin-top: 5px">
                   <tr>
-                    <td>
-                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id) %>
+                    <td class="color_2">
+                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id), class: 'paragraph_text' %>
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                      <%=  app.job_posting.title %>
+                    <td class="color_2">
+                      <p class="paragraph_text"> <%=  app.job_posting.title %></p>
                     </td>
                   </tr>
                   <tr>

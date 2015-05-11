@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150509011040) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "applicants", force: :cascade do |t|
     t.boolean  "compAccept"
     t.boolean  "userAccept"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20150509011040) do
     t.integer  "company_id"
   end
 
-  add_index "applicants", ["job_posting_id", "created_at"], name: "index_applicants_on_job_posting_id_and_created_at"
-  add_index "applicants", ["job_posting_id"], name: "index_applicants_on_job_posting_id"
+  add_index "applicants", ["job_posting_id", "created_at"], name: "index_applicants_on_job_posting_id_and_created_at", using: :btree
+  add_index "applicants", ["job_posting_id"], name: "index_applicants_on_job_posting_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 20150509011040) do
     t.string   "website"
   end
 
-  add_index "companies", ["email"], name: "index_companies_on_email", unique: true
+  add_index "companies", ["email"], name: "index_companies_on_email", unique: true, using: :btree
 
   create_table "job_postings", force: :cascade do |t|
     t.string   "title"
@@ -58,8 +61,8 @@ ActiveRecord::Schema.define(version: 20150509011040) do
     t.integer  "views"
   end
 
-  add_index "job_postings", ["company_id", "created_at"], name: "index_job_postings_on_company_id_and_created_at"
-  add_index "job_postings", ["company_id"], name: "index_job_postings_on_company_id"
+  add_index "job_postings", ["company_id", "created_at"], name: "index_job_postings_on_company_id_and_created_at", using: :btree
+  add_index "job_postings", ["company_id"], name: "index_job_postings_on_company_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -81,6 +84,8 @@ ActiveRecord::Schema.define(version: 20150509011040) do
     t.string   "resume"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "applicants", "job_postings"
+  add_foreign_key "job_postings", "companies"
 end

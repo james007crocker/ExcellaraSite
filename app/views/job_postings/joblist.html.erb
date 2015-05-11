@@ -6,7 +6,10 @@
 
       <%= will_paginate %>
 
-
+        <% if @job_postings.size == 0 %>
+            <br>
+            <p align="center">No jobs have been posted yet.</p>
+        <% end %>
         <% @job_postings.each do |job| %>
 
               <div class="div-back-border color_4">

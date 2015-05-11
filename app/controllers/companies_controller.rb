@@ -53,9 +53,9 @@ class CompaniesController < ApplicationController
   def activity
     @company = current_company
     @apps = Applicant.where("company_id = ?", @company.id)
-    @pending = @apps.where("userAccept = ? and compAccept = ?", "f", "t")
-    @required  = @apps.where("userAccept = ? and compAccept = ?", "t", "f")
-    @matched = @apps.where("userAccept = ? and compAccept = ?", "t", "t")
+    @pending = @apps.where("'userAccept' = ? and 'compAccept' = ?", "f", "t")
+    @required  = @apps.where("'userAccept' = ? and 'compAccept' = ?", "t", "f")
+    @matched = @apps.where("'userAccept' = ? and 'compAccept' = ?", "t", "t")
   end
 
   private

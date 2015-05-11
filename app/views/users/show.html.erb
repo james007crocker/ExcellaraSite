@@ -161,10 +161,10 @@
                 <p class="stand_out"><%= pluralize(Applicant.where(" user_id = ?", @user.id).count, 'Application') %></p>
               </div>
               <div class="col-xs-1 data_cell color_3">
-                <p class="stand_out"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where(" userAccept = ?", "f").count, 'Action') %> Required</p>
+                <p class="stand_out"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where("'userAccept' = ?", "f").count, 'Action') %> Required</p>
               </div>
               <div class="col-xs-1 data_cell color_4">
-                <p class="stand_out"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where("compAccept = ? and userAccept = ?", "t", "t").count, 'Job Match') %></p>
+                <p class="stand_out"><%= pluralize(Applicant.where(" user_id = ?", @user.id).where("'compAccept' = ? and 'userAccept' = ?", "t", "t").count, 'Job Match') %></p>
               </div>
             </div>
           </div>

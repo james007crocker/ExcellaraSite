@@ -53,10 +53,10 @@
             <p class="stand_out"><%= pluralize(@company.job_postings.count, 'Job Posting') %></p>
           </div>
           <div class="col-xs-1 data_cell color_3">
-            <p class="stand_out"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "f", "t").count, 'Job Applicant') %></p>
+            <p class="stand_out"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("'compAccept' = ? and 'userAccept' = ?", "f", "t").count, 'Job Applicant') %></p>
           </div>
           <div class="col-xs-1 data_cell color_4">
-            <p class="stand_out"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("compAccept = ? and userAccept = ?", "t", "t").count, 'Job Match') %></p>
+            <p class="stand_out"><%= pluralize(Applicant.where("company_id = ?", @company.id).where("'compAccept' = ? and 'userAccept' = ?", "t", "t").count, 'Job Match') %></p>
           </div>
         </div>
       </div>

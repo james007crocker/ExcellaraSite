@@ -18,7 +18,8 @@ gem 'mini_magick',               '3.8.0'
 gem 'fog',                       '1.23.0'
 
 group :development, :test do
-  gem 'sqlite3',     '1.3.9'
+  gem 'pg',           '0.17.1'
+  #gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'
   gem 'web-console', '2.0.0.beta3'
   gem 'spring',      '1.1.3'

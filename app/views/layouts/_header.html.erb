@@ -23,7 +23,7 @@
             <li><%= link_to "Post Job",   new_job_posting_path %></li>
             <li><%= link_to "My Jobs",   job_postings_path %></li>
             <li><%= link_to "Professionals",   users_path %></li>
-            <li><%= link_to "History", activity_companies_path %></li>
+            <li><%= link_to "History", activity_companies_path(current_user) %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>

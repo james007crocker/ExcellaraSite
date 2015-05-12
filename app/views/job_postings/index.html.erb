@@ -42,7 +42,7 @@
                         </tr>
                         <tr>
                           <td>
-                            <p class="paragraph_text"><%= pluralize(Applicant.where(" job_posting_id = ?", jobposting.id).where(" compAccept = ? and userAccept = ?", "t", "t").count, 'Match') %></p>
+                            <p class="paragraph_text"><%= pluralize(Applicant.where(" job_posting_id = ?", jobposting.id).where(" 'compAccept' = ? and 'userAccept' = ?", "t", "t").count, 'Match') %></p>
                           </td>
                         </tr>
                       </table>

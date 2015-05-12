@@ -90,9 +90,9 @@ class UsersController < ApplicationController
   def matched_jobs
     @user = current_user
     @apps = Applicant.where("user_id = ?", @user.id)
-    @pending = @apps.where("'userAccept' = ? and 'compAccept' = ?", "t", "f")
-    @required  = @apps.where("'userAccept' = ? and 'compAccept' = ?", "f", "t")
-    @matched = @apps.where("'userAccept' = ? and 'compAccept' = ?", "t", "t")
+    @pending = @apps.where(:userAccept => true, :compAccept => false)
+    @required  = @apps.where(:userAccept => false, :compAccept => true)
+    @matched = @apps.where(:userAccept => true, :compAccept => true)
   end
 
   def authenticated?(attribute, token)

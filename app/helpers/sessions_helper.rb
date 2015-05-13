@@ -108,8 +108,8 @@ module SessionsHelper
   #Display text without letters wrecked --------------------------
 
   def make_paragraph(text, number)
-    if text.blank?
-      return text
+    if text.blank? || text.nil?
+      return " "
     end
     paragraph = ""
     textA = text.gsub(/\s+/m, ' ').strip.split(" ")

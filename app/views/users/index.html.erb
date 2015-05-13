@@ -36,7 +36,7 @@
                       </tr>
                       <tr>
                         <td class="color_4" colspan="2" style="padding-left: 10px" align="center">
-                          <p class="paragraph_text"><%=simple_format(word_wrap(user.experience[0..100]+"......", line_width: 55), class: 'paragraph_text') %></p>
+                          <p class="paragraph_text"><%=simple_format(word_wrap(make_paragraph(user.getExperience + "......", 55), class: 'paragraph_text')) %></p>
                         </td>
                       </tr>
                       <tr>

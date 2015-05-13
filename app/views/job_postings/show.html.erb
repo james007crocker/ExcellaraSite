@@ -48,7 +48,9 @@
           <div align="center">
             <div class="row">
                 <% unless current_company.nil? %>
-                    <%= link_to "Remove", @jobposting, method: :delete %>
+                  <div style="padding: 5px">
+                    <%= button_to "Remove", @jobposting, class: "btn btn-primary button_width", method: :delete%>
+                  </div>
                 <% end %>
 
                 <div style="width: 30%;">

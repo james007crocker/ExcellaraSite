@@ -53,7 +53,7 @@ class CompaniesController < ApplicationController
   def activity
     @company = current_company
     @apps = Applicant.where("company_id = ?", @company.id)
-    @pending = @apps.where(:userAccept => true, :compAccept => false)
+    @pending = @apps.where(:userAccept => false, :compAccept => true)
     @required  = @apps.where(:userAccept => true, :compAccept => false)
     @matched = @apps.where(:userAccept => true, :compAccept => true)
   end

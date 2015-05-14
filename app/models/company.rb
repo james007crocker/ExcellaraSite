@@ -12,7 +12,7 @@ class Company < ActiveRecord::Base
   validates :location, length:  { maximum: 20 } #, presence: true
   validate :CompLocation?, :unless => Proc.new { |company| company.location.nil? }
 
-  validates :size, numericality: { only_integer: true }, inclusion: { in: 1..10000 }, on: :update #, presence: true
+  validates :size, numericality: { only_integer: true }, inclusion: { in: 1..10000, :message => ' must be greater than 0' }, on: :update #, presence: true
   #validate :CompSize?
 
   #validates :description, presence: true
@@ -22,7 +22,7 @@ class Company < ActiveRecord::Base
   validate :CompWebsite? , :unless => Proc.new { |company| company.description.nil? }
 
   has_secure_password
-  validates :password, length: { minimum: 6 }, :unless => Proc.new { |company| company.password.nil? }
+  validates :password, length: { minimum: 6, maximum: 20 }, :unless => Proc.new { |company| company.password.nil? }
 
 
   mount_uploader :picture, PictureUploader

@@ -105,11 +105,11 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :location, :experience, :accomplishment, :password, :password_confirmation, :picture)
+      params.require(:user).permit(:name, :email, :location, :province, :experience, :accomplishment, :password, :password_confirmation, :picture)
     end
 
     def user_update_params
-      params.require(:user).permit(:location, :experience, :accomplishment, :picture, :resume)
+      params.require(:user).permit(:location, :province, :experience, :accomplishment, :picture, :resume, :sector, :profession)
     end
 
     def logged_in_user

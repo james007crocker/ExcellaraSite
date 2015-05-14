@@ -12,8 +12,22 @@
         <%= f.label :title, "Job Title" %>
         <%= f.text_field :title, class: 'form-control' %>
 
-        <%= f.label :location, "Location" %>
-        <%= f.text_field :location, class: 'form-control' %>
+        <table width="100%">
+          <tr>
+            <td width="50%" style="margin-right: 10px">
+              <%= f.label :location, "City" %>
+              <%= f.select :location, getCities %>
+            </td>
+            <td width="25%" style="padding-left: 10px; padding-right: 10px">
+              <%= f.label :province %>
+              <%= f.select :province, getProvinces %>
+            </td>
+            <td width="25%" style="padding-left: 10px">
+              <%= f.label :sector, "Job Sector" %>
+              <%= f.select :sector, getType %>
+            </td>
+          </tr>
+        </table>
 
         <%= f.label :description, "Job Description" %>
         <%= f.text_area :description, class: 'form-control', :rows => "10" %>

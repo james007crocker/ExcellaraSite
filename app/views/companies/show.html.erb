@@ -22,7 +22,7 @@
               </tr>
               <tr>
                 <td class="color_1">
-                    <p class="credential_text paragraph_text2"><strong>Location:</strong> <%= @company.location %></p>
+                    <p class="credential_text paragraph_text2"><strong>Location:</strong> <%= @company.location %>, <%= @company.province %></p>
                 </td>
               </tr>
               <tr>
@@ -109,7 +109,7 @@
                                     <p class="paragraph_text2" style="margin-left: 5px"><strong>Job: </strong><%= link_to app.job_posting.title, app.job_posting %></p>
                                   </td>
                                   <td width="30%">
-                                    <p class="paragraph_text"><strong>Location: </strong><%= app.job_posting.location %></p>
+                                    <p class="paragraph_text"><strong>Location: </strong><%= app.job_posting.location %>, <%= app.job_posting.province %></p>
                                   </td>
                                   <td width="30%">
                                     <p class="paragraph_text"><strong>Applicant: </strong><%= link_to User.find_by(id: app.user_id).name, User.find_by(id: app.user_id) %></p>

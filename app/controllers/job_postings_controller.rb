@@ -61,7 +61,7 @@ class JobPostingsController < ApplicationController
   private
 
     def job_posting_params
-      params.require(:job_posting).permit(:title, :location, :description)
+      params.require(:job_posting).permit(:title, :location, :province, :description, :type)
     end
 
     def checkAccountCompleteUser

@@ -20,7 +20,7 @@
                 </div>
               </td>
               <td width="50%">
-                <p class="paragraph_text2" style="margin-left: 10%"><strong>Location: </strong><%= @user.location %></p>
+                <p class="paragraph_text2" style="margin-left: 10%"><strong>Location: </strong><%= @user.location %>, <%= @user.province %></p>
               </td>
             </tr>
           </table>
@@ -136,7 +136,7 @@
                   </tr>
                   <tr>
                     <td class="color_1" width="100%">
-                      <p class="credential_text paragraph_text2"><strong>Location:</strong> <%= @user.location %></p>
+                      <p class="credential_text paragraph_text2"><strong>Location:</strong> <%= @user.location %>, <%= @user.province %></p>
                     </td>
                   </tr>
                   <tr>
@@ -179,7 +179,7 @@
                     <% if @apps.size == 0 %>
                         <p align="center"> You have no activity to display. Start by browsing jobs.</p>
                         <div align="center">
-                          <div style="width: 30%;">
+                          <div style="width: 30%; margin: 5px">
                             <%= button_to "Browse Jobs", joblist_path , class: "btn btn-primary", method: :get%>
                           </div>
                         </div>
@@ -191,7 +191,7 @@
                                   <p class="paragraph_text2" style="margin-left: 4%"><strong></strong><%= link_to app.job_posting.title, app.job_posting %></p>
                                 </td>
                                 <td width="30%">
-                                  <p class="paragraph_text"><strong></strong><%= app.job_posting.location %></p>
+                                  <p class="paragraph_text"><strong></strong><%= app.job_posting.location %>, <%= app.job_posting.province %></p>
                                 </td>
                                 <td width="30%">
                                   <p class="paragraph_text"><strong></strong><%= app.job_posting.company.name %></p>

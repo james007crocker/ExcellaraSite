@@ -61,11 +61,11 @@ class CompaniesController < ApplicationController
   private
 
   def company_params
-    params.require(:company).permit(:name, :email, :location, :website, :description, :size, :password, :password_confirmation)
+    params.require(:company).permit(:name, :email, :location, :province, :website, :description, :size, :password, :password_confirmation)
   end
 
   def company_update_params
-    params.require(:company).permit(:location, :website, :description, :size, :picture)
+    params.require(:company).permit(:location, :province, :website, :description, :size, :picture)
   end
 
   def logged_in_company

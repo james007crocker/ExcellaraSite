@@ -16,14 +16,35 @@
     <%= form_for(@company, html: { multipart: true}) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
 
-        <%= f.label :location %>
-        <%= f.text_field :location, class: 'form-control' %>
+        <table width="100%">
+          <tr>
+            <td width="50%" style="padding-right: 10px">
+              <%= f.label :location, "City" %>
+              <%= f.select :location, getCities %>
+            </td>
+            <td width="50%" style="padding-left: 10px">
+              <%= f.label :province %>
+              <%= f.select :province, getProvinces %>
+            </td>
+          </tr>
+        </table>
 
-        <%= f.label :size, "Number of Employees" %>
-        <%= f.text_field :size, class: 'form-control' %>
+        <table width="100%">
+          <tr>
+            <td width="50%" style="padding-right: 10px">
+              <%= f.label :size, "Number of Employees" %>
+              <%= f.text_field :size, class: 'form-control' %>
+            </td>
+            <td width="50%" style="padding-left: 10px">
+              <%= f.label :website, "Company Website" %>
+              <%= f.text_field :website, class: 'form-control' %>
+            </td>
+          </tr>
+        </table>
 
-        <%= f.label :website, "Company Website" %>
-        <%= f.text_field :website, class: 'form-control' %>
+
+
+
 
         <%= f.label :description %>
         <%= f.text_area :description, class: 'form-control', :rows => "10" %>

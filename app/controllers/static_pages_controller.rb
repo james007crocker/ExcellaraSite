@@ -1,17 +1,22 @@
 class StaticPagesController < ApplicationController
   def home
+    loggedInHeadToHomePage
   end
 
   def help
+    loggedInHeadToHomePage
   end
 
   def about
+    loggedInHeadToHomePage
   end
 
   def contact
+    loggedInHeadToHomePage
   end
 
   def signup
+    loggedInHeadToHomePage
   end
 
   def send_message
@@ -23,4 +28,13 @@ class StaticPagesController < ApplicationController
     redirect_to root_path
   end
 
+  private
+
+    def loggedInHeadToHomePage
+      if company_logged_in?
+        redirect_to current_company
+      elsif user_logged_in?
+        redirect_to current_user
+      end
+    end
 end

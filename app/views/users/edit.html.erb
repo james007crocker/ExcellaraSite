@@ -11,8 +11,28 @@
     <%= form_for(@user, html: { multipart: true }) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
 
-        <%= f.label :location %>
-        <%= f.text_field :location, class: 'form-control' %>
+        <table width="75%">
+          <tr>
+            <td width="50%" style="padding-right: 10px">
+              <%= f.label :location, "City" %>
+              <%= f.select :location, getCities %>
+            </td>
+            <td width="25%" style="padding-left: 10px">
+              <%= f.label :province %>
+              <%= f.select :province, getProvinces %>
+            </td>
+          </tr>
+          <tr>
+            <td width="25%" style="padding-right: 10px">
+              <%= f.label :sector, "Job Sector" %>
+              <%= f.select :sector, getType %>
+            </td>
+            <td width="75%" style="padding-left: 10px">
+              <%= f.label :profession %>
+              <%= f.email_field :profession, class: 'form-control' %>
+            </td>
+          </tr>
+        </table>
 
         <%= f.label :experience %>
         <%= f.text_area :experience, class: 'form-control', :rows => "10" %>

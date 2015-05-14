@@ -25,5 +25,75 @@ module JobPostingsHelper
       return job.views + 1
     end
   end
+
+  def getCities
+    return ["Abbotsford",
+            "Barrie",
+            "Brampton",
+            "Burlington",
+            "Burnaby", "Calgary",
+            "Cambridge",
+            "Cape Breton",
+            "Chatham-Kent",
+            "Coquitlam",
+            "Edmonton",
+            "Gatineau",
+            "Guelph",
+            "Halifax",
+            "Hamilton",
+            "Kingston",
+            "Kitchener",
+            "Laval",
+            "Levis",
+            "London",
+            "Longueuil",
+            "Markham",
+            "Mississauga",
+            "Montreal",
+            "Oakville",
+            "Ontario",
+            "Oshawa",
+            "Ottawa",
+            "Quebec City",
+            "Regina",
+            "Richmond",
+            "Richmond Hill",
+            "Saguenay",
+            "Saskatoon",
+            "Sherbrooke",
+            "St. Catharines",
+            "Sudbury",
+            "Surrey",
+            "Thunder Bay",
+            "Toronto",
+            "Trois-Rivieres",
+            "Vancouver",
+            "Vaughan",
+            "Windsor",
+            "Winnipeg"]
+  end
+
+  def getProvinces
+    return ["AB",
+    "BC",
+    "MB",
+    "NB",
+    "NL",
+    "NT",
+    "NS",
+    "NU",
+    "ON",
+    "PE",
+    "QC",
+    "SK",
+    "YT"]
+  end
+
+  def getType
+    return ["Law",
+      "Finance",
+      "Healthcare"]
+  end
+
 end
 

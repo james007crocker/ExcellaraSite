@@ -4,11 +4,12 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
 
   validates :name, presence: true, length: { maximum: 50 }
+  validate :firstLastProvided?, :on => :create
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
       format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false}
-
+  validate :emailTaken?, :on => :create
   validates :location,  length:  { maximum: 20 }#,presence: true
   validate :userLocation?, :unless => Proc.new { |user| user.location.nil? }
 
@@ -23,7 +24,9 @@ class User < ActiveRecord::Base
   validate  :resume_size
 
   has_secure_password
-  validates :password, length: { minimum: 6 }, :unless => Proc.new { |company| company.password.nil? }
+  validates :password, length: { minimum: 6, maximum: 20 }, :unless => Proc.new { |company| company.password.nil? }
+
+  validates :profession, presence: true, length: { minimum: 4, maximum: 25 }
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -104,6 +107,18 @@ class User < ActiveRecord::Base
     def userExperience?
       if self.activated && self.experience.blank?
         errors.add(:experience, "should  be present")
+      end
+    end
+
+    def emailTaken?
+      unless Company.where(:email => self.email).size == 0
+        errors.add(:email, "is already in use")
+      end
+    end
+
+    def firstLastProvided?
+      if self.name.split(' ').length < 2
+        errors.add(:name, "should contain a first and last name")
       end
     end
 end

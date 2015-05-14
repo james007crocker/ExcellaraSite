@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150509011040) do
+ActiveRecord::Schema.define(version: 20150514180115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150509011040) do
     t.datetime "reset_sent_at"
     t.string   "picture"
     t.string   "website"
+    t.string   "province"
   end
 
   add_index "companies", ["email"], name: "index_companies_on_email", unique: true, using: :btree
@@ -59,6 +60,9 @@ ActiveRecord::Schema.define(version: 20150509011040) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "views"
+    t.string   "province"
+    t.string   "type"
+    t.string   "sector"
   end
 
   add_index "job_postings", ["company_id", "created_at"], name: "index_job_postings_on_company_id_and_created_at", using: :btree
@@ -82,6 +86,9 @@ ActiveRecord::Schema.define(version: 20150509011040) do
     t.datetime "reset_sent_at"
     t.string   "picture"
     t.string   "resume"
+    t.string   "province"
+    t.string   "profession"
+    t.string   "sector"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

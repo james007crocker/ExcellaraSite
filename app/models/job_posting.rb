@@ -60,8 +60,8 @@ class JobPosting < ActiveRecord::Base
   scope :with_location, lambda { |locations|
                         where(" job_postings.location = ? ", locations )
                       }
-  scope :with_sector, lambda { |types|
-                        where(" job_postings.type = ? ", types)
+  scope :with_sector, lambda { |sectors|
+                        where(" job_postings.sector = ? ", sectors)
                     }
 
   def self.options_for_sorted_by

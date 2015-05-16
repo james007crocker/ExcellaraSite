@@ -15,3 +15,5 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+//= require filterrific/filterrific-jquery
+// ###This was causing an error

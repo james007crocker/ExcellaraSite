@@ -3,75 +3,41 @@
 <h1 class="profile_title">Jobs</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-
-      <%= will_paginate %>
-
-        <% if @job_postings.size == 0 %>
-            <br>
-            <p align="center">No jobs have been posted yet.</p>
-        <% end %>
-        <% @job_postings.each do |job| %>
-
-              <div class="div-back-border color_4">
-                <table width="100%">
-                  <tr>
-                    <td width="160px">
-                      <div class="profile_pic3">
-                        <% if job.company.picture?%>
-                            <%= image_tag job.company.picture.url, class: "img-thumbnail", width: 150, height: 150%>
-                        <% else %>
-                            <%= image_tag "no_company_pic.png", class: "img-thumbnail", width: 150, height: 150  %>
-                        <% end %>
-                      </div>
-                    </td>
-                    <td style="margin-left: 10px">
-                      <table  width="100%" style="margin-top: 10px">
-                        <tr>
-                          <td class="color_1" width="50%">
-                            <p class="paragraph_text"><strong>Title: </strong><%= job.title%></p>
-                          </td>
-                          <td class="color_1" width="50%">
-                            <p class="paragraph_text"><strong>Location: </strong><%= job.location %>, <%= job.province %></p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="color_1" colspan="2">
-                            <p class="paragraph_text"><strong>Company: </strong><%= job.company.name %></p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="color_2" colspan="2" align="center">
-                            <p><%=simple_format(word_wrap(job.description[0..100]+"......", line_width: 50), class: 'paragraph_text') %></p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="2">
-                            <div align="center">
-                              <div clas="row">
-                                <div style="margin: 5px">
-                                  <%= button_to "View Job", job, class: "btn btn-primary button_width", method: "get"%>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      </table>
-                      <p class="copyright text-muted small" align="right" style="margin-right: 10%">Posted <%= time_ago_in_words(job.created_at) %> ago.</p>
-                    </td>
-                  </tr>
-                </table>
-
-
-
-              </div>
+    <%= form_for_filterrific @filterrific do |f| %>
+        <table>
+          <tr>
+            <td>
+              Search
+              <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+              <%= f.text_field(:search_query, class: 'filterrific-periodically-observed') %>
+            </td>
+            <td>
+              City
+              <%= f.select(:with_location, @filterrific.select_options[:with_location], { include_hidden: false, include_blank: '- Any -' }) %>
+            </td>
+            <td>
+              Job Sector
+              <%= f.select(:with_sector, @filterrific.select_options[:with_sector], { include_hidden: false, include_blank: '- Any -' }) %>
+            </td>
+            <td>
+              Sorted by
+              <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+            </td>
+          </tr>
+        </table>
         <div>
-          <br>
+          <%= link_to('Reset filters', reset_filterrific_url,) %>
         </div>
+        <%# add an automated spinner to your form when the list is refreshed %>
+        <%= render_filterrific_spinner %>
+    <% end %>
 
-        <% end %>
+    <%= render(partial: 'job_postings/list', locals: { job_postings: @job_postings }) %>
+
+      <!--%- will_paginate -%>-->
 
 
-      <%= will_paginate %>
+      <!--%- will_paginate -%>-->
 
   </div>
 </div>

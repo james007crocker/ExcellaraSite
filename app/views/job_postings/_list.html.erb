@@ -1,0 +1,68 @@
+<div id="filterrific_results">
+
+  <div>
+    <%= page_entries_info job_postings %>
+  </div>
+  <% job_postings.each do |job| %>
+
+      <div class="div-back-border color_4">
+        <table width="100%">
+          <tr>
+            <td width="160px">
+              <div class="profile_pic3">
+                <% if job.company.picture?%>
+                    <%= image_tag job.company.picture.url, class: "img-thumbnail", width: 150, height: 150%>
+                <% else %>
+                    <%= image_tag "no_company_pic.png", class: "img-thumbnail", width: 150, height: 150  %>
+                <% end %>
+              </div>
+            </td>
+            <td style="margin-left: 10px">
+              <table  width="100%" style="margin-top: 10px">
+                <tr>
+                  <td class="color_1" width="50%">
+                    <p class="paragraph_text"><strong>Title: </strong><%= job.title%></p>
+                  </td>
+                  <td class="color_1" width="50%">
+                    <p class="paragraph_text"><strong>Location: </strong><%= job.location %>, <%= job.province %></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="color_1" colspan="2">
+                    <p class="paragraph_text"><strong>Company: </strong><%= job.company.name %></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="color_2" colspan="2" align="center">
+                    <p><%=simple_format(word_wrap(job.description[0..100]+"......", line_width: 50), class: 'paragraph_text') %></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <div align="center">
+                      <div clas="row">
+                        <div style="margin: 5px">
+                          <%= button_to "View Job", job, class: "btn btn-primary button_width", method: "get"%>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              <p class="copyright text-muted small" align="right" style="margin-right: 10%">Posted <%= time_ago_in_words(job.created_at) %> ago.</p>
+            </td>
+          </tr>
+        </table>
+
+
+
+      </div>
+      <div>
+        <br>
+      </div>
+
+  <% end %>
+
+</div>
+
+<%= will_paginate job_postings %>

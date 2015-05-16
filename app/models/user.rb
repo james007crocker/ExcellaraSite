@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6, maximum: 20 }, :unless => Proc.new { |company| company.password.nil? }
 
-  validates :profession, presence: true, length: { minimum: 4, maximum: 25 }
+  validates :profession, presence: true, length: { minimum: 4, maximum: 25 } , :on => :update
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

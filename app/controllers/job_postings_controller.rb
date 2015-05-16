@@ -32,7 +32,33 @@ class JobPostingsController < ApplicationController
   end
 
   def joblist
-    @job_postings = JobPosting.paginate(page: params[:page], per_page: 10)
+    #@job_postings = JobPosting.paginate(page: params[:page], per_page: 10)
+
+    @filterrific = initialize_filterrific(
+        JobPosting,
+        params[:filterrific],
+        select_options: {
+            sorted_by: JobPosting.options_for_sorted_by,
+            with_location: getCities,
+            with_sector: getType
+        }#,
+        #persistence_id: 'shared_key',
+        #default_filter_params: {},
+        #available_filters: [],
+    ) or return
+
+    @job_postings = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
+
   end
 
   def show
@@ -61,7 +87,7 @@ class JobPostingsController < ApplicationController
   private
 
     def job_posting_params
-      params.require(:job_posting).permit(:title, :location, :province, :description, :type)
+      params.require(:job_posting).permit(:title, :location, :province, :description, :type, :sector)
     end
 
     def checkAccountCompleteUser

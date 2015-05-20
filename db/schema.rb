@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514180115) do
+ActiveRecord::Schema.define(version: 20150518125135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(version: 20150514180115) do
     t.boolean  "userAccept"
     t.integer  "job_posting_id"
     t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "company_id"
+    t.boolean  "compreject",     default: false
+    t.boolean  "userreject",     default: false
   end
 
   add_index "applicants", ["job_posting_id", "created_at"], name: "index_applicants_on_job_posting_id_and_created_at", using: :btree

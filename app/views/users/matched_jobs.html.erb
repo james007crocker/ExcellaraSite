@@ -11,7 +11,8 @@
         Pending
       </h3>
       <% @pending.each do |app| %>
-          <table class="div-back-border color_1" style="margin-bottom: 10px">
+          <%= link_to job_posting_path(app.job_posting.id), class: 'disable_hover' do%>
+          <table class="div-back-border color_1 div_button" style="margin-bottom: 10px">
             <tr>
               <td width="100px">
                 <div class="profile_pic4">
@@ -26,7 +27,7 @@
                 <table width="100%" style="margin-top: 5px">
                   <tr>
                     <td class="color_2">
-                      <%= link_to app.job_posting.title, job_posting_path(app.job_posting.id), class: 'paragraph_text' %>
+                      <p class="paragraph_text"><strong><%= app.job_posting.title %></strong></p>
                     </td>
                   </tr>
                   <tr>
@@ -43,6 +44,7 @@
               </td>
             </tr>
           </table>
+          <% end %>
       <% end %>
       <% if @pending.size == 0 %>
           <p align="center">No pending jobs yet.</p>
@@ -53,7 +55,8 @@
         Offers
       </h3>
       <% @required.each do |app| %>
-          <table class="div-back-border color_1" style="margin-bottom: 10px">
+          <%= link_to job_posting_path(app.job_posting.id), class: 'disable_hover' do%>
+            <table class="div-back-border color_1 div_button" style="margin-bottom: 10px">
             <tr>
               <td width="100px">
                 <div class="profile_pic4">
@@ -68,7 +71,7 @@
                 <table width="100%">
                   <tr>
                     <td class="color_2">
-                      <%= link_to app.job_posting.title, job_posting_path(app.job_posting.id), class: 'paragraph_text' %>
+                      <p class="paragraph_text"><strong><%= app.job_posting.title %></strong></p>
                     </td>
                   </tr>
                   <tr>
@@ -98,7 +101,7 @@
               </td>
             </tr>
           </table>
-
+          <% end %>
       <% end %>
       <% if @required.size == 0 %>
           <p align="center">No jobs require action.</p>
@@ -109,7 +112,8 @@
         Matched
       </h3>
       <% @matched.each do |app| %>
-          <table class="div-back-border color_1" style="margin-bottom: 10px">
+          <%= link_to job_posting_path(app.job_posting.id), class: 'disable_hover' do%>
+          <table class="div-back-border color_1 div_button" style="margin-bottom: 10px">
             <tr>
               <td width="100px">
                 <div class="profile_pic4">
@@ -124,7 +128,7 @@
                 <table width="100%" style="margin-top: 5px">
                   <tr>
                     <td class="color_2">
-                      <%= link_to app.job_posting.title, job_posting_path(app.job_posting.id), class: 'paragraph_text' %>
+                      <p class="paragraph_text"><strong><%= app.job_posting.title %></strong></p>
                     </td>
                   </tr>
                   <tr>
@@ -141,6 +145,7 @@
               </td>
             </tr>
           </table>
+          <% end %>
       <% end %>
       <% if @matched.size == 0 %>
           <p align="center">No job matches yet.</p>

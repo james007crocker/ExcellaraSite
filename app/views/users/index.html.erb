@@ -6,68 +6,35 @@
 
 <div class="row">
   <div class="col-md-6 col-centered">
-    <%= will_paginate %>
-    <ul class="users">
-      <% @users.each do |user| %>
+    <%= form_for_filterrific @filterrific do |f| %>
+        <table>
+          <tr>
+            <td>
+              Search
+              <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+              <%= f.text_field(:search_query, class: 'filterrific-periodically-observed') %>
+            </td>
+            <td>
+              City
+              <%= f.select(:with_location, @filterrific.select_options[:with_location], { include_hidden: false, include_blank: '- Any -' }) %>
+            </td>
+            <td>
+              Job Sector
+              <%= f.select(:with_sector, @filterrific.select_options[:with_sector], { include_hidden: false, include_blank: '- Any -' }) %>
+            </td>
+            <td>
+              Sorted by
+              <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+            </td>
+          </tr>
+        </table>
+        <div>
+          <%= link_to('Reset filters', reset_filterrific_url,) %>
+        </div>
+        <%# add an automated spinner to your form when the list is refreshed %>
+        <% render_filterrific_spinner %>
+    <% end %>
 
-          <% if user.admin == false && user.activated == true %>
-          <li>
-            <div class="color_1">
-              <table width="100%">
-                <tr>
-                  <td width="200px">
-                    <div class="profile_pic3">
-                      <% if user.picture?%>
-                          <%= image_tag user.picture.url, class: "img-thumbnail", width: 150, height: 150%>
-                      <% else %>
-                          <%= image_tag "no_profile.png", class: "img-thumbnail", width: 150, height: 150  %>
-                      <% end %>
-                    </div>
-                  </td>
-                  <td style="padding-top: 10px">
-                    <table width="100%">
-                      <tr >
-                        <td width="50%" class="color_2">
-                          <p class="paragraph_text" style="margin-left: 10px"><strong>Name:</strong> <%= user.name %></p>
-                        </td>
-                        <td width="50%" class="color_2">
-                          <p class="paragraph_text"><strong>Location:</strong> <%=  user.location %>, <%= user.province %></p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="color_4" colspan="2" style="padding-left: 10px" align="center">
-                          <p class="paragraph_text"><%=simple_format(word_wrap(make_paragraph(user.getExperience + "......", 55), class: 'paragraph_text')) %></p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">
-                          <div align="center">
-                            <div clas="row">
-                              <div style="width: 30%;">
-                                <br>
-                                <%= button_to "View Profile", user, class: "btn btn-primary", method: "get"%>
-                                <p></p>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-
-            </div>
-          <% end %>
-          <% if current_company.nil? %>
-            <%if current_user.admin? && !current_user?(user) %>
-                 <%= link_to "Delete", user, method: :delete, data: { confirm: "Are you sure?" } %>
-            <% end%>
-          </li>
-          <% end %>
-      <% end %>
-    </ul>
-
-    <%= will_paginate %>
+    <%= render(partial: 'users/list', locals: { users: @users }) %>
   </div>
 </div>

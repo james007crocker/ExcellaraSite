@@ -45,7 +45,13 @@
             <li><%= link_to "Home",   root_path %></li>
             <li><%= link_to "Contact",   contact_path %></li>
             <li><%= link_to "Log in", login_path %></li>
-            <li style="background-color: deepskyblue; "><%= link_to "Sign Up", signup_path %></li>
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="background-color: deepskyblue">Sign Up<b class="caret"></b></a>
+              <ul class="dropdown-menu" id="menu1">
+                <li><%= link_to "Professional", user_signup_path %></li>
+                <li><%= link_to "Company",   company_signup_path %></li>
+              </ul>
+            </li>
         <% end %>
       </ul>
     </div>

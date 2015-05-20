@@ -1,0 +1,3 @@
+<% js = escape_javascript(render(partial: 'users/list', locals: { users: @users })) %>
+$("#filterrific_results").html("<%= js %>");
+console.log("Hello");

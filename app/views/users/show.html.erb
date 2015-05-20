@@ -185,10 +185,11 @@
                         </div>
                     <% else %>
                         <% @apps.each do |app| %>
-                            <table class="barcode_rows" width="80%" align="center">
+                            <%= link_to app.job_posting, class: 'disable_hover' do %>
+                            <table class="barcode_rows div_button" width="80%" align="center">
                               <tr>
                                 <td width="30%">
-                                  <p class="paragraph_text2" style="margin-left: 4%"><strong></strong><%= link_to app.job_posting.title, app.job_posting %></p>
+                                  <p class="paragraph_text2" style="margin-left: 4%"><strong><%= app.job_posting.title %></strong></p>
                                 </td>
                                 <td width="30%">
                                   <p class="paragraph_text"><strong></strong><%= app.job_posting.location %>, <%= app.job_posting.province %></p>
@@ -220,6 +221,7 @@
                                 </td>
                               </tr>
                             </table>
+                            <% end %>
                             <br>
                         <% end %>
                     <% end %>

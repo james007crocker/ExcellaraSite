@@ -19,8 +19,31 @@ class UsersController < ApplicationController
   end
 
   def index
+    @filterrific = initialize_filterrific(
+        User,
+        params[:filterrific],
+        select_options: {
+            sorted_by: User.options_for_sorted_by,
+            with_location: getCities,
+            with_sector: getType
+        }#,
+    #persistence_id: 'shared_key',
+    #default_filter_params: {},
+    #available_filters: [],
+    ) or return
 
-    @users = User.paginate(page: params[:page], per_page: 10)
+    @users = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+  rescue ActiveRecord::RecordNotFound => e
+    # There is an issue with the persisted param_set. Reset it.
+    puts "Had to reset filterrific params: #{ e.message }"
+    redirect_to(reset_filterrific_url(format: :html)) and return
+
   end
 
   def show

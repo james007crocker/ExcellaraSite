@@ -14,7 +14,7 @@
           <table class="div-back-border color_1" style="margin-bottom: 10px">
             <tr>
               <td width="100px">
-                <div class="profile_pic4">
+                <div class="profile_pic4 ">
                   <% if User.find_by_id(app.user_id).picture? %>
                       <%= image_tag User.find_by_id(app.user_id).picture.url, class: "img-thumbnail", width: 50, height: 50%>
                   <% else %>

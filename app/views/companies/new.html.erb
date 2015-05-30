@@ -1,39 +1,54 @@
 <div class="accommodate_alert"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-centered tancolor" style="padding: 0">
+      <div style="background-color: black">
+        <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px">Company Sign Up</p>
+      </div>
+      <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
+      <div class="col-md-6 col-centered">
+        <%= form_for(@company) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
 
-<div class="row">
-  <div class="col-md-4 col-centered">
-    <h1 class="profile_title">Company Sign up</h1>
-    <%= form_for(@company) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
-
-        <%= f.label :name, "Company Name" %>
-        <%= f.text_field :name, class: 'form-control' %>
-
-        <%= f.label :email %>
-        <%= f.email_field :email, class: 'form-control' %>
-
-        <!--
+            <div class="form-group">
+              <%= f.label :name, "Company Name" %>
+              <%= f.text_field :name, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.email_field :email, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password %>
+              <%= f.password_field :password, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password_confirmation, "Password Confirmation" %>
+              <%= f.password_field :password_confirmation, class: 'form-control' %>
+            </div>
+            <!--
         <%= f.label :website, "Company Website" %>
         <%= f.text_field :website, class: 'form-control' %>
 
         <%= f.label :location %>
-        <%= f.text_field :location, class: 'form-control' %>
+        <%= f.text_field :location, class: 'form-control addmargin2' %>
 
         <%= f.label :size, "Number of Employees" %>
-        <%= f.text_field :size, class: 'form-control'%>
+        <%= f.text_field :size, class: 'form-control addmargin2'%>
 
         <%= f.label :description, "Company Description"  %>
-        <%= f.text_area :description, class: 'form-control', :rows => "10" %>
+        <%= f.text_area :description, class: 'form-control addmargin2', :rows => "10" %>
         -->
 
-        <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control' %>
 
-        <%= f.label :password_confirmation, "Password Confirmation" %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
+            <div class="center-block" style="display: block; float: none; text-align: center; margin-left: auto; margin-right: auto">
+              <%= f.submit "Create My Account", class: "btn btn-primary button_width2"%>
+            </div>
 
-
-        <%= f.submit "Create my account", class: "btn btn-primary" %>
-    <% end %>
+        <% end %>
+      </div>
+      <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
+      <br>
+    </div>
   </div>
 </div>

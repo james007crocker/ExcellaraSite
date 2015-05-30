@@ -48,7 +48,6 @@ class JobPostingsController < ApplicationController
     ) or return
 
     @job_postings = @filterrific.find.page(params[:page])
-
     respond_to do |format|
       format.html
       format.js
@@ -87,7 +86,7 @@ class JobPostingsController < ApplicationController
   private
 
     def job_posting_params
-      params.require(:job_posting).permit(:title, :location, :province, :description, :type, :sector)
+      params.require(:job_posting).permit(:title, :location, :province, :description, :type, :sector, :hours, :length)
     end
 
     def checkAccountCompleteUser

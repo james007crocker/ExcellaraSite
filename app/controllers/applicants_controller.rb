@@ -35,6 +35,22 @@ class ApplicantsController < ApplicationController
     end
   end
 
+  def destroy
+    applicant = Applicant.find_by(id: params[:id])
+    if !current_company.nil? && (current_company.id == applicant.company_id) || !current_user.nil? && (current_user.id === applicant.user_id)
+      applicant.destroy
+      flash[:success] = "Application Removed"
+      if current_company
+        redirect_to current_company
+      else
+        redirect_to current_user
+      end
+    else
+      redirect_to root_url
+    end
+
+  end
+
   def update
     if current_user
       @applicant = Applicant.find_by(id: params[:app_id])

@@ -5,6 +5,7 @@ class JobPosting < ActiveRecord::Base
   validates :title, presence: true, length: { maximum: 30 }
   validates :location, presence: true, length: { maximum: 20 }
   validates :description, presence: true
+  validates :hours, presence: true, numericality: { only_integer: true }, inclusion: { in: 1..50 }
 
   filterrific(
       default_filter_params: { sorted_by: 'created_at_desc' },
@@ -27,9 +28,9 @@ class JobPosting < ActiveRecord::Base
                         # every ActiveRecord table has a 'created_at' column.
                         order("job_postings.created_at #{ direction }")
 
-                      when /^name_/
+                      when /^title_/
                         # Simple sort on the name colums
-                        order("LOWER(job_postings.title) #{ direction }, LOWER(job_postings.title) #{ direction }")
+                        order("LOWER(job_postings.title) #{ direction }")
                       else
                         raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
                     end

@@ -1,0 +1,89 @@
+<style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        width: 70%;
+        margin: auto;
+    }
+</style>
+<div class="container">
+  <br>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner aquacolor" role="listbox">
+
+      <div class="item active">
+        <div style="height: 650px">
+        </div>
+        <div class="carousel-caption">
+          <p class="howworksfont" style="text-align: left">3 STEPS</p>
+          <p class="howworksfont1" style="text-align: left">How to use Excellara</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <div style="height: 650px">
+
+        </div>
+        <div class="carousel-caption">
+         <p class="howworksfont" style="text-align: left">1</p>
+          <p class="howworksfont2" >Sign up and make your profile.</p>
+          <p class="howworksfont3">Show off your skills and experience to help you find the employment situation that best suits you.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <div style="height: 650px">
+
+        </div>
+        <div class="carousel-caption">
+          <p class="howworksfont" style="text-align: left">2</p>
+          <p class="howworksfont2">Search for employers.</p>
+          <p class="howworksfont3">Search for relevant part-time jobs near you while employers browse your profile.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <div style="height: 650px">
+
+        </div>
+        <div class="carousel-caption">
+          <p class="howworksfont" style="text-align: left">3</p>
+          <p class="howworksfont2">Connect.</p>
+          <p class="howworksfont3">Click "apply" on jobs you are interested in and an email will be sent to the employer with a link to your profile.</p>
+        </div>
+      </div>
+      <!--<div class="item">
+        <img src="img_flower.jpg" alt="Flower" width="460" height="345">
+        <div class="carousel-caption">
+          <h3>Flowers</h3>
+          <p>Beatiful flowers in Kolymbari, Crete.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="img_flower2.jpg" alt="Flower" width="460" height="345">
+        <div class="carousel-caption">
+          <h3>Flowers</h3>
+          <p>Beatiful flowers in Kolymbari, Crete.</p>
+        </div>
+      </div>-->
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <%= image_tag "chevron-left.png", style: 'padding-top: 175px' %>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <%= image_tag "chevron-right.png", style: 'padding-top: 175px' %>
+    </a>
+  </div>
+</div>

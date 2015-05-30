@@ -1,0 +1,197 @@
+<script>
+    $(document).ready(function(){
+        $("#buttonSuggest").click(function(){
+            if ($(this).text() == "Suggest Job") {
+                $(this).text("Hide");
+            } else {
+                $(this).text("Suggest Job");
+            }
+            $("#viewSuggest").toggle();
+        });
+    });
+    //$(document).ready(ready);
+    //$(document).on('page:load', ready);
+</script>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10">
+      <h1 class="userheaderfont2"><%= @user.name %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2" style="background-color: white">
+    </div>
+    <div class="col-md-10 nopadding" style="background-color: #EEE6DB">
+      <table width="100%">
+        <tr>
+          <td width="160px">
+            <% if @user.picture? %>
+                <%= image_tag @user.picture.url, class: "img-responsive", width: 150, height: 150 if @user.picture? %>
+            <% else %>
+                <%= image_tag "no_profile.png", class: "img-responsive", width: 150, height: 150  %>
+            <% end %>
+          </td>
+          <td style="position: relative">
+            <table style="position: absolute; bottom: 0px; width: 100%">
+              <tr>
+                <td class="narrowfont">
+                  <%= @user.profession.upcase %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p><%= @user.location.upcase %>, <%= @user.province.upcase %></p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <h5><%= pluralize(@user.years, 'YEAR').upcase + ' EXPERIENCE' %></h5>
+                </td>
+                <td>
+                  <%= button_tag "Suggest Job", class: "btn btn-success button_width addmargin", id: "buttonSuggest"%>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+      <table width="100%">
+        <tr>
+          <td style="padding-top: 15px">
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-bottom: 20px">
+            <p class="hoursperweek"><%= @user.name.split(' ')[0] + "'s Experience"  %></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="paragraph">
+              <p class="two-col"><%= @user.experience %></p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-4 tancolor"  id="viewSuggest" style="display: none; position: absolute; right: 0; z-index: 5">
+      <div style="padding-top: 5px; padding-bottom: 2px">
+        <% if !current_company.nil? && @job_array.size > 0 %>
+            <h4>Suggest new job:</h4>
+            <div>
+              <%= form_tag url_for(:controller => 'applicants', :action => 'create'), :method => 'post' do  %>
+                  <%= hidden_field_tag :user_id, @user.id %>
+                  <div style="padding-bottom: 10px">
+                    <%= select_tag "job_id", options_from_collection_for_select(@job_array, "id", "title") %>
+                  </div>
+                  <%= submit_tag "Suggest Job", class: "btn btn-primary button_width center-block" %>
+              <% end %>
+            </div>
+        <% elsif !current_company.nil? && @job_array.size == 0 %>
+            <p align="center">No jobs to suggest yet.</p>
+            <div align="center">
+              <div style="width: 30%;">
+                <%= button_to "Post New Job", new_job_posting_path, class: "btn btn-primary", method: :get%>
+              </div>
+            </div>
+        <% end %>
+        <br>
+        <hr style="background-color: #000000; border: 0; height: 7px; width: 85%">
+      </div>
+      <h4>Jobs You Have Suggested:</h4>
+      <% if !current_company.nil? %>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Job</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @app_array.each do |app| %>
+                <% if !app.userAccept %>
+                    <tr>
+                      <td>
+                       <%= app.job_posting.title %>
+                      </td>
+                      <td>
+                        Pending
+                      </td>
+                    </tr>
+                <% else %>
+                    <tr>
+                      <td>
+                        <%= app.job_posting.title %>
+                      </td>
+                      <td>
+                        Matched
+                      </td>
+                    </tr>
+                <% end %>
+            <% end %>
+            <% if @app_array.size == 0 %>
+                <tr>
+                  <td>
+                    <p align="center">No jobs yet.</p>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+      <% end %>
+    </div>
+  </div>
+  <div class="row" style="padding-bottom: 10px">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-4">
+      <h5 class="headerfont">Skills</h5>
+      <div  class="tancolor">
+        <% @user.skill_list.each do |skill| %>
+            <div class="tagcolor" style="margin: 5px; padding-left: 5px; padding-right: 5px; padding-top: 7px; display: inline-block">
+              <p class="tagfont" style="color: white; vertical-align: middle"><%= skill.upcase %></p>
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h5 class="headerfont">Looking For</h5>
+      <div  class="tancolor">
+        <% @user.looking_list.each do |skill| %>
+            <div class="tagcolor" style="margin: 5px; padding-left: 5px; padding-right: 5px; padding-top: 7px; display: inline-block">
+              <p class="tagfont" style="color: white; vertical-align: middle"><%= skill.upcase %></p>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-4">
+      <h3 class="headerfont">Education</h3>
+      <div  class="tancolor">
+        <% @user.education_list.each do |skill| %>
+            <div class="tagcolor" style="margin: 5px; padding-left: 5px; padding-right: 5px; padding-top: 7px; display: inline-block">
+              <p class="tagfont" style="color: white; vertical-align: middle"><%= skill.upcase %></p>
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+  </div>
+
+</div>

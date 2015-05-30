@@ -1,61 +1,113 @@
-<div class="accommodate_alert"></div>
-
-<% if current_user.location.blank? || current_user.experience.blank? %>
-    <h1 class="profile_title">Complete Profile</h1>
-<% else %>
-    <h1 class="profile_title">Edit Profile</h1>
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
 <% end %>
+<div class="container" style="padding-top: 30px">
+  <div class="row">
+    <div class="col-md-8 col-centered tancolor" style="padding: 0">
+      <div style="background-color: black">
+        <% if current_user.location.blank? || current_user.experience.blank? %>
+            <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px">Complete Profile</p>
+        <% else %>
+            <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px">Edit Profile</p>
+        <% end %>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, html: { multipart: true }) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
+      </div>
+      <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
+      <div class="col-centered" style="width: 80%">
+        <%= form_for(@user, html: { multipart: true }) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
 
-        <table width="75%">
-          <tr>
-            <td width="50%" style="padding-right: 10px">
-              <%= f.label :location, "City" %>
-              <%= f.select :location, getCities %>
-            </td>
-            <td width="25%" style="padding-left: 10px">
-              <%= f.label :province %>
-              <%= f.select :province, getProvinces %>
-            </td>
-          </tr>
-          <tr>
-            <td width="25%" style="padding-right: 10px">
-              <%= f.label :sector, "Job Sector" %>
-              <%= f.select :sector, getType %>
-            </td>
-            <td width="75%" style="padding-left: 10px">
-              <%= f.label :profession %>
-              <%= f.text_field :profession, class: 'form-control' %>
-            </td>
-          </tr>
-        </table>
+            <table width="100%">
+              <tr>
+                <td colspan="1" style="padding-right: 10px;">
+                  <div class="form-group">
+                    <%= f.label :province %>
+                    <%= f.select :province, getProvinces %>
+                  </div>
+                </td>
+                <td colspan="1">
+                  <div class="form-group" style="padding-right: 10px; padding-left: 10px">
+                    <%= f.label :location, "City" %>
+                    <%= f.select :location, getCities %>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group" style="padding-left: 10px">
+                    <%= f.label :sector, "Job Sector" %>
+                    <%= f.select :sector, getType %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" style="padding-right: 10px">
+                  <div class="form-group">
+                    <%= f.label :years, "Years of Experience" %>
+                    <%= f.text_field :years, class: 'form-control' %>
+                  </div>
+                </td>
+                <td colspan="2" style="padding-left: 10px">
+                  <div class="form-group">
+                    <%= f.label :profession, "Job Title" %>
+                    <%= f.text_field :profession, class: 'form-control' %>
+                  </div>
+                </td>
+              </tr>
+            </table>
 
-        <%= f.label :experience %>
-        <%= f.text_area :experience, class: 'form-control', :rows => "10" %>
+            <div class="form-group">
+              <%= f.label :experience %>
+              <%= f.text_area :experience, class: 'form-control', :rows => "10" %>
+            </div>
 
-        <!--
+            <div class="form-group">
+              <%= f.label :skill_list, "Skills (comma seperated: e.g. Communication, Organization, Teamwork)" %>
+              <%= f.text_field :skill_list, value: @user.skill_list.to_s, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :education_list, "Education (comma seperated: University of Toronto BSc, Rotman MBA)" %>
+              <%= f.text_field :education_list, value: @user.education_list.to_s,  class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.label :looking_list, "Looking For (comma seperated: )" %>
+              <%= f.text_field :looking_list,value: @user.looking_list.to_s,  class: 'form-control' %>
+            </div>
+
+            <!--
         <%= f.label :accomplishment, "Accomplishments" %>
         <%= f.text_area :accomplishment, class: 'form-control', :rows => "10" %>
         -->
-        <%= f.label :picture, "Picture Upload" %>
-        <span class="picture">
-         <%= f.file_field :picture, class: 'form-control', accept: 'image/jpeg,image/gif,image/png'%>
-        </span>
 
-        <%= f.label :resume, "Resume Upload" %>
-        <span class="picture">
-         <%= f.file_field :resume, class: 'form-control', accept: 'image/jpeg,image/gif,image/png,application/pdf' %>
-        </span>
-
-        <%= f.submit "Save changes", class: "btn btn-primary" %>
-    <% end %>
-
+            <table  width="100%">
+              <tr>
+                <td style="padding-right: 10px">
+                  <div class="form-group">
+                <span class="picture">
+                <%= f.label :picture, "Picture Upload" %>
+                  <%= f.file_field :picture, class: 'form-control', accept: 'image/jpeg,image/gif,image/png'%>
+              </span>
+                  </div>
+                </td>
+                <td style="padding-left: 10px">
+                  <div class="form-group">
+                <span class="picture">
+                  <%= f.label :resume, "Resume Upload" %>
+                  <%= f.file_field :resume, class: 'form-control', accept: 'image/jpeg,image/gif,image/png,application/pdf' %>
+                </span>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div class="center-block" style="display: block; float: none; text-align: center; margin-left: auto; margin-right: auto">
+              <%= f.submit "Save Changes", class: "btn btn-primary button_width2" %>
+            </div>
+        <% end %>
+      </div>
+      <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
+      <br>
+    </div>
   </div>
 </div>
+
 
 <script type="text/javascript">
     $('#micropost_picture').bind('change', function() {

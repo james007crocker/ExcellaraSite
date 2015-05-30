@@ -1,23 +1,52 @@
 <div class="accommodate_alert"></div>
-<div class="row">
-  <h1 class="profile_title">Log in</h1>
-  <div class="col-md-4 col-centered">
-    <%= form_for(:session, url: login_path) do |f| %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-centered tancolor" style="padding: 0">
+      <div style="background-color: black">
+        <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px">Log In</p>
+      </div>
+        <%= image_tag "wk4_wordmark_black.png", style: 'padding-left: 25px' %>
+        <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
+      <%= form_for(:session, url: login_path) do |f| %>
+          <div class="col-md-7 col-centered">
+            <table>
+              <tr>
+                <td>
+                  <%= f.label :email, "Email: " %>
+                </td>
+                <td colspan="2">
+                  <%= f.email_field :email, class: 'form-control addmargin2' %>
+                </td>
+              </tr>
+              <tr>
+                <td width="150px">
+                  <%= f.label :password, "Password: " %>
+                </td>
+                <td width="300px">
+                  <%= f.password_field :password, class: 'form-control addmargin2' %>
+                  <%= link_to "(forgot password)", new_password_reset_path %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <%= f.label :remember_me, class: "checkbox inline" do %>
+                      <%= f.check_box :remember_me %>
+                      <span>Remember me</span>
+                  <% end %>
+                </td>
+              </tr>
+            </table>
+          </div>
 
-        <%= f.label :email %>
-        <%= f.email_field :email, class: 'form-control' %>
+          <div style="padding-top: 10px">
 
-        <%= f.label :password %> <%= link_to "(forgot password)", new_password_reset_path %>
-        <%= f.password_field :password, class: 'form-control' %>
+          </div>
+          <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
 
-        <%= f.label :remember_me, class: "checkbox inline" do %>
-            <%= f.check_box :remember_me %>
-            <span>Remember me</span>
-        <% end %>
 
-        <%= f.submit "Log in", class: "btn btn-primary" %>
-    <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+          <%= f.submit "Log in", class: "btn btn-primary button_width center-block" %>
+      <% end %>
+      <p style="text-align: right; padding-right: 20px">New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
   </div>
 </div>

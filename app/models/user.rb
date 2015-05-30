@@ -28,6 +28,12 @@ class User < ActiveRecord::Base
 
   validates :profession, presence: true, length: { minimum: 4, maximum: 25 } , :on => :update
 
+  validates :years, numericality: { only_integer: true }, inclusion: { in: 1..100, :message => ' must be greater than 0' }, on: :update #, presence: true
+
+
+  acts_as_taggable_on :skills, :lookings, :educations
+
+
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
         BCrypt::Engine.cost

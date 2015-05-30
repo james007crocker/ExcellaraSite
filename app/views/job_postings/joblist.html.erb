@@ -1,43 +1,51 @@
-<div class="accommodate_alert"></div>
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
+<% end %>
 
-<h1 class="profile_title">Jobs</h1>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for_filterrific @filterrific do |f| %>
-        <table>
-          <tr>
-            <td>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10 tagcolor">
+      <h1 class="jobindexfont">BROWSE JOBS</h1>
+      <%= form_for_filterrific @filterrific do |f| %>
+          <div class="row" style="padding-bottom: 10px">
+            <div class="col-md-2 queryfont">
               Search
               <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-              <%= f.text_field(:search_query, class: 'filterrific-periodically-observed') %>
-            </td>
-            <td>
+              <%= f.text_field(:search_query, class: 'filterrific-periodically-observed form-control') %>
+            </div>
+            <div class="col-md-2 queryfont">
               City
-              <%= f.select(:with_location, @filterrific.select_options[:with_location], { include_hidden: false, include_blank: '- Any -' }) %>
-            </td>
-            <td>
+              <%= f.select(:with_location, @filterrific.select_options[:with_location], { include_hidden: false, include_blank: '- Any -' }, class: 'form-control') %>
+            </div>
+            <div class="col-md-2 queryfont">
               Job Sector
-              <%= f.select(:with_sector, @filterrific.select_options[:with_sector], { include_hidden: false, include_blank: '- Any -' }) %>
-            </td>
-            <td>
+              <%= f.select(:with_sector, @filterrific.select_options[:with_sector], { include_hidden: false, include_blank: '- Any -' }, class: 'form-control') %>
+            </div>
+            <div class="col-md-3 queryfont">
               Sorted by
-              <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-            </td>
-          </tr>
-        </table>
-        <div>
-          <%= link_to('Reset filters', reset_filterrific_url,) %>
-        </div>
-        <%# add an automated spinner to your form when the list is refreshed %>
-        <%= render_filterrific_spinner %>
-    <% end %>
-
-    <%= render(partial: 'job_postings/list', locals: { job_postings: @job_postings }) %>
-
-      <!--%- will_paginate -%>-->
-
-
-      <!--%- will_paginate -%>-->
-
+              <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by], {},  class: 'form-control') %>
+            </div>
+            <div class="col-md-1 queryfont">
+              <table>
+                <tr>
+                  <td>
+                    <br>
+                    <%= link_to 'Reset Filters', reset_filterrific_url, class: "btn btn-primary", style: "width: 200px" %>
+                  </td>
+                  <td>
+                    <%= render_filterrific_spinner %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+      <% end %>
+    </div>
   </div>
 </div>
+
+
+<%= render(partial: 'job_postings/list', locals: { job_postings: @job_postings }) %>

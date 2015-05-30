@@ -1,55 +1,77 @@
-<div id="filterrific_results">
+<div class="container-fluid" id="filterrific_results">
+  <div class="row" style="padding-top: 25px">
+    <div class="col-md-2">
 
-  <div>
-    <%= page_entries_info job_postings %>
+    </div>
+    <div class="col-md-10">
+        <%= page_entries_info job_postings %>
+    </div>
   </div>
-  <% job_postings.each do |job| %>
-      <%= link_to job, class: 'disable_hover' do %>
-      <div class="div-back-border color_4 div_button">
-        <table width="100%">
-          <tr>
-            <td width="160px">
-              <div class="profile_pic3">
-                <% if job.company.picture?%>
-                    <%= image_tag job.company.picture.url, class: "img-thumbnail", width: 150, height: 150%>
-                <% else %>
-                    <%= image_tag "no_company_pic.png", class: "img-thumbnail", width: 150, height: 150  %>
-                <% end %>
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10">
+      <% num = 1 %>
+      <% job_postings.each do |job| %>
+          <%= link_to job, class: 'disable_hover' do %>
+            <div class="row div_button rowcolor<%= num %> rowcolor<%= num %>button" style="height: 230px; overflow: hidden">
+              <div class="col-md-4">
+                <table>
+                  <tr>
+                    <td width="115px">
+                      <div style="margin-top: 15px">
+                        <% if job.company.picture?%>
+                            <%= image_tag job.company.picture.url, class: "img-responsive", width: 100, height: 150%>
+                        <% else %>
+                            <%= image_tag "no_company_pic.png", class: "img-responsive", width: 100, height: 150  %>
+                        <% end %>
+                      </div>
+                    </td>
+                    <td>
+                      <h1 class="narrowfont3"><%= job.company.name.upcase %></h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="narrowfont4" colspan="2">
+                      <h4><%= job.title%></h4>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="narrowfont5">
+                      <%= job.location %>, <%= job.province %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="narrowfont5">
+                      <%= pluralize(job.hours, "Hour") %> Per Week
+                    </td>
+                  </tr>
+                </table>
               </div>
-            </td>
-            <td style="margin-left: 10px">
-              <table  width="100%" style="margin-top: 10px">
-                <tr>
-                  <td class="color_1" width="50%">
-                    <p class="paragraph_text"><strong>Title: </strong><%= job.title%></p>
-                  </td>
-                  <td class="color_1" width="50%">
-                    <p class="paragraph_text"><strong>Location: </strong><%= job.location %>, <%= job.province %></p>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="color_1" colspan="2">
-                    <p class="paragraph_text"><strong>Company: </strong><%= job.company.name %></p>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="color_2" colspan="2" align="center">
-                    <p><%=simple_format(word_wrap(job.description[0..100]+"......", line_width: 50), class: 'paragraph_text') %></p>
-                  </td>
-                </tr>
-              </table>
-              <p class="copyright text-muted small" align="right" style="margin-right: 10%">Posted <%= time_ago_in_words(job.created_at) %> ago.</p>
-            </td>
-          </tr>
-        </table>
+              <div class="col-md-8" style="height: 230px">
+                <div class="paragraph" style="vertical-align: middle; padding-top: 50px">
+                  <% if job.description.size() > 500 %>
+                      <p><%= job.description[0..500] + "......" %></p>
+                  <% else %>
+                      <p><%= job.description %></p>
+                  <% end %>
+                </div>
+                <p class="copyright text-muted small" style="right: 10px; bottom: 10px; position: absolute">Posted <%= time_ago_in_words(job.created_at) %> ago.</p>
+              </div>
+            </div>
+          <% end %>
+
+          <br>
+        <% num == 1 ? num = 2 : num = 1 %>
       <% end %>
-      </div>
-      <div>
-        <br>
-      </div>
-
-  <% end %>
-
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col=md-10">
+      <%= will_paginate job_postings %>
+    </div>
+  </div>
 </div>
-
-<%= will_paginate job_postings %>

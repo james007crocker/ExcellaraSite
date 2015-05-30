@@ -1,82 +1,92 @@
-<div class="accommodate_alert"></div>
-
-<div align="center">
-  <div class="row">
-    <div class="col-md-8 col-centered" >
-    <% if !@jobposting.nil? %>
-        <h3 class="profile_title">Company <%= @jobposting.title %> </h3>
-        <div class="div-back-border color_1">
-            <table width="100%">
-              <tr>
-                <td width="50%">
-                  <table width="100%" style="margin-left: 10%">
-                    <tr>
-                      <td  colspan="1">
-                        <p class="paragraph_text2" style="margin-left: 10px"><strong>Company: </strong><%= @jobposting.company.name %></p>
-                      </td>
-                      <td colspan="1">
-                        <p class="paragraph_text2" align="right"><strong>Location: </strong><%= @jobposting.location %>, <%= @jobposting.province %></p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2">
-                        <p  class="paragraph_text2" style="margin-left: 10px"><strong>Website: </strong><%= @jobposting.company.website %></p>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-
-                <td colspan="1">
-                  <div class="profile_pic2" align="right">
-                    <% if @jobposting.company.picture?%>
-                        <%= image_tag @jobposting.company.picture.url, class: "img-thumbnail", width: 150, height: 150%>
-                    <% else %>
-                        <%= image_tag "no_profile.png", class: "img-thumbnail", width: 150, height: 150  %>
-                    <% end %>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="3">
-                  <p style="margin-left: 10%"><strong>Job Description: </strong></p>
-                  <div class="blurb" style="margin-left: 10%">
-                    <%= simple_format(make_paragraph(@jobposting.description, 100), class: 'paragraph_text') %>
-                  </div>
-                </td>
-              </tr>
-            </table>
-          <div align="center">
-            <div class="row">
-                <% unless current_company.nil? %>
-                  <div style="padding: 5px">
-                    <%= button_to "Remove", @jobposting, class: "btn btn-primary button_width", method: :delete%>
-                  </div>
-                <% end %>
-
-                <div style="width: 30%;">
-
-                  <% unless current_user.nil? || @jobposting.applicants.find_by(user_id: current_user.id)%>
-                      <%= form_for(@jobposting.applicants.build) do |f| %>
-                          <%= hidden_field_tag :job_id, @jobposting.id %>
-                          <%= f.submit "Apply", class: "btn btn-primary" %>
-                      <% end %>
-                  <% end %>
-
-                  <% if !current_user.nil? && state(@jobposting) == "Match" %>
-                      <button class="btn btn-success btn-sm disabled">Matched</button>
-                  <% elsif !current_user.nil? && state(@jobposting) == "Pending" %>
-                      <button class="btn btn-warning btn-sm disabled">Pending</button>
-                  <% end %>
-
-                </div>
-            </div>
-          </div>
-
-              <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Posted <%= time_ago_in_words(@jobposting.created_at) %> ago.</p>
-        </div>
-    <% else %>
-        <p>No job to show. </p>
-    <% end %>
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
+<% end %>
+<div class="container-fluid tancolor">
+    <div class="row">
     </div>
-  </div>
+    <div class="row">
+      <div class="col-md-2">
+
+      </div>
+      <div class="col-md-8">
+        <h1 class="jobindexfont"><%= @jobposting.title.upcase %></h1>
+      </div>
+    </div>
+    <div class="row" style="background-color: #F6F2EC">
+      <div class="col-md-2 tancolor" style="height: 200px">
+
+      </div>
+      <div class="col-md-2 div_button" style="padding: 0; width: 200px">
+        <%= link_to @jobposting.company, class: 'disable_hover' do %>
+            <% if @jobposting.company.picture?%>
+                <%= image_tag @jobposting.company.picture.url, class: "img-responsive imgbutton", width: 200 %>
+            <% else %>
+                <%= image_tag "no_company_pic.png", class: "img-responsive imgbutton", width: 200 %>
+            <% end %>
+        <% end %>
+      </div>
+      <div class="col-md-2">
+
+      </div>
+      <div class="col-md-4" style="padding-top: 10px">
+        <% unless current_company.nil? %>
+            <div style="padding: 5px">
+              <%= button_to "Remove", @jobposting, class: "btn btn-primary btn-lg center-block", method: :delete%>
+            </div>
+        <% end %>
+
+        <div class="center-block">
+
+          <% unless current_user.nil? || @jobposting.applicants.find_by(user_id: current_user.id)%>
+              <%= form_for(@jobposting.applicants.build) do |f| %>
+                  <%= hidden_field_tag :job_id, @jobposting.id %>
+                  <%= f.submit "Apply", class: "btn btn-primary btn-lg center-block" %>
+              <% end %>
+          <% end %>
+
+          <% if !current_user.nil? && state(@jobposting) == "Match" %>
+              <button class="btn btn-success btn-lg disabled center-block">Matched</button>
+          <% elsif !current_user.nil? && state(@jobposting) == "Pending" %>
+              <button class="btn btn-warning btn-lg disabled center-block">Pending</button>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-md-3">
+        <p class="jobattributefont" style="text-align: center"><%= @jobposting.company.name %></p>
+      </div>
+      <div class="col-md-3">
+        <p class="jobattributefont" style="text-align: center"><%= @jobposting.location %>, <%= @jobposting.province %></p>
+      </div>
+      <div class="col-md-3">
+        <p class="jobattributefont" style="text-align: center"><%= @jobposting.length %></p>
+      </div>
+      <div class="col-md-3">
+        <p class="jobattributefont" style="text-align: center"><%= pluralize(@jobposting.hours, " Hours") %> Per Week</p>
+      </div>
+    </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+          <h3>Job Description</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+          <div class="paragraph">
+            <p class="two-col"><%= @jobposting.description %></p>
+          </div>
+        </div>
+      </div>
+
 </div>
+

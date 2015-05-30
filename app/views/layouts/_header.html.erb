@@ -12,44 +12,44 @@
 
       <ul class="nav navbar-nav navbar-right">
         <% if user_logged_in? %>
-            <li><%= link_to "Browse Jobs",   joblist_path %></li>
-            <li><%= link_to "History",   matched_jobs_users_path %></li>
+            <li class="headermenufont"><%= link_to "BROWSE",   joblist_path%></li>
+            <li class="headermenufont"><%= link_to "MANAGE",   matched_jobs_users_path %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Account <b class="caret"></b>
+                <%= current_user.name %> <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Profile", current_user %></li>
-                <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+                <li class="headermenufont"><%= link_to "PROFILE", current_user %></li>
+                <li class="headermenufont"><%= link_to "EDIT PROFILE", edit_user_path(current_user) %></li>
                 <li class="divider"></li>
-                <li><%= link_to "Logout", logout_path, method: "delete" %></li>
+                <li class="headermenufont"><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
               </ul>
             </li>
         <% elsif company_logged_in? %>
-            <li><%= link_to "Post Job",   new_job_posting_path %></li>
-            <li><%= link_to "My Jobs",   job_postings_path %></li>
-            <li><%= link_to "Professionals",   users_path %></li>
-            <li><%= link_to "History", activity_companies_path(current_user) %></li>
+            <li class="headermenufont"><%= link_to "POST JOB",   new_job_posting_path %></li>
+            <li class="headermenufont"><%= link_to "MY JOBS",   job_postings_path %></li>
+            <li class="headermenufont"><%= link_to "PROFESSIONALS",   users_path %></li>
+            <li class="headermenufont"><%= link_to "HISTORY", activity_companies_path(current_user) %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Account <b class="caret"></b>
+                <%= current_company.name %> <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-            <li><%= link_to "Profile", current_company %></li>
-            <li><%= link_to "Edit Profile", edit_company_path(current_company) %></li>
+            <li class="headermenufont"><%= link_to "PROFILE", current_company %></li>
+            <li class="headermenufont"><%= link_to "EDIT PROFILE", edit_company_path(current_company) %></li>
             <li class="divider"></li>
-            <li><%= link_to "Logout", logout_path, method: "delete" %></li>
+            <li class="headermenufont"><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
               </ul>
             </li>
         <% else %>
-            <li><%= link_to "Home",   root_path %></li>
-            <li><%= link_to "Contact",   contact_path %></li>
-            <li><%= link_to "Log in", login_path %></li>
+            <li class="headermenufont"><%= link_to "HOME",   root_path %></li>
+            <li class="headermenufont"class="headermenufont"><%= link_to "CONTACT",   contact_path %></li>
+            <li class="headermenufont"><%= link_to "LOG IN", login_path %></li>
             <li class="dropdown">
-              <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="background-color: deepskyblue">Sign Up<b class="caret"></b></a>
-              <ul class="dropdown-menu" id="menu1">
-                <li><%= link_to "Professional", user_signup_path %></li>
-                <li><%= link_to "Company",   company_signup_path %></li>
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="background-color: deepskyblue">SIGN UP<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="headermenufont"><%= link_to "AS PROFESSIONAL", user_signup_path %></li>
+                <li class="headermenufont"><%= link_to "AS COMPANY",   company_signup_path %></li>
               </ul>
             </li>
         <% end %>

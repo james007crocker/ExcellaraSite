@@ -18,6 +18,7 @@ class CompaniesController < ApplicationController
         end
       end
     end
+    @jobs = JobPosting.where(:company_id => @company.id)
   end
 
   def create

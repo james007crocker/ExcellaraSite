@@ -19,6 +19,10 @@ class StaticPagesController < ApplicationController
     loggedInHeadToHomePage
   end
 
+  def how_it_works
+
+  end
+
   def send_message
     @name = params[:name];
     @email = params[:email];

@@ -1,14 +1,29 @@
-<div class="accommodate_alert"></div>
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
+<% end %>
+
+<% if current_company %>
+
+    <%= render partial: 'companies/showcompany' %>
+
+<% elsif current_user %>
+
+    <%= render partial: 'companies/showuser' %>
+
+<% else %>
+
+<% end %>
+<!--
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-centered color_1">
       <table>
         <tr>
           <td>
-            <% if @company.picture?%>
-                <%= image_tag @company.picture.url, class: "vert-align" %>
-            <% else %>
-                <%= image_tag "no_company_pic.png", class: "vert-align"  %>
+            <%- if @company.picture? -%>
+                <%- image_tag @company.picture.url, class: "vert-align" -%>
+            <%- else -%>
+                <%= image_tag "no_company_pic.png", class: "vert-align"  -%>
             <% end %>
           </td>
           <td width="100%">
@@ -22,22 +37,22 @@
               </tr>
               <tr>
                 <td class="color_1">
-                    <p class="credential_text paragraph_text2"><strong>Location:</strong> <%= @company.location %>, <%= @company.province %></p>
+                    <p class="credential_text paragraph_text2"><strong>Location:</strong> <%- @company.location -%>, <%- @company.province -%></p>
                 </td>
               </tr>
               <tr>
                 <td class="color_1">
-                    <p class="credential_text paragraph_text2"><strong>Contact:</strong> <%= @company.email %></p>
+                    <p class="credential_text paragraph_text2"><strong>Contact:</strong> <%- @company.email -%></p>
                 </td>
               </tr>
               <tr>
                 <td class="color_1">
-                  <p class="credential_text paragraph_text2"><strong>Website:</strong> <%= @company.website %></p>
+                  <p class="credential_text paragraph_text2"><strong>Website:</strong> <%- @company.website -%></p>
                 </td>
               </tr>
               <tr>
                 <td class="color_1">
-                  <p class="credential_text paragraph_text2"><strong>Employees:</strong> <%= @company.size %></p>
+                  <p class="credential_text paragraph_text2"><strong>Employees:</strong> <%- @company.size -%></p>
                 </td>
               </tr>
             </table>
@@ -50,13 +65,13 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-1 data_cell color_4">
-            <p class="stand_out"><%= pluralize(@company.job_postings.count, 'Job Posting') %></p>
+            <p class="stand_out"><%- pluralize(@company.job_postings.count, 'Job Posting') -%></p>
           </div>
           <div class="col-xs-1 data_cell color_3">
-            <p class="stand_out"><%= pluralize(Applicant.where("company_id = ?", @company.id).where(:compAccept => false, :userAccept => true).count, 'Job Applicant') %></p>
+            <p class="stand_out"><%- pluralize(Applicant.where("company_id = ?", @company.id).where(:compAccept => false, :userAccept => true).count, 'Job Applicant') -%></p>
           </div>
           <div class="col-xs-1 data_cell color_4">
-            <p class="stand_out"><%= pluralize(Applicant.where("company_id = ?", @company.id).where(:compAccept => true, :userAccept => true).count, 'Job Match') %></p>
+            <p class="stand_out"><%- pluralize(Applicant.where("company_id = ?", @company.id).where(:compAccept => true, :userAccept => true).count, 'Job Match') -%></p>
           </div>
         </div>
       </div>
@@ -66,66 +81,66 @@
         <div class="row">
           <div class="col-md-8">
             <h3 class="heading_text" align="center">Recent 7 Day Activity</h3>
-            <% unless @apps.nil? %>
-                <% if @apps.size == 0 %>
+            <%- unless @apps.nil? -%>
+                <%- if @apps.size == 0 -%>
                     <p align="center"> You have no activity to display. Start by posting jobs then finding professionals.</p>
                     <div align="center">
                       <div style="width: 30%; margin: 5px">
-                        <%= button_to "Post Job", new_job_posting_path, class: "btn btn-primary", method: :get%>
+                        <%- button_to "Post Job", new_job_posting_path, class: "btn btn-primary", method: :get -%>
                       </div>
                     </div>
-                <% else %>
-                    <% @apps.each do |app| %>
+                <%- else -%>
+                    <%- @apps.each do |app| -%>
                         <table class="barcode_rows" width="80%" align="center">
                           <tr>
-                            <% if app.userAccept == false %>
+                            <%- if app.userAccept == false -%>
                                 <td style="background-color: #ffff00" colspan="3" >
                                   <p class="heading_text" align="center"><strong>Pending</strong></p>
                                 </td>
-                            <% elsif app.compAccept == false %>
+                            <%- elsif app.compAccept == false -%>
                                 <td style="background-color: greenyellow" colspan="3">
                                   <p class="heading_text" align="center"><strong>Action Required</strong></p>
                                 </td>
-                            <% else %>
+                            <%- else -%>
                                 <td style="background-color: deepskyblue" colspan="3">
                                   <p class="heading_text" align="center"><strong>Matched</strong></p>
                                 </td>
-                            <% end %>
+                            <%- end -%>
                           </tr>
                           <tr>
                             <td width="100px">
                               <div class="profile_pic4">
-                                <% if User.find_by_id(app.user_id).picture? %>
-                                    <%= image_tag User.find_by_id(app.user_id).picture.url, class: "img-thumbnail", width: 50, height: 50%>
-                                <% else %>
-                                    <%= image_tag "no_profile.png", class: "img-thumbnail", width: 50, height: 50  %>
-                                <% end %>
+                                <%- if User.find_by_id(app.user_id).picture? -%>
+                                    <%- image_tag User.find_by_id(app.user_id).picture.url, class: "img-thumbnail", width: 50, height: 50 -%>
+                                <%- else -%>
+                                    <%- image_tag "no_profile.png", class: "img-thumbnail", width: 50, height: 50  -%>
+                                <%- end -%>
                               </div>
                             </td>
                             <td>
                               <table width="100%">
                                 <tr>
                                   <td width="30%">
-                                    <p class="paragraph_text2" style="margin-left: 5px"><strong>Job: </strong><%= link_to app.job_posting.title, app.job_posting %></p>
+                                    <p class="paragraph_text2" style="margin-left: 5px"><strong>Job: </strong><%- link_to app.job_posting.title, app.job_posting -%></p>
                                   </td>
                                   <td width="30%">
-                                    <p class="paragraph_text"><strong>Location: </strong><%= app.job_posting.location %>, <%= app.job_posting.province %></p>
+                                    <p class="paragraph_text"><strong>Location: </strong><%- app.job_posting.location -%>, <%- app.job_posting.province -%></p>
                                   </td>
                                   <td width="30%">
-                                    <p class="paragraph_text"><strong>Applicant: </strong><%= link_to User.find_by(id: app.user_id).name, User.find_by(id: app.user_id) %></p>
+                                    <p class="paragraph_text"><strong>Applicant: </strong><%- link_to User.find_by(id: app.user_id).name, User.find_by(id: app.user_id) -%></p>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
                                     <div style="display: inline-block; margin: 5px" align="left">
-                                      <% if app.compAccept == false %>
-                                          <%= form_tag url_for(:controller => 'applicants', :action => 'update'), :method => 'patch' do  %>
-                                              <%= hidden_field_tag :app_id, app.id %>
-                                              <%= submit_tag "Accept", class: "btn btn-success btn-sm" %>
-                                          <% end %>
-                                      <% elsif app.userAccept == false %>
-                                      <% else %>
-                                      <% end %>
+                                      <%- if app.compAccept == false -%>
+                                          <%- form_tag url_for(:controller => 'applicants', :action => 'update'), :method => 'patch' do  -%>
+                                              <%- hidden_field_tag :app_id, app.id -%>
+                                              <%- submit_tag "Accept", class: "btn btn-success btn-sm" -%>
+                                          <%- end -%>
+                                      <%- elsif app.userAccept == false -%>
+                                      <%- else -%>
+                                      <%- end -%>
                                     </div>
                                   </td>
                                   <td  colspan="2" valign="bottom">
@@ -137,13 +152,13 @@
                           </tr>
                         </table>
                         <br>
-                    <% end %>
-                <% end %>
-            <% end %>
+                    <%- end -%>
+                <%- end -%>
+            <%- end -%>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+-->

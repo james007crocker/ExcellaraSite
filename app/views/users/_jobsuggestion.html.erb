@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <td>
+      <h4 class="spacedfont"><%= job.company.name.upcase %></h4>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3 class="spacedfont2"><%= job.title %></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h5 class="hoursperweek"><%= pluralize(job.hours, "Hour") %> Per Week</h5>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="paragraph">
+        <% if job.description.size() > 100 %>
+            <p><%= job.description[0...100] %>...</p>
+        <% else %>
+            <p><%= job.description %></p>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>
+<p class="copyright text-muted small" align="right" style="margin-right: 10%; bottom: 0px"> Posted <%= time_ago_in_words(job.created_at) %> ago.</p>

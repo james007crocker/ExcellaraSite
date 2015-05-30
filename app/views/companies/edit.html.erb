@@ -1,64 +1,75 @@
-<div class="accommodate_alert"></div>
-
-<% if current_company.website.blank? || current_company.location.blank? || current_company.size.blank? || current_company.description.blank? %>
-    <h1 class="profile_title">
-      Complete Profile
-    </h1>
-<% else %>
-    <h1 class="profile_title">
-      Edit Profile
-    </h1>
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
 <% end %>
+<div class="container" style="padding-top: 30px">
+  <div class="row">
+    <div class="col-md-8 col-centered tancolor" style="padding: 0">
+      <div style="background-color: black">
+        <% if current_company.website.blank? || current_company.location.blank? || current_company.size.blank? || current_company.description.blank? %> %>
+            <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px">Complete Profile</p>
+        <% else %>
+            <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px">Edit Profile</p>
+        <% end %>
 
+      </div>
+      <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
+      <div class="col-centered" style="width: 80%">
+        <%= form_for(@company, html: { multipart: true}) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@company, html: { multipart: true}) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
+            <table width="100%">
+              <tr>
+                <td style="padding-right: 10px">
+                  <div class="form-group">
+                    <%= f.label :location, "City" %>
+                    <%= f.select :location, getCities %>
+                  </div>
+                </td>
+                <td style="padding-left: 10px">
+                  <div class="form-group">
+                    <%= f.label :province %>
+                    <%= f.select :province, getProvinces %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td  style="padding-right: 10px">
+                  <div class="form-group">
+                    <%= f.label :size, "Number of Employees" %>
+                    <%= f.text_field :size, class: 'form-control' %>
+                  </div>
+                </td>
+                <td  style="padding-left: 10px">
+                  <div class="form-group">
+                    <%= f.label :website, "Company Website" %>
+                    <%= f.text_field :website, class: 'form-control' %>
+                  </div>
+                </td>
+              </tr>
+            </table>
 
-        <table width="100%">
-          <tr>
-            <td width="50%" style="padding-right: 10px">
-              <%= f.label :location, "City" %>
-              <%= f.select :location, getCities %>
-            </td>
-            <td width="50%" style="padding-left: 10px">
-              <%= f.label :province %>
-              <%= f.select :province, getProvinces %>
-            </td>
-          </tr>
-        </table>
+            <div class="form-group">
+              <%= f.label :description %>
+              <%= f.text_area :description, class: 'form-control', :rows => "10" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :picture, "Picture Upload" %>
+              <span class="picture">
+                <%= f.file_field :picture, class: 'form-control', accept: 'image/jpeg,image/gif,image/png'%>
+              </span>
+            </div>
 
-        <table width="100%">
-          <tr>
-            <td width="50%" style="padding-right: 10px">
-              <%= f.label :size, "Number of Employees" %>
-              <%= f.text_field :size, class: 'form-control' %>
-            </td>
-            <td width="50%" style="padding-left: 10px">
-              <%= f.label :website, "Company Website" %>
-              <%= f.text_field :website, class: 'form-control' %>
-            </td>
-          </tr>
-        </table>
-
-
-
-
-
-        <%= f.label :description %>
-        <%= f.text_area :description, class: 'form-control', :rows => "10" %>
-
-        <%= f.label :picture, "Picture Upload" %>
-        <span class="picture">
-         <%= f.file_field :picture, class: 'form-control', accept: 'image/jpeg,image/gif,image/png'%>
-        </span>
-
-        <%= f.submit "Save changes", class: "btn btn-primary" %>
-    <% end %>
-
+            <div class="center-block" style="display: block; float: none; text-align: center; margin-left: auto; margin-right: auto">
+              <%= f.submit "Save Changes", class: "btn btn-primary button_width2" %>
+            </div>
+        <% end %>
+      </div>
+      <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
+      <br>
+    </div>
   </div>
 </div>
+
 
 <script type="text/javascript">
     $('#micropost_picture').bind('change', function() {

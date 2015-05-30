@@ -49,13 +49,19 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if current_user?(@user)
-      @apps = []
-      appsMatchUser = Applicant.where("user_id = ?", @user.id)
-      appsMatchUser.each do |f|
-        if Time.now - f.updated_at < 7.days
-          @apps << f
-        end
-      end
+
+      #@apps = []
+      #appsMatchUser = Applicant.where("user_id = ?", @user.id)
+      #appsMatchUser.each do |f|
+      #  if Time.now - f.updated_at < 7.days
+      #    @apps << f
+      #  end
+      #end
+
+      randomJobs= JobPosting.order("RANDOM()")
+      @job1 = randomJobs.first
+      @job2 = randomJobs.second
+      @job3 = randomJobs.third
     elsif current_company
       @job_array = []
       @app_array = []
@@ -119,6 +125,13 @@ class UsersController < ApplicationController
     @matched = @apps.where(:userAccept => true, :compAccept => true)
   end
 
+  def viewprofile
+    @user = User.find(params[:id])
+    unless current_user?(@user)
+      flash.now[:danger] = "You do not have permission to view this page"
+    end
+  end
+
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
@@ -132,7 +145,7 @@ class UsersController < ApplicationController
     end
 
     def user_update_params
-      params.require(:user).permit(:location, :province, :experience, :accomplishment, :picture, :resume, :sector, :profession)
+      params.require(:user).permit(:location, :province, :experience, :accomplishment, :picture, :resume, :sector, :profession, :years, :skill_list, :education_list, :looking_list)
     end
 
     def logged_in_user

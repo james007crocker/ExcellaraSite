@@ -1,0 +1,192 @@
+ <div class="container-fluid" style="padding-left: 0">
+  <div class="row">
+    <h1 class="userheaderfont" style="padding-left: 20%"><%= @user.name %></h1>
+  </div>
+  <div class="row tancolor" style="z-index: 6">
+    <div class="col-md-3">
+      <% if @user.picture?%>
+          <%= image_tag @user.picture.url, class: "img-responsive", width: 300 %>
+      <% else %>
+          <%= image_tag "no_profile.png", class: "img-responsive", width: 300 %>
+      <% end %>
+    </div>
+    <div class="col-md-8 tancolor" style="padding-top: 20px">
+        <h4 class="narrowfont"><%= @user.profession.upcase %></h4>
+        <h6><%= @user.location.upcase %>, <%= @user.province.upcase %></h6>
+        <h4 class="narrowfont2"><%= pluralize(@user.years, 'year').upcase %> EXPERIENCE</h4>
+        <%= link_to "View Resume", resume_users_path(id: @user.id), class: "btn btn-primary", style: "width: 120px"%>
+        <%= link_to "View Full Profile", viewprofile_users_path(id: @user.id), class: "btn btn-primary  addmargin", style: "width: 130px"%>
+    </div>
+  </div>
+   <div class="row">
+     <div class="col-md-1">
+     </div>
+     <div class="col-md-10" style="background-color: #ffffff; z-index: 7; margin-top: -40px">
+       <div class="row">
+         <table>
+           <tr>
+             <td style="width: 33%; height: 250px;">
+               <% unless @job1.nil? %>
+               <%= link_to @job1, class: 'disable_hover' do %>
+                   <div class="tagcolor div_button buttongrey" style="margin-left: 10px; margin-top: 10px; overflow: hidden; height: 250px; padding: 10px">
+                     <%= render partial: 'users/jobsuggestion',locals: { job: @job1 } %>
+                   </div>
+               <% end %>
+               <% end %>
+             </td>
+             <td style="width: 33%; height: 250px;">
+               <% unless @job2.nil? %>
+               <%= link_to @job2, class: 'disable_hover' do %>
+                    <div class="tagcolor div_button buttongrey" style="margin-left: 10px; margin-top: 10px; overflow: hidden; height: 250px; padding: 10px">
+                      <%= render partial: 'users/jobsuggestion',locals: { job: @job2 } %>
+                    </div>
+               <% end %>
+               <% end %>
+             </td>
+             <td style="width: 33%; height: 250px;">
+               <% unless @job3.nil? %>
+               <%= link_to @job3, class: 'disable_hover' do %>
+                    <div class="tagcolor div_button buttongrey" style="margin-left: 10px; margin-top: 10px; margin-right: 10px; overflow: hidden; height: 250px; padding: 10px">
+                     <%= render partial: 'users/jobsuggestion',locals: { job: @job3 } %>
+                   </div>
+               <% end %>
+               <% end %>
+             </td>
+           </tr>
+         </table>
+       </div>
+     </div>
+     <div class="col-md-1">
+
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-md-9 col-centered">
+        <h2>Suggested Jobs</h2>
+     </div>
+   </div>
+   <div class="row">
+     <div class="col-md-9 col-centered">
+       <div align="center">
+         <%= link_to "Browse Jobs",   joblist_path, class: "btn btn-primary", style: "width: 150px" %>
+       </div>
+     </div>
+   </div>
+</div>
+ <!--
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-centered color_1">
+      <table>
+        <tr>
+          <td>
+
+          </td>
+          <td width="100%">
+            <table width="100%">
+              <tr>
+                <td class="color_2">
+                  <h1 class="profile_text">
+                    <%- @user.name -%>
+                  </h1>
+                </td>
+              </tr>
+              <tr>
+                <td class="color_1" width="100%">
+                  <p class="credential_text paragraph_text2"><strong>Location:</strong> <%- @user.location -%>, <%- @user.province -%></p>
+                </td>
+              </tr>
+              <tr>
+                <td class="color_1">
+                  <p class="credential_text paragraph_text2"><strong>Contact:</strong> <%- @user.email -%></p>
+                </td>
+              </tr>
+              <tr>
+                <td class="color_1">
+                  <p class="credential_text paragraph_text2"><%- link_to "Your Resume", resume_users_path(id: @user.id) -%></p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-8 col-centered color_3">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-1 data_cell color_4">
+            <p class="stand_out"><%- pluralize(Applicant.where(" user_id = ?", @user.id).count, 'Application') -%></p>
+          </div>
+          <div class="col-xs-1 data_cell color_3">
+            <p class="stand_out"><%- pluralize(Applicant.where(" user_id = ?", @user.id).where(:userAccept => false).count, 'Action') -%> Required</p>
+          </div>
+          <div class="col-xs-1 data_cell color_4">
+            <p class="stand_out"><%- pluralize(Applicant.where(" user_id = ?", @user.id).where(:compAccept => true, :userAccept => true).count, 'Job Match') -%></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8 col-centered color_1">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h3 class="heading_text" align="center">Recent Activity</h3>
+            <%- unless @apps.nil? -%>
+                <%- if @apps.size == 0 -%>
+                    <p align="center"> You have no activity to display. Start by browsing jobs.</p>
+                    <div align="center">
+                      <div style="width: 30%; margin: 5px">
+                        <%- button_to "Browse Jobs", joblist_path , class: "btn btn-primary", method: :get -%>
+                      </div>
+                    </div>
+                <%- else -%>
+                    <%- @apps.each do |app| -%>
+                        <%- link_to app.job_posting, class: 'disable_hover' do -%>
+                            <table class="barcode_rows div_button" width="80%" align="center">
+                              <tr>
+                                <td width="30%">
+                                  <p class="paragraph_text2" style="margin-left: 4%"><strong><%- app.job_posting.title -%></strong></p>
+                                </td>
+                                <td width="30%">
+                                  <p class="paragraph_text"><strong></strong><%- app.job_posting.location -%>, <%- app.job_posting.province -%></p>
+                                </td>
+                                <td width="30%">
+                                  <p class="paragraph_text"><strong></strong><%- app.job_posting.company.name -%></p>
+                                </td>
+                              </tr>
+                              <tr align="center">
+                                <td colspan="1">
+                                  <div style="display: inline-block">
+                                    <p class="paragraph_text2"><strong>Status: </strong></p>
+                                  </div>
+                                  <div style="display: inline-block" align="left">
+                                    <%- if app.userAccept == false -%>
+                                        <%- form_tag url_for(:controller => 'applicants', :action => 'update'), :method => 'patch' do  -%>
+                                            <%- hidden_field_tag :app_id, app.id -%>
+                                            <%- submit_tag "Accept", class: "btn btn-primary btn-sm" -%>
+                                        <%- end -%>
+                                    <%- elsif app.compAccept == false -%>
+                                        <button class="btn btn-warning btn-sm disabled">Pending</button>
+                                    <%- else -%>
+                                        <button class="btn btn-success btn-sm disabled">Matched</button>
+                                    <%- end -%>
+                                  </div>
+                                </td>
+                                <td  valign="bottom"  colspan="2">
+                                  <p class="copyright text-muted small" align="left" style="margin-left: 30%"> Sent <%- time_ago_in_words(app.created_at) -%> ago.</p>
+                                </td>
+                              </tr>
+                            </table>
+                        <%- end -%>
+                        <br>
+                    <%- end -%>
+                <%- end -%>
+            <%- end -%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ -->

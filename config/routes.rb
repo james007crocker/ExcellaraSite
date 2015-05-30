@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root                      'static_pages#home'
   get   'help'        =>    'static_pages#help'
+  get   'how_it_works'  =>    'static_pages#how_it_works'
   get   'about'       =>    'static_pages#about'
   get   'contact'     =>    'static_pages#contact'
   get   'send_message' =>   'static_pages#send_message'
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
     collection do
       get 'matched_jobs'
       get 'resume'
+      get 'viewprofile'
     end
   end
 

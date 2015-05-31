@@ -29,7 +29,7 @@
             <li class="headermenufont"><%= link_to "POST JOB",   new_job_posting_path %></li>
             <li class="headermenufont"><%= link_to "MY JOBS",   job_postings_path %></li>
             <li class="headermenufont"><%= link_to "PROFESSIONALS",   users_path %></li>
-            <li class="headermenufont"><%= link_to "HISTORY", activity_companies_path(current_user) %></li>
+            <li class="headermenufont"><%= link_to "HISTORY", activity_companies_path(current_company) %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <%= current_company.name %> <b class="caret"></b>
@@ -43,7 +43,8 @@
             </li>
         <% else %>
             <li class="headermenufont"><%= link_to "HOME",   root_path %></li>
-            <li class="headermenufont"class="headermenufont"><%= link_to "CONTACT",   contact_path %></li>
+            <li class="headermenufont"><%= link_to "CONTACT",   contact_path %></li>
+            <li class="headermenufont"><%= link_to "HOW IT WORKS",   how_it_works_path %></li>
             <li class="headermenufont"><%= link_to "LOG IN", login_path %></li>
             <li class="dropdown">
               <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="background-color: deepskyblue">SIGN UP<b class="caret"></b></a>

@@ -1,156 +1,165 @@
-<div class="accommodate_alert"></div>
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
+<% end %>
+<div class="container-fluid" style="padding-top: 30px">
+  <div class="row" style="background-color: black">
+    <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px">Manage Applications</p>
+  </div>
 
-<h1 class="profile_title">
-  History
-</h1>
+  <div class="row  bluecolor" style="min-height: 500px">
+    <div class="col-md-12 col-centered" style="padding-top: 40px">
+      <div class="col-md-10 col-centered">
+        <ul class="nav nav-tabs bw">
+          <li class="active"><a data-toggle="tab" href="#home">Matches</a></li>
+          <li><a data-toggle="tab" href="#menu1">Job Offers</a></li>
+          <li><a data-toggle="tab" href="#menu2">Pending Applications</a></li>
+        </ul>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3 class="heading_text" align="center" style="background-color: #ffff00">
-        Pending
-      </h3>
-      <% @pending.each do |app| %>
-          <%= link_to job_posting_path(app.job_posting.id), class: 'disable_hover' do%>
-          <table class="div-back-border color_1 div_button" style="margin-bottom: 10px">
-            <tr>
-              <td width="100px">
-                <div class="profile_pic4">
-                  <% if app.job_posting.company.picture?%>
-                      <%= image_tag app.job_posting.company.picture.url, class: "img-thumbnail", width: 50, height: 50%>
-                  <% else %>
-                      <%= image_tag "no_company_pic.png", class: "img-thumbnail", width: 50, height: 50  %>
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <% if @matched.size == 0 %>
+                <h1 class="center-block">No job matches yet.</h1>
+            <% else %>
+                <table class="table table-hover bluetable">
+                  <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Company</th>
+                    <th>Date Posted</th>
+                    <th>Date Matched</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @matched.each do |app| %>
+                      <tr>
+                        <td><%= app.job_posting.title %></td>
+                        <td><%= app.job_posting.company.name %></td>
+                        <td><%= Date.parse app.job_posting.created_at.to_s %></td>
+                        <td><%= Date.parse app.updated_at.to_s %></td>
+                        <td><%= link_to "View Job", app.job_posting %> | <%=link_to "View Company", app.job_posting.company %> | <a href="mailto:<%= app.job_posting.company.email%>">Email</a> | <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
+                      </tr>
                   <% end %>
-                </div>
-              </td>
-              <td>
-                <table width="100%" style="margin-top: 5px">
-                  <tr>
-                    <td class="color_2">
-                      <p class="paragraph_text"><strong><%= app.job_posting.title %></strong></p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="color_2">
-                      <p class="paragraph_text"><%= app.job_posting.company.name %></p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Applied <%= time_ago_in_words(app.created_at) %> ago.</p>
-                    </td>
-                  </tr>
+                  </tbody>
                 </table>
-              </td>
-            </tr>
-          </table>
-          <% end %>
-      <% end %>
-      <% if @pending.size == 0 %>
-          <p align="center">No pending jobs yet.</p>
-      <% end %>
-    </div>
-    <div class="col-sm-4">
-      <h3 class="heading_text" align="center" style="background-color: greenyellow">
-        Offers
-      </h3>
-      <% @required.each do |app| %>
-          <%= link_to job_posting_path(app.job_posting.id), class: 'disable_hover' do%>
-            <table class="div-back-border color_1 div_button" style="margin-bottom: 10px">
-            <tr>
-              <td width="100px">
-                <div class="profile_pic4">
-                  <% if app.job_posting.company.picture?%>
-                      <%= image_tag app.job_posting.company.picture.url, class: "img-thumbnail", width: 50, height: 50%>
-                  <% else %>
-                      <%= image_tag "no_company_pic.png", class: "img-thumbnail", width: 50, height: 50  %>
-                  <% end %>
-                </div>
-              </td>
-              <td>
-                <table width="100%">
+            <% end %>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+            <% if @required.size == 0 %>
+                <h1 class="center-block">No jobs require action.</h1>
+            <% else %>
+                <table class="table table-hover bluetable">
+                  <thead>
                   <tr>
-                    <td class="color_2">
-                      <p class="paragraph_text"><strong><%= app.job_posting.title %></strong></p>
-                    </td>
+                    <th>Title</th>
+                    <th>Company</th>
+                    <th>Date Posted</th>
+                    <th>Date Received</th>
+                    <th>Actions</th>
                   </tr>
-                  <tr>
-                    <td class="color_2">
-                      <p class="paragraph_text"><%= app.job_posting.company.name %></p>
-                    </td>
-                  </tr>
+                  </thead>
+                  <tbody>
+                  <% var = 1 %>
+                  <% @required.each do |app| %>
+                      <tr>
+                        <td><%= app.job_posting.title %></td>
+                        <td><%= app.job_posting.company.name %></td>
+                        <td><%= Date.parse app.job_posting.created_at.to_s %></td>
+                        <td><%= Date.parse app.updated_at.to_s %></td>
+                        <td><%= link_to "View Job", app.job_posting %> | <%=link_to "View Company", app.job_posting.company %> | <a href="" data-toggle="modal" data-target="#myModal<%= var %>">Accept</a>
+                          <!--<%-form_tag url_for(:controller => 'applicants', :action => 'update', :id => app.id), :method => 'patch' do  -%>
+                              <%- hidden_field_tag :app_id, app.id -%>
+                                <%- submit_tag "Accept"-%>
+                          <%- end -%>--> | Decline <!-- Button trigger modal -->
+                        <td>
+                          <!-- Modal -->
+                            <div class="modal fade" id="myModal<%= var %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                      <h4 class="modal-title" id="myModalLabel">Job Match Email</h4>
+                                    </div>
+                                    <%= form_tag url_for(:controller => 'applicants', :action => 'update', :id => app.id), :method => 'patch' do  %>
+                                        <div class="modal-body">
+                                          <% if current_user.resume? %>
+                                              <p style="padding-bottom: 50px">An email is going to be sent to <strong><%= app.job_posting.company.name %></strong> to continue the selection process for the <strong><%= app.job_posting.title %></strong> position.</p>
+                                              <div class="checkbox">
+                                                <label><%= check_box_tag "sendresume" %>Do you wish to attach your resume to this email?</label>
+                                              </div>
+                                          <% else %>
+                                              <p>An email is going to be sent to <strong><%= app.job_posting.company.name %></strong> to continue the selection process for the <strong><%= app.job_posting.title %></strong> position.</p>
+                                              <h3>Do you wish to upload a resume to this email prior to sending it?</h3>
+                                          <% end %>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <% if !current_user.resume? %>
+                                              <div style="float: right;">
+                                                <table>
+                                                  <tr>
+                                                    <td style="padding: 2px"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></td>
+                                                    <td style="padding: 2px"><%= submit_tag "Send Email", class: "btn btn-primary"%></td>
+                                                  </tr>
+                                                </table>
+                                              </div>
+                                          <% else %>
+                                              <div style="float: right;">
+                                                <table style="right: 0">
+                                                  <tr>
+                                                    <td style="padding: 2px"><%= link_to "Yes", edit_user_path(current_user), class: "btn btn-primary" %></td>
+                                                    <td style="padding: 2px"><%= submit_tag "No", class: "btn btn-warning"%></td>
+                                                    <td style="padding: 2px"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></td>
+                                                  </tr>
+                                                </table>
+                                              </div>
 
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <div style="margin-bottom: 5px; margin-right: 5px; margin-left: 5px">
-                  <%= form_tag url_for(:controller => 'applicants', :action => 'update', :id => app.id), :method => 'patch' do  %>
-                      <%= hidden_field_tag :app_id, app.id %>
-                      <div style="text-align: center">
-                        <%= submit_tag "Accept", class: "btn btn-primary button_width"%>
-                      </div>
+                                              <!--<%- link_to "No", applicant_path(app.id), :method => 'patch', class: "btn btn-warning" -%>-->
+                                          <% end %>
+                                        </div>
+                                    <% end %>
+                                  </div>
+                                </div>
+                          </div>
+                        </td>
+                      </tr>
+                  <% var = var + 1 %>
                   <% end %>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Recieved <%= time_ago_in_words(app.created_at) %> ago.</p>
-              </td>
-            </tr>
-          </table>
-          <% end %>
-      <% end %>
-      <% if @required.size == 0 %>
-          <p align="center">No jobs require action.</p>
-      <% end %>
-    </div>
-    <div class="col-sm-4">
-      <h3 class="heading_text" align="center" style="background-color: deepskyblue">
-        Matched
-      </h3>
-      <% @matched.each do |app| %>
-          <%= link_to job_posting_path(app.job_posting.id), class: 'disable_hover' do%>
-          <table class="div-back-border color_1 div_button" style="margin-bottom: 10px">
-            <tr>
-              <td width="100px">
-                <div class="profile_pic4">
-                  <% if app.job_posting.company.picture?%>
-                      <%= image_tag app.job_posting.company.picture.url, class: "img-thumbnail", width: 50, height: 50%>
-                  <% else %>
-                      <%= image_tag "no_company_pic.png", class: "img-thumbnail", width: 50, height: 50  %>
-                  <% end %>
-                </div>
-              </td>
-              <td>
-                <table width="100%" style="margin-top: 5px">
-                  <tr>
-                    <td class="color_2">
-                      <p class="paragraph_text"><strong><%= app.job_posting.title %></strong></p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="color_2">
-                      <p class="paragraph_text"><%= app.job_posting.company.name %></p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3 ">
-                      <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Matched <%= time_ago_in_words(app.updated_at) %> ago.</p>
-                    </td>
-                  </tr>
+                  </tbody>
                 </table>
-              </td>
-            </tr>
-          </table>
-          <% end %>
-      <% end %>
-      <% if @matched.size == 0 %>
-          <p align="center">No job matches yet.</p>
-      <% end %>
-
+            <% end %>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <% if @pending.size == 0 %>
+                <h1 class="center-block">No pending jobs yet.</h1>
+            <% else %>
+                <table class="table table-hover bluetable">
+                  <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Company</th>
+                    <th>Date Posted</th>
+                    <th>Date Sent</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @pending.each do |app| %>
+                      <tr>
+                        <td><%= app.job_posting.title %></td>
+                        <td><%= app.job_posting.company.name %></td>
+                        <td><%= Date.parse app.job_posting.created_at.to_s %></td>
+                        <td><%= Date.parse app.updated_at.to_s %></td>
+                        <td><%= link_to "View Job", app.job_posting %> | <%=link_to "View Company", app.job_posting.company %> |  <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <hr style="background-color: #000000; border: 0; height: 7px; width: 81%;">
+      <br>
     </div>
   </div>
 </div>

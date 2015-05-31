@@ -2258,10 +2258,30 @@ th {
   vertical-align: top;
   border-top: 1px solid #ddd;
 }
+
+.table.bluetable > thead > tr > th,
+.table.bluetable > tbody > tr > th,
+.table.bluetable > tfoot > tr > th,
+.table.bluetable > thead > tr > td,
+.table.bluetable > tbody > tr > td,
+.table.bluetable > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #000000;
+}
+
+
 .table > thead > tr > th {
   vertical-align: bottom;
   border-bottom: 2px solid #ddd;
 }
+
+.table.bluetable > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid black;
+}
+
 .table > caption + thead > tr:first-child > th,
 .table > colgroup + thead > tr:first-child > th,
 .table > thead:first-child > tr:first-child > th,
@@ -3905,6 +3925,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs {
   border-bottom: 1px solid #ddd;
 }
+
+.nav-tabs.bw {
+    border-bottom: 7px solid black;
+}
+
 .nav-tabs > li {
   float: left;
   margin-bottom: -1px;
@@ -3916,6 +3941,15 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     border-radius: 4px 4px 0 0;
     color: #555;
     background-color: #F4F2C6;
+}
+
+.nav-tabs.bw > li > a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 2px solid black;
+    border-radius: 0px 0px 0 0;
+    color: black;
+    background-color: #8AC0DB;
 }
 
 .nav-tabs > li > a:hover {
@@ -3930,6 +3964,17 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border: 1px solid #ddd;
   border-bottom-color: transparent;
 }
+
+.nav-tabs.bw > li.active > a,
+.nav-tabs.bw > li.active > a:hover,
+.nav-tabs.bw > li.active > a:focus {
+    color: #ffffff;
+    cursor: default;
+    background-color: #000000;
+    border: 2px solid black;
+    border-bottom-color: transparent;
+}
+
 .nav-tabs.nav-justified {
   width: 100%;
   border-bottom: 0;

@@ -6,7 +6,3 @@ use the contact informationto reach out to <%= @sender.name %>
 Contact: <%= @sender.email %>
 <%= @sender.name %> Profile: <%= url_for  @sender %>
 <%= @job.title %> Posting: <%= url_for @job %>
-
-<% if @sendresume == "1" %>
-Follow this link to view <%= @sender.name %>'s  <%= url_for resume_users_url(id: @sender.id) %>
-<% end %>

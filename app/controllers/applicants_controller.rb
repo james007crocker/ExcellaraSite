@@ -53,13 +53,29 @@ class ApplicantsController < ApplicationController
 
   def update
     if current_user
-      @applicant = Applicant.find_by(id: params[:app_id])
-      @job = @applicant.job_posting
-      @receiver = Company.find_by(id: @applicant.company_id)
+      @text = nil
+      @sender = current_user
+      application = Applicant.find_by(id: params[:id])
+      application.update_attribute(:userAccept, true)
+      @job = application.job_posting
+      @receiver = Company.find_by(id: application.company_id)
+      @sendresume = params[:sendresume]
+      UserMailer.match_email(@sender, @receiver, @job, @text, @sendresume).deliver_now
+      UserMailer.match_email2(@receiver, @sender, @job, @text).deliver_now
+      flash[:success] = "Email sent to " + @receiver.name + " about " + @job.title + " match"
+      redirect_to matched_jobs_users_path
     elsif current_company
-      @applicant = Applicant.find_by(id: params[:app_id])
-      @job = @applicant.job_posting
-      @receiver = User.find_by(id: @applicant.user_id)
+      @text = nil
+      @sender = current_company
+      application = Applicant.find_by(id: params[:id])
+      application.update_attribute(:compAccept, true)
+      @job = application.job_posting
+      @receiver = User.find_by(id: application.user_id)
+      @sendresume = params[:sendresume]
+      UserMailer.match_email2(@sender, @receiver, @job, @text).deliver_now
+      UserMailer.match_email(@receiver, @sender, @job, @text, @sendresume).deliver_now
+      flash[:success] = "Email sent to " + @receiver.name + " about " + @job.title + " match"
+      redirect_to activity_companies_path
     else
       flash[:danger] = "You do not have permission to view this page"
       redirect_to root_path
@@ -68,7 +84,7 @@ class ApplicantsController < ApplicationController
 
 
   def send_match_email
-
+  #This was originally used to send an email during a match situation - it has since been updated and is now unused
     @applicant = Applicant.find_by(id: params[:app_id])
     if current_user
       @applicant.update_attribute(:userAccept, true)
@@ -85,7 +101,7 @@ class ApplicantsController < ApplicationController
     end
     @text = params[:text]
     @job = JobPosting.find_by(id: params[:job])
-    UserMailer.match_email(@sender, @receiver, @job, @text, @sendresume).deliver_now
+    #UserMailer.match_email(@sender, @receiver, @job, @text, @sendresume).deliver_now
     flash[:success] = "Contacted " + @receiver.name + " about " + @job.title + " match"
     if current_user
       redirect_to current_user
@@ -95,7 +111,14 @@ class ApplicantsController < ApplicationController
   end
 
   def destroy
-    @applicant.destroy
-    redirect_to request.referrer || root_url
+    Applicant.find_by(id: params[:id]).destroy
+    flash[:success] = "Application successfully removed"
+    if current_user
+      redirect_to matched_jobs_users_path
+    elsif current_company
+      redirect_to activity_companies_path
+    else
+      redirect_to request.referrer || root_url
+    end
   end
 end

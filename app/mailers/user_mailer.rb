@@ -28,17 +28,32 @@ class UserMailer < ApplicationMailer
     @job = job
     @text = text
     @sendresume = sendresume
-    if Rails.env.production?
-      @link = "https://excellara-test.herokuapp.com/resume?id=" + @sender.id.to_s
-    else
-      @link = "http://localhost:3000/resume?id=" + @sender.id.to_s
-    end
+    #if Rails.env.production?
+      #@link = "https://excellara-test.herokuapp.com/resume?id=" + @sender.id.to_s
+    #else
+      #@link = "http://localhost:3000/resume?id=" + @sender.id.to_s
+    #end
     if @receiver.kind_of? User
       subject_string = "Excellara Match: " + @job.title + " at " + @sender.name
+      mail to: @receiver.email, subject: subject_string
     else
       subject_string = "Excellara Match: " + @sender.name + " for " + @job.title
+      mail to: @receiver.email, subject: subject_string
     end
-    mail to: receiver.email, subject: subject_string
+  end
+
+  def match_email2(receiver, sender, job, text)
+    @receiver = receiver
+    @sender = sender
+    @job = job
+    @text = text
+    if @receiver.kind_of? User
+      subject_string = "Excellara Match: " + @job.title + " at " + @sender.name
+      mail to: @receiver.email, subject: subject_string
+    else
+      subject_string = "Excellara Match: " + @sender.name + " for " + @job.title
+      mail to: @receiver.email, subject: subject_string
+    end
   end
 
   def message_email(name, email, message)

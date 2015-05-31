@@ -11,4 +11,13 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.password_reset
   end
 
+  def match_email
+    @receiver = Company.first
+    @sender = User.first
+    @job = JobPosting.first
+    @text = nil
+    @sendresume = "1"
+    UserMailer.match_email(@sender, @receiver, @job, @text, @sendresume)
+  end
+
 end

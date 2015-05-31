@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
 
                       when /^name_/
                         # Simple sort on the name colums
-                        order("LOWER(users.title) #{ direction }, LOWER(users.title) #{ direction }")
+                        order("LOWER(users.name) #{ direction }")
                       else
                         raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
                     end
@@ -188,7 +188,7 @@ class User < ActiveRecord::Base
 
   def self.options_for_sorted_by
     [
-        ['Title (a-z)', 'title_asc'],
+        ['Name (a-z)', 'name_asc'],
         ['Registration date (newest first)', 'created_at_desc'],
         ['Registration date (oldest first)', 'created_at_asc'],
     ]

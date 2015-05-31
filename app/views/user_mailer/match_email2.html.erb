@@ -14,9 +14,6 @@
         <p style="text-align: center">Contact: <a href="mailto:<%= @sender.email %>"><%= @sender.email %></a></p>
         <p style="text-align: center"><%= @sender.name %> Profile: <%= link_to "Profile", @sender %></p>
         <p style="text-align: center"><%= @job.title %> Posting: <%= link_to "Job Posting", @job %></p>
-        <% if @sendresume == "1" %>
-            <p style="text-align: center"> Follow this link to view <%= @sender.name %>'s  <%= link_to "Resume", resume_users_url(id: @sender.id) %> </p>
-        <% end %>
       </div>
       <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
       <br>

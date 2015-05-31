@@ -702,6 +702,10 @@ div .buttongrey:hover {
   background-color: #2A3554;
 }
 
+.bluecolor {
+  background-color: #8AC0DB;
+}
+
 .yellowcolor {
   background-color: #EEE872;
 }
@@ -757,4 +761,12 @@ div .buttongrey:hover {
   background-color: #1CDCA0;
 }
 
+.table-hover.bluetable {
+  > tbody > tr:hover {
+    > td,
+    > th {
+      background-color: #99D2ED;
+    }
+  }
+}
 

@@ -12,6 +12,9 @@
     //$(document).ready(ready);
     //$(document).on('page:load', ready);
 </script>
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
+<% end %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
@@ -98,7 +101,7 @@
               <% end %>
             </div>
         <% elsif !current_company.nil? && @job_array.size == 0 %>
-            <p align="center">No jobs to suggest yet.</p>
+            <h4>No jobs to suggest yet.</h4>
             <div align="center">
               <div style="width: 30%;">
                 <%= button_to "Post New Job", new_job_posting_path, class: "btn btn-primary", method: :get%>
@@ -110,44 +113,45 @@
       </div>
       <h4>Jobs You Have Suggested:</h4>
       <% if !current_company.nil? %>
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th>Job</th>
-              <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @app_array.each do |app| %>
-                <% if !app.userAccept %>
-                    <tr>
-                      <td>
-                       <%= app.job_posting.title %>
-                      </td>
-                      <td>
-                        Pending
-                      </td>
-                    </tr>
-                <% else %>
-                    <tr>
-                      <td>
-                        <%= app.job_posting.title %>
-                      </td>
-                      <td>
-                        Matched
-                      </td>
-                    </tr>
-                <% end %>
-            <% end %>
-            <% if @app_array.size == 0 %>
+          <% if @app_array.size == 0 %>
+              <tr>
+                <td>
+                  <p align="center">No jobs yet.</p>
+                </td>
+              </tr>
+          <% else %>
+              <table class="table table-striped">
+                <thead>
                 <tr>
-                  <td>
-                    <p align="center">No jobs yet.</p>
-                  </td>
+                  <th>Job</th>
+                  <th>Status</th>
                 </tr>
-            <% end %>
-            </tbody>
-          </table>
+                </thead>
+                <tbody>
+                <% @app_array.each do |app| %>
+                    <% if !app.userAccept %>
+                        <tr>
+                          <td>
+                            <%= app.job_posting.title %>
+                          </td>
+                          <td>
+                            Pending
+                          </td>
+                        </tr>
+                    <% else %>
+                        <tr>
+                          <td>
+                            <%= app.job_posting.title %>
+                          </td>
+                          <td>
+                            Matched
+                          </td>
+                        </tr>
+                    <% end %>
+                <% end %>
+                </tbody>
+              </table>
+          <% end %>
       <% end %>
     </div>
   </div>

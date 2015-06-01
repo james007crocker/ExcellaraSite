@@ -1,13 +1,19 @@
-<p>
-  Welcome to Excellara <%= @receiver.name %>,
-</p>
-<br>
-<p>
-  In order to complete your account activation please click the following link:
-  <%= link_to "Activate Account", edit_account_activation_url(@receiver.activation_token, email: @receiver.email) %>
-</p>
-<br>
-<p>
-  Thank you,
-  Excellara team
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-centered" style="padding: 0; background-color: tan; width: 50%">
+      <div style="background-color: black">
+        <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px; color: white">Welcome to Excellara <%= @receiver.name %></p>
+      </div>
+      <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
+      <div class="col-md-6 center-block" style="width: 90%;">
+        <h2 style="color: #ffffff; text-align: center">Congratulations!</h2>
+        <p style="text-align: center"> In order to complete your account activation please click the following link:
+          <%= link_to "Activate Account", edit_account_activation_url(@receiver.activation_token, email: @receiver.email) %></p>
+        <p style="text-align: center">Thank you,</p>
+        <p style="text-align: center">Excellara Team</p>
+      </div>
+      <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
+      <br>
+    </div>
+  </div>
+</div>

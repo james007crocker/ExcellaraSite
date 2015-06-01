@@ -1,0 +1,83 @@
+<% if @required.size == 0 %>
+    <h1 class="center-block">No jobs require action.</h1>
+<% else %>
+    <table class="table table-hover bluetable">
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Company</th>
+        <th>Date Posted</th>
+        <th>Date Received</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% var = 1 %>
+      <% @required.each do |app| %>
+          <tr>
+            <td><%= app.job_posting.title %></td>
+            <td><%= app.job_posting.company.name %></td>
+            <td><%= Date.parse app.job_posting.created_at.to_s %></td>
+            <td><%= Date.parse app.updated_at.to_s %></td>
+            <td><%= link_to "View Job", app.job_posting %> | <%=link_to "View Company", app.job_posting.company %> | <a href="" data-toggle="modal" data-target="#myModal<%= var %>">Accept</a>
+              <!--<%-form_tag url_for(:controller => 'applicants', :action => 'update', :id => app.id), :method => 'patch' do  -%>
+                              <%- hidden_field_tag :app_id, app.id -%>
+                                <%- submit_tag "Accept"-%>
+                          <%- end -%>--> | <%= link_to "Decline", { controller: "users", action: "matched_jobs", decline: app.id }, remote: true %> <!-- Button trigger modal -->
+            <td>
+              <!-- Modal -->
+              <div class="modal fade" id="myModal<%= var %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Job Match Email</h4>
+                    </div>
+                    <%= form_tag url_for(:controller => 'applicants', :action => 'update', :id => app.id), :method => 'patch' do  %>
+                        <div class="modal-body">
+                          <% if current_user.resume? %>
+                              <p style="padding-bottom: 50px">An email is going to be sent to <strong><%= app.job_posting.company.name %></strong> to continue the selection process for the <strong><%= app.job_posting.title %></strong> position.</p>
+                              <div class="checkbox">
+                                <label><%= check_box_tag "sendresume" %>Do you wish to attach your resume to this email?</label>
+                              </div>
+                          <% else %>
+                              <p>An email is going to be sent to <strong><%= app.job_posting.company.name %></strong> to continue the selection process for the <strong><%= app.job_posting.title %></strong> position.</p>
+                              <h3>Do you wish to upload a resume to this email prior to sending it?</h3>
+                          <% end %>
+                        </div>
+                        <div class="modal-footer">
+                          <% if current_user.resume? %>
+                              <div style="float: right;">
+                                <table>
+                                  <tr>
+                                    <td style="padding: 2px"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></td>
+                                    <td style="padding: 2px"><%= submit_tag "Send Email", class: "btn btn-primary"%></td>
+                                  </tr>
+                                </table>
+                              </div>
+                          <% else %>
+                              <div style="float: right;">
+                                <table style="right: 0">
+                                  <tr>
+                                    <td style="padding: 2px"><%= link_to "Yes", edit_user_path(current_user), class: "btn btn-primary" %></td>
+                                    <td style="padding: 2px"><%= submit_tag "No", class: "btn btn-warning"%></td>
+                                    <td style="padding: 2px"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></td>
+                                  </tr>
+                                </table>
+                              </div>
+
+                              <!--<%- link_to "No", applicant_path(app.id), :method => 'patch', class: "btn btn-warning" -%>-->
+                          <% end %>
+                        </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <% var = var + 1 %>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
+

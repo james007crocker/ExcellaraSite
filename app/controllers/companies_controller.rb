@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :logged_in_company, only: [:edit, :update, :destroy, :activity]
+  before_action :logged_in_company, only: [:edit, :update, :destroy, :activity, :show]
   before_action :correct_company, only: [:edit, :update]
   before_action :can_view_profile, only: [:show]
 
@@ -10,15 +10,20 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     if current_company?(@company)
-      @apps = []
-      appsMatchUser = Applicant.where("company_id = ?", @company.id)
-      appsMatchUser.each do |f|
-        if Time.now - f.updated_at < 7.days
-          @apps << f
-        end
-      end
+      randomUsers = User.order("RANDOM()")
+      @user1 = randomUsers.first
+      @user2 = randomUsers.second
+      @user3 = randomUsers.third
+      #@apps = []
+      #appsMatchUser = Applicant.where("company_id = ?", @company.id)
+      #appsMatchUser.each do |f|
+      #  if Time.now - f.updated_at < 7.days
+      #    @apps << f
+      #  end
+      #end
+    elsif current_user
+      @jobs = JobPosting.where(:company_id => @company.id)
     end
-    @jobs = JobPosting.where(:company_id => @company.id)
   end
 
   def create
@@ -53,10 +58,15 @@ class CompaniesController < ApplicationController
 
   def activity
     @company = current_company
-    @apps = Applicant.where("company_id = ?", @company.id)
-    @pending = @apps.where(:userAccept => false, :compAccept => true)
-    @required  = @apps.where(:userAccept => true, :compAccept => false)
-    @matched = @apps.where(:userAccept => true, :compAccept => true)
+  end
+
+  def viewprofile
+    @company = Company.find(params[:id])
+    @jobs = JobPosting.where(:company_id => @company.id)
+    unless current_company?(@company)
+      flash.now[:danger] = "You do not have permission to view this page"
+      redirect_to root_url
+    end
   end
 
   private

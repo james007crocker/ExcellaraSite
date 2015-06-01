@@ -1,151 +1,165 @@
-<div class="accommodate_alert"></div>
 
-<h1 class="profile_title">
-  History
-</h1>
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
+<% end %>
+<div class="container-fluid" style="padding-top: 30px">
+  <div class="row" style="background-color: black">
+    <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px">Manage Applications</p>
+  </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3 class="heading_text" align="center" style="background-color: #ffff00">
-        Pending
-      </h3>
-      <% @pending.each do |app| %>
-          <table class="div-back-border color_1" style="margin-bottom: 10px">
+  <div class="row  bluecolor" style="min-height: 500px">
+    <div class="col-md-12 col-centered" style="padding-top: 40px">
+      <div class="col-md-10 col-centered">
+        <table class="table table-hover bluetable">
+          <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Views</th>
+            <th>Date Posted</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% var = 1 %>
+          <% @company.job_postings.each do |job| %>
+              <script>
+                  $(document).ready(function(){
+                      $("#expand<%= var %>").click(function(){
+                          if ($(this).text() == "Expand") {
+                              $(this).text("Hide");
+                          } else {
+                              $(this).text("Expand");
+                          }
+                          $("#viewExpand<%= var %>").toggle();
+                      });
+                  });
+              </script>
             <tr>
-              <td width="100px">
-                <div class="profile_pic4 ">
-                  <% if User.find_by_id(app.user_id).picture? %>
-                      <%= image_tag User.find_by_id(app.user_id).picture.url, class: "img-thumbnail", width: 50, height: 50%>
-                  <% else %>
-                      <%= image_tag "no_profile.png", class: "img-thumbnail", width: 50, height: 50  %>
-                  <% end %>
+              <td><%= job.title %></td>
+              <td><%= job.views %></td>
+              <td><%= Date.parse job.created_at.to_s %></td>
+              <td><%= link_to "View Job", job %> | <%= link_to "Edit", edit_job_posting_path(job.id) %> | <%= link_to "Delete", job, method: 'delete' %> | <%= button_tag "Expand", id: "expand#{var}" %></td>
+            </tr>
+            <tr id="viewExpand<%= var %>" style="display: none">
+              <td colspan="4">
+                <ul class="nav nav-tabs bw">
+                  <li class="active"><a data-toggle="tab" href="#hometype<%= var %>">Incoming Applications</a></li>
+                  <li><a data-toggle="tab" href="#menu1type<%= var %>">Outgoing Offers</a></li>
+                  <li><a data-toggle="tab" href="#menu2type<%= var %>">Accepted Offers</a></li>
+                </ul>
+                <% jobs = Applicant.where(job_posting_id: job.id) %>
+                <div class="tab-content">
+                  <div id="hometype<%= var %>" class="tab-pane fade in active">
+                    <% incoming = jobs.where(compAccept: false, compreject: false) %>
+                    <% if incoming.count == 0 %>
+                        <h1 class="center-block">No incoming applications.</h1>
+                    <% else %>
+                        <table class="table table-hover bluetable">
+                          <thead class="bluecolor">
+                          <tr>
+                            <th>Applicant Name</th>
+                            <th>Profession</th>
+                            <th>Location</th>
+                            <th>Date Matched</th>
+                            <th>Actions</th>
+                          </tr>
+                          </thead>
+                          <tbody class="bluecolor">
+                          <% incoming.each do |app| %>
+                            <% user = User.find_by(id: app.user_id) %>
+                              <tr>
+                                <td><%= user.name %></td>
+                                <td><%= user.profession %></td>
+                                <td><%= user.location %>, <%= user.province %></td>
+                                <td><%= Date.parse app.created_at.to_s %></td>
+                                <td><%= link_to "View Profile", user %> | <%= link_to "Accept", applicant_path(app.id), method: 'patch' %> | <%=link_to "Decline", app.job_posting %></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                    <% end %>
+                  </div>
+                  <div id="menu1type<%= var %>" class="tab-pane fade">
+                    <% outgoing = jobs.where(userAccept: false, userreject: false) %>
+                      <% if outgoing.count == 0 %>
+                          <h1 class="center-block">No outgoing offers yet.</h1>
+                      <% else %>
+                          <table class="table table-hover bluetable">
+                            <thead class="bluecolor">
+                            <tr>
+                              <th>Applicant Name</th>
+                              <th>Profession</th>
+                              <th>Location</th>
+                              <th>Date Matched</th>
+                              <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody class="bluecolor">
+                            <% outgoing.each do |app| %>
+                                <% user = User.find_by(id: app.user_id) %>
+                                <tr>
+                                  <td><%= user.name %></td>
+                                  <td><%= user.profession %></td>
+                                  <td><%= user.location %>, <%= user.province %></td>
+                                  <td><%= Date.parse app.created_at.to_s %></td>
+                                  <td><%= link_to "View Profile", user %> | <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                          </table>
+                      <% end %>
+                  </div>
+                  <div id="menu2type<%= var %>" class="tab-pane fade">
+                    <% matches = jobs.where(userAccept: true, compAccept: true) %>
+                    <% if matches.count == 0 %>
+                        <h1 class="center-block">No accepted offers yet.</h1>
+                    <% else %>
+                        <table class="table table-hover bluetable">
+                          <thead class="bluecolor">
+                          <tr>
+                            <th>Applicant Name</th>
+                            <th>Profession</th>
+                            <th>Location</th>
+                            <th>Date Matched</th>
+                            <th>Actions</th>
+                          </tr>
+                          </thead>
+                          <tbody class="bluecolor">
+                          <% matches.each do |app| %>
+                              <% user = User.find_by(id: app.user_id) %>
+                              <tr>
+                                <td><%= user.name %></td>
+                                <td><%= user.profession %></td>
+                                <td><%= user.location %>, <%= user.province %></td>
+                                <td><%= Date.parse app.created_at.to_s %></td>
+                                <td><%= link_to "View Profile", user %> | <a href="mailto:<%= user.email %>">Email</a> | <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
+                              </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                    <% end %>
+                  </div>
                 </div>
-              </td>
-              <td>
-                <table width="100%" style="margin-top: 5px">
-                  <tr>
-                    <td class="color_2">
-                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id), class: 'paragraph_text' %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="color_2">
-                      <p class="paragraph_text"><%= app.job_posting.title %></p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Applied <%= time_ago_in_words(app.created_at) %> ago.</p>
-                    </td>
-                  </tr>
-                </table>
+                <hr style="background-color: #000000; border: 0; height: 7px; width: 100%;">
+                <br>
               </td>
             </tr>
-          </table>
-      <% end %>
-      <% if @pending.size == 0 %>
-          <p align="center">No pending jobs yet.</p>
-      <% end %>
-    </div>
-    <div class="col-sm-4">
-      <h3 class="heading_text" align="center" style="background-color: greenyellow">
-        Action Required
-      </h3>
-      <% @required.each do |app| %>
-          <table class="div-back-border color_1" style="margin-bottom: 10px">
-            <tr>
-              <td width="100px">
-                <div class="profile_pic4">
-                  <% if User.find_by_id(app.user_id).picture? %>
-                      <%= image_tag User.find_by_id(app.user_id).picture.url, class: "img-thumbnail", width: 50, height: 50%>
-                  <% else %>
-                      <%= image_tag "no_profile.png", class: "img-thumbnail", width: 50, height: 50  %>
-                  <% end %>
-                </div>
-              </td>
-              <td>
-                <table width="100%" class="color_2">
-                  <tr>
-                    <td>
-                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id), class: 'paragraph_text' %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p class="paragraph_text"> <%=  app.job_posting.title %> </p>
-                    </td>
-                  </tr>
-
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <div style="margin-bottom: 5px; margin-right: 5px; margin-left: 5px">
-                  <%= form_tag url_for(:controller => 'applicants', :action => 'update', :id => app.id), :method => 'patch' do  %>
-                      <%= hidden_field_tag :app_id, app.id %>
-                      <div style="text-align: center">
-                        <%= submit_tag "Accept", class: "btn btn-primary button_width"%>
-                      </div>
-                  <% end %>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Recieved <%= time_ago_in_words(app.created_at) %> ago.</p>
-              </td>
-            </tr>
-          </table>
-
-      <% end %>
-      <% if @required.size == 0 %>
-          <p align="center">No jobs require action.</p>
-      <% end %>
-    </div>
-    <div class="col-sm-4">
-      <h3 class="heading_text" align="center" style="background-color: deepskyblue">
-        Matched
-      </h3>
-      <% @matched.each do |app| %>
-          <table class="div-back-border color_1" style="margin-bottom: 10px">
-            <tr>
-              <td width="100px">
-                <div class="profile_pic4">
-                  <% if User.find_by_id(app.user_id).picture? %>
-                      <%= image_tag User.find_by_id(app.user_id).picture.url, class: "img-thumbnail", width: 50, height: 50%>
-                  <% else %>
-                      <%= image_tag "no_profile.png", class: "img-thumbnail", width: 50, height: 50  %>
-                  <% end %>
-                </div>
-              </td>
-              <td>
-                <table width="100%" style="margin-top: 5px">
-                  <tr>
-                    <td class="color_2">
-                      <%= link_to User.find_by_id(app.user_id).name, User.find_by_id(app.user_id), class: 'paragraph_text' %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="color_2">
-                      <p class="paragraph_text"> <%=  app.job_posting.title %></p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3 ">
-                      <p class="copyright text-muted small" align="right" style="margin-right: 10%"> Matched <%= time_ago_in_words(app.updated_at) %> ago.</p>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-      <% end %>
-      <% if @matched.size == 0 %>
-          <p align="center">No jobs matches yet.</p>
-      <% end %>
-
+          <% var = var + 1 %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-59614405-1', 'auto');
+    ga('send', 'pageview');
+
+</script>

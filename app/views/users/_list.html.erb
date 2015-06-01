@@ -1,7 +1,7 @@
-<div id="filterrific_results">
+<!--<div id="filterrific_results">
 
   <div>
-    <%= page_entries_info users %>
+
   </div>
     <ul class="users">
       <% users.each do |user| %>
@@ -52,5 +52,82 @@
       <% end %>
     </ul>
 </div>
+-->
 
-<%= will_paginate users %>
+<div class="container-fluid" id="filterrific_results">
+  <div class="row" style="padding-top: 25px">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10">
+      <%= page_entries_info users, data: "Professional" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-10">
+      <% num = 1 %>
+      <% users.each do |user| %>
+          <%= link_to user, class: 'disable_hover' do %>
+              <div class="row div_button rowcolor<%= num %> rowcolor<%= num %>button" style="height: 230px; overflow: hidden">
+                <div class="col-md-4">
+                  <table>
+                    <tr>
+                      <td width="115px">
+                        <div style="margin-top: 15px">
+                          <% if user.picture?%>
+                              <%= image_tag user.picture.url, class: "img-responsive", width: 100, height: 150%>
+                          <% else %>
+                              <%= image_tag "no_profile.png", class: "img-responsive", width: 100, height: 150  %>
+                          <% end %>
+                        </div>
+                      </td>
+                      <td>
+                        <h1 class="narrowfont3"><%= user.name %></h1>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="narrowfont4" colspan="2">
+                        <h4><%= user.profession %></h4>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="narrowfont5">
+                        <%=  user.location %>, <%= user.province %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" class="narrowfont5">
+                        <%= pluralize(user.years, "Year") %> of Experience
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-md-8" style="height: 230px">
+                  <div class="paragraph" style="vertical-align: middle; padding-top: 50px">
+                    <% if user.experience.size() > 500 %>
+                        <p><%= user.experience[0..500] + "......" %></p>
+                    <% else %>
+                        <p><%= user.experience %></p>
+                    <% end %>
+                  </div>
+                  <p class="copyright text-muted small" style="right: 10px; bottom: 10px; position: absolute">Active for <%= time_ago_in_words(user.created_at) %>.</p>
+                </div>
+              </div>
+          <% end %>
+
+          <br>
+          <% num == 1 ? num = 2 : num = 1 %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col=md-10">
+      <%= will_paginate users %>
+    </div>
+  </div>
+</div>

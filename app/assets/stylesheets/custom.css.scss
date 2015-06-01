@@ -149,6 +149,14 @@
   text-align: justify;
 }
 
+
+.excellara_item_font {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
 .intro-header {
   padding-top: 0px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
   padding-bottom: 50px;
@@ -502,15 +510,15 @@ body {
 
 .excellara_item1 {
   position: absolute;
-  top: 35%;
-  left: 48%;
-  margin-right: 40%;
+  top: 15%;
+  left: 54%;
+  margin-right: 30%;
 }
 
 .excellara_item2 {
   position: absolute;
-  top: -50px;
-  left: 10%;
+  bottom: 25%;
+  right: 3%;
 }
 
 .excellara_item3 {

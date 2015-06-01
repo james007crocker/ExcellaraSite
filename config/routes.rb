@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get 'matched_jobs'
+      patch 'matched_jobs'
       get 'resume'
       get 'viewprofile'
     end
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   resources :companies do
     collection do
       get 'activity'
+      get 'viewprofile'
     end
   end
 

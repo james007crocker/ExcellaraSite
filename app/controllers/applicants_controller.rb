@@ -9,6 +9,10 @@ class ApplicantsController < ApplicationController
       applicant.user_id = user.id
       applicant.company_id = current_company.id
       if applicant.save
+        @sender = current_company
+        @receiver = user
+        @job = jobposting
+        UserMailer.compsuggest(@sender, @receiver, @job).deliver_now
         flash[:success] = "A message has been sent to " + user.name
         redirect_to users_path
       else
@@ -23,6 +27,10 @@ class ApplicantsController < ApplicationController
       applicant.user_id = current_user.id
       applicant.company_id = jobposting.company.id
       if applicant.save
+        @sender = current_user
+        @receiver = Company.find_by(id: applicant.company_id)
+        @job = jobposting
+        UserMailer.compsuggest(@sender, @receiver, @job).deliver_now
         flash[:success] = "Successfully applied for job"
         redirect_to joblist_path
       else
@@ -41,11 +49,12 @@ class ApplicantsController < ApplicationController
       applicant.destroy
       flash[:success] = "Application Removed"
       if current_company
-        redirect_to current_company
+        redirect_to activity_companies_path
       else
-        redirect_to current_user
+        redirect_to matched_jobs_users_path
       end
     else
+      flash[:danger] = "You do not have permission to complete this operation"
       redirect_to root_url
     end
 

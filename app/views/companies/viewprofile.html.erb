@@ -87,22 +87,22 @@
         <div id="jobs" class="tab-pane fade" style="padding: 15px">
           <table class="table table-striped" style="background-color: #f5f5f5; border-color: black; border-width: 2px; border-radius: 5px">
             <thead>
+            <tr>
+              <th>Title</th>
+              <th>Sector</th>
+              <th>Hours Per Week</th>
+              <th>Link</th>
+            </tr>
+            <tbody>
+            <% @jobs.each do |job| %>
                 <tr>
-                  <th>Title</th>
-                  <th>Sector</th>
-                  <th>Hours Per Week</th>
-                  <th>Link</th>
+                  <td><%= job.title %></td>
+                  <td><%= job.sector %></td>
+                  <td><%= job.hours %></td>
+                  <td><%= link_to 'View', job %></td>
                 </tr>
-                <tbody>
-                <% @jobs.each do |job| %>
-                    <tr>
-                      <td><%= job.title %></td>
-                      <td><%= job.sector %></td>
-                      <td><%= job.hours %></td>
-                      <td><%= link_to 'View', job %></td>
-                    </tr>
-                <% end %>
-                </tbody>
+            <% end %>
+            </tbody>
             </thead>
           </table>
         </div>

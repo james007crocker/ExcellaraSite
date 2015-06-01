@@ -11,7 +11,18 @@
     <div class="carousel-inner" role="listbox">
       <div class="item active">
         <div class="excellara_item1">
-          <%= image_tag "wordmark_white.png"%>
+          <table>
+            <tr>
+              <td>
+                <%= image_tag "wordmark_white.png"%>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="excellara_item_font">Bringing experience to the<br/>workplace</p>
+              </td>
+            </tr>
+          </table>
         </div>
         <!--<h1 class="carousel_txt">Excellara</h1>
         <h3 class="carousel_txt2">Connecting Business with Experienced Help</h3>-->
@@ -20,7 +31,18 @@
 
       <div class="item">
         <div class="excellara_item2">
-          <%= image_tag "wordmark_white.png"%>
+          <table>
+            <tr>
+              <td>
+                <%= image_tag "wordmark_white.png"%>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="excellara_item_font">Bringing experience to the<br/>workplace</p>
+              </td>
+            </tr>
+          </table>
         </div>
         <!--<h1 class="carousel_txt">Excellara</h1>
         <h3 class="carousel_txt2">Connecting Business with Experienced Help</h3>-->
@@ -28,7 +50,18 @@
       </div>
       <div class="item">
         <div class="excellara_item3">
-          <%= image_tag "wordmark_white.png"%>
+          <table>
+            <tr>
+              <td>
+                <%= image_tag "wordmark_white.png"%>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="excellara_item_font">Bringing experience to the <br/> workplace</p>
+              </td>
+            </tr>
+          </table>
         </div>
         <!--<h1 class="carousel_txt">Excellara</h1>
         <h3 class="carousel_txt2">Connecting Business with Experienced Help</h3>-->
@@ -97,21 +130,67 @@
         <hr class="section-heading-spacer">
         <div class="clearfix"></div>
         <h2 class="section-heading">Benefits for Businesses:<br></h2>
-        <ul class="lead">
-          <li><strong>Save time</strong> by selecting from an exclusive pool of candidates</li> </br>
-          <li><strong>Lower onboarding costs</strong> by hiring professionals with 25+ years of experience</li></br>
-          <li><strong>Lower turnover</strong> - research shows employees age 55+ remain with employers for longer periods</li></br>
-          <li><strong>Personalized service.</strong> Our staff are available to help you through the hiring process.</li>
-        </ul>
-      </div>
-      <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-        <%= image_tag "innovation.jpg", :class => "img-responsive" %>
       </div>
     </div>
-
+    <div class="row">
+      <div class="col-md-3">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "hourglass.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Save time</strong> by selecting from an exclusive pool of candidates</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-3">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "savings1.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Lower onboarding costs</strong> by hiring professionals with 25+ years of experience</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-3">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "users6.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Lower turnover</strong> - research shows employees age 55+ remain with employers for longer periods</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-3">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "customerservice1.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Personalized service.</strong> Our staff are available to help you through the hiring process</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
-  <!-- /.container -->
-
 </div>
 <!-- /.content-section-a -->
 
@@ -124,14 +203,52 @@
         <hr class="section-heading-spacer">
         <div class="clearfix"></div>
         <h2 class="section-heading">Benefits for Professionals<br></h2>
-        <ul class="lead">
-          <li><strong>Keep your skills sharp</strong> while working for a company who appreciates you</li></br>
-          <li><strong>Flexible work hours</strong> so you have time off to enjoy retired life</li></br>
-          <li><strong>Make extra money</strong> by doing what you love, part-time. </li>
-        </ul>
       </div>
       <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-        <%= image_tag "computer.jpg", :class => "img-responsive" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "accounting5.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Keep your skills sharp</strong> while working for a company who appreciates you</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "person205.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px">Flexible work hours</strong> so you have time off to enjoy retired life</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "businessman61.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px">Make extra money</strong> by doing what you love, part-time</p>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
 
@@ -205,6 +322,16 @@
   <a href="https://twitter.com/excellaragroup" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @excellaragroup</a>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
       fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59614405-1', 'auto');
+      ga('send', 'pageview');
+
+  </script>
 </div>
 
 

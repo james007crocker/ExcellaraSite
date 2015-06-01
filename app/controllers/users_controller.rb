@@ -118,17 +118,32 @@ class UsersController < ApplicationController
   end
 
   def matched_jobs
-    @user = current_user
-    @apps = Applicant.where("user_id = ?", @user.id)
-    @pending = @apps.where(:userAccept => true, :compAccept => false)
-    @required  = @apps.where(:userAccept => false, :compAccept => true)
-    @matched = @apps.where(:userAccept => true, :compAccept => true)
+    unless params[:decline].nil?
+      Applicant.find_by(id: params[:decline]).update_attribute(:userreject, true)
+    end
+    if current_user
+      @user = current_user
+      @apps = Applicant.where("user_id = ?", @user.id)
+      @pending = @apps.where(:userAccept => true, :compAccept => false)
+      @required  = @apps.where(:userAccept => false, :compAccept => true, :userreject => false)
+      @matched = @apps.where(:userAccept => true, :compAccept => true)
+    else
+      flash.now[:danger] = "You do not have permission to view this page"
+      redirect_to root_url
+    end
+
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def viewprofile
     @user = User.find(params[:id])
     unless current_user?(@user)
       flash.now[:danger] = "You do not have permission to view this page"
+      redirect_to root_url
     end
   end
 

@@ -2,17 +2,16 @@
   <div class="row">
     <div class="col-md-8 col-centered" style="padding: 0; background-color: tan; width: 50%">
       <div style="background-color: black">
-        <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px; color: white">Excellara Match</p>
+        <p class="loginfont" style="padding-top: 10px; padding-bottom: 10px; padding-left: 30px; color: white">Excellara Job Interest</p>
       </div>
+      <%= image_tag "wk4_wordmark_black.png" %>
       <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
       <div class="col-md-6 center-block" style="width: 90%;">
-        <h2 style="color: #ffffff; text-align: center">Congratulations!</h2>
-        <h4 style="text-align: center">You have matched with <%= @sender.name %> for the <%= @job.title %> position.</h4>
-        <p style="text-align: center">In order to continue the process, please review the information in the links below and
-          use the contact information to reach out to <%= @sender.name %></p>
-        <p style="text-align: center">Contact: <a href="mailto:<%= @sender.email %>"><%= @sender.email %></a></p>
+        <h4 style="text-align: center"><%= @sender.name %> has expressed interest in the <%= @job.title %> position.</h4>
+        <p style="text-align: center">In order to continue the process, please review the information in the links below.</p>
         <p style="text-align: center"><%= @sender.name %> Profile: <%= link_to "Profile", @sender %></p>
         <p style="text-align: center"><%= @job.title %> Posting: <%= link_to "Job Posting", @job %></p>
+        <p style="text-align: center">Continue the process by accepting the invitation<%= link_to "here", activity_companies_path(@receiver) %>.</p>
       </div>
       <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
       <br>

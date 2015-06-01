@@ -16,8 +16,9 @@ class JobPostingsController < ApplicationController
     if current_company
       current_company.job_postings.find_by(id: params[:id]).destroy
       flash[:success] = "Job Posting Removed"
-      redirect_to job_postings_path
+      redirect_to activity_companies_path
     else
+      flash[:danger] = "You do not have permission to complete this operation"
       redirect_to root_url
     end
   end
@@ -77,7 +78,7 @@ class JobPostingsController < ApplicationController
     @job = JobPosting.find(params[:id])
     if @job.update_attributes(job_posting_params)
       flash.now[:success] = "Posting Updated"
-      redirect_to job_postings_path
+      redirect_to activity_companies_path
     else
       render 'edit'
     end

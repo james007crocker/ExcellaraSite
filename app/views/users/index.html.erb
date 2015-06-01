@@ -1,40 +1,59 @@
-<div class="accommodate_alert"></div>
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
+<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
 
-<h1 class="profile_title">
-  Professionals
-</h1>
-
-<div class="row">
-  <div class="col-md-6 col-centered">
-    <%= form_for_filterrific @filterrific do |f| %>
-        <table>
-          <tr>
-            <td>
+    </div>
+    <div class="col-md-10 tagcolor">
+      <h1 class="jobindexfont">PROFESSIONALS</h1>
+      <%= form_for_filterrific @filterrific do |f| %>
+          <div class="row" style="padding-bottom: 10px">
+            <div class="col-md-2 queryfont">
               Search
               <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
-              <%= f.text_field(:search_query, class: 'filterrific-periodically-observed') %>
-            </td>
-            <td>
+              <%= f.text_field(:search_query, class: 'filterrific-periodically-observed form-control') %>
+            </div>
+            <div class="col-md-2 queryfont">
               City
-              <%= f.select(:with_location, @filterrific.select_options[:with_location], { include_hidden: false, include_blank: '- Any -' }) %>
-            </td>
-            <td>
-              Job Sector
-              <%= f.select(:with_sector, @filterrific.select_options[:with_sector], { include_hidden: false, include_blank: '- Any -' }) %>
-            </td>
-            <td>
+              <%= f.select(:with_location, @filterrific.select_options[:with_location], { include_hidden: false, include_blank: '- Any -' }, class: 'form-control') %>
+            </div>
+            <div class="col-md-2 queryfont">
+              Industry
+              <%= f.select(:with_sector, @filterrific.select_options[:with_sector], { include_hidden: false, include_blank: '- Any -' }, class: 'form-control') %>
+            </div>
+            <div class="col-md-3 queryfont">
               Sorted by
-              <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-            </td>
-          </tr>
-        </table>
-        <div>
-          <%= link_to('Reset filters', reset_filterrific_url,) %>
-        </div>
-        <%# add an automated spinner to your form when the list is refreshed %>
-        <% render_filterrific_spinner %>
-    <% end %>
-
-    <%= render(partial: 'users/list', locals: { users: @users }) %>
+              <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by], {},  class: 'form-control') %>
+            </div>
+            <div class="col-md-1 queryfont">
+              <table>
+                <tr>
+                  <td>
+                    <br>
+                    <%= link_to 'Reset Filters', reset_filterrific_url, class: "btn btn-primary", style: "width: 200px" %>
+                  </td>
+                  <td>
+                    <%= render_filterrific_spinner %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+      <% end %>
+    </div>
   </div>
 </div>
+
+<%= render(partial: 'users/list', locals: { users: @users }) %>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-59614405-1', 'auto');
+    ga('send', 'pageview');
+
+</script>

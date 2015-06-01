@@ -1,0 +1,5 @@
+<%= @sender.name %> has expressed interest in you for the <%= @job.title %> position.
+In order to continue the process, please review the information in the links below.
+<%= @sender.name %> Profile: <%= url_for @sender %>
+<%= @job.title %> Posting: <%= url_for @job %>
+Continue the process by accepting the invitation<%= url_for matched_jobs_users_path(@receiever) %>

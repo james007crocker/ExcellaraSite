@@ -1,0 +1,77 @@
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
+<% end %>
+<div class="container-fluid" style="padding-left: 0">
+  <div class="row">
+    <h1 class="userheaderfont" style="padding-left: 20%"><%= @company.name.upcase %></h1>
+  </div>
+  <div class="row tancolor" style="z-index: 6">
+    <div class="col-md-3">
+      <% if @company.picture?%>
+          <%= image_tag @company.picture.url, class: "img-responsive", width: 300, height: 300 %>
+      <% else %>
+          <%= image_tag "no_company_pic.png", class: "img-responsive", width: 300, height: 300  %>
+      <% end %>
+    </div>
+    <div class="col-md-8 tancolor" style="padding-top: 20px">
+      <h4 class="narrowfont"><%= @company.website %></h4>
+      <h6><%= @company.location.upcase %>, <%= @company.province.upcase %></h6>
+      <h4 class="narrowfont2"><%= pluralize(@company.size, 'employee').upcase %></h4>
+      <%= link_to "View Your Company Profile", viewprofile_companies_path(id: @company.id), class: "btn btn-primary  addmargin", style: "width: 200px"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10" style="background-color: #ffffff; z-index: 7; margin-top: -40px">
+      <div class="row">
+        <table>
+          <tr>
+            <td style="width: 33%; height: 250px;">
+              <% unless @user1.nil? %>
+                  <%= link_to @user1, class: 'disable_hover' do %>
+                      <div class="tagcolor div_button buttongrey" style="margin-left: 10px; margin-top: 10px; overflow: hidden; height: 250px; padding: 10px">
+                        <%= render partial: 'companies/usersuggestion',locals: { user: @user1 } %>
+                      </div>
+                  <% end %>
+              <% end %>
+            </td>
+            <td style="width: 33%; height: 250px;">
+              <% unless @user2.nil? %>
+                  <%= link_to @user2, class: 'disable_hover' do %>
+                      <div class="tagcolor div_button buttongrey" style="margin-left: 10px; margin-top: 10px; overflow: hidden; height: 250px; padding: 10px">
+                        <%= render partial: 'companies/usersuggestion',locals: { user: @user2 } %>
+                      </div>
+                  <% end %>
+              <% end %>
+            </td>
+            <td style="width: 33%; height: 250px;">
+              <% unless @user3.nil? %>
+                  <%= link_to @user3, class: 'disable_hover' do %>
+                      <div class="tagcolor div_button buttongrey" style="margin-left: 10px; margin-top: 10px; margin-right: 10px; overflow: hidden; height: 250px; padding: 10px">
+                        <%= render partial: 'companies/usersuggestion',locals: { user: @user3 } %>
+                      </div>
+                  <% end %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <h2>Suggested Professionals</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9 col-centered">
+      <div align="center">
+        <%= link_to "Search For Professionals",   users_path, class: "btn btn-primary", style: "width: 190px" %>
+      </div>
+    </div>
+  </div>
+</div>

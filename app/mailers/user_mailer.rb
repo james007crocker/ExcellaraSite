@@ -62,4 +62,19 @@ class UserMailer < ApplicationMailer
     @message = message;
     mail to: "lauren@excellara.com", subject: "Excellara - Contact Page Message"
   end
+
+  def compsuggest(sender, receiver, job)
+    @receiver = receiver
+    @sender = sender
+    @job = job
+    mail to: @receiver.email, subject: "Excellara Job Interest: #{@job.title}"
+  end
+
+  def usersuggest(sender, receiver, job)
+    @receiver = receiver
+    @sender = sender
+    @job = job
+    mail to: @receiver.email, subject: "Excellara Job Interest: #{@job.title}"
+  end
+
 end

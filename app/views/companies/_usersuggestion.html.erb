@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <td>
+      <h4 class="spacedfont"><%= user.name.upcase %></h4>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3 class="spacedfont2"><%= user.profession %></h3>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h5 class="hoursperweek"><%= pluralize(user.years, "Year") %> Experience</h5>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="paragraph">
+        <% if user.experience.size() > 100 %>
+            <p><%= user.experience[0...100] %>...</p>
+        <% else %>
+            <p><%= user.experience %></p>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>
+<p class="copyright text-muted small" align="right" style="margin-right: 10%; bottom: 0px"> Active for <%= time_ago_in_words(user.created_at) %>.</p>

@@ -1,7 +1,7 @@
 Welcome to Excellara <%= @receiver.name %>,
 
-In order to complete your account activation please click the following link:
-<%= link_to "Activate Account", edit_account_activation_url(@receiver.activation_token, email: @receiver.email) %>
+In order to complete your account activation please follow this link:
+<%= url_for edit_account_activation_url(@receiver.activation_token, email: @receiver.email) %>
 
 Thank you,
 Excellara team

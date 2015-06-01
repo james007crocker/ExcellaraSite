@@ -1,3 +1,6 @@
+<% unless flash.empty? %>
+    <div class="accommodate_alert"></div>
+<% end %>
  <div class="container-fluid" style="padding-left: 0">
   <div class="row">
     <h1 class="userheaderfont" style="padding-left: 20%"><%= @user.name %></h1>
@@ -5,9 +8,9 @@
   <div class="row tancolor" style="z-index: 6">
     <div class="col-md-3">
       <% if @user.picture?%>
-          <%= image_tag @user.picture.url, class: "img-responsive", width: 300 %>
+          <%= image_tag @user.picture.url, class: "img-responsive", width: 300, height: 300 %>
       <% else %>
-          <%= image_tag "no_profile.png", class: "img-responsive", width: 300 %>
+          <%= image_tag "no_profile.png", class: "img-responsive", width: 300, height: 300 %>
       <% end %>
     </div>
     <div class="col-md-8 tancolor" style="padding-top: 20px">

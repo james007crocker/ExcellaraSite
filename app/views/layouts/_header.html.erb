@@ -20,8 +20,10 @@
               </a>
               <ul class="dropdown-menu">
                 <li class="headermenufont"><%= link_to "HOME", current_user %></li>
+                <li class="headermenufont"><%= link_to "PROFILE", viewprofile_users_path(id: current_user.id) %></li>
                 <li class="headermenufont"><%= link_to "EDIT PROFILE", edit_user_path(current_user) %></li>
                 <li class="divider"></li>
+                <li class="headermenufont"><a href="mailto:admin@excellara.com">HELP</a></li>
                 <li class="headermenufont"><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
               </ul>
             </li>
@@ -36,8 +38,10 @@
               </a>
               <ul class="dropdown-menu">
             <li class="headermenufont"><%= link_to "HOME", current_company %></li>
+            <li class="headermenufont"><%= link_to "PROFILE", viewprofile_companies_path(id: current_company.id) %></li>
             <li class="headermenufont"><%= link_to "EDIT PROFILE", edit_company_path(current_company) %></li>
             <li class="divider"></li>
+            <li class="headermenufont"><a href="mailto:admin@excellara.com">HELP</a></li>
             <li class="headermenufont"><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
               </ul>
             </li>

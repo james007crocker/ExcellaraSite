@@ -25,3 +25,5 @@ en:
       user:
         profession: "Job Title"
         sector: "Industry"
+        lastname: "Last name"
+        name: "First name"

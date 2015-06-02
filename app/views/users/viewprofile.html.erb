@@ -9,7 +9,7 @@
         </tr>
         <tr>
           <td style="text-align: center">
-            <%= link_to "Back to Profile", current_user, class: "btn btn-primary addmargin textwhite"%>
+            <%= link_to "HOME", current_user, class: "btn btn-primary addmargin textwhite"%>
           </td>
         </tr>
       </table>
@@ -22,7 +22,7 @@
 
     </div>
     <div class="col-md-10">
-      <h1 class="userheaderfont2"><%= @user.name %></h1>
+      <h1 class="userheaderfont2"><%= @user.name %>  <%= @user.lastname %></h1>
     </div>
   </div>
   <div class="row">

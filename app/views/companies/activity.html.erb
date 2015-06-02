@@ -68,7 +68,7 @@
                           <% incoming.each do |app| %>
                             <% user = User.find_by(id: app.user_id) %>
                               <tr>
-                                <td><%= user.name %></td>
+                                <td><%= user.name %> <%= user.lastname %></td>
                                 <td><%= user.profession %></td>
                                 <td><%= user.location %>, <%= user.province %></td>
                                 <td><%= Date.parse app.created_at.to_s %></td>
@@ -98,7 +98,7 @@
                             <% outgoing.each do |app| %>
                                 <% user = User.find_by(id: app.user_id) %>
                                 <tr>
-                                  <td><%= user.name %></td>
+                                  <td><%= user.name %> <%= user.lastname %></td>
                                   <td><%= user.profession %></td>
                                   <td><%= user.location %>, <%= user.province %></td>
                                   <td><%= Date.parse app.created_at.to_s %></td>
@@ -128,7 +128,7 @@
                           <% matches.each do |app| %>
                               <% user = User.find_by(id: app.user_id) %>
                               <tr>
-                                <td><%= user.name %></td>
+                                <td><%= user.name %> <%= user.lastname %></td>
                                 <td><%= user.profession %></td>
                                 <td><%= user.location %>, <%= user.province %></td>
                                 <td><%= Date.parse app.created_at.to_s %></td>

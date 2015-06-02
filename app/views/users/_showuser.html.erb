@@ -3,7 +3,7 @@
 <% end %>
  <div class="container-fluid" style="padding-left: 0">
   <div class="row">
-    <h1 class="userheaderfont" style="padding-left: 20%"><%= @user.name %></h1>
+    <h1 class="userheaderfont" style="padding-left: 20%"><%= @user.name %>  <%= @user.lastname %></h1>
   </div>
   <div class="row tancolor" style="z-index: 6">
     <div class="col-md-3">
@@ -21,6 +21,7 @@
         <%= link_to "View Full Profile", viewprofile_users_path(id: @user.id), class: "btn btn-primary  addmargin", style: "width: 130px"%>
     </div>
   </div>
+   <% unless @job1.nil? %>
    <div class="row">
      <div class="col-md-1">
      </div>
@@ -68,10 +69,11 @@
         <h2>Suggested Jobs</h2>
      </div>
    </div>
+   <% end %>
    <div class="row">
      <div class="col-md-9 col-centered">
        <div align="center">
-         <%= link_to "Browse Jobs",   joblist_path, class: "btn btn-primary", style: "width: 150px" %>
+         <%= link_to "Browse Jobs",   joblist_path, class: "btn btn-primary addmargin", style: "width: 150px" %>
        </div>
      </div>
    </div>

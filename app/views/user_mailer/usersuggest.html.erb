@@ -6,9 +6,9 @@
       </div>
       <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
       <div class="col-md-6 center-block" style="width: 90%;">
-        <h4 style="text-align: center"><%= @sender.name %> has expressed interest in the <%= @job.title %> position.</h4>
+        <h4 style="text-align: center"><%= @sender.name %> <%= @sender.lastname %> has expressed interest in the <%= @job.title %> position.</h4>
         <p style="text-align: center">In order to continue the process, please review the information in the links below.</p>
-        <p style="text-align: center"><%= @sender.name %> Profile: <%= link_to "Profile", @sender %></p>
+        <p style="text-align: center"><%= @sender.name %> <%= @sender.lastname %> Profile: <%= link_to "Profile", @sender %></p>
         <p style="text-align: center"><%= @job.title %> Posting: <%= link_to "Job Posting", @job %></p>
         <p style="text-align: center">Continue the process by accepting the invitation<%= link_to "here", activity_companies_path(@receiver) %>.</p>
       </div>

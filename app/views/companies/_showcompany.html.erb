@@ -20,6 +20,7 @@
       <%= link_to "View Your Company Profile", viewprofile_companies_path(id: @company.id), class: "btn btn-primary  addmargin", style: "width: 200px"%>
     </div>
   </div>
+  <% unless @user1.nil? %>
   <div class="row">
     <div class="col-md-1">
     </div>
@@ -67,10 +68,11 @@
       <h2>Suggested Professionals</h2>
     </div>
   </div>
+  <% end %>
   <div class="row">
     <div class="col-md-9 col-centered">
       <div align="center">
-        <%= link_to "Search For Professionals",   users_path, class: "btn btn-primary", style: "width: 190px" %>
+        <%= link_to "Search For Professionals",   users_path, class: "btn btn-primary addmargin", style: "width: 190px" %>
       </div>
     </div>
   </div>

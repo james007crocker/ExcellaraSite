@@ -15,7 +15,7 @@
 
             <div class="form-group">
               <%= f.label :title, "Job Title" %>
-              <%= f.text_field :title, class: 'form-control' %>
+              <%= f.text_field :title, placeholder: 'e.g. Certified Public Accountant', class: 'form-control' %>
             </div>
 
             <table width="100%">
@@ -43,13 +43,13 @@
                 <td width="50%">
                   <div class="form-group">
                     <%= f.label :length, "Type/Length of Contract" %>
-                    <%= f.text_field :length, class: 'form-control'%>
+                    <%= f.text_field :length, placeholder: 'e.g. 3 Month Contract', class: 'form-control'%>
                   </div>
                 </td>
                 <td width="25%" style="padding-left: 10px">
                   <div class="form-group">
                     <%= f.label :hours, "Hours Per Week" %>
-                    <%= f.text_field :hours, class: 'form-control' %>
+                    <%= f.text_field :hours, placeholder: 'e.g. 15', class: 'form-control' %>
                   </div>
                 </td>
               </tr>
@@ -57,7 +57,7 @@
 
             <div class="form-group">
               <%= f.label :description, "Job Description" %>
-              <%= f.text_area :description, class: 'form-control', :rows => "10" %>
+              <%= f.text_area :description, placeholder: 'e.g. Example company is seeking a ...', class: 'form-control', :rows => "10" %>
             </div>
 
 

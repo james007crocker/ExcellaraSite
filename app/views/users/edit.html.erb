@@ -20,7 +20,7 @@
             <table width="100%">
               <tr>
                 <td colspan="1" style="padding-right: 10px;">
-                  <div class="form-group">
+                  <div class="form-group" >
                     <%= f.label :province %>
                     <%= f.select :province, getProvinces %>
                   </div>
@@ -42,13 +42,13 @@
                 <td colspan="1" style="padding-right: 10px">
                   <div class="form-group">
                     <%= f.label :years, "Years of Experience" %>
-                    <%= f.text_field :years, class: 'form-control' %>
+                    <%= f.text_field :years, placeholder: 'e.g. 25', class: 'form-control' %>
                   </div>
                 </td>
                 <td colspan="2" style="padding-left: 10px">
                   <div class="form-group">
                     <%= f.label :profession, "Job Title" %>
-                    <%= f.text_field :profession, class: 'form-control' %>
+                    <%= f.text_field :profession, placeholder: 'e.g. Senior Tax Accountant', class: 'form-control' %>
                   </div>
                 </td>
               </tr>
@@ -56,20 +56,20 @@
 
             <div class="form-group">
               <%= f.label :experience %>
-              <%= f.text_area :experience, class: 'form-control', :rows => "10" %>
+              <%= f.text_area :experience, placeholder: 'e.g. I completed my schooling at ... Following this I spent 15 years in ... ', class: 'form-control', :rows => "10" %>
             </div>
 
             <div class="form-group">
-              <%= f.label :skill_list, "Skills (comma seperated: e.g. Communication, Organization, Teamwork)" %>
-              <%= f.text_field :skill_list, value: @user.skill_list.to_s, class: 'form-control' %>
+              <%= f.label :skill_list, "Skills (comma seperated)" %>
+              <%= f.text_field :skill_list, placeholder: 'e.g. Communication, Organization, Teamwork', value: @user.skill_list.to_s, class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= f.label :education_list, "Education (comma seperated: University of Toronto BSc, Rotman MBA)" %>
-              <%= f.text_field :education_list, value: @user.education_list.to_s,  class: 'form-control' %>
+              <%= f.label :education_list, "Education (comma seperated)" %>
+              <%= f.text_field :education_list, placeholder: 'e.g. University of Toronto BSc, Rotman MBA', value: @user.education_list.to_s,  class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= f.label :looking_list, "Looking For (comma seperated: book-keeping, tax accounting, startups)" %>
-              <%= f.text_field :looking_list,value: @user.looking_list.to_s,  class: 'form-control' %>
+              <%= f.label :looking_list, "Looking For (comma seperated)" %>
+              <%= f.text_field :looking_list, placeholder: 'e.g. local work, part-time, accounting', value: @user.looking_list.to_s,  class: 'form-control' %>
             </div>
 
             <!--

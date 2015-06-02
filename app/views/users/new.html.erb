@@ -15,13 +15,13 @@
                 <td style="padding-right: 10px">
                   <div class="form-group">
                     <%= f.label :name, "First Name" %>
-                    <%= f.text_field :name, class: 'form-control' %>
+                    <%= f.text_field :name, placeholder: 'First', class: 'form-control' %>
                   </div>
                 </td>
                 <td style="padding-left: 10px">
                   <div class="form-group">
                     <%= f.label :lastname, "Last Name" %>
-                    <%= f.text_field :lastname, class: 'form-control' %>
+                    <%= f.text_field :lastname, placeholder: 'Last', class: 'form-control' %>
                   </div>
                 </td>
               </tr>
@@ -30,7 +30,7 @@
 
             <div class="form-group">
               <%= f.label :email %>
-              <%= f.email_field :email, class: 'form-control' %>
+              <%= f.email_field :email, placeholder: 'john@example.com', class: 'form-control' %>
             </div>
 
 
@@ -46,11 +46,11 @@
         -->
             <div class="form-group">
               <%= f.label :password %>
-              <%= f.password_field :password, class: 'form-control' %>
+              <%= f.password_field :password, placeholder: 'Minimum 6 characters', class: 'form-control' %>
             </div>
             <div class="form-group">
               <%= f.label :password_confirmation, "Password Confirmation" %>
-              <%= f.password_field :password_confirmation, class: 'form-control' %>
+              <%= f.password_field :password_confirmation, placeholder: 'Re-enter password', class: 'form-control' %>
             </div>
             <div class="center-block" style="display: block; float: none; text-align: center; margin-left: auto; margin-right: auto">
               <%= f.submit "Create my account", class: "btn btn-primary button_width2" %>

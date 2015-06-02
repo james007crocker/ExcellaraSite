@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :can_view_profile, only: [:show, :index]
   before_action :can_view_pages, only: [:index]
-
+  before_action :checkAccountCompleteUser, only:  [:show, :viewprofile, :matched_jobs]
   def new
     @user = User.new
   end
@@ -193,6 +193,15 @@ class UsersController < ApplicationController
       unless CompanyProfileIsComplete?
         flash[:danger] = "Please complete your profile before proceeding"
         redirect_to edit_company_path(current_company)
+      end
+    end
+
+    def checkAccountCompleteUser
+      if current_user
+        unless UserProfileIsComplete?
+          flash[:danger] = "Please complete your profile before proceeding"
+          redirect_to edit_user_path(current_user)
+        end
       end
     end
 end

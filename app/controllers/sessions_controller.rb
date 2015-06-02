@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :can_view_pages, only: [:destroy]
+
   def new
   end
 
@@ -46,4 +48,19 @@ class SessionsController < ApplicationController
       redirect_to root_url
     end
   end
+
+  private
+    def can_view_pages
+      if current_company
+        unless CompanyProfileIsComplete?
+          flash[:danger] = "Please complete your profile before proceeding"
+          redirect_to edit_company_path(current_company)
+        end
+      elsif current_user
+        unless UserProfileIsComplete?
+          flash[:danger] = "Please complete your profile before proceeding"
+          redirect_to edit_user_path(current_user)
+        end
+      end
+    end
 end

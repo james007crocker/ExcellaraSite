@@ -20,131 +20,137 @@
           </tr>
           </thead>
           <tbody>
-          <% var = 1 %>
-          <% @company.job_postings.each do |job| %>
-              <script>
-                  $(document).ready(function(){
-                      $("#expand<%= var %>").click(function(){
-                          if ($(this).text() == "Expand") {
-                              $(this).text("Hide");
-                          } else {
-                              $(this).text("Expand");
-                          }
-                          $("#viewExpand<%= var %>").toggle();
-                      });
-                  });
-              </script>
+          <% if @company.job_postings.count == 0 %>
             <tr>
-              <td><%= job.title %></td>
-              <td><%= job.views %></td>
-              <td><%= Date.parse job.created_at.to_s %></td>
-              <td><%= link_to "View Job", job %> | <%= link_to "Edit", edit_job_posting_path(job.id) %> | <%= link_to "Delete", job, method: 'delete' %> | <%= button_tag "Expand", id: "expand#{var}" %></td>
+              <td colspan="4"><h1 class="center-block">No jobs posted yet.</h1></td>
             </tr>
-            <tr id="viewExpand<%= var %>" style="display: none">
-              <td colspan="4">
-                <ul class="nav nav-tabs bw">
-                  <li class="active"><a data-toggle="tab" href="#hometype<%= var %>">Incoming Applications</a></li>
-                  <li><a data-toggle="tab" href="#menu1type<%= var %>">Outgoing Offers</a></li>
-                  <li><a data-toggle="tab" href="#menu2type<%= var %>">Accepted Offers</a></li>
-                </ul>
-                <% jobs = Applicant.where(job_posting_id: job.id) %>
-                <div class="tab-content">
-                  <div id="hometype<%= var %>" class="tab-pane fade in active">
-                    <% incoming = jobs.where(compAccept: false, compreject: false) %>
-                    <% if incoming.count == 0 %>
-                        <h1 class="center-block">No incoming applications.</h1>
-                    <% else %>
-                        <table class="table table-hover bluetable">
-                          <thead class="bluecolor">
-                          <tr>
-                            <th>Applicant Name</th>
-                            <th>Profession</th>
-                            <th>Location</th>
-                            <th>Date Matched</th>
-                            <th>Actions</th>
-                          </tr>
-                          </thead>
-                          <tbody class="bluecolor">
-                          <% incoming.each do |app| %>
-                            <% user = User.find_by(id: app.user_id) %>
-                              <tr>
-                                <td><%= user.name %> <%= user.lastname %></td>
-                                <td><%= user.profession %></td>
-                                <td><%= user.location %>, <%= user.province %></td>
-                                <td><%= Date.parse app.created_at.to_s %></td>
-                                <td><%= link_to "View Profile", user %> | <%= link_to "Accept", applicant_path(app.id), method: 'patch' %> | <%=link_to "Decline", app.job_posting %></td>
-                              </tr>
-                          <% end %>
-                          </tbody>
-                        </table>
-                    <% end %>
-                  </div>
-                  <div id="menu1type<%= var %>" class="tab-pane fade">
-                    <% outgoing = jobs.where(userAccept: false, userreject: false) %>
-                      <% if outgoing.count == 0 %>
-                          <h1 class="center-block">No outgoing offers yet.</h1>
-                      <% else %>
-                          <table class="table table-hover bluetable">
-                            <thead class="bluecolor">
-                            <tr>
-                              <th>Applicant Name</th>
-                              <th>Profession</th>
-                              <th>Location</th>
-                              <th>Date Matched</th>
-                              <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody class="bluecolor">
-                            <% outgoing.each do |app| %>
-                                <% user = User.find_by(id: app.user_id) %>
+          <% else %>
+              <% var = 1 %>
+              <% @company.job_postings.each do |job| %>
+                  <script>
+                      $(document).ready(function(){
+                          $("#expand<%= var %>").click(function(){
+                              if ($(this).text() == "Expand") {
+                                  $(this).text("Hide");
+                              } else {
+                                  $(this).text("Expand");
+                              }
+                              $("#viewExpand<%= var %>").toggle();
+                          });
+                      });
+                  </script>
+                  <tr>
+                    <td><%= job.title %></td>
+                    <td><%= job.views %></td>
+                    <td><%= Date.parse job.created_at.to_s %></td>
+                    <td><%= link_to "View Job", job %> | <%= link_to "Edit", edit_job_posting_path(job.id) %> | <%= link_to "Delete", job, method: 'delete' %> | <%= button_tag "Expand", id: "expand#{var}" %></td>
+                  </tr>
+                  <tr id="viewExpand<%= var %>" style="display: none">
+                    <td colspan="4">
+                      <ul class="nav nav-tabs bw">
+                        <li class="active"><a data-toggle="tab" href="#hometype<%= var %>">Incoming Applications</a></li>
+                        <li><a data-toggle="tab" href="#menu1type<%= var %>">Outgoing Offers</a></li>
+                        <li><a data-toggle="tab" href="#menu2type<%= var %>">Accepted Offers</a></li>
+                      </ul>
+                      <% jobs = Applicant.where(job_posting_id: job.id) %>
+                      <div class="tab-content">
+                        <div id="hometype<%= var %>" class="tab-pane fade in active">
+                          <% incoming = jobs.where(compAccept: false, compreject: false) %>
+                          <% if incoming.count == 0 %>
+                              <h1 class="center-block">No incoming applications.</h1>
+                          <% else %>
+                              <table class="table table-hover bluetable">
+                                <thead class="bluecolor">
                                 <tr>
-                                  <td><%= user.name %> <%= user.lastname %></td>
-                                  <td><%= user.profession %></td>
-                                  <td><%= user.location %>, <%= user.province %></td>
-                                  <td><%= Date.parse app.created_at.to_s %></td>
-                                  <td><%= link_to "View Profile", user %> | <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
+                                  <th>Applicant Name</th>
+                                  <th>Profession</th>
+                                  <th>Location</th>
+                                  <th>Date Matched</th>
+                                  <th>Actions</th>
                                 </tr>
-                            <% end %>
-                            </tbody>
-                          </table>
-                      <% end %>
-                  </div>
-                  <div id="menu2type<%= var %>" class="tab-pane fade">
-                    <% matches = jobs.where(userAccept: true, compAccept: true) %>
-                    <% if matches.count == 0 %>
-                        <h1 class="center-block">No accepted offers yet.</h1>
-                    <% else %>
-                        <table class="table table-hover bluetable">
-                          <thead class="bluecolor">
-                          <tr>
-                            <th>Applicant Name</th>
-                            <th>Profession</th>
-                            <th>Location</th>
-                            <th>Date Matched</th>
-                            <th>Actions</th>
-                          </tr>
-                          </thead>
-                          <tbody class="bluecolor">
-                          <% matches.each do |app| %>
-                              <% user = User.find_by(id: app.user_id) %>
-                              <tr>
-                                <td><%= user.name %> <%= user.lastname %></td>
-                                <td><%= user.profession %></td>
-                                <td><%= user.location %>, <%= user.province %></td>
-                                <td><%= Date.parse app.created_at.to_s %></td>
-                                <td><%= link_to "View Profile", user %> | <a href="mailto:<%= user.email %>">Email</a> | <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
-                              </tr>
+                                </thead>
+                                <tbody class="bluecolor">
+                                <% incoming.each do |app| %>
+                                    <% user = User.find_by(id: app.user_id) %>
+                                    <tr>
+                                      <td><%= user.name %> <%= user.lastname %></td>
+                                      <td><%= user.profession %></td>
+                                      <td><%= user.location %>, <%= user.province %></td>
+                                      <td><%= Date.parse app.created_at.to_s %></td>
+                                      <td><%= link_to "View Profile", user %> | <%= link_to "Accept", applicant_path(app.id), method: 'patch' %> | <%=link_to "Decline", app.job_posting %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                              </table>
                           <% end %>
-                          </tbody>
-                        </table>
-                    <% end %>
-                  </div>
-                </div>
-                <hr style="background-color: #000000; border: 0; height: 7px; width: 100%;">
-                <br>
-              </td>
-            </tr>
-          <% var = var + 1 %>
+                        </div>
+                        <div id="menu1type<%= var %>" class="tab-pane fade">
+                          <% outgoing = jobs.where(userAccept: false, userreject: false) %>
+                          <% if outgoing.count == 0 %>
+                              <h1 class="center-block">No outgoing offers yet.</h1>
+                          <% else %>
+                              <table class="table table-hover bluetable">
+                                <thead class="bluecolor">
+                                <tr>
+                                  <th>Applicant Name</th>
+                                  <th>Profession</th>
+                                  <th>Location</th>
+                                  <th>Date Matched</th>
+                                  <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody class="bluecolor">
+                                <% outgoing.each do |app| %>
+                                    <% user = User.find_by(id: app.user_id) %>
+                                    <tr>
+                                      <td><%= user.name %> </td>
+                                      <td><%= user.profession %></td>
+                                      <td><%= user.location %>, <%= user.province %></td>
+                                      <td><%= Date.parse app.created_at.to_s %></td>
+                                      <td><%= link_to "View Profile", user %> | <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                              </table>
+                          <% end %>
+                        </div>
+                        <div id="menu2type<%= var %>" class="tab-pane fade">
+                          <% matches = jobs.where(userAccept: true, compAccept: true) %>
+                          <% if matches.count == 0 %>
+                              <h1 class="center-block">No accepted offers yet.</h1>
+                          <% else %>
+                              <table class="table table-hover bluetable">
+                                <thead class="bluecolor">
+                                <tr>
+                                  <th>Applicant Name</th>
+                                  <th>Profession</th>
+                                  <th>Location</th>
+                                  <th>Date Matched</th>
+                                  <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody class="bluecolor">
+                                <% matches.each do |app| %>
+                                    <% user = User.find_by(id: app.user_id) %>
+                                    <tr>
+                                      <td><%= user.name %></td>
+                                      <td><%= user.profession %></td>
+                                      <td><%= user.location %>, <%= user.province %></td>
+                                      <td><%= Date.parse app.created_at.to_s %></td>
+                                      <td><%= link_to "View Profile", user %> | <a href="mailto:<%= user.email %>">Email</a> | <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                              </table>
+                          <% end %>
+                        </div>
+                      </div>
+                      <hr style="background-color: #000000; border: 0; height: 7px; width: 100%;">
+                      <br>
+                    </td>
+                  </tr>
+                  <% var = var + 1 %>
+              <% end %>
           <% end %>
           </tbody>
         </table>

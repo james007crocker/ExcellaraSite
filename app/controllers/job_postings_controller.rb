@@ -6,7 +6,7 @@ class JobPostingsController < ApplicationController
     @jobpostings = current_company.job_postings.build(job_posting_params)
     if @jobpostings.save
       flash[:success] = "Created new job posting"
-      redirect_to job_postings_path
+      redirect_to activity_companies_path(current_company)
     else
       render 'new'
     end
@@ -91,7 +91,7 @@ class JobPostingsController < ApplicationController
     end
 
     def checkAccountCompleteUser
-      if current_user.location.blank? || current_user.experience.blank?
+      unless UserProfileIsComplete?
         flash[:danger] = "Please complete your profile before proceeding"
         redirect_to edit_user_path(current_user)
       end

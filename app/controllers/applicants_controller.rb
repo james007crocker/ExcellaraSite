@@ -6,6 +6,8 @@ class ApplicantsController < ApplicationController
       applicant.userAccept = false
       applicant.compAccept = true
       user = User.find_by(id: params[:user_id])
+      offerCount = user.offercount + 1
+      user.update_attribute(:offercount, offerCount)
       applicant.user_id = user.id
       applicant.company_id = current_company.id
       if applicant.save
@@ -27,8 +29,12 @@ class ApplicantsController < ApplicationController
       applicant.user_id = current_user.id
       applicant.company_id = jobposting.company.id
       if applicant.save
-        @sender = current_user
         @receiver = Company.find_by(id: applicant.company_id)
+        totalCount = @receiver.totalalerts + 1
+        @receiver.update_attribute(:totalalerts, totalCount)
+        offerCount = jobposting.offercount + 1
+        jobposting.update_attribute(:offercount, offerCount)
+        @sender = current_user
         @job = jobposting
         UserMailer.compsuggest(@sender, @receiver, @job).deliver_now
         flash[:success] = "Successfully applied for job"
@@ -68,6 +74,10 @@ class ApplicantsController < ApplicationController
       application.update_attribute(:userAccept, true)
       @job = application.job_posting
       @receiver = Company.find_by(id: application.company_id)
+      matchCount = @job.matchcount + 1
+      @job.update_attribute(:matchcount, matchCount)
+      totalCount = @receiver.totalalerts + 1
+      @receiver.update_attribute(:totalalerts, totalCount)
       @sendresume = params[:sendresume]
       UserMailer.match_email(@sender, @receiver, @job, @text, @sendresume).deliver_now
       UserMailer.match_email2(@receiver, @sender, @job, @text).deliver_now
@@ -77,6 +87,9 @@ class ApplicantsController < ApplicationController
       @text = nil
       @sender = current_company
       application = Applicant.find_by(id: params[:id])
+      user = User.find_by(id: application.user_id)
+      matchCount = user.matchcount + 1
+      user.update_attribute(:matchcount, matchCount)
       application.update_attribute(:compAccept, true)
       @job = application.job_posting
       @receiver = User.find_by(id: application.user_id)

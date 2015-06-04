@@ -58,7 +58,6 @@ class UsersController < ApplicationController
       #    @apps << f
       #  end
       #end
-
       randomJobs= JobPosting.order("RANDOM()")
       @job1 = randomJobs.first
       @job2 = randomJobs.second
@@ -124,6 +123,10 @@ class UsersController < ApplicationController
     end
     if current_user
       @user = current_user
+      @matches = @user.matchcount
+      @offers = @user.offercount
+      @user.update_attribute(:offercount, 0)
+      @user.update_attribute(:matchcount, 0)
       @apps = Applicant.where("user_id = ?", @user.id)
       @pending = @apps.where(:userAccept => true, :compAccept => false)
       @required  = @apps.where(:userAccept => false, :compAccept => true, :userreject => false)

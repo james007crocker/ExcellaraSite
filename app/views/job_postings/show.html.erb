@@ -48,7 +48,9 @@
               <button class="btn btn-success btn-lg disabled center-block">Matched</button>
           <% elsif !current_user.nil? && state(@jobposting) == "Pending" %>
               <button class="btn btn-warning btn-lg disabled center-block">Pending</button>
-          <% end %>
+          <% elsif !current_user.nil? &&  state(@jobposting) == "Declined"  %>
+              <button class="btn btn-info btn-lg disabled center-block">Declined</button>
+        <% end %>
 
         </div>
       </div>

@@ -15,6 +15,17 @@ class CompaniesController < ApplicationController
       @user1 = randomUsers.first
       @user2 = randomUsers.second
       @user3 = randomUsers.third
+
+      if @company.totalalerts == 0
+        @company.job_postings.each do |job|
+          if job.matchcount > 0
+            job.update_attribute(:matchcount, 0)
+          end
+          if job.offercount > 0
+            job.update_attribute(:offercount, 0)
+          end
+        end
+      end
       #@apps = []
       #appsMatchUser = Applicant.where("company_id = ?", @company.id)
       #appsMatchUser.each do |f|
@@ -59,6 +70,7 @@ class CompaniesController < ApplicationController
 
   def activity
     @company = current_company
+    @company.update_attribute(:totalalerts, 0)
   end
 
   def viewprofile

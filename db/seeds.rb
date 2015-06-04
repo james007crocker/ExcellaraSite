@@ -6,26 +6,3 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
-=begin
-User.create!(name: "Excellara_User_Admin",
-            email: "admin@excellara.com",
-            password: "excellara",
-            password_confirmation: "excellara",
-            location: "Palo Alto",
-            accomplishment: "Taking the world by storm",
-            experience: "Working on it.",
-            admin: true,
-            activated: true,
-            activated_at: Time.zone.now )
-
-Company.create!(name: "Excellara_Company_Admin",
-             email: "admin2@excellara.com",
-             password: "excellara",
-             password_confirmation: "excellara",
-             location: "Palo Alto",
-             description: "Taking the world by storm",
-             size: 3,
-             admin: true,
-            activated: true,
-            activated_at: Time.zone.now)
-end

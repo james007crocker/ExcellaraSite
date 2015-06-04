@@ -40,7 +40,14 @@
                       });
                   </script>
                   <tr>
-                    <td><%= job.title %></td>
+                    <td><%= job.title %>
+                      <% matchJobs = job.matchcount %>
+                      <% offerJobs = job.offercount %>
+                      <% alertCount = matchJobs + offerJobs %>
+                      <% if alertCount > 0 %>
+                        <span class="badge badgecolor"><%= alertCount %></span>
+                      <% end %>
+                    </td>
                     <td><%= job.views %></td>
                     <td><%= Date.parse job.created_at.to_s %></td>
                     <td><%= link_to "View Job", job %> | <%= link_to "Edit", edit_job_posting_path(job.id) %> | <%= link_to "Delete", job, method: 'delete' %> | <%= button_tag "Expand", id: "expand#{var}" %></td>
@@ -48,9 +55,17 @@
                   <tr id="viewExpand<%= var %>" style="display: none">
                     <td colspan="4">
                       <ul class="nav nav-tabs bw">
-                        <li class="active"><a data-toggle="tab" href="#hometype<%= var %>">Incoming Applications</a></li>
+                        <li class="active"><a data-toggle="tab" href="#hometype<%= var %>">Incoming Applications
+                        <% if offerJobs > 0 %>
+                          <span class="badge badgecolor"><%= offerJobs %></span>
+                        <% end %>
+                        </a></li>
                         <li><a data-toggle="tab" href="#menu1type<%= var %>">Outgoing Offers</a></li>
-                        <li><a data-toggle="tab" href="#menu2type<%= var %>">Accepted Offers</a></li>
+                        <li><a data-toggle="tab" href="#menu2type<%= var %>">Accepted Offers
+                          <% if matchJobs > 0 %>
+                              <span class="badge badgecolor"><%= matchJobs %></span>
+                          <% end %>
+                        </a></li>
                       </ul>
                       <% jobs = Applicant.where(job_posting_id: job.id) %>
                       <div class="tab-content">

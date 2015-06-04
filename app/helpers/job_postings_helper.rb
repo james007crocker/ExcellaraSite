@@ -13,6 +13,8 @@ module JobPostingsHelper
       return "Apply"
     elsif applicant.userAccept && applicant.compAccept
       return "Match"
+    elsif applicant.userreject
+      return "Declined"
     else
       return "Pending"
     end

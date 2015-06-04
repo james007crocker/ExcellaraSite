@@ -10,8 +10,16 @@
     <div class="col-md-12 col-centered" style="padding-top: 40px">
       <div class="col-md-10 col-centered">
         <ul class="nav nav-tabs bw">
-          <li class="active"><a data-toggle="tab" href="#home">Matches</a></li>
-          <li><a data-toggle="tab" href="#menu1">Job Offers</a></li>
+          <li class="active"><a data-toggle="tab" href="#home">Matches
+          <% if @matches > 0 %>
+            <span class="badge badgecolor"><%= @matches %></span>
+          <% end %>
+          </a></li>
+          <li><a data-toggle="tab" href="#menu1">Job Offers
+            <% if @offers > 0 %>
+                <span class="badge badgecolor"><%= @offers %></span>
+            <% end %>
+          </a></li>
           <li><a data-toggle="tab" href="#menu2">Pending Applications</a></li>
         </ul>
 

@@ -4,7 +4,11 @@
 
     </div>
     <div class="col-md-10">
-        <%= page_entries_info job_postings %>
+      <%if job_postings.count == 0 %>
+           <h1>No job postings returned.</h1>
+      <% else %>
+          <%= page_entries_info job_postings %>
+    <% end %>
     </div>
   </div>
   <div class="row">

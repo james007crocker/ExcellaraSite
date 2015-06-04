@@ -21,19 +21,19 @@
               <tr>
                 <td colspan="1" style="padding-right: 10px;">
                   <div class="form-group" >
-                    <%= f.label :province %>
+                    <%= f.label :province, "*Province" %>
                     <%= f.select :province, getProvinces %>
                   </div>
                 </td>
                 <td colspan="1">
                   <div class="form-group" style="padding-right: 10px; padding-left: 10px">
-                    <%= f.label :location, "City" %>
+                    <%= f.label :location, "*City" %>
                     <%= f.select :location, getCities %>
                   </div>
                 </td>
                 <td>
                   <div class="form-group" style="padding-left: 10px">
-                    <%= f.label :sector, "Industry" %>
+                    <%= f.label :sector, "*Industry" %>
                     <%= f.select :sector, getType %>
                   </div>
                 </td>
@@ -41,34 +41,48 @@
               <tr>
                 <td colspan="1" style="padding-right: 10px">
                   <div class="form-group">
-                    <%= f.label :years, "Years of Experience" %>
+                    <%= f.label :years, "*Years of Experience" %>
                     <%= f.text_field :years, placeholder: 'e.g. 25', class: 'form-control' %>
                   </div>
                 </td>
                 <td colspan="2" style="padding-left: 10px">
                   <div class="form-group">
-                    <%= f.label :profession, "Job Title" %>
+                    <%= f.label :profession, "*Job Title" %>
                     <%= f.text_field :profession, placeholder: 'e.g. Senior Tax Accountant', class: 'form-control' %>
                   </div>
                 </td>
               </tr>
             </table>
 
+            <script>
+              jQuery(document).ready(function($) {
+                  updateCountDown();
+                  $('.countchar').change(updateCountDown);
+                  $('.countchar').keyup(updateCountDown);
+
+                  function updateCountDown() {
+                      var chars = 500 - jQuery('.countchar').val().length;
+                      jQuery('.displaycount').text(' Characters Remaining: ' + chars)
+                  }
+              })
+
+
+            </script>
             <div class="form-group">
-              <%= f.label :experience %>
-              <%= f.text_area :experience, placeholder: 'e.g. I completed my schooling at ... Following this I spent 15 years in ... ', class: 'form-control', :rows => "10" %>
+              <%= f.label :experience, "*Accomplishments" %><span class="displaycount"></span>
+              <%= f.text_area :experience, placeholder: 'Describe a few of your accomplishments. Max 500 characters.', class: 'countchar', :rows => "7" %>
             </div>
 
             <div class="form-group">
-              <%= f.label :skill_list, "Skills (comma seperated)" %>
+              <%= f.label :skill_list, "Skills (comma separated)" %>
               <%= f.text_field :skill_list, placeholder: 'e.g. Communication, Organization, Teamwork', value: @user.skill_list.to_s, class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= f.label :education_list, "Education (comma seperated)" %>
+              <%= f.label :education_list, "Education (comma separated)" %>
               <%= f.text_field :education_list, placeholder: 'e.g. University of Toronto BSc, Rotman MBA', value: @user.education_list.to_s,  class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= f.label :looking_list, "Looking For (comma seperated)" %>
+              <%= f.label :looking_list, "Looking For (comma separated)" %>
               <%= f.text_field :looking_list, placeholder: 'e.g. local work, part-time, accounting', value: @user.looking_list.to_s,  class: 'form-control' %>
             </div>
 

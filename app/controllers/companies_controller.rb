@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  before_action :check_for_redirect, only: [:show]
   before_action :logged_in_company, only: [:edit, :update, :destroy, :activity]
   before_action :correct_company, only: [:edit, :update]
   before_action :can_view_profile, only: [:show]
@@ -77,6 +78,14 @@ class CompaniesController < ApplicationController
 
   def company_update_params
     params.require(:company).permit(:location, :province, :website, :description, :size, :picture)
+  end
+
+  def check_for_redirect
+    unless user_logged_in? || company_logged_in?
+      store_location
+      flash[:danger] = "Please Log In"
+      redirect_to login_url
+    end
   end
 
   def logged_in_company

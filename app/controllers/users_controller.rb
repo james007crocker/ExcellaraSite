@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :check_for_redirect, only: [:show, :resume]
   before_action :logged_in_user, only: [:edit, :update, :destroy, :matched_jobs]
   before_action :correct_user, only: [:edit, :update]
   before_action :can_view_profile, only: [:show, :index]
@@ -161,6 +162,14 @@ class UsersController < ApplicationController
 
     def user_update_params
       params.require(:user).permit(:location, :province, :experience, :accomplishment, :picture, :resume, :sector, :profession, :years, :skill_list, :education_list, :looking_list)
+    end
+
+    def check_for_redirect
+      unless user_logged_in? || company_logged_in?
+        store_location
+        flash[:danger] = "Please Log In"
+        redirect_to login_url
+      end
     end
 
     def logged_in_user

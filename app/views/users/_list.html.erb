@@ -60,7 +60,11 @@
 
     </div>
     <div class="col-md-10">
-      <%= page_entries_info users, data: "Professional" %>
+      <% if users.count == 0 %>
+          <h1>No job professionals returned.</h1>
+      <% else %>
+          <%= page_entries_info users, data: "Professional" %>
+      <% end %>
     </div>
   </div>
   <div class="row">

@@ -1,4 +1,5 @@
 class JobPostingsController < ApplicationController
+  before_action :check_for_redirect, only: [:show]
   before_action :checkAccountCompleteUser, only: [:joblist]
   before_action :checkAccountCompleteCompany, only: [:new, :index]
 
@@ -89,6 +90,15 @@ class JobPostingsController < ApplicationController
     def job_posting_params
       params.require(:job_posting).permit(:title, :location, :province, :description, :type, :sector, :hours, :length)
     end
+
+    def check_for_redirect
+      unless user_logged_in? || company_logged_in?
+        store_location
+        flash[:danger] = "Please Log In"
+        redirect_to login_url
+      end
+    end
+
 
     def checkAccountCompleteUser
       unless UserProfileIsComplete?

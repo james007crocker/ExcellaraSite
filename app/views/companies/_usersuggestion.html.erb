@@ -6,21 +6,21 @@
   </tr>
   <tr>
     <td>
-      <h3 class="spacedfont2"><%= user.profession %></h3>
+      <h3 class="spacedfont2"><%= user.profession unless user.profession.blank? %></h3>
     </td>
   </tr>
   <tr>
     <td>
-      <h5 class="hoursperweek"><%= pluralize(user.years, "Year") %> Experience</h5>
+      <h5 class="hoursperweek"><%= pluralize(user.years, "Year") unless user.years.blank? %> Experience</h5>
     </td>
   </tr>
   <tr>
     <td>
       <div class="paragraph">
-        <% if user.experience.size() > 100 %>
+        <% if !user.experience.blank? && user.experience.size() > 100 %>
             <p><%= user.experience[0...100] %>...</p>
         <% else %>
-            <p><%= user.experience %></p>
+            <p><%= user.experience unless user.experience.blank? %></p>
         <% end %>
       </div>
     </td>

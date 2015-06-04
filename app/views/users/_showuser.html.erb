@@ -3,7 +3,7 @@
 <% end %>
  <div class="container-fluid" style="padding-left: 0">
   <div class="row">
-    <h1 class="userheaderfont" style="padding-left: 20%"><%= @user.name %>  <%= @user.lastname %></h1>
+    <h1 class="userheaderfont" style="padding-left: 20%"><%=  @user.name unless @user.name.blank? %>  <%= @user.lastname unless @user.lastname.blank? %></h1>
   </div>
   <div class="row tancolor" style="z-index: 6">
     <div class="col-md-3">
@@ -14,9 +14,9 @@
       <% end %>
     </div>
     <div class="col-md-8 tancolor" style="padding-top: 20px">
-        <h4 class="narrowfont"><%= @user.profession.upcase %></h4>
-        <h6><%= @user.location.upcase %>, <%= @user.province.upcase %></h6>
-        <h4 class="narrowfont2"><%= pluralize(@user.years, 'year').upcase %> EXPERIENCE</h4>
+        <h4 class="narrowfont"><%= @user.profession.upcase unless @user.profession.blank? %></h4>
+        <h6><%= @user.location.upcase %>, <%= @user.province.upcase unless @user.province.blank? %></h6>
+        <h4 class="narrowfont2"><%= pluralize(@user.years, 'year').upcase unless @user.years.blank? %> EXPERIENCE</h4>
         <%= link_to "View Resume", resume_users_path(id: @user.id), class: "btn btn-primary", style: "width: 120px"%>
         <%= link_to "View Full Profile", viewprofile_users_path(id: @user.id), class: "btn btn-primary  addmargin", style: "width: 130px"%>
     </div>

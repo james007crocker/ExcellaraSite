@@ -22,7 +22,7 @@
 
     </div>
     <div class="col-md-10">
-      <h1 class="userheaderfont2"><%= @user.name %>  <%= @user.lastname %></h1>
+      <h1 class="userheaderfont2"><%= @user.name unless @user.name.blank? %>  <%= @user.lastname unless @user.lastname.blank? %></h1>
     </div>
   </div>
   <div class="row">
@@ -42,17 +42,17 @@
             <table style="position: absolute; bottom: 0px; width: 100%">
               <tr>
                 <td class="narrowfont">
-                  <%= @user.profession.upcase %>
+                  <%= @user.profession.upcase unless @user.profession.blank? %>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p><%= @user.location.upcase %>, <%= @user.province.upcase %></p>
+                  <p><%= @user.location.upcase unless @user.location.blank? %>, <%= @user.province.upcase unless @user.province.blank? %></p>
                 </td>
               </tr>
               <tr>
                 <td colspan="4">
-                  <h5><%= pluralize(@user.years, 'YEAR').upcase + ' EXPERIENCE' %></h5>
+                  <h5><%= pluralize(@user.years, 'YEAR').upcase + ' EXPERIENCE' unless @user.years.blank? %></h5>
                 </td>
               </tr>
             </table>
@@ -73,13 +73,13 @@
         </tr>
         <tr>
           <td>
-            <p class="hoursperweek"><%= @user.name.split(' ')[0] + "'s Experience"  %></p>
+            <p class="hoursperweek"><%= @user.name.split(' ')[0] + "'s Experience"  unless @user.name.blank? %></p>
           </td>
         </tr>
         <tr>
           <td>
             <div class="paragraph">
-              <p class="two-col"><%= @user.experience %></p>
+              <p class="two-col"><%= @user.experience unless @user.experience.blank? %></p>
             </div>
           </td>
         </tr>
@@ -91,24 +91,28 @@
     <div class="col-md-2">
     </div>
     <div class="col-md-4">
-      <h5 class="headerfont">Skills</h5>
-      <div  class="tancolor">
-        <% @user.skill_list.each do |skill| %>
-            <div class="tagcolor" style="margin: 5px; padding-left: 5px; padding-right: 5px; padding-top: 7px; display: inline-block">
-              <p class="tagfont" style="color: white; vertical-align: middle"><%= skill.upcase %></p>
-            </div>
-        <% end %>
-      </div>
+      <% if @user.skill_list.count != 0 %>
+          <h5 class="headerfont">Skills</h5>
+          <div  class="tancolor">
+            <% @user.skill_list.each do |skill| %>
+                <div class="tagcolor" style="margin: 5px; padding-left: 5px; padding-right: 5px; padding-top: 7px; display: inline-block">
+                  <p class="tagfont" style="color: white; vertical-align: middle"><%= skill.upcase %></p>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
     </div>
     <div class="col-md-4">
-      <h5 class="headerfont">Looking For</h5>
-      <div  class="tancolor">
-        <% @user.looking_list.each do |skill| %>
-            <div class="tagcolor" style="margin: 5px; padding-left: 5px; padding-right: 5px; padding-top: 7px; display: inline-block">
-              <p class="tagfont" style="color: white; vertical-align: middle"><%= skill.upcase %></p>
-            </div>
-        <% end %>
-      </div>
+      <% if @user.looking_list.count != 0 %>
+          <h5 class="headerfont">Looking For</h5>
+          <div  class="tancolor">
+            <% @user.looking_list.each do |skill| %>
+                <div class="tagcolor" style="margin: 5px; padding-left: 5px; padding-right: 5px; padding-top: 7px; display: inline-block">
+                  <p class="tagfont" style="color: white; vertical-align: middle"><%= skill.upcase %></p>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
     </div>
   </div>
   <div class="row">
@@ -116,14 +120,16 @@
 
     </div>
     <div class="col-md-4">
-      <h3 class="headerfont">Education</h3>
-      <div  class="tancolor">
-        <% @user.education_list.each do |skill| %>
-            <div class="tagcolor" style="margin: 5px; padding-left: 5px; padding-right: 5px; padding-top: 7px; display: inline-block">
-              <p class="tagfont" style="color: white; vertical-align: middle"><%= skill.upcase %></p>
-            </div>
-        <% end %>
-      </div>
+      <% if @user.education_list.count != 0 %>
+        <h3 class="headerfont">Education</h3>
+          <div  class="tancolor">
+            <% @user.education_list.each do |skill| %>
+                <div class="tagcolor" style="margin: 5px; padding-left: 5px; padding-right: 5px; padding-top: 7px; display: inline-block">
+                  <p class="tagfont" style="color: white; vertical-align: middle"><%= skill.upcase %></p>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
     </div>
     <div class="col-md-4">
 

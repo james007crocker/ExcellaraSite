@@ -74,15 +74,15 @@
             </div>
 
             <div class="form-group">
-              <%= f.label :skill_list, "Skills (comma separated)" %>
+              <%= f.label :skill_list, "Skills" %><span> (separated with a comma)</span>
               <%= f.text_field :skill_list, placeholder: 'e.g. Communication, Organization, Teamwork', value: @user.skill_list.to_s, class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= f.label :education_list, "Education (comma separated)" %>
+              <%= f.label :education_list, "Education" %><span> (separated with a comma)</span>
               <%= f.text_field :education_list, placeholder: 'e.g. University of Toronto BSc, Rotman MBA', value: @user.education_list.to_s,  class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= f.label :looking_list, "Looking For (comma separated)" %>
+              <%= f.label :looking_list, "Looking For " %><span> (separated with a comma)</span>
               <%= f.text_field :looking_list, placeholder: 'e.g. local work, part-time, accounting', value: @user.looking_list.to_s,  class: 'form-control' %>
             </div>
 

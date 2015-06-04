@@ -13,7 +13,7 @@
             <%= render 'shared/error_messages', object: f.object %>
 
             <div class="form-group">
-              <%= f.label :title %>
+              <%= f.label :title, "*Job Title" %>
               <%= f.text_field :title, class: 'form-control' %>
             </div>
 
@@ -21,19 +21,19 @@
               <tr>
                 <td style="padding-right: 10px">
                   <div class="form-group">
-                    <%= f.label :province %>
+                    <%= f.label :province, "*Province" %>
                     <%= f.select :province, getProvinces %>
                   </div>
                 </td>
                 <td style="padding-left: 10px; padding-right: 10px">
                   <div class="form-group">
-                    <%= f.label :location, "City" %>
+                    <%= f.label :location, "*City" %>
                     <%= f.select :location, getCities %>
                   </div>
                 </td>
                 <td style="padding-left: 10px; padding-right: 10px">
                   <div class="form-group">
-                    <%= f.label :sector, "Job Sector" %>
+                    <%= f.label :sector, "*Job Sector" %>
                     <%= f.select :sector, getType %>
                   </div>
                 </td>
@@ -41,13 +41,13 @@
               <tr>
                 <td>
                   <div class="form-group">
-                    <%= f.label :length, "Type/Length of Contract" %>
+                    <%= f.label :length, "*Type/Length of Contract" %>
                     <%= f.text_field :length, class: 'form-control' %>
                   </div>
                 </td>
                 <td style="padding-left: 10px">
                   <div class="form-group">
-                    <%= f.label :hours, "Hours Per Week" %>
+                    <%= f.label :hours, "*Hours Per Week" %>
                     <%= f.text_field :hours, class: 'form-control' %>
                   </div>
                 </td>
@@ -55,7 +55,7 @@
             </table>
 
             <div class="form-group">
-              <%= f.label :description %>
+              <%= f.label :description, "*Job Description" %>
               <%= f.text_area :description, class: 'form-control', :rows => "10" %>
             </div>
 

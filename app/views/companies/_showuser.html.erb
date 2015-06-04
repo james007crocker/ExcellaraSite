@@ -4,7 +4,7 @@
 
     </div>
     <div class="col-md-10">
-      <h1 class="jobindexfont"><%= @company.name.upcase %></h1>
+      <h1 class="jobindexfont"><%= @company.name.upcase unless @company.name.blank? %></h1>
     </div>
   </div>
   <div class="row navycolor">
@@ -30,7 +30,7 @@
       <div class="tab-content yellowcolor">
         <div id="mission" class="tab-pane fade in active" style="padding: 15px">
           <div class="paragraph">
-            <p class="two-col"><%= @company.description %></p>
+            <p class="two-col"><%= @company.description unless @company.description.blank? %></p>
           </div>
         </div>
         <div id="contact" class="tab-pane fade" style="padding: 15px">
@@ -43,7 +43,7 @@
                       <p><strong>Location:</strong></p>
                     </td>
                     <td>
-                      <p><%= @company.location %>, <%= @company.province %></p>
+                      <p><%= @company.location unless @company.location.blank? %>, <%= @company.province unless @company.province.blank? %></p>
                     </td>
                   </tr>
                   <tr>
@@ -51,7 +51,7 @@
                       <p><strong>Website:</strong></p>
                     </td>
                     <td>
-                      <p><%= @company.website %></p>
+                      <p><%= @company.website unless @company.website.blank? %></p>
                     </td>
                   </tr>
                   <tr>
@@ -59,7 +59,7 @@
                       <p><strong>Email:</strong></p>
                     </td>
                     <td>
-                      <p><%= @company.email %></p>
+                      <p><%= @company.email unless @company.email.blank? %></p>
                     </td>
                   </tr>
                   <tr>
@@ -67,7 +67,7 @@
                       <p><strong>Employees:</strong></p>
                     </td>
                     <td>
-                      <p><%= @company.size %></p>
+                      <p><%= @company.size unless @company.size.blank? %></p>
                     </td>
                   </tr>
                 </table>
@@ -96,9 +96,9 @@
                 <tbody>
                 <% @jobs.each do |job| %>
                     <tr>
-                      <td><%= job.title %></td>
-                      <td><%= job.sector %></td>
-                      <td><%= job.hours %></td>
+                      <td><%= job.title unless job.title.blank? %></td>
+                      <td><%= job.sector unless job.sector.blank? %></td>
+                      <td><%= job.hours unless job.hours.blank? %></td>
                       <td><%= link_to 'View', job %></td>
                     </tr>
                 <% end %>

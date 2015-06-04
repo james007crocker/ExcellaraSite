@@ -3,7 +3,7 @@
 <% end %>
 <div class="container-fluid" style="padding-left: 0">
   <div class="row">
-    <h1 class="userheaderfont" style="padding-left: 20%"><%= @company.name.upcase %></h1>
+    <h1 class="userheaderfont" style="padding-left: 20%"><%= @company.name.upcase unless @company.name.blank? %></h1>
   </div>
   <div class="row tancolor" style="z-index: 6">
     <div class="col-md-3">
@@ -14,9 +14,9 @@
       <% end %>
     </div>
     <div class="col-md-8 tancolor" style="padding-top: 20px">
-      <h4 class="narrowfont"><%= @company.website %></h4>
-      <h6><%= @company.location.upcase %>, <%= @company.province.upcase %></h6>
-      <h4 class="narrowfont2"><%= pluralize(@company.size, 'employee').upcase %></h4>
+      <h4 class="narrowfont"><%= @company.website unless @company.website.blank? %></h4>
+      <h6><%= @company.location.upcase unless @company.location.blank? %>, <%= @company.province.upcase unless @company.province.blank? %></h6>
+      <h4 class="narrowfont2"><%= pluralize(@company.size, 'employee').upcase unless @company.size.blank? %></h4>
       <%= link_to "View Your Company Profile", viewprofile_companies_path(id: @company.id), class: "btn btn-primary  addmargin", style: "width: 200px"%>
     </div>
   </div>

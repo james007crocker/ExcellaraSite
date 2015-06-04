@@ -50,10 +50,10 @@
                       <table width = 100%>
                         <tr>
                           <td width="50%" class="color_2">
-                            <p class="paragraph_text"><strong>Title: </strong><%= jobposting.title %></p>
+                            <p class="paragraph_text"><strong>Title: </strong><%= jobposting.title unless jobposting.title.blank? %></p>
                           </td>
                           <td width="50%" class="color_2">
-                            <p class="paragraph_text"><strong>Location: </strong><%= jobposting.location %>, <%= jobposting.province %></p>
+                            <p class="paragraph_text"><strong>Location: </strong><%= jobposting.location unless jobposting.location.blank? %>, <%= jobposting.province unless jobposting.province.blank? %></p>
                           </td>
                         </tr>
                         <tr>
@@ -63,7 +63,7 @@
                           <td align="center" colspan="3">
                             <div class="paragraph_text">
                               <p align="left"><strong>Description: </strong></p>
-                              <%= simple_format(make_paragraph(jobposting.description , 80)) %>
+                              <%= simple_format(make_paragraph(jobposting.description , 80)) unless jobposting.description.blank? %>
                             </div>
                           </td>
                         </tr>

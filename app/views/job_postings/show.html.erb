@@ -9,7 +9,7 @@
 
       </div>
       <div class="col-md-8">
-        <h1 class="jobindexfont"><%= @jobposting.title.upcase %></h1>
+        <h1 class="jobindexfont"><%= @jobposting.title.upcase unless@jobposting.title.blank? %></h1>
       </div>
     </div>
     <div class="row" style="background-color: #F6F2EC">
@@ -55,16 +55,16 @@
     </div>
     <div class="row" style="margin-top: 10px;">
       <div class="col-md-3">
-        <p class="jobattributefont" style="text-align: center"><%= @jobposting.company.name %></p>
+        <p class="jobattributefont" style="text-align: center"><%= @jobposting.company.name unless @jobposting.company.blank? %></p>
       </div>
       <div class="col-md-3">
-        <p class="jobattributefont" style="text-align: center"><%= @jobposting.location %>, <%= @jobposting.province %></p>
+        <p class="jobattributefont" style="text-align: center"><%= @jobposting.location unless @jobposting.location.blank? %>, <%= @jobposting.province unless @jobposting.province.blank? %></p>
       </div>
       <div class="col-md-3">
-        <p class="jobattributefont" style="text-align: center"><%= @jobposting.length %></p>
+        <p class="jobattributefont" style="text-align: center"><%= @jobposting.length unless @jobposting.length.blank? %></p>
       </div>
       <div class="col-md-3">
-        <p class="jobattributefont" style="text-align: center"><%= pluralize(@jobposting.hours, " Hours") %> Per Week</p>
+        <p class="jobattributefont" style="text-align: center"><%= pluralize(@jobposting.hours, " Hours") unless @jobposting.hours.blank? %> Per Week</p>
       </div>
     </div>
     </div>
@@ -83,7 +83,7 @@
         </div>
         <div class="col-md-8">
           <div class="paragraph">
-            <p class="two-col"><%= @jobposting.description %></p>
+            <p class="two-col"><%= @jobposting.description unless @jobposting.description.blank? %></p>
           </div>
         </div>
       </div>

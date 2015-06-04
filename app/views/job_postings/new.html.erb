@@ -14,7 +14,7 @@
             <%= render 'shared/error_messages', object: f.object %>
 
             <div class="form-group">
-              <%= f.label :title, "Job Title" %>
+              <%= f.label :title, "*Job Title" %>
               <%= f.text_field :title, placeholder: 'e.g. Certified Public Accountant', class: 'form-control' %>
             </div>
 
@@ -22,19 +22,19 @@
               <tr>
                 <td width="50%" style="padding-right: 10px">
                   <div class="form-group">
-                    <%= f.label :province %>
+                    <%= f.label :province, "*Province" %>
                     <%= f.select :province, getProvinces %>
                   </div>
                 </td>
                 <td width="25%" style="padding-right: 10px">
                   <div class="form-group">
-                    <%= f.label :location, "City" %>
+                    <%= f.label :location, "*City" %>
                     <%= f.select :location, getCities %>
                   </div>
                 </td>
                 <td width="25%" style="padding-left: 10px; padding-right: 10px">
                   <div class="form-group">
-                    <%= f.label :sector, "Job Sector" %>
+                    <%= f.label :sector, "*Job Sector" %>
                     <%= f.select :sector, getType %>
                   </div>
                 </td>
@@ -42,13 +42,13 @@
               <tr>
                 <td width="50%">
                   <div class="form-group">
-                    <%= f.label :length, "Type/Length of Contract" %>
+                    <%= f.label :length, "*Type/Length of Contract" %>
                     <%= f.text_field :length, placeholder: 'e.g. 3 Month Contract', class: 'form-control'%>
                   </div>
                 </td>
                 <td width="25%" style="padding-left: 10px">
                   <div class="form-group">
-                    <%= f.label :hours, "Hours Per Week" %>
+                    <%= f.label :hours, "*Hours Per Week" %>
                     <%= f.text_field :hours, placeholder: 'e.g. 15', class: 'form-control' %>
                   </div>
                 </td>
@@ -56,7 +56,7 @@
             </table>
 
             <div class="form-group">
-              <%= f.label :description, "Job Description" %>
+              <%= f.label :description, "*Job Description" %>
               <%= f.text_area :description, placeholder: 'e.g. Example company is seeking a ...', class: 'form-control', :rows => "10" %>
             </div>
 

@@ -29,3 +29,14 @@ en:
         name: "First name"
         years: "Years of Experience"
         experience: "Accomplishments"
+      job_posting:
+        title: "Job Title"
+        sector: "Job Sector"
+        length: "Type/Length of Contract"
+        hours: "Hours Per Week"
+        description: "Job Description"
+      company:
+        size: "Number of Employees"
+        website: "Company Website"
+        location: "City"
+

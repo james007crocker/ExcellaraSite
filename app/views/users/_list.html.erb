@@ -94,7 +94,7 @@
                     </tr>
                     <tr>
                       <td class="narrowfont4" colspan="2">
-                        <h4><%= user.profession %></h4>
+                        <h4><%= user.profession unless user.profession.blank? %></h4>
                       </td>
                     </tr>
                     <tr>
@@ -104,17 +104,17 @@
                     </tr>
                     <tr>
                       <td colspan="2" class="narrowfont5">
-                        <%= pluralize(user.years, "Year") %> of Experience
+                        <%= pluralize(user.years, "Year") unless user.years.blank? %> of Experience
                       </td>
                     </tr>
                   </table>
                 </div>
                 <div class="col-md-8" style="height: 230px">
                   <div class="paragraph" style="vertical-align: middle; padding-top: 50px">
-                    <% if user.experience.size() > 500 %>
-                        <p><%= user.experience[0..500] + "......" %></p>
+                    <% if !user.experience.blank? && user.experience.size() > 500 %>
+                        <p><%= user.experience[0..500] + "......" unless user.experience.blank? %></p>
                     <% else %>
-                        <p><%= user.experience %></p>
+                        <p><%= user.experience unless user.experience.blank? %></p>
                     <% end %>
                   </div>
                   <p class="copyright text-muted small" style="right: 10px; bottom: 10px; position: absolute">Active for <%= time_ago_in_words(user.created_at) %>.</p>

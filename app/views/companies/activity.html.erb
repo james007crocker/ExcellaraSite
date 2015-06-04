@@ -74,8 +74,8 @@
                                     <% user = User.find_by(id: app.user_id) %>
                                     <tr>
                                       <td><%= user.name %> <%= user.lastname %></td>
-                                      <td><%= user.profession %></td>
-                                      <td><%= user.location %>, <%= user.province %></td>
+                                      <td><%= user.profession unless user.profession.blank? %></td>
+                                      <td><%= user.location unless user.location.blank? %>, <%= user.province unless user.province.blank? %></td>
                                       <td><%= Date.parse app.created_at.to_s %></td>
                                       <td><%= link_to "View Profile", user %> | <%= link_to "Accept", applicant_path(app.id), method: 'patch' %> | <%=link_to "Decline", app.job_posting %></td>
                                     </tr>
@@ -104,8 +104,8 @@
                                     <% user = User.find_by(id: app.user_id) %>
                                     <tr>
                                       <td><%= user.name %> </td>
-                                      <td><%= user.profession %></td>
-                                      <td><%= user.location %>, <%= user.province %></td>
+                                      <td><%= user.profession unless user.profession.blank? %></td>
+                                      <td><%= user.location unless user.location.blank? %>, <%= user.province unless user.province.blank? %></td>
                                       <td><%= Date.parse app.created_at.to_s %></td>
                                       <td><%= link_to "View Profile", user %> | <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
                                     </tr>
@@ -134,8 +134,8 @@
                                     <% user = User.find_by(id: app.user_id) %>
                                     <tr>
                                       <td><%= user.name %></td>
-                                      <td><%= user.profession %></td>
-                                      <td><%= user.location %>, <%= user.province %></td>
+                                      <td><%= user.profession unless user.profession.blank? %></td>
+                                      <td><%= user.location unless user.location.blank? %>, <%= user.province unless user.province.blank? %></td>
                                       <td><%= Date.parse app.created_at.to_s %></td>
                                       <td><%= link_to "View Profile", user %> | <a href="mailto:<%= user.email %>">Email</a> | <%= link_to "Delete", applicant_path(app.id), :method => 'delete'%></td>
                                     </tr>

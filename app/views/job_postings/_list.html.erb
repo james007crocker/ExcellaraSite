@@ -33,29 +33,29 @@
                       </div>
                     </td>
                     <td>
-                      <h1 class="narrowfont3"><%= job.company.name.upcase %></h1>
+                      <h1 class="narrowfont3"><%= job.company.name.upcase unless job.company.name.blank? %></h1>
                     </td>
                   </tr>
                   <tr>
                     <td class="narrowfont4" colspan="2">
-                      <h4><%= job.title%></h4>
+                      <h4><%= job.title unless job.title.blank? %></h4>
                     </td>
                   </tr>
                   <tr>
                     <td colspan="2" class="narrowfont5">
-                      <%= job.location %>, <%= job.province %>
+                      <%= job.location unless job.location.blank? %>, <%= job.province unless job.province.blank? %>
                     </td>
                   </tr>
                   <tr>
                     <td colspan="2" class="narrowfont5">
-                      <%= pluralize(job.hours, "Hour") %> Per Week
+                      <%= pluralize(job.hours, "Hour") unless job.hours.blank? %> Per Week
                     </td>
                   </tr>
                 </table>
               </div>
               <div class="col-md-8" style="height: 230px">
                 <div class="paragraph" style="vertical-align: middle; padding-top: 50px">
-                  <% if job.description.size() > 500 %>
+                  <% if !job.description.blank? && job.description.size() > 500 %>
                       <p><%= job.description[0..500] + "......" %></p>
                   <% else %>
                       <p><%= job.description %></p>

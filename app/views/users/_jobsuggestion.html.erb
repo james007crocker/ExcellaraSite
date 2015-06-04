@@ -6,21 +6,21 @@
   </tr>
   <tr>
     <td>
-      <h3 class="spacedfont2"><%= job.title %></h3>
+      <h3 class="spacedfont2"><%= job.title unless job.title.blank? %></h3>
     </td>
   </tr>
   <tr>
     <td>
-      <h5 class="hoursperweek"><%= pluralize(job.hours, "Hour") %> Per Week</h5>
+      <h5 class="hoursperweek"><%= pluralize(job.hours, "Hour") unless job.hours.blank? %> Per Week</h5>
     </td>
   </tr>
   <tr>
     <td>
       <div class="paragraph">
         <% if job.description.size() > 100 %>
-            <p><%= job.description[0...100] %>...</p>
+            <p><%= job.description[0...100] unless job.description.blank? %>...</p>
         <% else %>
-            <p><%= job.description %></p>
+            <p><%= job.description unless job.description.blank? %></p>
         <% end %>
       </div>
     </td>

@@ -1,0 +1,322 @@
+<div style="z-index: -1">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <div class="excellara_item1">
+          <table>
+            <tr>
+              <td>
+                <%= image_tag "wordmark_white.png"%>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="excellara_item_font">Use your accounting skills to<br/>give back</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!--<h1 class="carousel_txt">Excellara</h1>
+        <h3 class="carousel_txt2">Connecting Business with Experienced Help</h3>-->
+        <%= image_tag "typing.jpg", class: "slider_img" %>
+      </div>
+
+      <div class="item">
+        <div class="excellara_item2">
+          <table>
+            <tr>
+              <td>
+                <%= image_tag "wordmark_white.png"%>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="excellara_item_font">Use your accounting skills to<br/>give back</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!--<h1 class="carousel_txt">Excellara</h1>
+        <h3 class="carousel_txt2">Connecting Business with Experienced Help</h3>-->
+        <%= image_tag "writting.jpg", class: "slider_img" %>
+      </div>
+      <div class="item">
+        <div class="excellara_item3">
+          <table>
+            <tr>
+              <td>
+                <%= image_tag "wordmark_white.png"%>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="excellara_item_font">Use your accounting skills to<br/>give back</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!--<h1 class="carousel_txt">Excellara</h1>
+        <h3 class="carousel_txt2">Connecting Business with Experienced Help</h3>-->
+        <%= image_tag "looking.jpg", class: "slider_img" %>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span> -->
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span> -->
+    </a>
+
+  </div>
+</div>
+
+<!--
+<div class="intro-header">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="intro-message">
+          <h1 style="text-shadow: 0px 0px 30px #000, -1px -1px #000, 1px 1px #000">Excellara</h1>
+          <%= image_tag "vertical_white.png", class: "shadow_img", align: "middle" %>
+          <h3 style="text-shadow: 0px 0px 30px #000, -1px -1px #000, 1px 1px #000">Connecting Businesses with Experienced Help</h3>
+          <hr class="intro-divider">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+<!-- /.intro-header -->
+
+<!-- Page Content -->
+<a  name="services"></a>
+<div class="content-section-c">
+  <div align="center">
+    <div class="container">
+      <div class="row">
+
+        <hr align="center" class="section-heading-spacer2">
+        <div class="clearfix"></div>
+        <h3 class="section-heading">Use your skills to give back to the community.  We connect not-for-profits looking for
+          part-time help with a generation of experienced accounting professionals. <br></h3>
+      </div>
+      <div>
+        <h2 style="color: deepskyblue">It's Free! Sign Up Today!</h2>
+        <%= link_to "Accountants", user_signup_path, class: "btn btn-lg btn-primary" , style: :"width: 200px" %>
+        <%= link_to "Not-for-Profits", company_signup_path, class: "btn btn-lg btn-success" , style: :"width: 200px" %>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="content-section-a">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-centered">
+        <hr class="section-heading-spacer2 center-block">
+        <div class="clearfix"></div>
+        <h2 class="section-heading" style="text-align: center">Benefits for Not-for-Profits<br></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "hourglass.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Save time</strong> by quickly locating candidates in your area</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "hands12.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Provide a better service</strong> by ensuring your operations are run by skilled individuals</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-3">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "customerservice1.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Personalized service.</strong> Our staff are available to help you through the hiring process</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.content-section-a -->
+
+<div class="content-section-b">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6 col-centered">
+        <hr class="section-heading-spacer2 center-block">
+        <div class="clearfix"></div>
+        <h2 class="section-heading" style="text-align: center">Benefits for Accountants<br></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "accounting5.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Keep your skills sharp</strong> while working for a company who appreciates you</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "person205.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Flexible hours</strong> that you can adjust to your retirement plans</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <table style="text-align: center">
+          <tr>
+            <td>
+              <%= image_tag "users6.png", :class => "img-responsive center-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p style="padding-top: 20px"><strong>Give back to the community</strong> you live in by sharing your skills</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+</div>
+<!-- /.content-section-b -->
+<a  name="team"></a>
+<div class="content-section-a">
+
+  <div class="container">
+
+    <div align="center">
+      <hr align="center" class="section-heading-spacer2">
+      <div class="clearfix"></div>
+      <h2 class="section-heading">Our Team</h2>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4" align="center">
+        <%= image_tag "lauren.jpg", :class => "img-circle", :width => "150", :align => "middle" %>
+        <br><br><p>Lauren Watkins <br>Co-founder <br> Business Lead</p>
+      </div>
+      <div class="col-md-4" align="center">
+        <%= image_tag "james.jpg", :class => "img-circle", :width => "150", :align => "middle" %>
+        <br><br><p>James Crocker <br>Co-founder <br> Technical Lead</p>
+      </div>
+      <div class="col-md-4" align="center">
+        <%= image_tag "nikita.jpg", :class => "img-circle", :width => "150", :align => "middle" %>
+        <br><br><p>Nikita Zhitkevich <br>Co-founder <br> Product Lead</p>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div align="center">
+        <div align="center">
+          <%= image_tag "bryan.jpg", :class => "img-circle", :width => "150", :align => "middle" %>
+          <br><br><p>Bryan Kerdman <br> Advisor</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- /.content-section-a -->
+
+<!--<a  name="contact"></a>
+<div class="banner">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-6">
+      </div>
+      <div class="col-lg-6">
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div> -->
+<br>
+<div align="center">
+  <a href="https://twitter.com/excellaragroup" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @excellaragroup</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+      fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59614405-1', 'auto');
+      ga('send', 'pageview');
+
+  </script>
+</div>
+
+
+

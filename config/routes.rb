@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'password_resets/edit'
 
   root                      'static_pages#home'
+  get   'volunteer'   =>    'static_pages#volunteer'
+  get   'work'   =>    'static_pages#work'
   get   'help'        =>    'static_pages#help'
   get   'how_it_works'  =>    'static_pages#how_it_works'
   get   'about'       =>    'static_pages#about'

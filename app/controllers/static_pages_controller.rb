@@ -23,6 +23,14 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def work
+
+  end
+
+  def volunteer
+
+  end
+
   def send_message
     @name = params[:name];
     @email = params[:email];

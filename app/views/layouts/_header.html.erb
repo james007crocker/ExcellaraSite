@@ -34,6 +34,16 @@
                 <li class="headermenufont"><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
               </ul>
             </li>
+            <li>
+              <div class="centerframe">
+                <% if current_user.picture?%>
+                    <%= image_tag current_user.picture.url, class: "img-responsive centerimg", width: 40, height: 40 %>
+                <% else %>
+                    <%= image_tag "no_profile.png", class: "img-responsive centerimg", width: 40, height: 40  %>
+                <% end %>
+              </div>
+            </li>
+
         <% elsif company_logged_in? %>
             <li class="headermenufont"><%= link_to "POST JOB",   new_job_posting_path %></li>
             <!--<li class="headermenufont"><%= link_to "MY JOBS",   job_postings_path %></li>-->
@@ -58,6 +68,15 @@
             <li class="headermenufont"><a href="mailto:admin@excellara.com">HELP</a></li>
             <li class="headermenufont"><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
               </ul>
+            </li>
+            <li>
+              <div class="centerframe">
+                <% if current_company.picture?%>
+                    <%= image_tag current_company.picture.url, class: "img-responsive centerimg", width: 40, height: 40 %>
+                <% else %>
+                    <%= image_tag "no_company_pic.png", class: "img-responsive centerimg", width: 40, height: 40  %>
+                <% end %>
+              </div>
             </li>
         <% else %>
             <li class="headermenufont"><%= link_to "HOME",   root_path %></li>

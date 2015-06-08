@@ -782,3 +782,25 @@ div .buttongrey:hover {
   background-color: deeppink;
 }
 
+.centerframe {
+  height: 50px;
+  width: 50px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.centerhelper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.centerimg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+

@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6, maximum: 20 }, :unless => Proc.new { |company| company.password.nil? }
 
-  validates :profession, presence: true, length: { minimum: 4, maximum: 25 } , :on => :update
+  validates :profession, presence: true, length: { minimum: 4, maximum: 35 } , :on => :update
 
   validates :years, numericality: { only_integer: true }, inclusion: { in: 1..100, :message => ' must be greater than 0' }, on: :update #, presence: true
 

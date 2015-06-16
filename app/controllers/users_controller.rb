@@ -88,6 +88,11 @@ class UsersController < ApplicationController
   end
 
   def create
+    compCheck = Company.find_by(email: params[:email])
+    unless compCheck.nil?
+      flash[:danger] = "Email has already been taken"
+      render 'new'
+    end
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email

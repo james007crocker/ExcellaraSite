@@ -87,6 +87,38 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
+  def self.from_omniauth(auth)
+    return create_from_omniauth(auth)
+  end
+
+  def self.create_from_omniauth(auth)
+    user = User.new
+    user.provider = auth["provider"]
+    user.uid = auth["uid"]
+    user.name = auth["info"]["first_name"]
+    user.lastname = auth["info"]["last_name"]
+    user.email = auth["info"]["email"]
+    user.sector = auth["extra"]["raw_info"]["industry"]
+    user.profession = auth["info"]["description"]
+    city = auth["info"]["location"]["name"].split(",")
+    user.location = city[0]
+    country = auth["info"]["location"]["country"]["code"]
+    if (country == "ca")
+      user.country = "Canada"
+    elsif (country == "us")
+      user.country = "United States"
+    else
+      user.country = "n/a"
+    end
+    user.experience = auth["extra"]["raw_info"]["summary"]
+    user.profileurl = auth["info"]["image"]
+    user.password = "linkedinsignup1"
+    user.password_confirmation = "linkedinsignup1"
+    user.activate
+    user.save
+    return user
+  end
+
   private
 
     def create_activation_digest

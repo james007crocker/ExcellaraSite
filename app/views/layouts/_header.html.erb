@@ -38,6 +38,8 @@
               <div class="centerframe">
                 <% if current_user.picture?%>
                     <%= image_tag current_user.picture.url, class: "img-responsive centerimg", width: 40, height: 40 %>
+                <% elsif !(current_user.profileurl.nil? || current_user.profileurl.blank?) %>
+                    <%= image_tag current_user.profileurl, class: "img-responsive centerimg", width: 40, height: 40 %>
                 <% else %>
                     <%= image_tag "no_profile.png", class: "img-responsive centerimg", width: 40, height: 40  %>
                 <% end %>

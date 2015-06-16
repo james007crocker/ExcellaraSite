@@ -9,6 +9,8 @@
     <div class="col-md-3">
       <% if @user.picture?%>
           <%= image_tag @user.picture.url, class: "img-responsive", width: 300, height: 300 %>
+      <% elsif !(@user.profileurl.nil? || @user.profileurl.blank?) %>
+          <%= image_tag @user.profileurl, class: "img-responsive", width: 300, height: 300 %>
       <% else %>
           <%= image_tag "no_profile.png", class: "img-responsive", width: 300, height: 300 %>
       <% end %>

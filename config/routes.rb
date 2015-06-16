@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get   'joblist'     =>    'job_postings#joblist'
   post  'login'       =>    'sessions#create'
   delete 'logout'      =>   'sessions#destroy'
+  get 'auth/linkedin/callback', to: 'sessions#create'
+  get 'auth/linkedin/failure', to: 'static_pages#home'
 
   resources :users do
     collection do

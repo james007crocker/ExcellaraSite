@@ -33,7 +33,9 @@
         <tr>
           <td width="160px">
             <% if @user.picture? %>
-                <%= image_tag @user.picture.url, class: "img-responsive", width: 150, height: 150 if @user.picture? %>
+                <%= image_tag @user.picture.url, class: "img-responsive", width: 150, height: 150 %>
+            <% elsif !(@user.profileurl.nil? || @user.profileurl.blank?) %>
+                <%= image_tag @user.profileurl, class: "img-responsive", width: 150, height: 150 %>
             <% else %>
                 <%= image_tag "no_profile.png", class: "img-responsive", width: 150, height: 150  %>
             <% end %>

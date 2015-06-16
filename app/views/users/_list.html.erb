@@ -4,52 +4,52 @@
 
   </div>
     <ul class="users">
-      <% users.each do |user| %>
+      <%# users.each do |user| %>
 
-          <% if true %>
+          <%# if true %>
               <li>
-                <%= link_to user, class: 'disable_hover' do %>
+                <%# link_to user, class: 'disable_hover' do %>
                 <div class="color_1 div_button">
                   <table width="100%">
                     <tr>
                       <td width="200px">
                         <div class="profile_pic3">
-                          <% if user.picture?%>
-                              <%= image_tag user.picture.url, class: "img-thumbnail", width: 150, height: 150%>
-                          <% else %>
-                              <%= image_tag "no_profile.png", class: "img-thumbnail", width: 150, height: 150  %>
-                          <% end %>
+                          <%# if user.picture?%>
+                              <%#= image_tag user.picture.url, class: "img-thumbnail", width: 150, height: 150%>
+                          <%# else %>
+                              <%#= image_tag "no_profile.png", class: "img-thumbnail", width: 150, height: 150  %>
+                          <%# end %>
                         </div>
                       </td>
                       <td style="padding-top: 10px">
                         <table width="100%">
                           <tr >
                             <td width="50%" class="color_2">
-                              <p class="paragraph_text" style="margin-left: 10px"><strong>Name:</strong> <%= user.name %></p>
+                              <p class="paragraph_text" style="margin-left: 10px"><strong>Name:</strong> <%#= user.name %></p>
                             </td>
                             <td width="50%" class="color_2">
-                              <p class="paragraph_text"><strong>Location:</strong> <%=  user.location %>, <%= user.province %></p>
+                              <p class="paragraph_text"><strong>Location:</strong> <%#=  user.location %>, <%#= user.province %></p>
                             </td>
                           </tr>
                           <tr>
                             <td class="color_4" colspan="2" style="padding-left: 10px" align="center">
-                              <p class="paragraph_text"><%=simple_format(word_wrap(make_paragraph(user.getExperience + "......", 55), class: 'paragraph_text')) %></p>
+                              <p class="paragraph_text"><%#=simple_format(word_wrap(make_paragraph(user.getExperience + "......", 55), class: 'paragraph_text')) %></p>
                             </td>
                           </tr>
                         </table>
                       </td>
                     </tr>
                   </table>
-                  <% end %>
+                  <%# end %>
                 </div>
-          <% end %>
-          <% if current_company.nil? %>
-              <%if current_user.admin? && !current_user?(user) %>
-                  <%= link_to "Delete", user, method: :delete, data: { confirm: "Are you sure?" } %>
-              <% end%>
+          <%# end %>
+          <%# if current_company.nil? %>
+              <%#if current_user.admin? && !current_user?(user) %>
+                  <%#= link_to "Delete", user, method: :delete, data: { confirm: "Are you sure?" } %>
+              <%# end%>
               </li>
-          <% end %>
-      <% end %>
+          <%# end %>
+      <%# end %>
     </ul>
 </div>
 -->
@@ -83,6 +83,8 @@
                         <div style="margin-top: 15px">
                           <% if user.picture?%>
                               <%= image_tag user.picture.url, class: "img-responsive", width: 100, height: 150%>
+                          <% elsif !(user.profileurl.nil? || user.profileurl.blank?) %>
+                              <%= image_tag user.profileurl, class: "img-responsive", width: 100, height: 150 %>
                           <% else %>
                               <%= image_tag "no_profile.png", class: "img-responsive", width: 100, height: 150  %>
                           <% end %>

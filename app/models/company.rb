@@ -8,6 +8,7 @@ class Company < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false}
+  validate :emailTaken?, :on => :create
 
   validates :location, length:  { maximum: 20 } #, presence: true
   validate :CompLocation?, :unless => Proc.new { |company| company.location.nil? }
@@ -114,6 +115,12 @@ class Company < ActiveRecord::Base
     def CompDescription?
       if self.activated && self.description.blank?
         errors.add(:description, "should be present")
+      end
+    end
+
+    def emailTaken?
+      unless User.where(:email => self.email).size == 0
+        errors.add(:email, "is already in use")
       end
     end
 end

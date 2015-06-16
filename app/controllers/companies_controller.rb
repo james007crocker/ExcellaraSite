@@ -84,61 +84,61 @@ class CompaniesController < ApplicationController
 
   private
 
-  def company_params
-    params.require(:company).permit(:name, :email, :location, :province, :website, :description, :size, :password, :password_confirmation)
-  end
-
-  def company_update_params
-    params.require(:company).permit(:location, :province, :website, :description, :size, :picture)
-  end
-
-  def check_for_redirect
-    unless user_logged_in? || company_logged_in?
-      store_location
-      flash[:danger] = "Please Log In"
-      redirect_to login_url
+    def company_params
+      params.require(:company).permit(:name, :email, :location, :province, :website, :description, :size, :password, :password_confirmation)
     end
-  end
 
-  def logged_in_company
-    unless company_logged_in?
-      store_location
-      flash[:danger] = "Please Log In"
-      redirect_to login_url
+    def company_update_params
+      params.require(:company).permit(:location, :province, :website, :description, :size, :picture)
     end
-  end
 
-  def correct_company
-    @company = Company.find(params[:id])
-    unless current_company?(@company)
-      flash[:danger] = "You do not have permission to view this profile."
-      redirect_to(root_url)
+    def check_for_redirect
+      unless user_logged_in? || company_logged_in?
+        store_location
+        flash[:danger] = "Please Log In"
+        redirect_to login_url
+      end
     end
-  end
 
-  def can_view_profile
-    if !current_company.nil?
-      if CompanyProfileIsComplete?
-        #fine
+    def logged_in_company
+      unless company_logged_in?
+        store_location
+        flash[:danger] = "Please Log In"
+        redirect_to login_url
+      end
+    end
+
+    def correct_company
+      @company = Company.find(params[:id])
+      unless current_company?(@company)
+        flash[:danger] = "You do not have permission to view this profile."
+        redirect_to(root_url)
+      end
+    end
+
+    def can_view_profile
+      if !current_company.nil?
+        if CompanyProfileIsComplete?
+          #fine
+        else
+          flash[:danger] = "Please complete your profile before proceeding"
+          redirect_to edit_company_path(current_company)
+        end
+      elsif !current_user.nil?
+        if UserProfileIsComplete?
+          #fine
+        end
       else
+        flash[:danger] = "You do not have permission to view this page."
+        redirect_to(root_url)
+      end
+    end
+
+    def can_view_pages
+      unless CompanyProfileIsComplete?
         flash[:danger] = "Please complete your profile before proceeding"
         redirect_to edit_company_path(current_company)
       end
-    elsif !current_user.nil?
-      if UserProfileIsComplete?
-        #fine
-      end
-    else
-      flash[:danger] = "You do not have permission to view this page."
-      redirect_to(root_url)
     end
-  end
-
-  def can_view_pages
-    unless CompanyProfileIsComplete?
-      flash[:danger] = "Please complete your profile before proceeding"
-      redirect_to edit_company_path(current_company)
-    end
-  end
 
 end

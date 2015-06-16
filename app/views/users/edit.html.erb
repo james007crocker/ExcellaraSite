@@ -96,7 +96,7 @@
                 <td style="padding-right: 10px">
                   <div class="form-group">
                 <span class="picture">
-                <%= f.label :picture, "Picture Upload" %>
+                <%= f.label :picture, "Picture Upload" %><span> (jpeg, gif, png)</span>
                   <%= f.file_field :picture, class: 'form-control', accept: 'image/jpeg,image/gif,image/png'%>
               </span>
                   </div>
@@ -104,8 +104,8 @@
                 <td style="padding-left: 10px">
                   <div class="form-group">
                 <span class="picture">
-                  <%= f.label :resume, "Resume Upload" %>
-                  <%= f.file_field :resume, class: 'form-control', accept: 'image/jpeg,image/gif,image/png,application/pdf' %>
+                  <%= f.label :resume, "Resume Upload" %><span> (pdf, doc, docx)</span>
+                  <%= f.file_field :resume, class: 'form-control', accept: 'image/jpeg,image/gif,image/png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document' %>
                 </span>
                   </div>
                 </td>

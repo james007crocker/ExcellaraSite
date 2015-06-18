@@ -35,7 +35,8 @@
                 <td>
                   <div class="form-group" style="padding-left: 10px">
                     <%= f.label :sector, "*Industry" %>
-                    <%= f.select :sector, getType %>
+                    <%= f.select :sector, getType + [@user.sector] unless @user.sector.blank? %>
+                    <%= f.select :sector, getType if @user.sector.blank? %>
                   </div>
                 </td>
               </tr>

@@ -157,8 +157,29 @@
   text-align: center;
 }
 
-.intro-header {
-  padding-top: 0px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+.aboutfont {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.teamfont {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.teamfont2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 200;
+}
+
+/*.intro-header {
+  padding-top: 0px;
   padding-bottom: 50px;
   text-align: center;
   color: #f8f8f8;
@@ -171,6 +192,15 @@
   color: #f8f8f8;
   background: url(asset-path("banner-bg3.jpg")) no-repeat center center;
   background-size: cover;
+}*/
+
+.ourstory {
+  color: #f8f8f8;
+  background: url(asset-path("ourteam.jpg")) no-repeat center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 0;
+  padding-top: 44.91%;
 }
 
 section {

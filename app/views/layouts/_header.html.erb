@@ -82,8 +82,15 @@
             </li>
         <% else %>
             <li class="headermenufont"><%= link_to "HOME",   root_path %></li>
-            <li class="headermenufont"><%= link_to "CONTACT",   contact_path %></li>
             <li class="headermenufont"><%= link_to "HOW IT WORKS",   how_it_works_path %></li>
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle headermenufont">ABOUT<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="headermenufont"><a href="/#story">OUR STORY</a></li>
+                <li class="headermenufont"><a href="/#team">TEAM</a></li>
+                <li class="headermenufont"><%= link_to "CONTACT", contact_path %></li>
+              </ul>
+            </li>
             <li class="headermenufont"><%= link_to "LOG IN", login_path %></li>
             <li class="dropdown">
               <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="background-color: deepskyblue">SIGN UP<b class="caret"></b></a>

@@ -28,7 +28,8 @@
                 <td colspan="1">
                   <div class="form-group" style="padding-right: 10px; padding-left: 10px">
                     <%= f.label :location, "*City" %>
-                    <%= f.select :location, getCities %>
+                    <%= f.select :location, getCities + [@user.location] unless @user.location.blank? %>
+                    <%= f.select :location, getCities if @user.location.blank? %>
                   </div>
                 </td>
                 <td>

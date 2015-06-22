@@ -194,23 +194,25 @@ class User < ActiveRecord::Base
                        return nil  if query.blank?
 
                        # condition query, parse into individual keywords
-                       terms = query.downcase.split(/\s+/)
+                       unless query.is_a? Numeric
+                         terms = query.downcase.split(/\s+/)
 
-                       # replace "*" with "%" for wildcard searches,
-                       # append '%', remove duplicate '%'s
-                       terms = terms.map { |e|
-                         (e.gsub('*', '%') + '%').gsub(/%+/, '%')
-                       }
-                       # configure number of OR conditions for provision
-                       # of interpolation arguments. Adjust this if you
-                       # change the number of OR conditions.
-                       num_or_conds = 2
-                       where(
-                           terms.map { |term|
-                             "(LOWER(users.name) LIKE ? OR LOWER(users.experience) LIKE ?)"
-                           }.join(' AND '),
-                           *terms.map { |e| [e] * num_or_conds }.flatten
-                       )
+                         # replace "*" with "%" for wildcard searches,
+                         # append '%', remove duplicate '%'s
+                         terms = terms.map { |e|
+                           (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+                         }
+                         # configure number of OR conditions for provision
+                         # of interpolation arguments. Adjust this if you
+                         # change the number of OR conditions.
+                         num_or_conds = 2
+                         where(
+                             terms.map { |term|
+                               "(LOWER(users.name) LIKE ? OR LOWER(users.experience) LIKE ?)"
+                             }.join(' AND '),
+                             *terms.map { |e| [e] * num_or_conds }.flatten
+                         )
+                       end
                      }
 
   scope :with_location, lambda { |locations|

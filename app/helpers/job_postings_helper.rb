@@ -92,9 +92,9 @@ module JobPostingsHelper
   end
 
   def getType
-    return ["Law",
-      "Finance",
-      "Healthcare",
+    return ["Accounting",
+      "Human Resources",
+      "Law",
       "Other"]
   end
 

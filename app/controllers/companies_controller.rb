@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     if current_company?(@company)
-      randomUsers = User.order("RANDOM()")
+      randomUsers = User.where(:activated => true).order("RANDOM()")
       @user1 = randomUsers.first
       @user2 = randomUsers.second
       @user3 = randomUsers.third

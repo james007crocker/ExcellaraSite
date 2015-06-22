@@ -7,7 +7,7 @@
       <%if job_postings.count == 0 %>
            <h1>No job postings returned.</h1>
       <% else %>
-          <%= page_entries_info job_postings %>
+          <p>Displaying <%= pluralize(job_postings.count, "Job Posting") %></p>
     <% end %>
     </div>
   </div>

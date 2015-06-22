@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def index
     @filterrific = initialize_filterrific(
-        User,
+        User.where(:activated => true),
         params[:filterrific],
         select_options: {
             sorted_by: User.options_for_sorted_by,

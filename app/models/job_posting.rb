@@ -39,9 +39,9 @@ class JobPosting < ActiveRecord::Base
                        return nil  if query.blank?
 
                        # condition query, parse into individual keywords
-                       terms = query.downcase.split(/\s+/)
-
-                       # replace "*" with "%" for wildcard searches,
+                       unless query.is_a? Numeric
+                         terms = query.downcase.split(/\s+/)
+                        # replace "*" with "%" for wildcard searches,
                        # append '%', remove duplicate '%'s
                        terms = terms.map { |e|
                          (e.gsub('*', '%') + '%').gsub(/%+/, '%')
@@ -56,6 +56,7 @@ class JobPosting < ActiveRecord::Base
                            }.join(' AND '),
                            *terms.map { |e| [e] * num_or_conds }.flatten
                        )
+                       end
                      }
 
   scope :with_location, lambda { |locations|

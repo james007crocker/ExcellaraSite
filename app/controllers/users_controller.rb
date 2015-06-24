@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def index
     @filterrific = initialize_filterrific(
-        User.where(:activated => true),
+        User.where(:completed => true),
         params[:filterrific],
         select_options: {
             sorted_by: User.options_for_sorted_by,
@@ -62,6 +62,9 @@ class UsersController < ApplicationController
       @job1 = randomJobs.first
       @job2 = randomJobs.second
       @job3 = randomJobs.third
+      if @user.completed == false
+        @user.update_attribute(:completed, true)
+      end
     elsif current_company
       @job_array = []
       @app_array = []

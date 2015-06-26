@@ -27,6 +27,10 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def jobs
+
+  end
+
   def volunteer
 
   end

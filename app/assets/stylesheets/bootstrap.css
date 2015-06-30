@@ -2259,6 +2259,19 @@ th {
   border-top: 1px solid #ddd;
 }
 
+.table.yellowtable > thead > tr > th,
+.table.yellowtable > tbody > tr > th,
+.table.yellowtable > tfoot > tr > th,
+.table.yellowtable > thead > tr > td,
+.table.yellowtable > tbody > tr > td,
+.table.yellowtable > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #000000;
+}
+
+
 .table.bluetable > thead > tr > th,
 .table.bluetable > tbody > tr > th,
 .table.bluetable > tfoot > tr > th,
@@ -2278,6 +2291,11 @@ th {
 }
 
 .table.bluetable > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid black;
+}
+
+.table.yellowtable > thead > tr > th {
     vertical-align: bottom;
     border-bottom: 2px solid black;
 }

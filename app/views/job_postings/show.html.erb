@@ -16,14 +16,16 @@
       <div class="col-md-2 tancolor" style="height: 200px">
 
       </div>
-      <div class="col-md-2 div_button" style="padding: 0; width: 200px">
-        <%= link_to @jobposting.company, class: 'disable_hover' do %>
-            <% if @jobposting.company.picture?%>
-                <%= image_tag @jobposting.company.picture.url, class: "img-responsive imgbutton", width: 200 %>
-            <% else %>
-                <%= image_tag "no_company_pic.png", class: "img-responsive imgbutton", width: 200 %>
-            <% end %>
-        <% end %>
+      <div class="col-md-2" style="padding: 0">
+        <div class="centerframe200">
+          <%= link_to @jobposting.company, class: 'disable_hover' do %>
+              <% if @jobposting.company.picture?%>
+                  <%= image_tag @jobposting.company.picture.url, class: "img-responsive centerimg200_2 hw200 imgbutton div_button" %>
+              <% else %>
+                  <%= image_tag "no_company_pic.png", class: "img-responsive centerimg200_2 hw200 imgbutton div_button" %>
+              <% end %>
+          <% end %>
+        </div>
       </div>
       <div class="col-md-2">
 

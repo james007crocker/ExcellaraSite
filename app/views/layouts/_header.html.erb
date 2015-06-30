@@ -37,11 +37,11 @@
             <li>
               <div class="centerframe">
                 <% if current_user.picture?%>
-                    <%= image_tag current_user.picture.url, class: "img-responsive centerimg", width: 40, height: 40 %>
+                    <%= image_tag current_user.picture.url, class: "img-responsive centerimg hw40" %>
                 <% elsif !(current_user.profileurl.nil? || current_user.profileurl.blank?) %>
-                    <%= image_tag current_user.profileurl, class: "img-responsive centerimg", width: 40, height: 40 %>
+                    <%= image_tag current_user.profileurl, class: "img-responsive centerimg hw40" %>
                 <% else %>
-                    <%= image_tag "no_profile.png", class: "img-responsive centerimg", width: 40, height: 40  %>
+                    <%= image_tag "no_profile.png", class: "img-responsive centerimg hw40" %>
                 <% end %>
               </div>
             </li>
@@ -74,9 +74,9 @@
             <li>
               <div class="centerframe">
                 <% if current_company.picture?%>
-                    <%= image_tag current_company.picture.url, class: "img-responsive centerimg", width: 40, height: 40 %>
+                    <%= image_tag current_company.picture.url, class: "img-responsive centerimg centerimg hw40" %>
                 <% else %>
-                    <%= image_tag "no_company_pic.png", class: "img-responsive centerimg", width: 40, height: 40  %>
+                    <%= image_tag "no_company_pic.png", class: "img-responsive centerimg centerimg hw40" %>
                 <% end %>
               </div>
             </li>

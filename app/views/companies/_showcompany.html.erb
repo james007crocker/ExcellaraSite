@@ -6,11 +6,11 @@
     <h1 class="userheaderfont" style="padding-left: 20%"><%= @company.name.upcase unless @company.name.blank? %></h1>
   </div>
   <div class="row tancolor" style="z-index: 6">
-    <div class="col-md-3">
+    <div class="col-md-3 centerframe300">
       <% if @company.picture?%>
-          <%= image_tag @company.picture.url, class: "img-responsive", width: 300, height: 300 %>
+          <%= image_tag @company.picture.url, class: "img-responsive centerimg hw300" %>
       <% else %>
-          <%= image_tag "no_company_pic.png", class: "img-responsive", width: 300, height: 300  %>
+          <%= image_tag "no_company_pic.png", class: "img-responsive centerimg hw300" %>
       <% end %>
     </div>
     <div class="col-md-8 tancolor" style="padding-top: 20px">

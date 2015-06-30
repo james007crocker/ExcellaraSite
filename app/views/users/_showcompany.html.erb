@@ -30,13 +30,13 @@
     <div class="col-md-10 nopadding" style="background-color: #EEE6DB">
       <table width="100%">
         <tr>
-          <td width="160px">
+          <td class="centerframe150" style="width: 160px; height: 150px">
             <% if @user.picture? %>
-                <%= image_tag @user.picture.url, class: "img-responsive", width: 150, height: 150 %>
+                <%= image_tag @user.picture.url, class: "img-responsive centerimg150 hw150" %>
             <% elsif !(@user.profileurl.nil? || @user.profileurl.blank?) %>
-                <%= image_tag @user.profileurl, class: "img-responsive", width: 150, height: 150 %>
+                <%= image_tag @user.profileurl, class: "img-responsive centerimg150 hw150" %>
             <% else %>
-                <%= image_tag "no_profile.png", class: "img-responsive", width: 150, height: 150  %>
+                <%= image_tag "no_profile.png", class: "img-responsive centerimg150 hw150"  %>
             <% end %>
           </td>
           <td style="position: relative">

@@ -5,14 +5,14 @@
   <div class="row">
     <h1 class="userheaderfont" style="padding-left: 20%"><%=  @user.name unless @user.name.blank? %>  <%= @user.lastname unless @user.lastname.blank? %></h1>
   </div>
-  <div class="row tancolor" style="z-index: 6">
-    <div class="col-md-3">
+  <div class="row tancolor" style="z-index: 6; height: 300px;">
+    <div class="col-md-3 centerframe300">
       <% if @user.picture?%>
-          <%= image_tag @user.picture.url, class: "img-responsive", width: 300, height: 300 %>
+          <%= image_tag @user.picture.url, class: "img-responsive centerimg hw300" %>
       <% elsif !(@user.profileurl.nil? || @user.profileurl.blank?) %>
-          <%= image_tag @user.profileurl, class: "img-responsive", width: 300, height: 300 %>
+          <%= image_tag @user.profileurl, class: "img-responsive centerimg hw300" %>
       <% else %>
-          <%= image_tag "no_profile.png", class: "img-responsive", width: 300, height: 300 %>
+          <%= image_tag "no_profile.png", class: "img-responsive centerimg hw300" %>
       <% end %>
     </div>
     <div class="col-md-8 tancolor" style="padding-top: 20px">

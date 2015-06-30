@@ -82,11 +82,37 @@
   font-weight: 200;
 }
 
+.narrowfont3_1 {
+  letter-spacing: 0px;
+  font-size: 2em;
+  font-weight: 200;
+}
+
+.narrowfont3_2 {
+  letter-spacing: 0px;
+  font-size: 1em;
+  font-weight: 200;
+}
+
 .narrowfont4 {
   letter-spacing: 4px;
   font-size: 2em;
   font-weight: 100;
 }
+
+
+.narrowfont4_1 {
+  letter-spacing: 2px;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.narrowfont4_2 {
+  letter-spacing: 2px;
+  font-size: 12px;
+  font-weight: 100;
+}
+
 .narrowfont5 {
   letter-spacing: 2px;
   font-weight: 200;
@@ -812,6 +838,15 @@ div .buttongrey:hover {
   }
 }
 
+.table-hover.yellowtable {
+  > tbody > tr:hover {
+    > td,
+    > th {
+      background-color: #FFF974;
+    }
+  }
+}
+
 .badgecolor {
   background-color: deeppink;
 }
@@ -819,6 +854,27 @@ div .buttongrey:hover {
 .centerframe {
   height: 50px;
   width: 50px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.centerframe300 {
+  height: 300px;
+  width: 300px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.centerframe150 {
+  height: 150px;
+  width: 150px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.centerframe200 {
+  height: 200px;
+  width: 200px;
   white-space: nowrap;
   text-align: center;
 }
@@ -838,3 +894,70 @@ div .buttongrey:hover {
   margin: auto;
 }
 
+.centerimg200_2 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+.centerimg200 {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.centerimg150 {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.centerimg100 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.hw300 {
+  width: auto;
+  max-width: 300px;
+  height: auto;
+  max-height: 300px;
+}
+
+.hw200 {
+  width: auto;
+  max-width: 200px;
+  height: auto;
+  max-height: 200px;
+}
+
+.hw150 {
+  width: auto;
+  max-width: 150px;
+  height: auto;
+  max-height: 150px;
+}
+
+.hw100 {
+  width: auto;
+  max-width: 100px;
+  height: auto;
+  max-height: 100px;
+}
+
+.hw40 {
+  width: auto;
+  max-width: 40px;
+  height: auto;
+  max-height: 40px;
+}

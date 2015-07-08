@@ -86,6 +86,7 @@ class CompaniesController < ApplicationController
 
 
   def adminportal
+    @Uincomplete = User.where(:completed => false)
     @UApproved = User.where(:status => 2).count
     @UWait = User.where(:status => 1).count
     @UNew = User.where(:status => 0, :completed => true).count

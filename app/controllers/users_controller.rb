@@ -58,7 +58,7 @@ class UsersController < ApplicationController
       #    @apps << f
       #  end
       #end
-      if @user.status != 0
+      if @user.status != 2
         randomJobs= JobPosting.order("RANDOM()")
         @job1 = randomJobs.first
         @job2 = randomJobs.second

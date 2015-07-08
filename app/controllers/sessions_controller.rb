@@ -26,7 +26,11 @@ class SessionsController < ApplicationController
           if company.activated?
             company_log_in company
             params[:session][:remember_me] == '1' ? remember_company(company) : forget_company(company)
-            redirect_back_or company
+            if company.admin == true
+              redirect_to adminportal_companies_path
+            else
+              redirect_back_or company
+            end
           else
             message = "Account not activated. "
             message += "Check your email for activation link."
@@ -84,4 +88,5 @@ class SessionsController < ApplicationController
         end
       end
     end
+
 end

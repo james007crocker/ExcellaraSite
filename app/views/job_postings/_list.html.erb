@@ -20,15 +20,19 @@
       <% job_postings.each do |job| %>
           <%= link_to job, class: 'disable_hover' do %>
             <div class="row div_button rowcolor<%= num %> rowcolor<%= num %>button" style="height: 230px; overflow: hidden">
-              <div class="col-md-4">
+              <div class="col-md-5">
                 <table>
                   <tr>
                     <td width="115px">
-                      <div style="margin-top: 15px" class="centerframe100">
+                      <div class="centerframe100" style="margin-top: 15px">
+                        <span style="display: inline-block; height: 100%; vertical-align: middle"></span>
+                      <!--<div style="margin-top: 15px" class="centerframe100">-->
                         <% if job.company.picture?%>
-                            <%= image_tag job.company.picture.url, class: "img-responsive hw100"%>
+                            <%= image_tag job.company.picture.url, class: "hw100" %>
+                            <%# image_tag job.company.picture.url, class: "img-responsive hw100"%>
                         <% else %>
-                            <%= image_tag "no_company_pic.png", class: "img-responsive hw100" %>
+                            <%= image_tag "no_company_pic.png", class: "hw100"  %>
+                            <%# image_tag "no_company_pic.png", class: "img-responsive hw100" %>
                         <% end %>
                       </div>
                     </td>
@@ -53,7 +57,7 @@
                   </tr>
                 </table>
               </div>
-              <div class="col-md-8" style="height: 230px">
+              <div class="col-md-7" style="height: 230px">
                 <div class="paragraph" style="vertical-align: middle; padding-top: 50px">
                   <% if !job.description.blank? && job.description.size() > 500 %>
                       <p><%= job.description[0..500] + "......" %></p>

@@ -34,6 +34,11 @@ Rails.application.routes.draw do
     collection do
       get 'activity'
       get 'viewprofile'
+      get 'adminportal'
+      get 'adminprofessionals'
+      get 'admincompanies'
+      get 'adminjobs'
+      get 'adminapplications'
     end
   end
 

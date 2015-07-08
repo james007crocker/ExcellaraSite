@@ -36,24 +36,35 @@ class JobPostingsController < ApplicationController
   def joblist
     #@job_postings = JobPosting.paginate(page: params[:page], per_page: 10)
 
-    @filterrific = initialize_filterrific(
-        JobPosting,
-        params[:filterrific],
-        select_options: {
-            sorted_by: JobPosting.options_for_sorted_by,
-            with_location: getCities,
-            with_sector: getType
-        }#,
-        #persistence_id: 'shared_key',
-        #default_filter_params: {},
-        #available_filters: [],
-    ) or return
+    if current_user.status == 0
+      flash[:danger] = "Your profile is awaiting approval. This process can take up to 48 hours to complete."
+      redirect_to current_user
+    elsif current_user.status == 1
+      flash[:danger] = "Your profile is awaiting approval. This process can take a few days to complete. We appreciate your patiencel."
+      redirect_to current_user
+    else
+      @filterrific = initialize_filterrific(
+          JobPosting,
+          params[:filterrific],
+          select_options: {
+              sorted_by: JobPosting.options_for_sorted_by,
+              with_location: getCities,
+              with_sector: getType
+          }#,
+          #persistence_id: 'shared_key',
+          #default_filter_params: {},
+          #available_filters: [],
+      ) or return
 
-    @job_postings = @filterrific.find.page(params[:page])
-    respond_to do |format|
-      format.html
-      format.js
+      @job_postings = @filterrific.find.page(params[:page])
+
+
+      respond_to do |format|
+        format.html
+        format.js
     end
+
+  end
 
   rescue ActiveRecord::RecordNotFound => e
     # There is an issue with the persisted param_set. Reset it.

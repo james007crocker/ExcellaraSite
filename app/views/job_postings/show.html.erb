@@ -6,16 +6,24 @@
     </div>
     <div class="row">
       <div class="col-md-2">
-
+        <h3><%= link_to "< Back", 'javascript:history.go(-1);' %></h3>
       </div>
       <div class="col-md-8">
-        <h1 class="jobindexfont"><%= @jobposting.title.upcase unless@jobposting.title.blank? %></h1>
+        <h1 class="jobindexfont"><%= @jobposting.title.upcase unless @jobposting.title.blank? %></h1>
       </div>
     </div>
     <div class="row" style="background-color: #F6F2EC">
       <div class="col-md-2 tancolor" style="height: 200px">
 
       </div>
+      <!--<div class="col-md-2 div_button" style="padding: 0; width: 200px">-->
+          <%# link_to @jobposting.company, class: 'disable_hover' do %>
+            <%# if @jobposting.company.picture?%>
+               <%# image_tag @jobposting.company.picture.url, class: "img-responsive imgbutton", width: 200 %>
+            <%# else %>
+              <%# image_tag "no_company_pic.png", class: "img-responsive imgbutton", width: 200 %>
+            <%# end %>
+          <%# end %>
       <div class="col-md-2" style="padding: 0">
         <div class="centerframe200">
           <%= link_to @jobposting.company, class: 'disable_hover' do %>

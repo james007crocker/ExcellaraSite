@@ -4,7 +4,11 @@
       <% if user_logged_in? %>
           <%= link_to image_tag( "horizontal_black.png", height: "45px", style: "margin-top: 2px"), current_user%>
       <% elsif company_logged_in? %>
-          <%= link_to image_tag( "horizontal_black.png", height: "45px", style: "margin-top: 2px"), current_company%>
+          <% if current_company.admin == false %>
+            <%= link_to image_tag( "horizontal_black.png", height: "45px", style: "margin-top: 2px"), current_company %>
+          <% else %>
+              <%= link_to image_tag( "horizontal_black.png", height: "45px", style: "margin-top: 2px"), adminportal_companies_path %>
+          <% end %>
       <% else %>
           <%= link_to image_tag( "horizontal_black.png", height: "45px", style: "margin-top: 2px"), root_path%>
       <% end %>
@@ -37,49 +41,62 @@
             <li>
               <div class="centerframe">
                 <% if current_user.picture?%>
+                    <%# image_tag current_user.picture.url, class: "img-responsive centerimg", width: 40, height: 40 %>
                     <%= image_tag current_user.picture.url, class: "img-responsive centerimg hw40" %>
                 <% elsif !(current_user.profileurl.nil? || current_user.profileurl.blank?) %>
+                    <%# image_tag current_user.profileurl, class: "img-responsive centerimg", width: 40, height: 40 %>
                     <%= image_tag current_user.profileurl, class: "img-responsive centerimg hw40" %>
                 <% else %>
+                    <%# image_tag "no_profile.png", class: "img-responsive centerimg", width: 40, height: 40  %>
                     <%= image_tag "no_profile.png", class: "img-responsive centerimg hw40" %>
                 <% end %>
               </div>
             </li>
 
         <% elsif company_logged_in? %>
-            <li class="headermenufont"><%= link_to "POST JOB",   new_job_posting_path %></li>
-            <!--<li class="headermenufont"><%= link_to "MY JOBS",   job_postings_path %></li>-->
-            <li class="headermenufont"><%= link_to "PROFESSIONALS",   users_path %></li>
-            <li class="headermenufont"><%= link_to activity_companies_path(current_company) do %>
-            MANAGE
-              <% activeCount2 = current_company.totalalerts %>
-              <% if activeCount2 > 0 %>
-                <span class="badge badgecolor"><%= activeCount2 %></span>
-              <% end %>
-            <% end %>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%= current_company.name %> <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-            <li class="headermenufont"><%= link_to "HOME", current_company %></li>
-            <li class="headermenufont"><%= link_to "PROFILE", viewprofile_companies_path(id: current_company.id) %></li>
-            <li class="headermenufont"><%= link_to "EDIT PROFILE", edit_company_path(current_company) %></li>
-            <li class="divider"></li>
-            <li class="headermenufont"><a href="mailto:admin@excellara.com">HELP</a></li>
-            <li class="headermenufont"><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
-              </ul>
-            </li>
-            <li>
-              <div class="centerframe">
-                <% if current_company.picture?%>
-                    <%= image_tag current_company.picture.url, class: "img-responsive centerimg centerimg hw40" %>
-                <% else %>
-                    <%= image_tag "no_company_pic.png", class: "img-responsive centerimg centerimg hw40" %>
+            <% if current_company.admin == false %>
+                <li class="headermenufont"><%= link_to "POST JOB",   new_job_posting_path %></li>
+                <!--<li class="headermenufont"><%= link_to "MY JOBS",   job_postings_path %></li>-->
+                <li class="headermenufont"><%= link_to "PROFESSIONALS",   users_path %></li>
+                <li class="headermenufont"><%= link_to activity_companies_path(current_company) do %>
+                MANAGE
+                  <% activeCount2 = current_company.totalalerts %>
+                  <% if activeCount2 > 0 %>
+                    <span class="badge badgecolor"><%= activeCount2 %></span>
+                  <% end %>
                 <% end %>
-              </div>
-            </li>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <%= current_company.name %> <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                <li class="headermenufont"><%= link_to "HOME", current_company %></li>
+                <li class="headermenufont"><%= link_to "PROFILE", viewprofile_companies_path(id: current_company.id) %></li>
+                <li class="headermenufont"><%= link_to "EDIT PROFILE", edit_company_path(current_company) %></li>
+                <li class="divider"></li>
+                <li class="headermenufont"><a href="mailto:admin@excellara.com">HELP</a></li>
+                <li class="headermenufont"><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
+                  </ul>
+                </li>
+                <li>
+                  <div class="centerframe">
+                    <% if current_company.picture?%>
+                        <%# image_tag current_company.picture.url, class: "img-responsive centerimg", width: 40, height: 40 %>
+                        <%= image_tag current_company.picture.url, class: "img-responsive centerimg centerimg hw40" %>
+                    <% else %>
+                        <%# image_tag "no_company_pic.png", class: "img-responsive centerimg", width: 40, height: 40  %>
+                        <%= image_tag "no_company_pic.png", class: "img-responsive centerimg centerimg hw40" %>
+                    <% end %>
+                  </div>
+                </li>
+            <% else %>
+                <li class="headermenufont"><%= link_to "PROFESSIONALS",   adminprofessionals_companies_path %></li>
+                <li class="headermenufont"><%= link_to "COMPANIES",   admincompanies_companies_path %></li>
+                <li class="headermenufont"><%= link_to "JOBS",   adminjobs_companies_path %></li>
+                <li class="headermenufont"><%= link_to "APPLICATIONS",   adminapplications_companies_path %></li>
+                <li><%= link_to "LOGOUT", logout_path, method: "delete", style: "color: mediumvioletred" %></li>
+            <% end %>
         <% else %>
             <li class="headermenufont"><%= link_to "HOME",   root_path %></li>
             <li class="headermenufont"><%= link_to "HOW IT WORKS",   how_it_works_path %></li>

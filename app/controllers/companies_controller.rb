@@ -4,6 +4,8 @@ class CompaniesController < ApplicationController
   before_action :correct_company, only: [:edit, :update]
   before_action :can_view_profile, only: [:show]
   before_action :can_view_pages, only:  [:activity, :viewprofile]
+  before_action :isadmin?, only: [:adminportal, :admincompanies, :adminjobs, :adminapplications]
+
   def new
     @company = Company.new
   end
@@ -11,7 +13,7 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     if current_company?(@company)
-      randomUsers = User.where(:completed => true).order("RANDOM()")
+      randomUsers = User.where(:status => 2).order("RANDOM()")
       @user1 = randomUsers.first
       @user2 = randomUsers.second
       @user3 = randomUsers.third
@@ -82,6 +84,47 @@ class CompaniesController < ApplicationController
     end
   end
 
+
+  def adminportal
+    @UApproved = User.where(:status => 2).count
+    @UWait = User.where(:status => 1).count
+    @UNew = User.where(:status => 0, :completed => true).count
+  end
+
+  def adminprofessionals
+    if params[:delete] == "true"
+      User.find_by(id: params[:user_id]).destroy
+      #flash[:success] = "Professional Deleted"
+    elsif params[:approve] == "true"
+      User.find_by(id: params[:user_id]).update_attribute(:status, 2)
+      #flash[:success] = "Professional Approved"
+    elsif params[:waitlist] == "true"
+      User.find_by(id: params[:user_id]).update_attribute(:status, 1)
+      #flash[:success] = "Professional Approved"
+    end
+    @news = User.where(:status => 0, :completed => true).paginate(page: params[:news_page], per_page: 5)
+    @waitlisteds = User.where(:status => 1).paginate(page: params[:waitlisteds_page], per_page: 5)
+    @approveds = User.where(:status => 2).paginate(page: params[:approveds_page], per_page: 5)
+    @notcompletes = User.where(:completed => false).paginate(page: params[:notcompletes_page], per_page: 5)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def admincompanies
+
+  end
+
+  def adminjobs
+
+  end
+
+  def adminapplications
+
+  end
+
   private
 
     def company_params
@@ -138,6 +181,13 @@ class CompaniesController < ApplicationController
       unless CompanyProfileIsComplete?
         flash[:danger] = "Please complete your profile before proceeding"
         redirect_to edit_company_path(current_company)
+      end
+    end
+
+    def isadmin?
+      unless current_company && current_company.admin == true
+        flash[:danger] = "You do not have permission to view this page."
+        redirect_to root_url
       end
     end
 

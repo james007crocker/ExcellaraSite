@@ -76,42 +76,49 @@
       <% users.each do |user| %>
           <%= link_to user, class: 'disable_hover' do %>
               <div class="row div_button rowcolor<%= num %> rowcolor<%= num %>button" style="height: 230px; overflow: hidden">
-                <div class="col-md-4">
-                  <table>
-                    <tr>
-                      <td width="115px">
-                        <div class="centerframe100" style="margin-top: 15px">
+                <div class="col-md-5">
+                  <table style="table-layout: fixed">
+                    <tr style="height: 100px">
+                      <td  style="padding-top: 15px" width="115px">
+                        <div style="overflow: hidden; width: 100px; height: 100px">
+                        <!--<div class="centerframe100" style="margin-top: 15px">-->
                           <% if user.picture?%>
-                              <%= image_tag user.picture.url, class: "img-responsive  hw100" %>
+                              <%= image_tag user.picture.url, class: "img-responsive" %>
+                              <%# image_tag user.picture.url, class: "img-responsive  hw100" %>
                           <% elsif !(user.profileurl.nil? || user.profileurl.blank?) %>
-                              <%= image_tag user.profileurl, class: "img-responsive  hw100" %>
+                              <%= image_tag user.profileurl, class: "img-responsive" %>
+                              <%# image_tag user.profileurl, class: "img-responsive  hw100" %>
                           <% else %>
-                              <%= image_tag "no_profile.png", class: "img-responsive hw100"  %>
+                              <%= image_tag "no_profile.png", class: "img-responsive" %>
+                              <%# image_tag "no_profile.png", class: "img-responsive hw100"  %>
                           <% end %>
                         </div>
                       </td>
-                      <td>
-                        <% fullname = user.name + user.lastname %>
-                        <% if fullname.length < 15 %>
+                      <td style="padding-top: 15px; overflow: hidden">
+                        <h1 class="narrowfont6"><%= user.name %> <%= user.lastname %></h1>
+                        <!--<%# fullname = user.name + user.lastname %>
+                        <%# if fullname.length < 15 %>
                             <h1 class="narrowfont3"><%= user.name %> <%= user.lastname %></h1>
-                        <% elsif fullname.length < 25 %>
+                        <%# elsif fullname.length < 25 %>
                             <h1 class="narrowfont3_1"><%= user.name %> <%= user.lastname %></h1>
-                        <% else %>
+                        <%# else %>
                             <h1 class="narrowfont3_2"><%= user.name %> <%= user.lastname %></h1>
-                        <% end %>
+                        <%# end %>-->
                       </td>
                     </tr>
                     <tr>
-                      <td colspan="2">
-                        <% unless user.profession.blank? %>
-                            <% if user.profession.length < 19 %>
+                      <td class="narrowfont4" colspan="2">
+                        <h4><%= user.profession unless user.profession.blank? %></h4>
+                      <!--<td colspan="2">
+                        <%# unless user.profession.blank? %>
+                            <%# if user.profession.length < 19 %>
                                 <p class="narrowfont4"><%= user.profession   %></p>
-                            <% elsif user.profession.length < 35 %>
+                            <%# elsif user.profession.length < 35 %>
                                 <p class="narrowfont4_1"><%= user.profession %></p>
-                            <% else %>
+                            <%# else %>
                                 <p class="narrowfont4_2"><%= user.profession %></p>
-                            <% end %>
-                        <% end %>
+                            <%# end %>
+                        <%# end %>-->
                       </td>
                     </tr>
                     <tr>
@@ -126,10 +133,10 @@
                     </tr>
                   </table>
                 </div>
-                <div class="col-md-8" style="height: 230px">
+                <div class="col-md-7" style="height: 230px">
                   <div class="paragraph" style="vertical-align: middle; padding-top: 50px">
-                    <% if !user.experience.blank? && user.experience.size() > 500 %>
-                        <p><%= user.experience[0..500] + "......" unless user.experience.blank? %></p>
+                    <% if !user.experience.blank? && user.experience.size() > 400 %>
+                        <p><%= user.experience[0..400] + "......" unless user.experience.blank? %></p>
                     <% else %>
                         <p><%= user.experience unless user.experience.blank? %></p>
                     <% end %>

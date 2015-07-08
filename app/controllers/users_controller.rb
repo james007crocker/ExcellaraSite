@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if current_user.admin?
+    if current_user && current_user.admin?
       User.find(params[:id]).destroy
       flash[:success] = "User Deleted"
       redirect_to users_url
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def index
     @filterrific = initialize_filterrific(
-        User.where(:completed => true),
+        User.where(:status => 2),
         params[:filterrific],
         select_options: {
             sorted_by: User.options_for_sorted_by,
@@ -58,10 +58,15 @@ class UsersController < ApplicationController
       #    @apps << f
       #  end
       #end
-      randomJobs= JobPosting.order("RANDOM()")
-      @job1 = randomJobs.first
-      @job2 = randomJobs.second
-      @job3 = randomJobs.third
+      if @user.status != 0
+        randomJobs= JobPosting.order("RANDOM()")
+        @job1 = randomJobs.first
+        @job2 = randomJobs.second
+        @job3 = randomJobs.third
+      else
+        @job1 = @job2  = @job3 = nil
+      end
+
       if @user.completed == false
         @user.update_attribute(:completed, true)
       end

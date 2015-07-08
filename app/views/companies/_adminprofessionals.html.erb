@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col-md-6 col-centered" style="padding-top: 50px">
+
+    <h1 style="text-align: center">Not Completed</h1>
+    <table class="table table-hover" style="background-color: lightblue">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Time Since Sign Up</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @notcompletes.each do |new| %>
+          <tr>
+            <td><%= new.name + " " + new.lastname %></td>
+            <td><%= new.email %></td>
+            <td><%= time_ago_in_words(new.created_at) %></td>
+            <td style="color: red"><%= link_to "Delete", { controller: "companies", action: "adminprofessionals", delete: true, user_id: new.id }, remote: true %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @notcompletes, :param_name => 'notcompletes_page' %>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-centered">
+    <h1 style="text-align: center">Awaiting Approval</h1>
+    <table class="table table-hover" style="background-color: lightyellow">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Location</th>
+        <th>Industry</th>
+        <th>Title</th>
+        <th>Years Experience</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @news.each do |new| %>
+          <tr>
+            <td><%= new.name + " " + new.lastname %></td>
+            <td><%= new.email %></td>
+            <td><%= new.location + ", " + new.province %></td>
+            <td><%= new.sector %></td>
+            <td><%= new.profession %></td>
+            <td><%= new.years %></td>
+            <td><%= link_to "View", new %> | <%= link_to "Approve", { controller: "companies", action: "adminprofessionals", approve: true, user_id: new.id }, remote: true %> |
+              <%= link_to "Waitlist", { controller: "companies", action: "adminprofessionals", waitlist: true, user_id: new.id }, remote: true %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @news, :param_name => 'news_page' %>
+
+
+    <h1 style="text-align: center">Waitlisted</h1>
+    <table class="table table-hover" style="background-color: lightcoral">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Location</th>
+        <th>Industry</th>
+        <th>Title</th>
+        <th>Years Experience</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @waitlisteds.each do |new| %>
+          <tr>
+            <td><%= new.name + " " + new.lastname %></td>
+            <td><%= new.email %></td>
+            <td><%= new.location + ", " + new.province %></td>
+            <td><%= new.sector %></td>
+            <td><%= new.profession %></td>
+            <td><%= new.years %></td>
+            <td><%= link_to "View", new %> | <%= link_to "Approve", { controller: "companies", action: "adminprofessionals", approve: true, user_id: new.id }, remote: true %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @waitlisteds, :param_name => 'waitlisteds_page' %>
+
+    <h1 style="text-align: center">Approved</h1>
+    <table class="table table-hover" style="background-color: lightgreen">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Location</th>
+        <th>Industry</th>
+        <th>Title</th>
+        <th>Years Experience</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @approveds.each do |new| %>
+          <tr>
+            <td><%= new.name + " " + new.lastname %></td>
+            <td><%= new.email %></td>
+            <td><%= new.location + ", " + new.province %></td>
+            <td><%= new.sector %></td>
+            <td><%= new.profession %></td>
+            <td><%= new.years %></td>
+            <td><%= link_to "View", new %> | <%= link_to "Waitlist", { controller: "companies", action: "adminprofessionals", waitlist: true, user_id: new.id }, remote: true %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @approveds, :param_name => 'approveds_page' %>
+
+  </div>
+</div>

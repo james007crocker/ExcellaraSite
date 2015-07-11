@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  before_action :can_view_pages, only: [:destroy]
 
   def new
   end

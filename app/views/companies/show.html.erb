@@ -2,11 +2,11 @@
     <div class="accommodate_alert"></div>
 <% end %>
 
-<% if current_company %>
+<% if current_company?(@company) %>
 
     <%= render partial: 'companies/showcompany' %>
 
-<% elsif current_user %>
+<% elsif current_user || current_company.admin == true %>
 
     <%= render partial: 'companies/showuser' %>
 

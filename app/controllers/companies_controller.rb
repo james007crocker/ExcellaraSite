@@ -13,29 +13,41 @@ class CompaniesController < ApplicationController
   def show
     @company = Company.find(params[:id])
     if current_company?(@company)
-      randomUsers = User.where(:status => 2).order("RANDOM()")
-      @user1 = randomUsers.first
-      @user2 = randomUsers.second
-      @user3 = randomUsers.third
+      if @company.admin == true
+        redirect_to adminportal_companies_path
+      else
 
-      if @company.totalalerts == 0
-        @company.job_postings.each do |job|
-          if job.matchcount > 0
-            job.update_attribute(:matchcount, 0)
-          end
-          if job.offercount > 0
-            job.update_attribute(:offercount, 0)
-          end
+        if @company.completed == false
+          @company.update_attribute(:completed, true)
         end
+
+        #if @company.status == 2
+          randomUsers = User.where(:status => 2).order("RANDOM()")
+          @user1 = randomUsers.first
+          @user2 = randomUsers.second
+          @user3 = randomUsers.third
+
+          if @company.totalalerts == 0
+            @company.job_postings.each do |job|
+              if job.matchcount > 0
+                job.update_attribute(:matchcount, 0)
+              end
+              if job.offercount > 0
+                job.update_attribute(:offercount, 0)
+              end
+            end
+          #end
+          #@apps = []
+          #appsMatchUser = Applicant.where("company_id = ?", @company.id)
+          #appsMatchUser.each do |f|
+          #  if Time.now - f.updated_at < 7.days
+          #    @apps << f
+          #  end
+          #end
+        end
+
       end
-      #@apps = []
-      #appsMatchUser = Applicant.where("company_id = ?", @company.id)
-      #appsMatchUser.each do |f|
-      #  if Time.now - f.updated_at < 7.days
-      #    @apps << f
-      #  end
-      #end
-    elsif current_user
+    elsif current_user || current_company.admin == true
       @jobs = JobPosting.where(:company_id => @company.id)
     end
   end
@@ -90,6 +102,11 @@ class CompaniesController < ApplicationController
     @UApproved = User.where(:status => 2).count
     @UWait = User.where(:status => 1).count
     @UNew = User.where(:status => 0, :completed => true).count
+
+    @Cincomplete = Company.where(:completed => false, :admin => false).count
+    @Capproved = Company.where(:status => 2, :admin => false).count
+    @Cwait = Company.where(:status => 1, :admin => false).count
+    @Cnew = Company.where(:status => 0, :completed => false, :admin => false).count
   end
 
   def adminprofessionals
@@ -115,15 +132,32 @@ class CompaniesController < ApplicationController
   end
 
   def admincompanies
+    if params[:delete] == "true"
+      Company.find_by(id: params[:user_id]).destroy
+      #flash[:success] = "Professional Deleted"
+    elsif params[:approve] == "true"
+      Company.find_by(id: params[:user_id]).update_attribute(:status, 2)
+      #flash[:success] = "Professional Approved"
+    elsif params[:waitlist] == "true"
+      Company.find_by(id: params[:user_id]).update_attribute(:status, 1)
+      #flash[:success] = "Professional Approved"
+    end
 
+    @Cincompletes = Company.where(:completed => false, :admin => false).paginate(page: params[:notcompletes_page], per_page: 5)
+    @Cnews = Company.where(:completed => true, :status => 0, :admin => false).paginate(page: params[:news_page], per_page: 5)
+    @Cwaits = Company.where(:status => 1, :admin => false).paginate(page: params[:waitlisteds_page], per_page: 5)
+    @Capproveds = Company.where(:status => 2, :admin => false).paginate(page: params[:approveds_page], per_page: 5)
   end
 
   def adminjobs
-
+    if params[:delete] == "true"
+      JobPosting.find_by(id: params[:job_id]).destroy
+    end
+    @jobs = JobPosting.all.order('created_at DESC').paginate(page: params[:jobs_page], per_page: 10) #This is temporary solution
   end
 
   def adminapplications
-
+    @apps = Applicant.all.order('created_at DESC').paginate(page: params[:apps_page], per_page: 10) #This is temporary solution
   end
 
   private

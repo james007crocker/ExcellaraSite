@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-md-6 col-centered" style="padding-top: 50px">
+
+    <h1 style="text-align: center">Not Completed</h1>
+    <table class="table table-hover" style="background-color: lightblue">
+      <thead>
+      <tr>
+        <th>Company</th>
+        <th>Email</th>
+        <th>Time Since Sign Up</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @Cincompletes.each do |inc| %>
+          <tr>
+            <td><%= inc.name %></td>
+            <td><%= inc.email %></td>
+            <td><%= time_ago_in_words(inc.created_at) %></td>
+            <td style="color: red"><%= link_to "Delete", { controller: "companies", action: "admincompanies", delete: true, user_id: inc.id }, remote: true %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @Cincompletes, :param_name => 'notcompletes_page' %>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-centered">
+    <h1 style="text-align: center">Awaiting Approval</h1>
+    <table class="table table-hover" style="background-color: lightyellow">
+      <thead>
+      <tr>
+        <th>Company</th>
+        <th>Email</th>
+        <th>Location</th>
+         <th>Website</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @Cnews.each do |inc| %>
+          <tr>
+            <td><%= inc.name %></td>
+            <td><%= inc.email %></td>
+            <td><%= inc.location + ", " + inc.province %></td>
+            <td><%= inc.website %></td>
+            <td><%= link_to "View", inc %> | <%= link_to "Approve", { controller: "companies", action: "admincompanies", approve: true, user_id: inc.id }, remote: true %> |
+              <%= link_to "Waitlist", { controller: "companies", action: "admincompanies", waitlist: true, user_id: inc.id }, remote: true %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @Cnews, :param_name => 'news_page' %>
+
+
+    <h1 style="text-align: center">Waitlisted</h1>
+    <table class="table table-hover" style="background-color: lightcoral">
+      <thead>
+      <tr>
+        <th>Company</th>
+        <th>Email</th>
+        <th>Location</th>
+        <th>Website</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @Cwaits.each do |inc| %>
+          <tr>
+            <td><%= inc.name %></td>
+            <td><%= inc.email %></td>
+            <td><%= inc.location + ", " + inc.province %></td>
+            <td><%= inc.website %></td>
+            <td><%= link_to "View", inc %> | <%= link_to "Approve", { controller: "companies", action: "admincompanies", approve: true, user_id: inc.id }, remote: true %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @Cwaits, :param_name => 'waitlisteds_page' %>
+
+    <h1 style="text-align: center">Approved</h1>
+    <table class="table table-hover" style="background-color: lightgreen">
+      <thead>
+      <tr>
+        <th>Company</th>
+        <th>Email</th>
+        <th>Location</th>
+        <th>Website</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @Capproveds.each do |inc| %>
+          <tr>
+            <td><%= inc.name %></td>
+            <td><%= inc.email %></td>
+            <td><%= inc.location + ", " + inc.province %></td>
+            <td><%= inc.website %></td>
+            <td><%= link_to "View", inc %> | <%= link_to "Waitlist", { controller: "companies", action: "admincompanies", waitlist: true, user_id: inc.id }, remote: true %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @Capproveds, :param_name => 'approveds_page' %>
+
+  </div>
+</div>

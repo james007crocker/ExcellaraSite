@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706161012) do
+ActiveRecord::Schema.define(version: 20150711170651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20150706161012) do
     t.integer  "matchcount",        default: 0
     t.integer  "offercount",        default: 0
     t.integer  "totalalerts",       default: 0
+    t.boolean  "completed",         default: false
+    t.integer  "status",            default: 0
   end
 
   add_index "companies", ["email"], name: "index_companies_on_email", unique: true, using: :btree
@@ -62,8 +64,8 @@ ActiveRecord::Schema.define(version: 20150706161012) do
     t.string   "location"
     t.text     "description"
     t.integer  "company_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "views"
     t.string   "province"
     t.string   "type"
@@ -72,8 +74,9 @@ ActiveRecord::Schema.define(version: 20150706161012) do
     t.string   "length"
     t.boolean  "userreject"
     t.boolean  "companyreject"
-    t.integer  "matchcount",    default: 0
-    t.integer  "offercount",    default: 0
+    t.integer  "matchcount",      default: 0
+    t.integer  "offercount",      default: 0
+    t.integer  "applicantscount", default: 0
   end
 
   add_index "job_postings", ["company_id", "created_at"], name: "index_job_postings_on_company_id_and_created_at", using: :btree

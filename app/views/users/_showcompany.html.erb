@@ -60,7 +60,9 @@
                   <h5><%= pluralize(@user.years, 'YEAR').upcase + ' EXPERIENCE' unless @user.years.blank? %></h5>
                 </td>
                 <td>
-                  <%= button_tag "Suggest Job", class: "btn btn-success button_width addmargin", id: "buttonSuggest" if current_company.admin == false%>
+                  <% if current_company.status == 2 && current_company.admin == false %>
+                      <%= button_tag "Suggest Job", class: "btn btn-success button_width addmargin", id: "buttonSuggest" %>
+                  <% end %>
                 </td>
               </tr>
             </table>

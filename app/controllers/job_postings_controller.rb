@@ -25,7 +25,12 @@ class JobPostingsController < ApplicationController
   end
 
   def new
-    @jobpostings = JobPosting.new
+    if current_company.status != 2
+      flash[:danger] ="Your account is still awaiting approval. This process can take up to 24 hours. We appreciate your patience."
+      redirect_to current_company
+    else
+      @jobpostings = JobPosting.new
+    end
   end
 
   def index
@@ -74,11 +79,13 @@ class JobPostingsController < ApplicationController
   end
 
   def show
-    if !current_company.nil?
+    if !current_company.nil? && current_company.admin == false
       @jobposting = current_company.job_postings.find_by(id: params[:id])
     else
       @jobposting = JobPosting.find_by(id: params[:id])
-      @jobposting.update_attribute(:views, increment_view_count(@jobposting))
+      if current_user
+        @jobposting.update_attribute(:views, increment_view_count(@jobposting))
+      end
     end
   end
 

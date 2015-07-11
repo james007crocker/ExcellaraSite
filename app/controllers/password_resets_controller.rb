@@ -36,21 +36,31 @@ class PasswordResetsController < ApplicationController
       render 'edit'
     else
       if @receiver.kind_of? User
-        if @receiver.update_attributes(receiver_params)
-          user_log_in @receiver
-          flash[:success] = "Password has been reset."
-          redirect_to @receiver
+        p1 = params[:user][:password]
+        p2 = params[:user][:password_confirmation]
+        if check_password(p1, p2)
+          if @receiver.update_attribute(:password, p1)
+            user_log_in @receiver
+            flash[:success] = "Password has been reset."
+            redirect_to @receiver
+          else
+            render 'edit'
+          end
         else
           render 'edit'
         end
       elsif @receiver.kind_of? Company
-        if @receiver.update_attributes(receiver_params)
+        p1 = params[:company][:password]
+        p2 = params[:company][:password_confirmation]
+        if @receiver.update_attribute(:password, p1)
           company_log_in @receiver
           flash[:success] = "Password has been reset."
           redirect_to @receiver
         else
           render 'edit'
         end
+      else
+        render 'edit'
       end
     end
   end
@@ -89,6 +99,18 @@ class PasswordResetsController < ApplicationController
       if @receiver.password_reset_expired?
         flash[:danger] = "Password reset has expired."
         redirect_to new_password_reset_url
+      end
+    end
+
+    def check_password(p1, p2)
+      if p1 != p2
+        flash[:danger] = "Password and password confirmation do not match"
+        return false
+      elsif p1.length < 6
+        flash[:danger] = "Passwords must be greater than 6 characters"
+        return false
+      else
+        return true
       end
     end
 end

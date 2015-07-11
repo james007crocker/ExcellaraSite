@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-8 col-centered" style="padding-top: 50px">
+
+    <h1 style="text-align: center">All Applications</h1>
+    <table class="table table-hover" style="background-color: lightblue">
+      <thead>
+      <tr>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Professional</th>
+        <th>Date Applied</th>
+        <th>Company Status</th>
+        <th>Professional Status</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @apps.each do |app| %>
+        <% job = JobPosting.find_by(id: app.job_posting_id) %>
+        <% pro = User.find_by(id: app.user_id) %>
+        <% comp = Company.find_by(id: app.company_id) %>
+          <tr>
+            <td><%= job.title %></td>
+            <td><%= comp.name %></td>
+            <td><%= pro.name %> <%= pro.lastname %></td>
+            <td><%= time_ago_in_words(app.created_at) %></td>
+            <td>
+                <% if app.compAccept == TRUE %>
+                    Accepted
+                <% elsif app.compreject == TRUE %>
+                    Rejected
+                <% else %>
+                    Pending
+                <% end %>
+            </td>
+            <td>
+              <% if app.userAccept == TRUE %>
+                  Accepted
+              <% elsif app.userreject == TRUE %>
+                  Rejected
+              <% else %>
+                  Pending
+              <% end %>
+            </td>
+            <td><%= link_to "View Job", job  %> | <%= link_to "View Company", comp  %> | <%= link_to "View Professional", pro %> </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @apps, :param_name => 'apps_page' %>
+
+  </div>
+</div>

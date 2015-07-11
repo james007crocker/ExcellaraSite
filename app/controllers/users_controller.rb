@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :can_view_profile, only: [:show, :index]
   before_action :can_view_pages, only: [:index]
   before_action :checkAccountCompleteUser, only:  [:show, :viewprofile, :matched_jobs]
+
   def new
     @user = User.new
   end
@@ -58,7 +59,7 @@ class UsersController < ApplicationController
       #    @apps << f
       #  end
       #end
-      if @user.status != 2
+      if @user.status == 2
         randomJobs= JobPosting.order("RANDOM()")
         @job1 = randomJobs.first
         @job2 = randomJobs.second
@@ -227,6 +228,13 @@ class UsersController < ApplicationController
           flash[:danger] = "Please complete your profile before proceeding"
           redirect_to edit_user_path(current_user)
         end
+      end
+    end
+
+    def checkApprovedCompany
+      unless current_company.status == 2
+        flash[:danger] = "Your account is still awaiting approval. This process can take up to 24 hours. We appreciate your patience."
+        redirect_to current_company
       end
     end
 end

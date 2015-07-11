@@ -39,7 +39,7 @@
 
       </div>
       <div class="col-md-4" style="padding-top: 10px">
-        <% unless current_company.nil? %>
+        <% if current_company?(@jobposting.company) %>
             <div style="padding: 5px">
               <%= button_to "Remove", @jobposting, class: "btn btn-primary btn-lg center-block", method: :delete%>
             </div>

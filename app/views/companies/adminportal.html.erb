@@ -12,12 +12,24 @@
         <p><strong>Total: <%= @UNew + @UApproved + @UWait + @Uincomplete %></strong></p>
       </div>
       <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
-
       <h1 style="text-align: center">Company Statistics</h1>
+      <div class="col-md-4 col-centered" style="text-align: left">
+        <p>Incomplete: <%= @Cincomplete %></p>
+        <p>Awaiting Approval: <%= @Cnew %></p>
+        <p>Approved: <%= @Capproved %></p>
+        <p>Waitlisted: <%= @Cwait %></p>
+        <p><strong>Total: <%= @Cincomplete + @Cnew + @Capproved + @Cwait %></strong></p>
+      </div>
       <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
       <h1 style="text-align: center">Job Statistics</h1>
+      <div class="col-md-4 col-centered" style="text-align: left">
+        <p><strong><p>Total: <%= JobPosting.count %></p></strong></p>
+      </div>
       <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
       <h1 style="text-align: center">Application Statistics</h1>
+      <div class="col-md-4 col-centered" style="text-align: left">
+        <p><strong><p>Total: <%= Applicant.count %></p></strong></p>
+      </div>
       <hr style="background-color: #000000; border: 0; height: 7px; width: 85%;">
     </div>
   </div>

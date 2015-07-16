@@ -106,7 +106,7 @@ class CompaniesController < ApplicationController
     @Cincomplete = Company.where(:completed => false, :admin => false).count
     @Capproved = Company.where(:status => 2, :admin => false).count
     @Cwait = Company.where(:status => 1, :admin => false).count
-    @Cnew = Company.where(:status => 0, :completed => false, :admin => false).count
+    @Cnew = Company.where(:status => 0, :completed => true, :admin => false).count
   end
 
   def adminprofessionals

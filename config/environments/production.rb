@@ -1,7 +1,7 @@
 Rails.application.configure do
   #ONLY CHANGE NEEDED FROM STAGING TO PRODUCTION**************************************************************************
-  config.action_mailer.default_url_options = { :host => 'excellara.herokuapp.com' }
-  Rails.application.routes.default_url_options[:host] = 'excellara.herokuapp.com'
+  config.action_mailer.default_url_options = { :host => 'excellara-test.herokuapp.com' }
+  Rails.application.routes.default_url_options[:host] = 'excellara-test.herokuapp.com'
   #***********************************************************************************************************************
 
   config.action_mailer.delivery_method = :smtp
@@ -9,14 +9,24 @@ Rails.application.configure do
   #config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
 
+  #config.action_mailer.smtp_settings = {
+  #    address:              'smtp.gmail.com',
+  #    port:                 587,
+  #    #domain:              ENV["GMAIL_DOMAIN"],
+  #    user_name:            ENV["GMAIL_USERNAME"],
+  #    password:             ENV["GMAIL_PASSWORD"],
+  #    authentication:       'plain',
+  #    enable_starttls_auto: true  }
+
   config.action_mailer.smtp_settings = {
-      address:              'smtp.gmail.com',
-      port:                 587,
-      #domain:              ENV["GMAIL_DOMAIN"],
-      user_name:            ENV["GMAIL_USERNAME"],
-      password:             ENV["GMAIL_PASSWORD"],
-      authentication:       'plain',
-      enable_starttls_auto: true  }
+      :address   => "smtp.mandrillapp.com",
+      :port      => 587, # ports 25, 587 and 2525 are also supported with STARTTLS
+      :enable_starttls_auto => true, # detects and uses STARTTLS
+      :user_name => "MANDRILL_USERNAME",
+      :password  => "MANDRILL_PASSWORD", # SMTP password is any valid API key
+      :authentication => 'login', # Mandrill supports 'plain' or 'login'
+      #:domain => 'excellara.com', # your domain to identify your server when connecting
+  }
 
   # Settings specified here will take precedence over those in config/application.rb.
 

@@ -36,7 +36,7 @@ class ApplicantsController < ApplicationController
         jobposting.update_attribute(:offercount, offerCount)
         @sender = current_user
         @job = jobposting
-        UserMailer.compsuggest(@sender, @receiver, @job).deliver_now
+        UserMailer.usersuggest(@sender, @receiver, @job).deliver_now
         flash[:success] = "Successfully applied for job"
         redirect_to joblist_path
       else

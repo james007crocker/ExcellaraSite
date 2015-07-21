@@ -12,7 +12,14 @@ class UsersController < ApplicationController
 
   def destroy
     if current_user && current_user.admin?
-      User.find(params[:id]).destroy
+
+      user = User.find(params[:id])
+      #Applicant.each do |appl|
+      #  if appl.user_id == user.id
+      #    appl.destroy
+      #  end
+      #end
+      user.destroy
       flash[:success] = "User Deleted"
       redirect_to users_url
     else

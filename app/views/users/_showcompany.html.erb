@@ -21,7 +21,18 @@
         <h3><%= link_to "< Back", 'javascript:history.go(-1);' %></h3>
     </div>
     <div class="col-md-10">
-      <h1 class="userheaderfont2"><%= @user.name unless @user.name.blank? %> <%= @user.lastname unless @user.lastname.blank? %></h1>
+      <table width="100%">
+        <tr>
+          <td>
+            <h1 class="userheaderfont2"><%= @user.name unless @user.name.blank? %> <%= @user.lastname unless @user.lastname.blank? %></h1>
+          </td>
+          <td>
+            <% if current_company.admin == true && !@user.resume.blank? %>
+                <%= link_to "View Resume", resume_users_path(id: @user.id), class: "btn btn-primary", style: "width: 120px"%>
+            <% end %>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
   <div class="row">

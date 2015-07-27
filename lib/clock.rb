@@ -5,6 +5,7 @@ require 'clockwork'
 include Clockwork
 
 
-every( 10.seconds, 'Initiating the MATCH', :at => '23:00'){
+every( 10.seconds, 'Initiating the MATCH'){
   puts "Hello World July 27th"
 }
+every(1.hour, 'hourly.job')

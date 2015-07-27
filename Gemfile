@@ -20,9 +20,11 @@ gem 'filterrific',               '2.0.4'
 gem 'acts-as-taggable-on',       '3.5.0'
 gem 'omniauth-linkedin-oauth2'
 gem 'mandrill-api',               '~> 1.0.53' ,require: 'mandrill'
+gem 'clockwork'
+gem 'pg',             '0.17.1'
+
 
 group :development, :test do
-  gem 'pg',           '0.17.1'
   #gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'
   gem 'web-console', '2.0.0.beta3'
@@ -36,7 +38,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg',             '0.17.1'
   gem 'rails_12factor', '0.0.2'
   gem 'puma',           '2.11.1'
 end

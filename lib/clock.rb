@@ -8,7 +8,7 @@ handler do |job|
   puts "Running #{job}"
 end
 
-every( 10.seconds, 'Initiating the MATCH'){
-  puts "Hello World July 27th"
-}
-every(1.hour, 'hourly.job')
+#every( 10.seconds, 'Initiating the MATCH'){
+#  puts "Hello World July 27th"
+#}
+#every(1.hour, 'hourly.job')

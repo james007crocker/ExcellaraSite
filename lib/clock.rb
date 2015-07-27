@@ -4,6 +4,9 @@ require 'clockwork'
 
 include Clockwork
 
+handler do |job|
+  puts "Running #{job}"
+end
 
 every( 10.seconds, 'Initiating the MATCH'){
   puts "Hello World July 27th"

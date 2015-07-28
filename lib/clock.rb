@@ -8,19 +8,19 @@ handler do |job|
   puts "Running #{job}"
 end
 
-every(1.minute, 'House Keeping With Applications'){
+every(5.minute, 'House Keeping With Applications'){
   Applicant.all.each do |app|
     if app.compreject || app.userreject && app.updated_at < Date.today() - 7.days
-      puts "Deleting Application: " + app.id.to_s + " Job: " + app.job_posting_id.to_s
+      puts "A: Deleting Application: " + app.id.to_s + " Job: " + app.job_posting_id.to_s
       app.destroy
     elsif app.compAccept && app.userAccept && app.updated_at < Date.today() - 14.days
-      puts "Requesting Status of Application: " + app.id.to_s
+      puts "A: Requesting Status of Application: " + app.id.to_s
       #||||||||||---------|||||||||Send Mail to both comp and user
     elsif app.compAccept && !app.userAccept && app.updated_at < Date.today() - 7.days
-      puts "Prompting Application Response of App: " + app.id.to_s + " from User: " + app.user_id.to_s
+      puts "A: Prompting Application Response of App: " + app.id.to_s + " from User: " + app.user_id.to_s
       #||||||||||---------|||||||||Send Mail to user requesting action
     elsif app.userAccept && !app.compAccept && app.updated_at < Date.today() - 7.days
-      puts "Prompting Application Response of App: " + app.id.to_s + " from Company: " + app.company_id.to_s
+      puts "A: Prompting Application Response of App: " + app.id.to_s + " from Company: " + app.company_id.to_s
       #||||||||||---------|||||||||Send Mail to company requesting action
     end
   end
@@ -86,11 +86,12 @@ every(1.minute, 'House Keeping With Applications'){
 #
 #
 #
-# #Add :at => time so that this occurs at night
-# every(5.minute, 'House Keeping With Companies'){
-#   Company.each do |comp|
-#     if comp.admin == false && JobPosting.where(:company_id => comp.id).count == 0
-#       #||||||||||---------|||||||||Send mail to whoever needs job
-#     end
-#   end
-# }
+#Add :at => time so that this occurs at night
+every(1.minute, 'House Keeping With Companies'){
+  Company.all.each do |comp|
+    if comp.admin == false && comp.status == 2 && JobPosting.where(:company_id => comp.id).count == 0
+      puts "C: Prompting Company to Post Jobs, Id: " + comp.id.to_s
+      #||||||||||---------|||||||||Send mail to whoever needs job
+    end
+  end
+}

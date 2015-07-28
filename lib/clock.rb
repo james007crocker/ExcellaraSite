@@ -9,7 +9,7 @@ handler do |job|
 end
 
 every(1.minute, 'House Keeping With Applications'){
-  Applicant.each do |app|
+  Applicant.all.each do |app|
     if app.compreject || app.userreject && app.updated_at > Date.now - 7.days
       puts "Deleting Application: " + app.id + " Job: " + app.job_posting_id
       app.destroy

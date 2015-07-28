@@ -8,7 +8,7 @@ handler do |job|
   puts "Running #{job}"
 end
 
-every(5.minute, 'House Keeping With Applications'){
+every(50.minute, 'House Keeping With Applications'){
   Applicant.all.each do |app|
     if app.compreject || app.userreject && app.updated_at < Date.today() - 7.days
       puts "A: Deleting Application: " + app.id.to_s + " Job: " + app.job_posting_id.to_s
@@ -27,13 +27,13 @@ every(5.minute, 'House Keeping With Applications'){
 }
 
 #Add :at => time so that this occurs at night
-every( 7.minute, 'Initiating the MATCH'){
+every( 2.minute, 'Initiating the MATCH'){
   puts "Beginning the Match Automation Process"
   User.all.each do |user|
     if user.sector == "Accounting" || user.sector == "Human Resources" || user.sector == "Law"
       suggestedJob = []
       suggestedLink = []
-      jobs = JobPosting.where(:location => user.location, :sector => user.sector).where("created_at > ?", Date.today() - 7.days).order('date ASC, created_at ASC')
+      jobs = JobPosting.where(:location => user.location, :sector => user.sector).where("created_at > ?", Date.today() - 7.days).order('created_at ASC')
       unless jobs.nil?
         jobs.each do |job|
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
@@ -72,7 +72,7 @@ every( 7.minute, 'Initiating the MATCH'){
           end
         end
       else
-        users = User.where(:location => job.location, :sector => job.sector).order('date ASC, created_at ASC')
+        users = User.where(:location => job.location, :sector => job.sector).order('created_at ASC')
         users.each do |user|
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
             suggestedUser << user.name + " " + user.lastname
@@ -98,7 +98,7 @@ every( 7.minute, 'Initiating the MATCH'){
 
 
 #Add :at => time so that this occurs at night
-every(10.minute, 'House Keeping With Companies'){
+every(50.minute, 'House Keeping With Companies'){
   Company.all.each do |comp|
     if comp.admin == false && comp.status == 2 && JobPosting.where(:company_id => comp.id).count == 0
       puts "C: Prompting Company to Post Jobs, Id: " + comp.id.to_s

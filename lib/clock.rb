@@ -10,17 +10,17 @@ end
 
 every(1.minute, 'House Keeping With Applications'){
   Applicant.all.each do |app|
-    if app.compreject || app.userreject && app.updated_at > Date.today() - 7.days
-      puts "Deleting Application: " + app.id + " Job: " + app.job_posting_id
+    if app.compreject || app.userreject && app.updated_at < Date.today() - 7.days
+      puts "Deleting Application: " + app.id.to_s + " Job: " + app.job_posting_id.to_s
       app.destroy
-    elsif app.compAccept && app.userAccept && app.updated_at > Date.today() - 14.days
-      puts "Requesting Status of Application: " + app.id
+    elsif app.compAccept && app.userAccept && app.updated_at < Date.today() - 14.days
+      puts "Requesting Status of Application: " + app.id.to_s
       #||||||||||---------|||||||||Send Mail to both comp and user
-    elsif app.compAccept && !app.userAccept && app.updated_at > Date.today() - 7.days
-      puts "Prompting Application Response of App: " + app.id + " from User: " + app.user_id
+    elsif app.compAccept && !app.userAccept && app.updated_at < Date.today() - 7.days
+      puts "Prompting Application Response of App: " + app.id.to_s + " from User: " + app.user_id.to_s
       #||||||||||---------|||||||||Send Mail to user requesting action
-    elsif app.userAccept && !app.compAccept && app.updated_at > Date.today() - 7.days
-      puts "Prompting Application Response of App: " + app.id + " from Company: " + app.company_id
+    elsif app.userAccept && !app.compAccept && app.updated_at < Date.today() - 7.days
+      puts "Prompting Application Response of App: " + app.id.to_s + " from Company: " + app.company_id.to_s
       #||||||||||---------|||||||||Send Mail to company requesting action
     end
   end

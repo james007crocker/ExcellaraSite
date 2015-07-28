@@ -8,6 +8,24 @@ handler do |job|
   puts "Running #{job}"
 end
 
+every(1.minute, 'House Keeping With Applications'){
+  Applicant.each do |app|
+    if app.compreject || app.userreject && app.updated_at > Date.now - 7.days
+      puts "Deleting Application: " + app.id + " Job: " + app.job_posting_id
+      app.destroy
+    elsif app.compAccept && app.userAccept && app.updated_at > Date.now - 14.days
+      puts "Requesting Status of Application: " + app.id
+      #||||||||||---------|||||||||Send Mail to both comp and user
+    elsif app.compAccept && !app.userAccept && app.updated_at > Date.now - 7.days
+      puts "Prompting Application Response of App: " + app.id + " from User: " + app.user_id
+      #||||||||||---------|||||||||Send Mail to user requesting action
+    elsif app.userAccept && !app.compAccept && app.updated_at > Date.now - 7.days
+      puts "Prompting Application Response of App: " + app.id + " from Company: " + app.company_id
+      #||||||||||---------|||||||||Send Mail to company requesting action
+    end
+  end
+}
+
 #Add :at => time so that this occurs at night
 =begin
 every( 7.minute, 'Initiating the MATCH'){
@@ -68,24 +86,7 @@ every( 7.minute, 'Initiating the MATCH'){
 }
 =end
 
-#Add :at => time so that this occurs at night
-every(1.minute, 'House Keeping With Applications'){
-  Applicant.each do |app|
-    if app.compreject || app.userreject && app.updated_at > Date.now - 7.days
-      puts "Deleting Application: " + app.id + " Job: " + app.job_posting_id
-      app.destroy
-    elsif app.compAccept && app.userAccept && app.updated_at > Date.now - 14.days
-      puts "Requesting Status of Application: " + app.id
-      #||||||||||---------|||||||||Send Mail to both comp and user
-    elsif app.compAccept && !app.userAccept && app.updated_at > Date.now - 7.days
-      puts "Prompting Application Response of App: " + app.id + " from User: " + app.user_id
-      #||||||||||---------|||||||||Send Mail to user requesting action
-    elsif app.userAccept && !app.compAccept && app.updated_at > Date.now - 7.days
-      puts "Prompting Application Response of App: " + app.id + " from Company: " + app.company_id
-      #||||||||||---------|||||||||Send Mail to company requesting action
-    end
-  end
-}
+
 
 #Add :at => time so that this occurs at night
 =begin

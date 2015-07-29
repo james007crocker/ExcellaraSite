@@ -36,7 +36,7 @@ end
 # }
 
 #Add :at => time so that this occurs at night
-# every( 5.minute, 'Initiating the MATCH'){
+ every( 5.minute, 'Initiating the MATCH'){
 #   puts "Beginning the Match Automation Process"
 #   User.where(:status => 2).each do |user|
 #     if user.sector == "Accounting" || user.sector == "Human Resources" || user.sector == "Law"
@@ -44,9 +44,6 @@ end
 #       suggestedLink = []
 #       jobs = JobPosting.where(:location => user.location, :sector => user.sector).where("updated_at > ?", Date.today() - 7.days).order('created_at ASC')
 #       unless jobs.nil?
-#         jobs.each do |j|
-#           puts j.title
-#         end
 #         jobs.each do |job|
 #           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
 #             suggestedJob << job.title + " - " + job.company.name + " - " + job.location + " - " + job.length + " - " + job.hours.to_s + "/week"
@@ -71,47 +68,47 @@ end
 #     end
 #   end
 
-  # JobPosting.all.each do |job|
-  #   suggestedUser = []
-  #   suggestedLink = []
-  #   if job.sector == "Accounting" || job.sector == "Human Resources" || user.sector == "Law"
-  #     if job.created_at < Date.today() - 7.days
-  #       users = User.where(:location => job.location, :sector => job.sector, :status => 2).where("created_at > ?", Date.today() - 7.days)
-  #       users.each do |user|
-  #         unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
-  #           suggestedUser << user.name + " " + user.lastname
-  #           suggestedLink << user_url(user)
-  #         end
-  #         if suggestedUser.size == 5
-  #           break
-  #         end
-  #       end
-  #     else
-  #       users = User.where(:location => job.location, :sector => job.sector).order('created_at ASC')
-  #       users.each do |user|
-  #         unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
-  #           suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + pluralize(user.years, "Year") + "of  Experience"
-  #           suggestedLink << user_url(user)
-  #         end
-  #         if suggestedUser.size == 5
-  #           break
-  #         end
-  #       end
-  #     end
-  #     puts job.company.name
-  #     puts "----------------"
-  #     suggestedUser.each do |f|
-  #       puts f
-  #     end
-  #     puts "//////////////////"
-  #     puts " "
-  #
-  #     if suggestedUser.size > 0
-  #       UserMailer.jobssuggestedtocompanies(job.company.email, job.title,  job.company.name, suggestedUser, suggestedLink).deliver_now
-  #     end
-  #
-  #   end
-  # end
+  JobPosting.all.each do |job|
+    suggestedUser = []
+    suggestedLink = []
+    if job.sector == "Accounting" || job.sector == "Human Resources" || user.sector == "Law"
+      if job.created_at < Date.today() - 7.days
+        users = User.where(:location => job.location, :sector => job.sector, :status => 2).where("created_at > ?", Date.today() - 7.days)
+        users.each do |user|
+          unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
+            suggestedUser << user.name + " " + user.lastname
+            suggestedLink << Rails.application.routes.url_helpers.user_url(user)
+          end
+          if suggestedUser.size == 5
+            break
+          end
+        end
+      else
+        users = User.where(:location => job.location, :sector => job.sector).order('created_at ASC')
+        users.each do |user|
+          unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
+            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + pluralize(user.years, "Year") + "of  Experience"
+            suggestedLink << Rails.application.routes.url_helpers.user_url(user)
+          end
+          if suggestedUser.size == 5
+            break
+          end
+        end
+      end
+      puts job.company.name
+      puts "----------------"
+      suggestedUser.each do |f|
+        puts f
+      end
+      puts "//////////////////"
+      puts " "
+
+      if suggestedUser.size > 0
+        UserMailer.jobssuggestedtocompanies(job.company.email, job.title,  job.company.name, suggestedUser, suggestedLink).deliver_now
+      end
+
+    end
+  end
 }
 
 

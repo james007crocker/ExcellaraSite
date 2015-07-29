@@ -470,7 +470,7 @@ class UserMailer < ApplicationMailer
 
     if jobtitles.size > 2
       job3t = jobtitles[2]
-      job3l = joblinks[3]
+      job3l = joblinks[2]
       job3b = true
     end
 

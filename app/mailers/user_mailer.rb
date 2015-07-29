@@ -605,5 +605,5 @@ class UserMailer < ApplicationMailer
     }
     mandrill_client.messages.send_template template_name, template_content, message
   end
-
+  #Please work!
 end

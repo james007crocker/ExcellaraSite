@@ -50,7 +50,7 @@ every( 5.minute, 'Initiating the MATCH'){
         jobs.each do |job|
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
             suggestedJob << job.title + " - " + job.company.name + " - " + job.location + " - " + job.length + " - " + job.hours.to_s + "/week"
-            suggestedLink << job_posting_url(job)
+            suggestedLink << Rails.application.routes.url_helpers.job_posting_url(job).to_s
           end
           if suggestedJob.size == 3
             break

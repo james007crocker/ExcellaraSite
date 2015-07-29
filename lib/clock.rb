@@ -43,7 +43,7 @@ every( 5.minute, 'Initiating the MATCH'){
       suggestedJob = []
       suggestedLink = []
       jobs = JobPosting.where(:location => user.location, :sector => user.sector).where("updated_at > ?", Date.today() - 7.days).order('created_at ASC')
-      puts user.name + " " + jobs
+      puts user.name + " " + jobs.to_s
       unless jobs.nil?
         jobs.each do |job|
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)

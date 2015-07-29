@@ -48,7 +48,7 @@ every( 5.minute, 'Initiating the MATCH'){
           puts j.title
         end
         jobs.each do |job|
-          unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
+          unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
             suggestedJob << job.title + " - " + job.company.name + " - " + job.location + " - " + job.length + " - " + job.hours.to_s + "/week"
             suggestedLink << job_posting_url(job)
           end
@@ -78,7 +78,7 @@ every( 5.minute, 'Initiating the MATCH'){
   #     if job.created_at < Date.today() - 7.days
   #       users = User.where(:location => job.location, :sector => job.sector, :status => 2).where("created_at > ?", Date.today() - 7.days)
   #       users.each do |user|
-  #         unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
+  #         unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
   #           suggestedUser << user.name + " " + user.lastname
   #           suggestedLink << user_url(user)
   #         end

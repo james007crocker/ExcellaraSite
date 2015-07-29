@@ -62,7 +62,7 @@ every( 5.minute, 'Initiating the MATCH'){
       puts "////////////////////////"
       puts " "
 
-      if jobtitle.size > 0
+      if suggestedJob.size > 0
         UserMailer.jobssuggestedtousers(user.email, user.name, suggestedJob, suggestedLink).deliver_now
       end
     end

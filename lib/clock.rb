@@ -78,7 +78,7 @@ end
         users.each do |user|
           puts user.name + " " + user.lastname
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
-            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + pluralize(user.years, "Year")
+            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + helper.pluralize(user.years, "Year") + "of  Experience"
             suggestedLink << Rails.application.routes.url_helpers.user_url(user)
           end
           if suggestedUser.size == 5
@@ -91,7 +91,7 @@ end
         users.each do |user|
           puts user.name + " " + user.lastname
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
-            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + pluralize(user.years, "Year") + "of  Experience"
+            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + helper.pluralize(user.years, "Year") + "of  Experience"
             suggestedLink << Rails.application.routes.url_helpers.user_url(user)
           end
           if suggestedUser.size == 5

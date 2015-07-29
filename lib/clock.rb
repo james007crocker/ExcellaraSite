@@ -19,18 +19,18 @@ every(5.minute, 'House Keeping With Applications'){
       puts "A: Requesting Status of Application: " + app.id.to_s
       user = User.find_by(id:  app.user_id)
       comp = Company.find_by(id: app.company_id)
-      UserMailer.housekeepapplicationsBoth(user.email, app.job_posting.name, user.name, comp.name).deliver_now
-      UserMailer.housekeepapplicationsBoth(comp.email, app.job_posting.name, comp.name, user.name + " " + user.lastname).deliver_now
+      UserMailer.housekeepapplicationsBoth(user.email, app.job_posting.title, user.name, comp.name).deliver_now
+      UserMailer.housekeepapplicationsBoth(comp.email, app.job_posting.title, comp.name, user.name + " " + user.lastname).deliver_now
     elsif app.compAccept && !app.userAccept && app.updated_at < Date.today() - 7.days
       puts "A: Prompting Application Response of App: " + app.id.to_s + " from User: " + app.user_id.to_s
       user = User.find_by(id:  app.user_id)
       comp = Company.find_by(id: app.company_id)
-      UserMailer.housekeepapplicationsuser(user.email, app.job_posting.name, user.name, comp.name).deliver_now
+      UserMailer.housekeepapplicationsuser(user.email, app.job_posting.title, user.name, comp.name).deliver_now
     elsif app.userAccept && !app.compAccept && app.updated_at < Date.today() - 7.days
       puts "A: Prompting Application Response of App: " + app.id.to_s + " from Company: " + app.company_id.to_s
       user = User.find_by(id:  app.user_id)
       comp = Company.find_by(id: app.company_id)
-      UserMailer.housekeepapplicationscomp(comp.email, app.job_posting.name, user.name, comp).deliver_now
+      UserMailer.housekeepapplicationscomp(comp.email, app.job_posting.title, user.name, comp).deliver_now
     end
   end
 }

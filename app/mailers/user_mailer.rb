@@ -539,6 +539,36 @@ class UserMailer < ApplicationMailer
     user4b = nil
     user5b = nil
 
+    if userNames.size > 0
+      user1b = true
+      user1n = userNames[0]
+      user1l = userLinks[0]
+    end
+
+    if userNames.size > 1
+      user2b = true
+      user2n = userNames[1]
+      user2l = userLinks[1]
+    end
+
+    if userNames.size > 2
+      user3b = true
+      user3n = userNames[2]
+      user3l = userLinks[2]
+    end
+
+    if userNames.size > 3
+      user4b = true
+      user4n = userNames[3]
+      user4l = userLinks[3]
+    end
+
+    if userNames.size > 4
+      user5b = true
+      user5n = userNames[5]
+      user5l = userLinks[5]
+    end
+
     template_name = 'jobssuggestedtocompanies'
     template_content = []
     message = {

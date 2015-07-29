@@ -36,40 +36,40 @@ end
 # }
 
 #Add :at => time so that this occurs at night
-every( 5.minute, 'Initiating the MATCH'){
-  puts "Beginning the Match Automation Process"
-  User.where(:status => 2).each do |user|
-    if user.sector == "Accounting" || user.sector == "Human Resources" || user.sector == "Law"
-      suggestedJob = []
-      suggestedLink = []
-      jobs = JobPosting.where(:location => user.location, :sector => user.sector).where("updated_at > ?", Date.today() - 7.days).order('created_at ASC')
-      unless jobs.nil?
-        jobs.each do |j|
-          puts j.title
-        end
-        jobs.each do |job|
-          unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
-            suggestedJob << job.title + " - " + job.company.name + " - " + job.location + " - " + job.length + " - " + job.hours.to_s + "/week"
-            suggestedLink << Rails.application.routes.url_helpers.job_posting_url(job).to_s
-          end
-          if suggestedJob.size == 3
-            break
-          end
-        end
-      end
-      puts user.name + user.lastname
-      puts "------------------------"
-      suggestedJob.each do |f|
-        puts f
-      end
-      puts "////////////////////////"
-      puts " "
-
-      if suggestedJob.size > 0
-        UserMailer.jobssuggestedtousers(user.email, user.name, suggestedJob, suggestedLink).deliver_now
-      end
-    end
-  end
+# every( 5.minute, 'Initiating the MATCH'){
+#   puts "Beginning the Match Automation Process"
+#   User.where(:status => 2).each do |user|
+#     if user.sector == "Accounting" || user.sector == "Human Resources" || user.sector == "Law"
+#       suggestedJob = []
+#       suggestedLink = []
+#       jobs = JobPosting.where(:location => user.location, :sector => user.sector).where("updated_at > ?", Date.today() - 7.days).order('created_at ASC')
+#       unless jobs.nil?
+#         jobs.each do |j|
+#           puts j.title
+#         end
+#         jobs.each do |job|
+#           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
+#             suggestedJob << job.title + " - " + job.company.name + " - " + job.location + " - " + job.length + " - " + job.hours.to_s + "/week"
+#             suggestedLink << Rails.application.routes.url_helpers.job_posting_url(job).to_s
+#           end
+#           if suggestedJob.size == 3
+#             break
+#           end
+#         end
+#       end
+#       puts user.name + user.lastname
+#       puts "------------------------"
+#       suggestedJob.each do |f|
+#         puts f
+#       end
+#       puts "////////////////////////"
+#       puts " "
+#
+#       if suggestedJob.size > 0
+#         UserMailer.jobssuggestedtousers(user.email, user.name, suggestedJob, suggestedLink).deliver_now
+#       end
+#     end
+#   end
 
   # JobPosting.all.each do |job|
   #   suggestedUser = []

@@ -114,11 +114,11 @@ end
 
 
 #Add :at => time so that this occurs at night
-every(5.minute, 'House Keeping With Companies'){
-  Company.all.each do |comp|
-    if comp.admin == false && comp.status == 2 && JobPosting.where(:company_id => comp.id).count == 0
-      puts "C: Prompting Company to Post Jobs, Id: " + comp.id.to_s
-      UserMailer.postjobs(comp.email, comp.name).deliver_now
-    end
-  end
-}
+# every(5.minute, 'House Keeping With Companies'){
+#   Company.all.each do |comp|
+#     if comp.admin == false && comp.status == 2 && JobPosting.where(:company_id => comp.id).count == 0
+#       puts "C: Prompting Company to Post Jobs, Id: " + comp.id.to_s
+#       UserMailer.postjobs(comp.email, comp.name).deliver_now
+#     end
+#   end
+# }

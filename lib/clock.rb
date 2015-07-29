@@ -73,8 +73,10 @@ end
     suggestedLink = []
     if job.sector == "Accounting" || job.sector == "Human Resources" || job.sector == "Law"
       if job.created_at < Date.today() - 7.days
+        puts job.title + "A------------------A"
         users = User.where(:location => job.location, :sector => job.sector, :status => 2).where("created_at > ?", Date.today() - 7.days)
         users.each do |user|
+          puts user.name + " " + user.lastname
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
             suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + pluralize(user.years, "Year")
             suggestedLink << Rails.application.routes.url_helpers.user_url(user)
@@ -84,9 +86,11 @@ end
           end
         end
       else
+        puts job.title + "B------------------B"
         users = User.where(:location => job.location, :sector => job.sector).order('created_at ASC')
         users.each do |user|
-          unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
+          puts user.name + " " + user.lastname
+          unless Applicant.where(:job_posting_id => job.id, :user_id => user.id, :status => 2)
             suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + pluralize(user.years, "Year") + "of  Experience"
             suggestedLink << Rails.application.routes.url_helpers.user_url(user)
           end

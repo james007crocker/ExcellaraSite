@@ -38,11 +38,12 @@ end
 #Add :at => time so that this occurs at night
 every( 5.minute, 'Initiating the MATCH'){
   puts "Beginning the Match Automation Process"
-  User.all.each do |user|
+  User.where(:status => 2).each do |user|
     if user.sector == "Accounting" || user.sector == "Human Resources" || user.sector == "Law"
       suggestedJob = []
       suggestedLink = []
-      jobs = JobPosting.where(:location => user.location, :sector => user.sector).where("created_at > ?", Date.today() - 7.days).order('created_at ASC')
+      jobs = JobPosting.where(:location => user.location, :sector => user.sector).where("updated_at > ?", Date.today() - 7.days).order('created_at ASC')
+      puts user.name + " " + jobs
       unless jobs.nil?
         jobs.each do |job|
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
@@ -73,7 +74,7 @@ every( 5.minute, 'Initiating the MATCH'){
   #   suggestedLink = []
   #   if job.sector == "Accounting" || job.sector == "Human Resources" || user.sector == "Law"
   #     if job.created_at < Date.today() - 7.days
-  #       users = User.where(:location => job.location, :sector => job.sector).where("created_at > ?", Date.today() - 7.days)
+  #       users = User.where(:location => job.location, :sector => job.sector, :status => 2).where("created_at > ?", Date.today() - 7.days)
   #       users.each do |user|
   #         unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
   #           suggestedUser << user.name + " " + user.lastname

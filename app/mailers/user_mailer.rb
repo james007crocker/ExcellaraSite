@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
 
   def mandrill_client
     require 'mandrill'
-    @mandrill_client ||= Mandrill::API.new "eRrpq1bHdEuYrCSDE_2j2Q"
+    @mandrill_client ||= Mandrill::API.new ENV['MANDRILL_PASSWORD']
   end
 
   def account_activation(receiver)
@@ -287,6 +287,323 @@ class UserMailer < ApplicationMailer
     #@sender = sender
     #@job = job
     #mail to: @receiver.email, subject: "Excellara Job Interest: #{@job.title}"
+  end
+
+  def housekeepcompanies(name, email)
+    template_name = 'housekeepcompanies'
+    template_content = []
+    message = {
+        to: [{email: email}],
+        subject: "Excellara - Account Is Ready, Start Posting Jobs!",
+        merge_vars: [
+            {
+                rcpt: email,
+                vars: [
+                    {
+                        name: 'COMP_NAME', content: name
+                    }
+                ]
+            }
+        ]
+    }
+
+    mandrill_client.messages.send_template template_name, template_content, message
+  end
+
+  def housekeepapplicationsBoth(email, job, name1, name2)
+    template_name = 'housekeepapplicationsboth'
+    template_content = []
+    message = {
+        to: [{email: email}],
+        subject: "Excellara - What's going on with the #{job} position?",
+        merge_vars: [
+            {
+                rcpt: email,
+                vars: [
+                    {
+                        name: 'JOB', content: job
+                    },
+                    {
+                        name: 'NAME1', content: name1
+                    },
+                    {
+                        name: 'NAME2', content: name2
+                    }
+                ]
+            }
+        ]
+    }
+    mandrill_client.messages.send_template template_name, template_content, message
+  end
+
+  def housekeepapplicationsBoth(email, job, name1, name2)
+    template_name = 'housekeepapplicationsboth'
+    template_content = []
+    message = {
+        to: [{email: email}],
+        subject: "Excellara - What's going on with the #{job} position?",
+        merge_vars: [
+            {
+                rcpt: email,
+                vars: [
+                    {
+                        name: 'JOB', content: job
+                    },
+                    {
+                        name: 'NAME1', content: name1
+                    },
+                    {
+                        name: 'NAME2', content: name2
+                    }
+                ]
+            }
+        ]
+    }
+    mandrill_client.messages.send_template template_name, template_content, message
+  end
+
+  def housekeepapplicationsuser(email, job, user, comp)
+    template_name = 'housekeepapplicationsuser'
+    template_content = []
+    message = {
+        to: [{email: email}],
+        subject: "Excellara - You have a match needing attention!",
+        merge_vars: [
+            {
+                rcpt: email,
+                vars: [
+                    {
+                        name: 'JOB', content: job
+                    },
+                    {
+                        name: 'USER', content: user
+                    },
+                    {
+                        name: 'COMP', content: comp
+                    },
+                    {
+                        name: 'NEXT_STEP', content: matched_jobs_users_url
+                    }
+                ]
+            }
+        ]
+    }
+    mandrill_client.messages.send_template template_name, template_content, message
+  end
+
+  def housekeepapplicationscomp(email, job, user, comp)
+    template_name = 'housekeepapplicationscomp'
+    template_content = []
+    message = {
+        to: [{email: email}],
+        subject: "Excellara - You have a match needing attention!",
+        merge_vars: [
+            {
+                rcpt: email,
+                vars: [
+                    {
+                        name: 'JOB', content: job
+                    },
+                    {
+                        name: 'USER', content: user
+                    },
+                    {
+                        name: 'COMP', content: comp.name
+                    },
+                    {
+                        name: 'NEXT_STEP', content: activity_companies_url(comp)
+                    }
+                ]
+            }
+        ]
+    }
+    mandrill_client.messages.send_template template_name, template_content, message
+  end
+
+  def postjobs(email, comp)
+    template_name = 'postjobs'
+    template_content = []
+    message = {
+        to: [{email: email}],
+        subject: "Excellara - It's time to post jobs!",
+        merge_vars: [
+            {
+                rcpt: email,
+                vars: [
+                    {
+                        name: 'COMP', content: comp
+                    },
+                    {
+                        name: 'NEXT_STEP', content: new_job_posting_url
+                    }
+                ]
+            }
+        ]
+    }
+    mandrill_client.messages.send_template template_name, template_content, message
+  end
+
+  def jobssuggestedtousers(email, user, jobtitles, joblinks)
+    job1t = nil
+    job2t = nil
+    job3t = nil
+
+    job1l = nil
+    job2l = nil
+    job3l = nil
+
+    job1b = false
+    job2b = false
+    job3b = false
+
+    if jobtitles.size > 0
+      job1t = jobtitles[0]
+      job1l = joblinks[0]
+      job1b = true
+    end
+
+    if jobtitles.size > 1
+      job2t = jobtitles[1]
+      job2l = joblinks[1]
+      job2b = true
+    end
+
+    if jobtitles.size > 2
+      job3t = jobtitles[2]
+      job3l = joblinks[3]
+      job3b = true
+    end
+
+    template_name = 'jobssuggestedtousers'
+    template_content = []
+    message = {
+        to: [{email: email}],
+        subject: "Excellara - Job Suggestions This Week",
+        merge_vars: [
+            {
+                rcpt: email,
+                vars: [
+                    {
+                        name: 'USER', content: user
+                    },
+                    {
+                        name: 'JOB1T', content: job1t
+                    },
+                    {
+                        name: 'JOB1L', content: job1l
+                    },
+                    {
+                        name: 'JOB1B', content: job1b
+                    },
+                    {
+                        name: 'JOB2T', content: job2t
+                    },
+                    {
+                        name: 'JOB2L', content: job2l
+                    },
+                    {
+                        name: 'JOB2B', content: job2b
+                    },
+                    {
+                        name: 'JOB3T', content: job3t
+                    },
+                    {
+                        name: 'JOB3L', content: job3l
+                    },
+                    {
+                        name: 'JOB3B', content: job3b
+                    }
+                ]
+            }
+        ]
+    }
+    mandrill_client.messages.send_template template_name, template_content, message
+  end
+
+  def jobssuggestedtocompanies(email, title,  comp, userNames, userLinks)
+    user1n = nil
+    user2n = nil
+    user3n = nil
+    user4n = nil
+    user5n = nil
+
+    user1l = nil
+    user2l = nil
+    user3l = nil
+    user4l = nil
+    user5l = nil
+
+    user1b = nil
+    user2b = nil
+    user3b = nil
+    user4b = nil
+    user5b = nil
+
+    template_name = 'jobssuggestedtocompanies'
+    template_content = []
+    message = {
+        to: [{email: email}],
+        subject: "Excellara - Candidate Suggestions For #{title}",
+        merge_vars: [
+            {
+                rcpt: email,
+                vars: [
+                    {
+                        name: 'COMP', content: comp
+                    },
+                    {
+                        name: 'JOB', content: title
+                    },
+                    {
+                        name: 'USER1N', content: user1n
+                    },
+                    {
+                        name: 'USER1L', content: user1l
+                    },
+                    {
+                        name: 'USER1B', content: user1b
+                    },
+                    {
+                        name: 'USER2N', content: user2n
+                    },
+                    {
+                        name: 'USER2L', content: user2l
+                    },
+                    {
+                        name: 'USER2B', content: user2b
+                    },
+                    {
+                        name: 'USER3N', content: user3n
+                    },
+                    {
+                        name: 'USER3L', content: user3l
+                    },
+                    {
+                        name: 'USER3B', content: user3b
+                    },
+                    {
+                        name: 'USER4N', content: user4n
+                    },
+                    {
+                        name: 'USER4L', content: user4l
+                    },
+                    {
+                        name: 'USER4B', content: user4b
+                    },
+                    {
+                        name: 'USER5N', content: user5n
+                    },
+                    {
+                        name: 'USER5L', content: user5l
+                    },
+                    {
+                        name: 'USER5B', content: user5b
+                    },
+                ]
+            }
+        ]
+    }
+    mandrill_client.messages.send_template template_name, template_content, message
   end
 
 end

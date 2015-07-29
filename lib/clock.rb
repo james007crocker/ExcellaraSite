@@ -10,30 +10,30 @@ end
 
 #Add :at => time so that this occurs at night
 #Add :at => time so that this occurs at night
-every(5.minute, 'House Keeping With Applications'){
-  Applicant.all.each do |app|
-    if app.compreject || app.userreject && app.updated_at < Date.today() - 7.days
-      puts "A: Deleting Application: " + app.id.to_s + " Job: " + app.job_posting_id.to_s
-      app.destroy
-    elsif app.compAccept && app.userAccept && app.updated_at < Date.today() - 14.days
-      puts "A: Requesting Status of Application: " + app.id.to_s
-      user = User.find_by(id:  app.user_id)
-      comp = Company.find_by(id: app.company_id)
-      UserMailer.housekeepapplicationsBoth(user.email, app.job_posting.title, user.name, comp.name).deliver_now
-      UserMailer.housekeepapplicationsBoth(comp.email, app.job_posting.title, comp.name, user.name + " " + user.lastname).deliver_now
-    elsif app.compAccept && !app.userAccept && app.updated_at < Date.today() - 7.days
-      puts "A: Prompting Application Response of App: " + app.id.to_s + " from User: " + app.user_id.to_s
-      user = User.find_by(id:  app.user_id)
-      comp = Company.find_by(id: app.company_id)
-      UserMailer.housekeepapplicationsuser(user.email, app.job_posting.title, user.name, comp.name).deliver_now
-    elsif app.userAccept && !app.compAccept && app.updated_at < Date.today() - 7.days
-      puts "A: Prompting Application Response of App: " + app.id.to_s + " from Company: " + app.company_id.to_s
-      user = User.find_by(id:  app.user_id)
-      comp = Company.find_by(id: app.company_id)
-      UserMailer.housekeepapplicationscomp(comp.email, app.job_posting.title, user.name, comp).deliver_now
-    end
-  end
-}
+# every(5.minute, 'House Keeping With Applications'){
+#   Applicant.all.each do |app|
+#     if app.compreject || app.userreject && app.updated_at < Date.today() - 7.days
+#       puts "A: Deleting Application: " + app.id.to_s + " Job: " + app.job_posting_id.to_s
+#       app.destroy
+#     elsif app.compAccept && app.userAccept && app.updated_at < Date.today() - 14.days
+#       puts "A: Requesting Status of Application: " + app.id.to_s
+#       user = User.find_by(id:  app.user_id)
+#       comp = Company.find_by(id: app.company_id)
+#       UserMailer.housekeepapplicationsBoth(user.email, app.job_posting.title, user.name, comp.name).deliver_now
+#       UserMailer.housekeepapplicationsBoth(comp.email, app.job_posting.title, comp.name, user.name + " " + user.lastname).deliver_now
+#     elsif app.compAccept && !app.userAccept && app.updated_at < Date.today() - 7.days
+#       puts "A: Prompting Application Response of App: " + app.id.to_s + " from User: " + app.user_id.to_s
+#       user = User.find_by(id:  app.user_id)
+#       comp = Company.find_by(id: app.company_id)
+#       UserMailer.housekeepapplicationsuser(user.email, app.job_posting.title, user.name, comp.name).deliver_now
+#     elsif app.userAccept && !app.compAccept && app.updated_at < Date.today() - 7.days
+#       puts "A: Prompting Application Response of App: " + app.id.to_s + " from Company: " + app.company_id.to_s
+#       user = User.find_by(id:  app.user_id)
+#       comp = Company.find_by(id: app.company_id)
+#       UserMailer.housekeepapplicationscomp(comp.email, app.job_posting.title, user.name, comp).deliver_now
+#     end
+#   end
+# }
 
 #Add :at => time so that this occurs at night
 # every( 2.minute, 'Initiating the MATCH'){

@@ -90,7 +90,7 @@ end
         users = User.where(:location => job.location, :sector => job.sector, :status => 2).order('created_at ASC')
         users.each do |user|
           puts user.name + " " + user.lastname
-          unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
+          unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
             suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + pluralize(user.years, "Year") + "of  Experience"
             suggestedLink << Rails.application.routes.url_helpers.user_url(user)
           end

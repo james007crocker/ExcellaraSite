@@ -37,7 +37,7 @@ end
 
 #Add :at => time so that this occurs at night
  every( 5.minute, 'Initiating the MATCH'){
-   require 'active_support/inflector'
+   #require 'active_support/inflector'
 #   puts "Beginning the Match Automation Process"
 #   User.where(:status => 2).each do |user|
 #     if user.sector == "Accounting" || user.sector == "Human Resources" || user.sector == "Law"
@@ -79,7 +79,7 @@ end
         users.each do |user|
           puts user.name + " " + user.lastname
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
-            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + ActiveSupport::Inflector.pluralize(user.years, "Year") + "of  Experience"
+            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + user.years.to_s + " Years of  Experience"
             suggestedLink << Rails.application.routes.url_helpers.user_url(user)
           end
           if suggestedUser.size == 5
@@ -92,7 +92,7 @@ end
         users.each do |user|
           puts user.name + " " + user.lastname
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
-            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + ActiveSupport::Inflector.pluralize(user.years, "Year") + "of  Experience"
+            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + user.years.to_s + " Years of  Experience"
             suggestedLink << Rails.application.routes.url_helpers.user_url(user)
           end
           if suggestedUser.size == 5

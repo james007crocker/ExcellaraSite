@@ -75,9 +75,12 @@ end
       if job.created_at < Date.today() - 7.days
         users = User.where(:location => job.location, :sector => job.sector, :status => 2).where("created_at > ?", Date.today() - 7.days)
         users.each do |user|
+          puts "1a"
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id).count > 0
-            suggestedUser << user.name + " " + user.lastname
+            puts "2a"
+            suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + pluralize(user.years, "Year")
             suggestedLink << Rails.application.routes.url_helpers.user_url(user)
+            puts "3a"
           end
           if suggestedUser.size == 5
             break
@@ -86,9 +89,12 @@ end
       else
         users = User.where(:location => job.location, :sector => job.sector).order('created_at ASC')
         users.each do |user|
+          puts "1b"
           unless Applicant.where(:job_posting_id => job.id, :user_id => user.id)
+            puts "2b"
             suggestedUser << user.name + " " + user.lastname + " - " + user.profession + " - " + pluralize(user.years, "Year") + "of  Experience"
             suggestedLink << Rails.application.routes.url_helpers.user_url(user)
+            puts "3b"
           end
           if suggestedUser.size == 5
             break

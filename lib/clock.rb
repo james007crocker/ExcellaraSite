@@ -10,7 +10,7 @@ end
 
 #Add :at => time so that this occurs at night
 #Add :at => time so that this occurs at night
-every(7.days, 'House Keeping With Applications', :at=>"03:00"){
+every(7.days, 'House Keeping With Applications', :at=>"02:00"){
   Applicant.all.each do |app|
     if app.compreject || app.userreject && app.updated_at < Date.today() - 7.days
       puts "A: Deleting Application: " + app.id.to_s + " Job: " + app.job_posting_id.to_s
@@ -120,7 +120,7 @@ every(7.days, 'House Keeping With Applications', :at=>"03:00"){
 
 
 #Add :at => time so that this occurs at night
-every(7.days, 'House Keeping With Companies', :at=>"03:00"){
+every(7.days, 'House Keeping With Companies', :at=>"04:00"){
   Company.all.each do |comp|
     if comp.admin == false && comp.status == 2 && JobPosting.where(:company_id => comp.id).count == 0
       puts "C: Prompting Company to Post Jobs, Id: " + comp.id.to_s

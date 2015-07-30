@@ -27,7 +27,7 @@
             <h1 class="userheaderfont2"><%= @user.name unless @user.name.blank? %> <%= @user.lastname unless @user.lastname.blank? %></h1>
           </td>
           <td>
-            <% if current_company.admin == true && !@user.resume.blank? %>
+            <% if (current_company.admin == true || Applicant.where(:user_id => @user.id, :company_id => current_company.id).count > 0) && !@user.resume.blank? %>
                 <%= link_to "View Resume", resume_users_path(id: @user.id), class: "btn btn-primary", style: "width: 120px"%>
             <% end %>
           </td>

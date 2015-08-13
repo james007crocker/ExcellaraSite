@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root                      'static_pages#home'
   get   'volunteer'   =>    'static_pages#volunteer'
+  get   'privacypolicy' =>  'static_pages#privacypolicy'
   get   'work'   =>    'static_pages#work'
   get   'jobs'   =>    'static_pages#jobs'
   get   'help'        =>    'static_pages#help'

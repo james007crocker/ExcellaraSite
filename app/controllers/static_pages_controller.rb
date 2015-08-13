@@ -35,6 +35,10 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def privacypolicy
+
+  end
+
   def send_message
     @name = params[:name];
     @email = params[:email];

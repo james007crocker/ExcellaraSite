@@ -12,3 +12,5 @@ Clone this repository, navigate to the folder containing the project, and enter 
 Open a browser window and navigate to localhost:3000. The landing page will be displayed in the page.
 
 A screen capture of the top portion of the page can be seen below:
+
+![Alt text](https://github.com/james007crocker/Excellara_site/blob/master/ExcellaraFinalWebsite.png?raw=true)

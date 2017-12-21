@@ -1,7 +1,7 @@
 ##Excellara Full Site
 
 This repo contains the full source code developed for the Excellara website. Businesses' and interested candidates could sign up, and upon verifying their 
-credentials, complete their profiles and begin browsing fitting candidates and jobs respectively. A custom dashboard handled all inerested and pending candidates for business' and suggested and pending jobs for candidates. Upon both sides (a businnes and selected candidate) identifying each other as a good fit, contact information would be made available to them. Three months after launch, over 250 job candidates had signed up and over 40 jobs had been posted.
+credentials, complete their profiles and begin browsing fitting candidates and jobs respectively. A custom dashboard handled all interested and pending candidates for business' and suggested and pending jobs for candidates. Upon both sides (a businnes and selected candidate) identifying each other as a good fit, contact information would be made available to them. Three months after launch, over 250 job candidates had signed up and over 40 jobs had been posted.
 
 * Ruby version: 2.2.0
 * Rails version: 4.2.2
